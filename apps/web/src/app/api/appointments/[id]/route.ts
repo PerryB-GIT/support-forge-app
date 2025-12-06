@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@support-forge/database";
 
+type AppointmentStatus = "SCHEDULED" | "CONFIRMED" | "COMPLETED" | "CANCELLED" | "NO_SHOW";
+
 // GET /api/appointments/[id] - Get single appointment
 export async function GET(
   request: NextRequest,
@@ -71,12 +73,12 @@ export async function PATCH(
 
     // Only allow updating certain fields
     const { status, notes } = body;
-    const updateData: { status?: string; notes?: string } = {};
+    const updateData: { status?: AppointmentStatus; notes?: string } = {};
 
     if (status) {
       // Clients can only cancel their appointments
       if (status === "CANCELLED" && ["SCHEDULED", "CONFIRMED"].includes(existing.status)) {
-        updateData.status = status;
+        updateData.status = status as AppointmentStatus;
       }
     }
 
