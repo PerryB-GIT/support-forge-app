@@ -1,7 +1,8 @@
 import { NextRequest } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { prisma, MessageRole } from "@support-forge/database";
+import { applyRateLimit } from "@/lib/rate-limit";
+import { prisma } from "@support-forge/database";
 import Anthropic from "@anthropic-ai/sdk";
 import OpenAI from "openai";
 
@@ -66,6 +67,12 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // Apply rate limiting
+    const rateLimitResponse = applyRateLimit(session.user.id, "chat");
+    if (rateLimitResponse) {
+      return rateLimitResponse;
+    }
+
     const body: ChatRequest = await request.json();
     const { messages, provider = "claude", model, conversationId } = body;
 
@@ -113,7 +120,7 @@ export async function POST(request: NextRequest) {
       await prisma.message.create({
         data: {
           conversationId: convId,
-          role: MessageRole.USER,
+          role: "USER",
           content: latestUserMessage.content,
         },
       });
@@ -199,7 +206,7 @@ async function streamClaude(
         await prisma.message.create({
           data: {
             conversationId,
-            role: MessageRole.ASSISTANT,
+            role: "ASSISTANT",
             content: fullContent,
             model,
             tokenCount: outputTokens,
@@ -294,7 +301,7 @@ async function streamOpenAI(
         await prisma.message.create({
           data: {
             conversationId,
-            role: MessageRole.ASSISTANT,
+            role: "ASSISTANT",
             content: fullContent,
             model,
           },

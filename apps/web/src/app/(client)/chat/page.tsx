@@ -1,4 +1,4 @@
-import { ChatInterface } from "@/components/chat/chat-interface";
+import { ChatPageWrapper } from "@/components/chat";
 
 export const metadata = {
   title: "AI Assistant - Support Forge",
@@ -6,9 +6,5 @@ export const metadata = {
 };
 
 export default function ChatPage() {
-  return (
-    <div className="max-w-4xl mx-auto">
-      <ChatInterface />
-    </div>
-  );
+  return <ChatPageWrapper />;
 }
