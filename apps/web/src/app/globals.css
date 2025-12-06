@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* Support Forge Brand Colors */
+:root {
+  /* Primary Colors */
+  --forge-navy: #0a1628;
+  --forge-copper: #c97c4b;
+  --forge-copper-light: #e8a87c;
+  --forge-cream: #faf8f5;
+
+  /* Background Colors */
+  --bg-dark: #050508;
+  --bg-surface: #141419;
+  --bg-elevated: #1a1a22;
+
+  /* Accent */
+  --accent: #c97c4b;
+  --accent-hover: #e8a87c;
+
+  /* Text */
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  /* Borders */
+  --border-subtle: #2a2a35;
+  --border-default: #374151;
+
+  /* Status */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* Theme */
+  --background: var(--bg-dark);
+  --foreground: var(--text-primary);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Custom colors for Tailwind */
+  --color-forge-navy: var(--forge-navy);
+  --color-forge-copper: var(--forge-copper);
+  --color-forge-copper-light: var(--forge-copper-light);
+  --color-forge-cream: var(--forge-cream);
+
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+
+  /* Fonts */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
+}
+
+/* Light mode override */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: var(--forge-cream);
+    --foreground: var(--forge-navy);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-default);
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--forge-copper);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--forge-copper);
+  color: var(--bg-dark);
+}
