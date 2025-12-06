@@ -13,12 +13,19 @@ interface Message {
 
 type Provider = "claude" | "openai";
 
-export function ChatInterface() {
+interface ChatInterfaceProps {
+  conversationId?: string;
+  onConversationChange?: (id: string | undefined) => void;
+}
+
+export function ChatInterface({ conversationId: initialConversationId, onConversationChange }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingConversation, setIsLoadingConversation] = useState(false);
   const [streamingContent, setStreamingContent] = useState("");
   const [provider, setProvider] = useState<Provider>("claude");
   const [model, setModel] = useState("claude-3-sonnet-20240229");
+  const [conversationId, setConversationId] = useState<string | undefined>(initialConversationId);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom
@@ -29,6 +36,43 @@ export function ChatInterface() {
   useEffect(() => {
     scrollToBottom();
   }, [messages, streamingContent, scrollToBottom]);
+
+  // Load conversation when conversationId changes
+  useEffect(() => {
+    if (initialConversationId && initialConversationId !== conversationId) {
+      setConversationId(initialConversationId);
+      loadConversation(initialConversationId);
+    }
+  }, [initialConversationId]);
+
+  const loadConversation = async (id: string) => {
+    try {
+      setIsLoadingConversation(true);
+      const response = await fetch(`/api/conversations/${id}`);
+      if (!response.ok) {
+        throw new Error("Failed to load conversation");
+      }
+      const data = await response.json();
+
+      // Set the model from the conversation
+      if (data.model) {
+        setModel(data.model);
+        setProvider(data.model.includes("claude") ? "claude" : "openai");
+      }
+
+      // Load messages
+      const loadedMessages: Message[] = data.messages.map((m: { id: string; role: string; content: string }) => ({
+        id: m.id,
+        role: m.role.toLowerCase() as "user" | "assistant",
+        content: m.content,
+      }));
+      setMessages(loadedMessages);
+    } catch (error) {
+      console.error("Error loading conversation:", error);
+    } finally {
+      setIsLoadingConversation(false);
+    }
+  };
 
   const sendMessage = async (content: string) => {
     const userMessage: Message = {
@@ -52,6 +96,7 @@ export function ChatInterface() {
           })),
           provider,
           model,
+          conversationId,
         }),
       });
 
@@ -78,7 +123,23 @@ export function ChatInterface() {
 
               try {
                 const parsed = JSON.parse(data);
-                if (parsed.content) {
+
+                // Handle metadata (conversation ID)
+                if (parsed.type === "metadata") {
+                  if (parsed.conversationId && parsed.conversationId !== conversationId) {
+                    setConversationId(parsed.conversationId);
+                    onConversationChange?.(parsed.conversationId);
+                  }
+                }
+
+                // Handle content
+                if (parsed.type === "content" && parsed.content) {
+                  fullContent += parsed.content;
+                  setStreamingContent(fullContent);
+                }
+
+                // Legacy format support
+                if (parsed.content && !parsed.type) {
                   fullContent += parsed.content;
                   setStreamingContent(fullContent);
                 }
@@ -117,7 +178,23 @@ export function ChatInterface() {
   const clearChat = () => {
     setMessages([]);
     setStreamingContent("");
+    setConversationId(undefined);
+    onConversationChange?.(undefined);
   };
+
+  if (isLoadingConversation) {
+    return (
+      <div className="flex flex-col h-[calc(100vh-8rem)] items-center justify-center">
+        <div className="flex items-center gap-2 text-text-muted">
+          <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+          </svg>
+          Loading conversation...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)]">
@@ -152,14 +229,14 @@ export function ChatInterface() {
             <button
               onClick={clearChat}
               className="p-2 rounded-lg text-text-muted hover:text-text-primary hover:bg-elevated transition-colors"
-              title="Clear chat"
+              title="New chat"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  d="M12 4v16m8-8H4"
                 />
               </svg>
             </button>
