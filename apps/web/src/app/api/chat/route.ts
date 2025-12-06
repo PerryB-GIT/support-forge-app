@@ -128,9 +128,9 @@ export async function POST(request: NextRequest) {
 
     // Stream response based on provider
     if (provider === "claude") {
-      return streamClaude(messages, selectedModel, convId, isNewConversation);
+      return streamClaude(messages, selectedModel, convId!, isNewConversation);
     } else {
-      return streamOpenAI(messages, selectedModel, convId, isNewConversation);
+      return streamOpenAI(messages, selectedModel, convId!, isNewConversation);
     }
   } catch (error) {
     console.error("Chat API error:", error);

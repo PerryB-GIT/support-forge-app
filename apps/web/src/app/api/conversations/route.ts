@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json({
-      conversations: conversations.map((conv) => ({
+      conversations: conversations.map((conv: typeof conversations[0]) => ({
         id: conv.id,
         title: conv.title,
         model: conv.model,
