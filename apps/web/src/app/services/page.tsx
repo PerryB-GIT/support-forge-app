@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ServicesPage() {
   const services = [
@@ -83,20 +84,29 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <header className="border-b border-slate-700/50 backdrop-blur-sm bg-slate-900/80 sticky top-0 z-50">
+      <header className="border-b border-border-subtle backdrop-blur-sm bg-background/80 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-            Support Forge
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="SupportForge"
+              width={44}
+              height={44}
+              className="rounded-lg"
+            />
+            <span className="text-xl font-bold bg-gradient-to-r from-white to-forge-silver bg-clip-text text-transparent">
+              SupportForge
+            </span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="/services" className="text-cyan-400 font-medium">Services</Link>
-            <Link href="/about" className="text-slate-300 hover:text-white transition-colors">About</Link>
-            <Link href="/contact" className="text-slate-300 hover:text-white transition-colors">Contact</Link>
+            <Link href="/services" className="text-accent font-medium">Services</Link>
+            <Link href="/about" className="text-text-secondary hover:text-text-primary transition-colors">About</Link>
+            <Link href="/contact" className="text-text-secondary hover:text-text-primary transition-colors">Contact</Link>
             <Link
               href="/login"
-              className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-medium hover:from-cyan-400 hover:to-blue-500 transition-all"
+              className="px-4 py-2 bg-accent hover:bg-accent-hover text-white rounded-lg font-medium transition-all"
             >
               Client Portal
             </Link>
@@ -107,10 +117,10 @@ export default function ServicesPage() {
       {/* Hero Section */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Our <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Services</span>
+          <h1 className="text-5xl md:text-6xl font-bold text-text-primary mb-6">
+            Our <span className="text-accent">Services</span>
           </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto">
             Comprehensive technology solutions tailored to accelerate your business growth.
             From AI integration to managed IT services, we have the expertise to transform your operations.
           </p>
@@ -124,20 +134,20 @@ export default function ServicesPage() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="group bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-300"
+                className="group bg-surface border border-border-subtle rounded-2xl p-8 hover:border-accent/50 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row gap-8">
                   <div className="lg:w-1/2">
                     <div className="text-5xl mb-4">{service.icon}</div>
-                    <h2 className="text-2xl font-bold text-white mb-4">{service.title}</h2>
-                    <p className="text-slate-300 text-lg leading-relaxed">{service.description}</p>
+                    <h2 className="text-2xl font-bold text-text-primary mb-4">{service.title}</h2>
+                    <p className="text-text-secondary text-lg leading-relaxed">{service.description}</p>
                   </div>
                   <div className="lg:w-1/2">
-                    <h3 className="text-sm font-semibold text-cyan-400 uppercase tracking-wider mb-4">Key Capabilities</h3>
+                    <h3 className="text-sm font-semibold text-accent uppercase tracking-wider mb-4">Key Capabilities</h3>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start gap-2 text-slate-300">
-                          <svg className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <li key={featureIndex} className="flex items-start gap-2 text-text-secondary">
+                          <svg className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                           {feature}
@@ -153,25 +163,25 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border-y border-slate-700/50">
+      <section className="py-20 px-6 bg-gradient-to-r from-accent/10 via-background to-accent/10 border-y border-border-subtle">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-6">
             Ready to Transform Your Business?
           </h2>
-          <p className="text-xl text-slate-300 mb-8">
-            Let's discuss how our services can help you achieve your technology goals.
+          <p className="text-xl text-text-secondary mb-8">
+            Let&apos;s discuss how our services can help you achieve your technology goals.
             Schedule a free consultation with our experts today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold text-lg hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/25"
+              className="px-8 py-4 bg-accent hover:bg-accent-hover text-white rounded-xl font-semibold text-lg transition-all shadow-lg shadow-accent/25"
             >
-              Get Started
+              Schedule Consultation
             </Link>
             <Link
               href="/about"
-              className="px-8 py-4 border border-slate-600 text-white rounded-xl font-semibold text-lg hover:bg-slate-800 transition-all"
+              className="px-8 py-4 border border-border-subtle text-text-primary rounded-xl font-semibold text-lg hover:bg-surface transition-all"
             >
               Learn More About Us
             </Link>
@@ -180,19 +190,28 @@ export default function ServicesPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-slate-700/50">
+      <footer className="py-12 px-6 border-t border-border-subtle">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              Support Forge
+            <Link href="/" className="flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt="SupportForge"
+                width={32}
+                height={32}
+                className="rounded-lg"
+              />
+              <span className="font-bold bg-gradient-to-r from-white to-forge-silver bg-clip-text text-transparent">
+                SupportForge
+              </span>
+            </Link>
+            <div className="flex gap-6 text-text-muted">
+              <Link href="/services" className="hover:text-text-primary transition-colors">Services</Link>
+              <Link href="/about" className="hover:text-text-primary transition-colors">About</Link>
+              <Link href="/contact" className="hover:text-text-primary transition-colors">Contact</Link>
             </div>
-            <div className="flex gap-6 text-slate-400">
-              <Link href="/services" className="hover:text-white transition-colors">Services</Link>
-              <Link href="/about" className="hover:text-white transition-colors">About</Link>
-              <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
-            </div>
-            <div className="text-slate-500">
-              © 2024 Support Forge. All rights reserved.
+            <div className="text-text-muted">
+              © {new Date().getFullYear()} SupportForge. All rights reserved.
             </div>
           </div>
         </div>

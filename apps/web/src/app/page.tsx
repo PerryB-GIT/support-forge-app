@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Link from "next/link";
+import Image from "next/image";
 import { CONTACT_INFO } from "@support-forge/shared";
 
 export default async function Home() {
@@ -16,34 +17,21 @@ export default async function Home() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <svg
-              width="36"
-              height="36"
-              viewBox="0 0 60 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M30 5L5 20v20l25 15 25-15V20L30 5z"
-                stroke="var(--forge-copper)"
-                strokeWidth="2"
-                fill="none"
-              />
-              <path
-                d="M30 15L15 24v12l15 9 15-9V24L30 15z"
-                fill="var(--forge-copper)"
-                opacity="0.3"
-              />
-              <path d="M25 28h10v8l-5 4-5-4v-8z" fill="var(--forge-copper)" />
-            </svg>
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="SupportForge"
+              width={44}
+              height={44}
+              className="rounded-lg"
+            />
             <span
-              className="text-xl font-bold"
+              className="text-xl font-bold bg-gradient-to-r from-white to-forge-silver bg-clip-text text-transparent"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Support Forge
+              SupportForge
             </span>
-          </div>
+          </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/services" className="text-text-secondary hover:text-text-primary transition-colors">
               Services
@@ -336,14 +324,16 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <svg width="28" height="28" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M30 5L5 20v20l25 15 25-15V20L30 5z" stroke="var(--forge-copper)" strokeWidth="2" fill="none" />
-                  <path d="M30 15L15 24v12l15 9 15-9V24L30 15z" fill="var(--forge-copper)" opacity="0.3" />
-                  <path d="M25 28h10v8l-5 4-5-4v-8z" fill="var(--forge-copper)" />
-                </svg>
-                <span className="font-bold" style={{ fontFamily: "var(--font-space-grotesk)" }}>Support Forge</span>
-              </div>
+              <Link href="/" className="flex items-center gap-3 mb-4">
+                <Image
+                  src="/logo.png"
+                  alt="SupportForge"
+                  width={36}
+                  height={36}
+                  className="rounded-lg"
+                />
+                <span className="font-bold bg-gradient-to-r from-white to-forge-silver bg-clip-text text-transparent" style={{ fontFamily: "var(--font-space-grotesk)" }}>SupportForge</span>
+              </Link>
               <p className="text-text-secondary text-sm">
                 AI & IT Consulting services for modern businesses. Transforming ideas into reality.
               </p>

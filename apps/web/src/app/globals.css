@@ -1,30 +1,32 @@
 @import "tailwindcss";
 
-/* Support Forge Brand Colors */
+/* Support Forge Brand Colors - Black/Silver/Purple Theme */
 :root {
   /* Primary Colors */
-  --forge-navy: #0a1628;
-  --forge-copper: #c97c4b;
-  --forge-copper-light: #e8a87c;
-  --forge-cream: #faf8f5;
+  --forge-black: #0a0a0f;
+  --forge-purple: #8B5CF6;
+  --forge-purple-light: #A78BFA;
+  --forge-silver: #C0C0C0;
+  --forge-silver-dark: #9CA3AF;
 
   /* Background Colors */
   --bg-dark: #050508;
-  --bg-surface: #141419;
-  --bg-elevated: #1a1a22;
+  --bg-surface: #0f0f14;
+  --bg-elevated: #18181f;
 
-  /* Accent */
-  --accent: #c97c4b;
-  --accent-hover: #e8a87c;
+  /* Accent - Purple */
+  --accent: #8B5CF6;
+  --accent-hover: #A78BFA;
+  --accent-glow: rgba(139, 92, 246, 0.3);
 
   /* Text */
   --text-primary: #f9fafb;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
+  --text-secondary: #C0C0C0;
+  --text-muted: #9CA3AF;
 
   /* Borders */
   --border-subtle: #2a2a35;
-  --border-default: #374151;
+  --border-default: #404050;
 
   /* Status */
   --success: #10b981;
@@ -34,6 +36,9 @@
   /* Theme */
   --background: var(--bg-dark);
   --foreground: var(--text-primary);
+
+  /* Logo accent (cyan from logo) */
+  --logo-cyan: #22D3EE;
 }
 
 @theme inline {
@@ -41,10 +46,10 @@
   --color-foreground: var(--foreground);
 
   /* Custom colors for Tailwind */
-  --color-forge-navy: var(--forge-navy);
-  --color-forge-copper: var(--forge-copper);
-  --color-forge-copper-light: var(--forge-copper-light);
-  --color-forge-cream: var(--forge-cream);
+  --color-forge-black: var(--forge-black);
+  --color-forge-purple: var(--forge-purple);
+  --color-forge-purple-light: var(--forge-purple-light);
+  --color-forge-silver: var(--forge-silver);
 
   --color-surface: var(--bg-surface);
   --color-elevated: var(--bg-elevated);
@@ -64,11 +69,11 @@
   --font-heading: "Space Grotesk", system-ui, sans-serif;
 }
 
-/* Light mode override */
+/* Light mode override - keeping dark theme for now */
 @media (prefers-color-scheme: light) {
   :root {
-    --background: var(--forge-cream);
-    --foreground: var(--forge-navy);
+    --background: var(--bg-dark);
+    --foreground: var(--text-primary);
   }
 }
 
@@ -94,17 +99,22 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--border-default);
+  background: var(--forge-purple);
 }
 
 /* Focus ring */
 *:focus-visible {
-  outline: 2px solid var(--forge-copper);
+  outline: 2px solid var(--forge-purple);
   outline-offset: 2px;
 }
 
 /* Selection */
 ::selection {
-  background: var(--forge-copper);
+  background: var(--forge-purple);
   color: var(--bg-dark);
+}
+
+/* Purple glow effect for cards on hover */
+.glow-purple:hover {
+  box-shadow: 0 0 30px var(--accent-glow);
 }
