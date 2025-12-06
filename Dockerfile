@@ -26,8 +26,10 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Generate Prisma client
-WORKDIR /app/packages/database
-RUN npx prisma generate
+WORKDIR /app
+RUN npm cache clean --force && \
+    cd packages/database && \
+    npx --yes prisma generate --schema=./prisma/schema.prisma
 
 # Build the web app
 WORKDIR /app

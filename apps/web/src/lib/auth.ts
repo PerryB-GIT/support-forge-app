@@ -44,7 +44,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (\!credentials?.email || \!credentials?.password) {
+        if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
 
@@ -52,13 +52,13 @@ export const authOptions: NextAuthOptions = {
           where: { email: credentials.email },
         });
 
-        if (\!user || \!user.password) {
+        if (!user || !user.password) {
           throw new Error("Invalid credentials");
         }
 
         const isValid = await bcrypt.compare(credentials.password, user.password);
 
-        if (\!isValid) {
+        if (!isValid) {
           throw new Error("Invalid credentials");
         }
 
