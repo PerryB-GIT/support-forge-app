@@ -2,7 +2,7 @@ FROM node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-RUN apk add --no-cache libc6-compat openssl python3 make g++
+RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 
 # Copy root package files
@@ -16,18 +16,17 @@ COPY packages/database/package.json ./packages/database/
 COPY packages/ai/package.json ./packages/ai/
 
 # Install all dependencies including devDependencies for build
-# Force rebuild of native modules for Alpine
 RUN npm ci --include=dev
+
+# Explicitly install lightningcss musl binary
+RUN npm install lightningcss-linux-x64-musl --save-optional || true
 
 # Build the app
 FROM base AS builder
-RUN apk add --no-cache openssl openssl-dev python3 make g++
+RUN apk add --no-cache openssl openssl-dev
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Rebuild native modules for Alpine (lightningcss, etc.)
-RUN npm rebuild
 
 # Generate Prisma client
 WORKDIR /app
