@@ -1,0 +1,309 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    service: "",
+    message: ""
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // In production, this would send to an API
+    console.log("Form submitted:", formData);
+    setSubmitted(true);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const contactInfo = [
+    {
+      icon: "📧",
+      title: "Email Us",
+      value: "contact@support-forge.com",
+      description: "We'll respond within 24 hours"
+    },
+    {
+      icon: "📞",
+      title: "Call Us",
+      value: "(555) 123-4567",
+      description: "Mon-Fri 9am-6pm EST"
+    },
+    {
+      icon: "📍",
+      title: "Visit Us",
+      value: "123 Tech Drive, Suite 100",
+      description: "Innovation City, IC 12345"
+    }
+  ];
+
+  const services = [
+    "AI Integration & Automation",
+    "Custom Software Development",
+    "Cloud Solutions & DevOps",
+    "IT Consulting & Strategy",
+    "Cybersecurity Services",
+    "Managed IT Services",
+    "Other"
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+      {/* Navigation */}
+      <header className="border-b border-slate-700/50 backdrop-blur-sm bg-slate-900/80 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            Support Forge
+          </Link>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/services" className="text-slate-300 hover:text-white transition-colors">Services</Link>
+            <Link href="/about" className="text-slate-300 hover:text-white transition-colors">About</Link>
+            <Link href="/contact" className="text-cyan-400 font-medium">Contact</Link>
+            <Link
+              href="/login"
+              className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-medium hover:from-cyan-400 hover:to-blue-500 transition-all"
+            >
+              Client Portal
+            </Link>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            Get in <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Touch</span>
+          </h1>
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+            Ready to transform your business with technology? We'd love to hear from you.
+            Reach out and let's start a conversation about your goals.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Info Cards */}
+      <section className="py-8 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6">
+            {contactInfo.map((info, index) => (
+              <div
+                key={index}
+                className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6 text-center hover:border-cyan-500/50 transition-all duration-300"
+              >
+                <div className="text-4xl mb-4">{info.icon}</div>
+                <h3 className="text-lg font-bold text-white mb-2">{info.title}</h3>
+                <p className="text-cyan-400 font-medium mb-1">{info.value}</p>
+                <p className="text-slate-400 text-sm">{info.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 md:p-12">
+            {submitted ? (
+              <div className="text-center py-12">
+                <div className="text-6xl mb-6">✅</div>
+                <h2 className="text-2xl font-bold text-white mb-4">Thank You!</h2>
+                <p className="text-slate-300 mb-8">
+                  Your message has been received. We'll get back to you within 24 hours.
+                </p>
+                <button
+                  onClick={() => {
+                    setSubmitted(false);
+                    setFormData({ name: "", email: "", company: "", phone: "", service: "", message: "" });
+                  }}
+                  className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-medium hover:from-cyan-400 hover:to-blue-500 transition-all"
+                >
+                  Send Another Message
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl font-bold text-white mb-2">Send Us a Message</h2>
+                  <p className="text-slate-400">Fill out the form below and we'll get back to you shortly.</p>
+                </div>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+                        Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                        placeholder="john@company.com"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="company" className="block text-sm font-medium text-slate-300 mb-2">
+                        Company Name
+                      </label>
+                      <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                        placeholder="Acme Inc."
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                        placeholder="(555) 123-4567"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="service" className="block text-sm font-medium text-slate-300 mb-2">
+                      Service of Interest
+                    </label>
+                    <select
+                      id="service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                    >
+                      <option value="">Select a service...</option>
+                      {services.map((service, index) => (
+                        <option key={index} value={service}>{service}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+                      Message *
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={5}
+                      className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                      placeholder="Tell us about your project or inquiry..."
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold text-lg hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/25"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 px-6 bg-slate-800/30">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            <p className="text-slate-300">Quick answers to common questions</p>
+          </div>
+          <div className="space-y-4">
+            {[
+              {
+                question: "How quickly can you start on a new project?",
+                answer: "We typically begin discovery and planning within 1-2 weeks of contract signing. For urgent needs, we can often accommodate faster timelines."
+              },
+              {
+                question: "Do you offer free consultations?",
+                answer: "Yes! We offer a free initial consultation to understand your needs and discuss how we can help. This helps us provide accurate estimates and recommendations."
+              },
+              {
+                question: "What industries do you work with?",
+                answer: "We work across various industries including healthcare, finance, retail, manufacturing, and technology. Our solutions are tailored to meet industry-specific requirements."
+              },
+              {
+                question: "Do you provide ongoing support after project completion?",
+                answer: "Absolutely. We offer various support and maintenance packages to ensure your solutions continue to perform optimally. Our 24/7 support team is always ready to help."
+              }
+            ].map((faq, index) => (
+              <div
+                key={index}
+                className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6"
+              >
+                <h3 className="text-lg font-semibold text-white mb-2">{faq.question}</h3>
+                <p className="text-slate-400">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-6 border-t border-slate-700/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              Support Forge
+            </div>
+            <div className="flex gap-6 text-slate-400">
+              <Link href="/services" className="hover:text-white transition-colors">Services</Link>
+              <Link href="/about" className="hover:text-white transition-colors">About</Link>
+              <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+            </div>
+            <div className="text-slate-500">
+              © 2024 Support Forge. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
