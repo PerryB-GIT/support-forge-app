@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "standalone",
+  transpilePackages: ["@support-forge/shared", "@support-forge/database"],
 };
 
 export default nextConfig;
