@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // output: "standalone", // Only for Docker deployments
   transpilePackages: ["@support-forge/shared", "@support-forge/database"],
 };
 
