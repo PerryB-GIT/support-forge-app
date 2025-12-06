@@ -18,8 +18,8 @@ COPY packages/ai/package.json ./packages/ai/
 # Install all dependencies including devDependencies for build
 RUN npm ci --include=dev
 
-# Explicitly install lightningcss musl binary
-RUN npm install lightningcss-linux-x64-musl --save-optional || true
+# Explicitly install musl binaries for Alpine compatibility
+RUN npm install lightningcss-linux-x64-musl @tailwindcss/oxide-linux-x64-musl --save-optional || true
 
 # Build the app
 FROM base AS builder
