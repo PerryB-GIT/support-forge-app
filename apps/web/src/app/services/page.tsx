@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function ServicesPage() {
   const services = [
@@ -88,15 +87,8 @@ export default function ServicesPage() {
       {/* Navigation */}
       <header className="border-b border-border-subtle backdrop-blur-sm bg-background/80 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              alt="SupportForge"
-              width={44}
-              height={44}
-              className="rounded-lg"
-            />
-            <span className="text-xl font-bold bg-gradient-to-r from-white to-forge-silver bg-clip-text text-transparent">
+          <Link href="/" className="flex items-center gap-2">
+            <span className="text-xl font-bold text-accent">
               SupportForge
             </span>
           </Link>
@@ -193,15 +185,8 @@ export default function ServicesPage() {
       <footer className="py-12 px-6 border-t border-border-subtle">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="SupportForge"
-                width={32}
-                height={32}
-                className="rounded-lg"
-              />
-              <span className="font-bold bg-gradient-to-r from-white to-forge-silver bg-clip-text text-transparent">
+            <Link href="/" className="flex items-center gap-2">
+              <span className="font-bold text-accent">
                 SupportForge
               </span>
             </Link>

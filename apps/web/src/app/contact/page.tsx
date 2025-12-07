@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -32,20 +31,20 @@ export default function ContactPage() {
     {
       icon: "📧",
       title: "Email Us",
-      value: "contact@support-forge.com",
+      value: "perry.bailes@gmail.com",
       description: "We'll respond within 24 hours"
     },
     {
       icon: "📞",
       title: "Call Us",
-      value: "(555) 123-4567",
+      value: "(478) 299-1604",
       description: "Mon-Fri 9am-6pm EST"
     },
     {
       icon: "📍",
-      title: "Visit Us",
-      value: "123 Tech Drive, Suite 100",
-      description: "Innovation City, IC 12345"
+      title: "Location",
+      value: "Haverhill, MA",
+      description: "Massachusetts"
     }
   ];
 
@@ -59,23 +58,16 @@ export default function ContactPage() {
     "Other"
   ];
 
-  // Calendly URL - Update this with your actual Calendly link
-  const calendlyUrl = "https://calendly.com/supportforge";
+  // Calendly URL
+  const calendlyUrl = "https://calendly.com/perry-bailes";
 
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <header className="border-b border-border-subtle backdrop-blur-sm bg-background/80 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              alt="SupportForge"
-              width={44}
-              height={44}
-              className="rounded-lg"
-            />
-            <span className="text-xl font-bold bg-gradient-to-r from-white to-forge-silver bg-clip-text text-transparent">
+          <Link href="/" className="flex items-center gap-2">
+            <span className="text-xl font-bold text-accent">
               SupportForge
             </span>
           </Link>
@@ -327,15 +319,8 @@ export default function ContactPage() {
       <footer className="py-12 px-6 border-t border-border-subtle">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="SupportForge"
-                width={32}
-                height={32}
-                className="rounded-lg"
-              />
-              <span className="font-bold bg-gradient-to-r from-white to-forge-silver bg-clip-text text-transparent">
+            <Link href="/" className="flex items-center gap-2">
+              <span className="font-bold text-accent">
                 SupportForge
               </span>
             </Link>
