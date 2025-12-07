@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 type Role = "ADMIN" | "CLIENT";
@@ -91,6 +92,13 @@ export default function ClientSidebar({ user }: Props) {
       {/* Mobile header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-surface border-b border-border-subtle z-40 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
+          <Image
+            src="/sf-logo.png"
+            alt="Support Forge"
+            width={32}
+            height={32}
+            className="object-contain"
+          />
           <span className="text-xl font-bold text-accent">SupportForge</span>
         </div>
       </div>
@@ -99,6 +107,13 @@ export default function ClientSidebar({ user }: Props) {
       <aside className="hidden lg:flex flex-col fixed left-0 top-0 bottom-0 w-64 bg-surface border-r border-border-subtle z-50">
         {/* Logo */}
         <div className="h-16 flex items-center gap-2 px-6 border-b border-border-subtle">
+          <Image
+            src="/sf-logo.png"
+            alt="Support Forge"
+            width={40}
+            height={40}
+            className="object-contain"
+          />
           <span className="text-xl font-bold text-accent">SupportForge</span>
         </div>
 

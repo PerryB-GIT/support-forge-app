@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 type Role = "ADMIN" | "CLIENT";
@@ -101,21 +102,13 @@ export default function AdminSidebar({ user }: Props) {
       {/* Mobile header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-surface border-b border-border-subtle z-40 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 60 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M30 5L5 20v20l25 15 25-15V20L30 5z"
-              stroke="var(--forge-copper)"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path d="M25 28h10v8l-5 4-5-4v-8z" fill="var(--forge-copper)" />
-          </svg>
+          <Image
+            src="/sf-logo.png"
+            alt="Support Forge"
+            width={32}
+            height={32}
+            className="object-contain"
+          />
           <span className="font-bold">Admin Portal</span>
         </div>
       </div>
@@ -124,21 +117,13 @@ export default function AdminSidebar({ user }: Props) {
       <aside className="hidden lg:flex flex-col fixed left-0 top-0 bottom-0 w-64 bg-surface border-r border-border-subtle z-50">
         {/* Logo */}
         <div className="h-16 flex items-center gap-2 px-6 border-b border-border-subtle">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 60 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M30 5L5 20v20l25 15 25-15V20L30 5z"
-              stroke="var(--forge-copper)"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path d="M25 28h10v8l-5 4-5-4v-8z" fill="var(--forge-copper)" />
-          </svg>
+          <Image
+            src="/sf-logo.png"
+            alt="Support Forge"
+            width={40}
+            height={40}
+            className="object-contain"
+          />
           <div>
             <span className="font-bold text-lg block leading-tight">Support Forge</span>
             <span className="text-xs text-accent">Admin Portal</span>
