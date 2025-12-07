@@ -45,31 +45,11 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 mb-4">
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 60 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M30 5L5 20v20l25 15 25-15V20L30 5z"
-                stroke="var(--forge-copper)"
-                strokeWidth="2"
-                fill="none"
-              />
-              <path
-                d="M30 15L15 24v12l15 9 15-9V24L30 15z"
-                fill="var(--forge-copper)"
-                opacity="0.3"
-              />
-              <path d="M25 28h10v8l-5 4-5-4v-8z" fill="var(--forge-copper)" />
-            </svg>
             <span
-              className="text-2xl font-bold"
+              className="text-2xl font-bold text-accent"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Support Forge
+              SupportForge
             </span>
           </div>
           <p className="text-text-secondary">Sign in to your account</p>
@@ -98,7 +78,7 @@ export default function LoginPage() {
               name="email"
               type="email"
               required
-              className="w-full px-4 py-2.5 rounded-lg bg-elevated border border-border-subtle focus:border-forge-copper focus:ring-1 focus:ring-forge-copper outline-none transition-colors"
+              className="w-full px-4 py-2.5 rounded-lg bg-elevated border border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
               placeholder="you@example.com"
             />
           </div>
@@ -115,7 +95,7 @@ export default function LoginPage() {
               name="password"
               type="password"
               required
-              className="w-full px-4 py-2.5 rounded-lg bg-elevated border border-border-subtle focus:border-forge-copper focus:ring-1 focus:ring-forge-copper outline-none transition-colors"
+              className="w-full px-4 py-2.5 rounded-lg bg-elevated border border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
               placeholder="••••••••"
             />
           </div>
