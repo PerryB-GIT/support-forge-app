@@ -1,5 +1,6 @@
 import { prisma } from "@support-forge/database";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function AdminProjectsPage() {
   const projects = await prisma.project.findMany({
@@ -42,16 +43,19 @@ export default async function AdminProjectsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1
-            className="text-2xl lg:text-3xl font-bold"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
-            Projects
-          </h1>
-          <p className="text-text-secondary mt-1">
-            Create and manage client projects
-          </p>
+        <div className="flex items-center gap-3">
+          <Image src="/sf-logo.png" alt="Support Forge" width={40} height={40} className="rounded-lg" />
+          <div>
+            <h1
+              className="text-2xl lg:text-3xl font-bold"
+              style={{ fontFamily: "var(--font-space-grotesk)" }}
+            >
+              Projects
+            </h1>
+            <p className="text-text-secondary mt-1">
+              Create and manage client projects
+            </p>
+          </div>
         </div>
         <Link
           href="/admin/projects/new"
