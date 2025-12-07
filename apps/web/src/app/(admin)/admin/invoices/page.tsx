@@ -1,5 +1,6 @@
 import { prisma } from "@support-forge/database";
 import Link from "next/link";
+import { InvoiceStatusDropdown } from "./InvoiceStatusDropdown";
 
 export default async function AdminInvoicesPage() {
   const invoices = await prisma.invoice.findMany({
@@ -169,32 +170,5 @@ export default async function AdminInvoicesPage() {
         </div>
       </div>
     </div>
-  );
-}
-
-function InvoiceStatusDropdown({
-  invoiceId,
-  currentStatus,
-}: {
-  invoiceId: string;
-  currentStatus: string;
-}) {
-  return (
-    <form action={`/api/admin/invoices/${invoiceId}/status`} method="POST">
-      <select
-        name="status"
-        defaultValue={currentStatus}
-        onChange={(e) => {
-          const form = e.target.closest("form");
-          if (form) form.submit();
-        }}
-        className="text-xs px-2 py-1 rounded bg-elevated border border-border-subtle cursor-pointer"
-      >
-        <option value="pending">Pending</option>
-        <option value="paid">Paid</option>
-        <option value="overdue">Overdue</option>
-        <option value="cancelled">Cancelled</option>
-      </select>
-    </form>
   );
 }
