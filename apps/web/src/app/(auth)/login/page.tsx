@@ -84,12 +84,20 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-text-secondary mb-1.5"
-            >
-              Password
-            </label>
+            <div className="flex items-center justify-between mb-1.5">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-text-secondary"
+              >
+                Password
+              </label>
+              <Link
+                href="/forgot-password"
+                className="text-sm text-accent hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
             <input
               id="password"
               name="password"
@@ -148,6 +156,18 @@ export default function LoginPage() {
           Don&apos;t have an account?{" "}
           <Link href="/register" className="text-accent hover:underline">
             Sign up
+          </Link>
+        </p>
+
+        <p className="mt-4 text-center">
+          <Link
+            href="/"
+            className="text-text-muted hover:text-text-secondary text-sm inline-flex items-center gap-1"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to home
           </Link>
         </p>
       </div>

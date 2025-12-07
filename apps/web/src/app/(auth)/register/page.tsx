@@ -179,6 +179,29 @@ export default function RegisterPage() {
               className="w-full px-4 py-2.5 rounded-lg bg-elevated border border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
               placeholder="••••••••"
             />
+            <p className="mt-1.5 text-xs text-text-muted">
+              Must be at least 8 characters
+            </p>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <input
+              id="terms"
+              name="terms"
+              type="checkbox"
+              required
+              className="mt-1 w-4 h-4 rounded border-border-subtle bg-elevated text-accent focus:ring-accent focus:ring-offset-0"
+            />
+            <label htmlFor="terms" className="text-sm text-text-secondary">
+              I agree to the{" "}
+              <Link href="/terms" className="text-accent hover:underline">
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link href="/privacy" className="text-accent hover:underline">
+                Privacy Policy
+              </Link>
+            </label>
           </div>
 
           <button
@@ -194,6 +217,18 @@ export default function RegisterPage() {
           Already have an account?{" "}
           <Link href="/login" className="text-accent hover:underline">
             Sign in
+          </Link>
+        </p>
+
+        <p className="mt-4 text-center">
+          <Link
+            href="/"
+            className="text-text-muted hover:text-text-secondary text-sm inline-flex items-center gap-1"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to home
           </Link>
         </p>
       </div>
