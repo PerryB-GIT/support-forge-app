@@ -15,8 +15,8 @@ export default async function BillingPage() {
       })
     : [];
 
-  const formatCurrency = (amount: number | string) => {
-    const num = typeof amount === "string" ? parseFloat(amount) : amount;
+  const formatCurrency = (amount: number | string | { toString(): string }) => {
+    const num = typeof amount === "number" ? amount : parseFloat(amount.toString());
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
