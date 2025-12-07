@@ -12,13 +12,13 @@ export default async function AdminAnalyticsPage() {
   ]);
 
   // Calculate revenue metrics
-  const totalRevenue = invoices.reduce((sum, inv) => sum + (inv.total || 0), 0);
+  const totalRevenue = invoices.reduce((sum, inv) => sum + Number(inv.amount || 0), 0);
   const paidRevenue = invoices
-    .filter((inv) => inv.status === "PAID")
-    .reduce((sum, inv) => sum + (inv.total || 0), 0);
+    .filter((inv) => inv.status === "PAID" || inv.status === "paid")
+    .reduce((sum, inv) => sum + Number(inv.amount || 0), 0);
   const pendingRevenue = invoices
-    .filter((inv) => inv.status === "SENT" || inv.status === "OVERDUE")
-    .reduce((sum, inv) => sum + (inv.total || 0), 0);
+    .filter((inv) => inv.status === "SENT" || inv.status === "pending" || inv.status === "OVERDUE" || inv.status === "overdue")
+    .reduce((sum, inv) => sum + Number(inv.amount || 0), 0);
 
   // Project metrics
   const activeProjects = projects.filter((p) => p.status === "ACTIVE").length;
@@ -57,8 +57,8 @@ export default async function AdminAnalyticsPage() {
     });
 
     const monthRevenue = monthInvoices
-      .filter((inv) => inv.status === "PAID")
-      .reduce((sum, inv) => sum + (inv.total || 0), 0);
+      .filter((inv) => inv.status === "PAID" || inv.status === "paid")
+      .reduce((sum, inv) => sum + Number(inv.amount || 0), 0);
 
     const monthTickets = tickets.filter((t) => {
       const tDate = new Date(t.createdAt);
