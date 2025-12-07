@@ -222,9 +222,9 @@ export default async function ClientDetailPage({
                   className="p-4 hover:bg-elevated/50 flex items-center justify-between"
                 >
                   <div>
-                    <p className="font-medium">{invoice.invoiceNumber}</p>
+                    <p className="font-medium">{invoice.number}</p>
                     <p className="text-sm text-text-muted">
-                      ${invoice.amount.toFixed(2)} - {new Date(invoice.createdAt).toLocaleDateString()}
+                      ${Number(invoice.amount).toFixed(2)} - {new Date(invoice.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   <span className={`px-2 py-1 rounded text-xs font-medium ${statusStyle?.bg} ${statusStyle?.text}`}>
