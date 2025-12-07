@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Link from "next/link";
+import Image from "next/image";
 import { CONTACT_INFO } from "@support-forge/shared";
 
 export default async function Home() {
@@ -17,6 +18,7 @@ export default async function Home() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
+            <Image src="/sf-logo.png" alt="Support Forge" width={32} height={32} className="rounded-lg" />
             <span
               className="text-xl font-bold text-accent"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -317,6 +319,7 @@ export default async function Home() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-8">
             <div>
               <Link href="/" className="flex items-center gap-2 mb-4">
+                <Image src="/sf-logo.png" alt="Support Forge" width={28} height={28} className="rounded-lg" />
                 <span className="font-bold text-accent" style={{ fontFamily: "var(--font-space-grotesk)" }}>SupportForge</span>
               </Link>
               <p className="text-text-secondary text-sm">

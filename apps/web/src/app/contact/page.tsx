@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -67,6 +68,7 @@ export default function ContactPage() {
       <header className="border-b border-border-subtle backdrop-blur-sm bg-background/80 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
+            <Image src="/sf-logo.png" alt="Support Forge" width={32} height={32} className="rounded-lg" />
             <span className="text-xl font-bold text-accent">
               SupportForge
             </span>
@@ -320,6 +322,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <Link href="/" className="flex items-center gap-2">
+              <Image src="/sf-logo.png" alt="Support Forge" width={28} height={28} className="rounded-lg" />
               <span className="font-bold text-accent">
                 SupportForge
               </span>
