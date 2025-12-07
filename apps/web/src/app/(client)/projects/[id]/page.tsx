@@ -177,7 +177,7 @@ export default function ProjectDetailPage() {
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Tickets</h2>
           <Link
-            href={`/support/new?project=${project.id}`}
+            href={`/support?create=true&project=${project.id}`}
             className="text-sm text-accent hover:underline"
           >
             Create Ticket
