@@ -91,28 +91,30 @@ export default function ClientSidebar({ user }: Props) {
     <>
       {/* Mobile header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-surface border-b border-border-subtle z-40 flex items-center justify-between px-4">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Image
             src="/sf-logo.png"
             alt="Support Forge"
-            width={140}
-            height={40}
-            className="object-contain"
+            width={36}
+            height={36}
+            className="object-contain rounded-lg"
           />
+          <span className="font-bold text-lg">Support Forge</span>
         </div>
       </div>
 
       {/* Sidebar */}
       <aside className="hidden lg:flex flex-col fixed left-0 top-0 bottom-0 w-64 bg-surface border-r border-border-subtle z-50">
         {/* Logo */}
-        <div className="h-16 flex items-center px-4 border-b border-border-subtle">
+        <div className="h-16 flex items-center gap-3 px-4 border-b border-border-subtle">
           <Image
             src="/sf-logo.png"
             alt="Support Forge"
-            width={180}
-            height={45}
-            className="object-contain"
+            width={40}
+            height={40}
+            className="object-contain rounded-lg"
           />
+          <span className="text-xl font-bold text-accent">SupportForge</span>
         </div>
 
         {/* Navigation */}
