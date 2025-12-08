@@ -1,7 +1,7 @@
 import { prisma } from "@support-forge/database";
 import Link from "next/link";
 import Image from "next/image";
-import { InvoiceStatusDropdown } from "./InvoiceStatusDropdown";
+import { InvoiceActions } from "@/components/admin/InvoiceActions";
 
 export default async function AdminInvoicesPage() {
   const invoices = await prisma.invoice.findMany({

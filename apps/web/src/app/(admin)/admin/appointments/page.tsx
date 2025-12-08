@@ -1,6 +1,7 @@
 import { prisma } from "@support-forge/database";
 import Link from "next/link";
 import Image from "next/image";
+import { AppointmentActions } from "@/components/admin/AppointmentActions";
 
 export default async function AdminAppointmentsPage() {
   const appointments = await prisma.appointment.findMany({

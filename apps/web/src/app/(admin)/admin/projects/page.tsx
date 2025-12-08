@@ -1,6 +1,7 @@
 import { prisma } from "@support-forge/database";
 import Link from "next/link";
 import Image from "next/image";
+import { ProjectActions } from "@/components/admin/ProjectActions";
 
 export default async function AdminProjectsPage() {
   const projects = await prisma.project.findMany({

@@ -1,6 +1,7 @@
 import { prisma } from "@support-forge/database";
 import Link from "next/link";
 import Image from "next/image";
+import { TicketActions } from "@/components/admin/TicketActions";
 
 export default async function AdminTicketsPage() {
   const tickets = await prisma.ticket.findMany({

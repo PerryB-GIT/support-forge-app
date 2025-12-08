@@ -154,6 +154,22 @@ export default function AdminSidebar({ user }: Props) {
           </ul>
         </nav>
 
+        {/* Portal Switcher */}
+        <div className="px-3 pb-2">
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-elevated/50 hover:bg-elevated text-text-secondary hover:text-text-primary transition-colors border border-border-subtle"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <div className="flex-1">
+              <span className="font-medium text-sm">Switch to Client View</span>
+              <p className="text-xs text-text-muted">View as a client would see</p>
+            </div>
+          </Link>
+        </div>
+
         {/* User section */}
         <div className="p-4 border-t border-border-subtle">
           <div className="flex items-center gap-3 mb-3">
