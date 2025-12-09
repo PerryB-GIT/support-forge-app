@@ -4,6 +4,9 @@ import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 import Image from "next/image";
 import { CONTACT_INFO } from "@support-forge/shared";
+import { LocalBusinessJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
+
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://support-forge.com";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -14,6 +17,25 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <WebSiteJsonLd
+        url={siteUrl}
+        name="Support Forge"
+        description="AI & IT Consulting Services - Transform your business with cutting-edge technology solutions"
+      />
+      <LocalBusinessJsonLd
+        url={siteUrl}
+        logo={`${siteUrl}/sf-logo.png`}
+        name="Support Forge"
+        description="AI & IT Consulting services providing AI integration, custom software development, cloud solutions, cybersecurity, and managed IT services."
+        email={CONTACT_INFO.email}
+        telephone={CONTACT_INFO.phoneRaw}
+        address={{
+          city: "Haverhill",
+          region: "Massachusetts",
+          country: "US",
+        }}
+        priceRange="$$"
+      />
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -27,6 +49,9 @@ export default async function Home() {
             </span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
+            <Link href="/ai-transformation" className="text-accent font-medium">
+              AI Transformation
+            </Link>
             <Link href="/services" className="text-text-secondary hover:text-text-primary transition-colors">
               Services
             </Link>
@@ -59,31 +84,30 @@ export default async function Home() {
         <div className="max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-            AI-Powered IT Solutions
+            Real AI Awakening
           </div>
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Your AI & IT
-            <span className="text-accent"> Partner</span>
+            AI That Actually
+            <span className="text-accent"> Works</span>
           </h1>
           <p className="text-lg md:text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
-            Transform your business with cutting-edge AI solutions and expert IT consulting.
-            Access your client portal, manage projects, and get 24/7 AI-powered support.
+            Stop collecting AI subscriptions that gather dust. We help business owners build systems that genuinely transform how they work — and we love every minute of it.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/register"
+              href="/ai-transformation"
               className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105"
             >
-              Start Your Project
+              See What's Possible
             </Link>
             <Link
-              href="/services"
+              href="/contact"
               className="px-8 py-4 rounded-lg bg-surface border border-border-subtle hover:border-accent text-text-primary font-medium transition-all"
             >
-              Explore Services
+              Let's Talk
             </Link>
           </div>
         </div>

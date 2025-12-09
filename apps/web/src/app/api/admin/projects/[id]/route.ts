@@ -138,6 +138,9 @@ export async function DELETE(
 
   try {
     const { id } = await params;
+
+    // With cascade deletes enabled in Prisma schema,
+    // deleting the project will automatically delete all tickets and documents
     await prisma.project.delete({
       where: { id },
     });
@@ -145,8 +148,9 @@ export async function DELETE(
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting project:", error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { error: "Failed to delete project" },
+      { error: `Failed to delete project: ${errorMessage}` },
       { status: 500 }
     );
   }

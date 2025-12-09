@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Setup Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D97706;
+            --primary-light: #FBBF24;
+            --primary-dark: #B45309;
+            --secondary: #6366F1;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gradient: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FBBF24 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-icon svg {
+            width: 56px;
+            height: 56px;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            right: 40px;
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: 2px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1;
+            transition: transform 0.2s;
+        }
+
+        .progress-step:hover {
+            transform: translateY(-2px);
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--gray-500);
+            transition: all 0.3s;
+            border: 3px solid white;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-step.active .step-circle,
+        .progress-step.completed .step-circle {
+            background: var(--primary);
+            color: white;
+        }
+
+        .progress-step.completed .step-circle {
+            background: var(--success);
+        }
+
+        .step-label {
+            margin-top: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gray-500);
+            text-align: center;
+            max-width: 80px;
+        }
+
+        .progress-step.active .step-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Section */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        .section-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .section-icon svg {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--gray-50);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .card-icon.kubernetes { background: linear-gradient(135deg, #326CE5, #4A90D9); }
+        .card-icon.filesystem { background: linear-gradient(135deg, #10B981, #34D399); }
+        .card-icon.aws { background: linear-gradient(135deg, #FF9900, #FFB84D); }
+        .card-icon.figma { background: linear-gradient(135deg, #F24E1E, #FF7262); }
+        .card-icon.commander { background: linear-gradient(135deg, #6366F1, #818CF8); }
+        .card-icon.tableau { background: linear-gradient(135deg, #E97627, #F5A623); }
+        .card-icon.windows { background: linear-gradient(135deg, #0078D4, #50E6FF); }
+        .card-icon.fathom { background: linear-gradient(135deg, #8B5CF6, #A78BFA); }
+        .card-icon.calendly { background: linear-gradient(135deg, #006BFF, #4D94FF); }
+        .card-icon.playwright { background: linear-gradient(135deg, #45BA4B, #6FCF97); }
+        .card-icon.wordpress { background: linear-gradient(135deg, #21759B, #54A3C9); }
+
+        .card-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .card-version {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+        }
+
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .feature-tag {
+            background: white;
+            border: 1px solid var(--gray-300);
+            color: var(--gray-600);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            background: var(--gray-50);
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            background: white;
+            border-color: var(--primary-light);
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--dark);
+        }
+
+        .step-content p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--gray-800);
+            color: #E5E7EB;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            position: relative;
+            margin: 12px 0;
+        }
+
+        .code-block code {
+            display: block;
+            white-space: pre;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--gray-700);
+            color: var(--gray-300);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+            color: white;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 16px 0;
+        }
+
+        .info-box.tip {
+            background: #ECFDF5;
+            border-left: 4px solid var(--success);
+        }
+
+        .info-box.warning {
+            background: #FFFBEB;
+            border-left: 4px solid var(--warning);
+        }
+
+        .info-box.note {
+            background: #EEF2FF;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .info-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .info-box.tip .info-icon { color: var(--success); }
+        .info-box.warning .info-icon { color: var(--warning); }
+        .info-box.note .info-icon { color: var(--secondary); }
+
+        .info-content {
+            font-size: 0.9rem;
+        }
+
+        .info-content strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Checklist */
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--gray-50);
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .check-item:hover {
+            background: white;
+            border-color: var(--success);
+        }
+
+        .check-item.checked {
+            background: #ECFDF5;
+            border-color: var(--success);
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gray-300);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .check-item.checked .checkbox {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .checkbox svg {
+            width: 14px;
+            height: 14px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .check-item.checked .checkbox svg {
+            opacity: 1;
+        }
+
+        .check-label {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+        }
+
+        /* Commands Table */
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .command-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px;
+            background: var(--gray-50);
+            border-radius: 10px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s;
+        }
+
+        .command-item:hover {
+            background: white;
+            border-color: var(--primary);
+        }
+
+        .command-name {
+            font-family: 'Monaco', monospace;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .command-desc {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* Collapsible */
+        .collapsible {
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: var(--gray-50);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .collapsible-header:hover {
+            background: var(--gray-100);
+        }
+
+        .collapsible-title {
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .collapsible-arrow {
+            width: 20px;
+            height: 20px;
+            color: var(--gray-500);
+            transition: transform 0.3s;
+        }
+
+        .collapsible.open .collapsible-arrow {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .collapsible.open .collapsible-content {
+            padding: 20px;
+            max-height: 2000px;
+        }
+
+        /* Architecture Diagram */
+        .diagram {
+            background: var(--gray-50);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .diagram-title {
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 24px;
+        }
+
+        .diagram-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .diagram-box {
+            background: white;
+            border: 2px solid var(--gray-300);
+            border-radius: 12px;
+            padding: 16px 24px;
+            min-width: 140px;
+            transition: all 0.3s;
+        }
+
+        .diagram-box:hover {
+            border-color: var(--primary);
+            transform: scale(1.02);
+        }
+
+        .diagram-box.primary {
+            background: var(--gradient);
+            color: white;
+            border: none;
+        }
+
+        .diagram-box h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .diagram-box p {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        .diagram-arrow {
+            color: var(--gray-400);
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--gray-300);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .section { padding: 24px 16px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .progress-bar { overflow-x: auto; padding-bottom: 10px; }
+            .step-label { display: none; }
+            .diagram-flow { flex-direction: column; }
+            .diagram-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                </svg>
+            </div>
+            <h1>Claude Code Setup Guide</h1>
+            <p>Your complete step-by-step guide to supercharging Claude with extensions, MCP servers, plugins, and skills</p>
+            <div class="hero-meta">
+                <span>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    December 8, 2024
+                </span>
+                <span>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    Author: Jake B.
+                </span>
+                <span>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    ~30 min setup
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <nav class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-step active" onclick="scrollToSection('prerequisites')">
+                <div class="step-circle">1</div>
+                <span class="step-label">Prerequisites</span>
+            </div>
+            <div class="progress-step" onclick="scrollToSection('extensions')">
+                <div class="step-circle">2</div>
+                <span class="step-label">Extensions</span>
+            </div>
+            <div class="progress-step" onclick="scrollToSection('mcp-servers')">
+                <div class="step-circle">3</div>
+                <span class="step-label">MCP Servers</span>
+            </div>
+            <div class="progress-step" onclick="scrollToSection('plugins')">
+                <div class="step-circle">4</div>
+                <span class="step-label">Plugins</span>
+            </div>
+            <div class="progress-step" onclick="scrollToSection('skills')">
+                <div class="step-circle">5</div>
+                <span class="step-label">Skills</span>
+            </div>
+            <div class="progress-step" onclick="scrollToSection('commands')">
+                <div class="step-circle">6</div>
+                <span class="step-label">Commands</span>
+            </div>
+            <div class="progress-step" onclick="scrollToSection('troubleshooting')">
+                <div class="step-circle">7</div>
+                <span class="step-label">Troubleshoot</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Architecture Overview -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="section-title">How It All Works Together</h2>
+                    <p class="section-subtitle">Understanding the Claude ecosystem architecture</p>
+                </div>
+            </div>
+
+            <div class="diagram">
+                <p class="diagram-title">🔄 Claude Enhancement Architecture</p>
+                <div class="diagram-flow">
+                    <div class="diagram-box primary">
+                        <h4>Claude Desktop</h4>
+                        <p>Core AI Interface</p>
+                    </div>
+                    <span class="diagram-arrow">→</span>
+                    <div class="diagram-box">
+                        <h4>MCP Servers</h4>
+                        <p>7 Integrations</p>
+                    </div>
+                    <span class="diagram-arrow">→</span>
+                    <div class="diagram-box">
+                        <h4>Extensions</h4>
+                        <p>7 Extensions</p>
+                    </div>
+                    <span class="diagram-arrow">→</span>
+                    <div class="diagram-box">
+                        <h4>Plugins</h4>
+                        <p>2 Marketplaces</p>
+                    </div>
+                    <span class="diagram-arrow">→</span>
+                    <div class="diagram-box">
+                        <h4>Skills</h4>
+                        <p>36+ Skills</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Checklist -->
+            <h3 style="margin-bottom: 16px; font-size: 1.1rem;">✅ Setup Checklist</h3>
+            <div class="checklist">
+                <div class="check-item checked" onclick="toggleCheck(this)">
+                    <div class="checkbox">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <span class="check-label">Install Claude Desktop</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <span class="check-label">Enable Always Thinking Mode</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <span class="check-label">Configure MCP Servers</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <span class="check-label">Install Extensions (7)</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <span class="check-label">Add Plugin Marketplaces</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <span class="check-label">Install SuperClaude Commands</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 1: Prerequisites -->
+        <section id="prerequisites" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="section-title">Step 1: Install Prerequisites</h2>
+                    <p class="section-subtitle">Set up the required tools before installing Claude enhancements</p>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Download & Install Node.js</h4>
+                        <p>Required for NPX-based MCP servers. Download from <a href="https://nodejs.org" target="_blank">nodejs.org</a></p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <code># Verify installation
+node --version
+npm --version</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Download & Install Python 3.10+</h4>
+                        <p>Required for Python-based MCP servers. Download from <a href="https://python.org" target="_blank">python.org</a></p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <code># Verify installation
+python --version
+
+# Install UV package manager (required for some extensions)
+pip install uv</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Install Git</h4>
+                        <p>Required for cloning MCP server repositories. Download from <a href="https://git-scm.com" target="_blank">git-scm.com</a></p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Download Claude Desktop</h4>
+                        <p>Download and install Claude Desktop from <a href="https://claude.ai/download" target="_blank">claude.ai/download</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box tip">
+                <svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div class="info-content">
+                    <strong>Pro Tip</strong>
+                    Make sure to add Python and Node.js to your system PATH during installation for easier command-line access.
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: Extensions -->
+        <section id="extensions" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="section-title">Step 2: Install Extensions</h2>
+                    <p class="section-subtitle">Add powerful capabilities to Claude Desktop</p>
+                </div>
+            </div>
+
+            <div class="info-box note">
+                <svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div class="info-content">
+                    <strong>How to Install</strong>
+                    Open Claude Desktop → Settings → Extensions → Browse and install the extensions below.
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Kubernetes -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon kubernetes">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0L1.5 6v12L12 24l10.5-6V6L12 0zm0 2.18l7.5 4.32v8.64L12 19.82l-7.5-4.32V6.5L12 2.18z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Kubernetes MCP Server</h3>
+                            <p class="card-version">v2.9.7 • by Flux159</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Manage K8s clusters, pods, deployments, and Helm charts directly from Claude.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">kubectl</span>
+                        <span class="feature-tag">Helm</span>
+                        <span class="feature-tag">Port Forward</span>
+                        <span class="feature-tag">Logs</span>
+                    </div>
+                </div>
+
+                <!-- Filesystem -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon filesystem">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Filesystem</h3>
+                            <p class="card-version">v0.2.0 • Official Anthropic</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Read, write, and manage files directly. Create directories and search file contents.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Read/Write</span>
+                        <span class="feature-tag">Search</span>
+                        <span class="feature-tag">Directory Tree</span>
+                    </div>
+                </div>
+
+                <!-- AWS -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon aws">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">AWS API MCP Server</h3>
+                            <p class="card-version">v1.1.2 • by AWS Labs</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Execute AWS CLI commands with ML-powered suggestions. Manage EC2, S3, Lambda, and more.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">EC2</span>
+                        <span class="feature-tag">S3</span>
+                        <span class="feature-tag">Lambda</span>
+                        <span class="feature-tag">IAM</span>
+                    </div>
+                </div>
+
+                <!-- Figma -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon figma">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                                <path d="M9 21a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H9Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Figma</h3>
+                            <p class="card-version">v1.0.4 • Official Figma</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Generate UI code from Figma designs. Extract variables, components, and layouts.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Design to Code</span>
+                        <span class="feature-tag">Screenshots</span>
+                        <span class="feature-tag">Variables</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Commander -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon commander">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Desktop Commander</h3>
+                            <p class="card-version">v0.2.23</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Full filesystem access with terminal control. Start processes and manage dev environments.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Terminal</span>
+                        <span class="feature-tag">Processes</span>
+                        <span class="feature-tag">File Editing</span>
+                    </div>
+                </div>
+
+                <!-- Tableau -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon tableau">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Tableau</h3>
+                            <p class="card-version">v1.12.4 • Official Tableau</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Query datasources, list workbooks, and get Pulse metrics and insights.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Datasources</span>
+                        <span class="feature-tag">Workbooks</span>
+                        <span class="feature-tag">Views</span>
+                    </div>
+                </div>
+
+                <!-- Windows MCP -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon windows">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M3 5.548l7.09-0.973v6.846H3V5.548zm0 12.904l7.09 0.973v-6.846H3v5.873zm7.909 1.082L22 21v-8.421H10.909v8.955zm0-15.068v8.955H22V3l-11.091 1.466z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Windows MCP</h3>
+                            <p class="card-version">v0.1.0 • by CursorTouch</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Launch apps, execute PowerShell, capture UI state, and automate mouse/keyboard.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">PowerShell</span>
+                        <span class="feature-tag">Automation</span>
+                        <span class="feature-tag">UI Capture</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3: MCP Servers -->
+        <section id="mcp-servers" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="section-title">Step 3: Configure MCP Servers</h2>
+                    <p class="section-subtitle">Connect Claude to external services and APIs</p>
+                </div>
+            </div>
+
+            <div class="info-box warning">
+                <svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <div class="info-content">
+                    <strong>Config File Location</strong>
+                    Edit: <code>%APPDATA%\Claude\claude_desktop_config.json</code>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Fathom -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon fathom">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Fathom</h3>
+                            <p class="card-version">Meeting Recordings</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Access meeting recordings, AI-generated summaries, and transcripts with speaker labels.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Transcripts</span>
+                        <span class="feature-tag">Summaries</span>
+                        <span class="feature-tag">Search</span>
+                    </div>
+                </div>
+
+                <!-- Calendly -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon calendly">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Calendly</h3>
+                            <p class="card-version">Calendar Scheduling</p>
+                        </div>
+                    </div>
+                    <p class="card-description">List events, manage bookings, and handle scheduling directly through Claude.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Events</span>
+                        <span class="feature-tag">Bookings</span>
+                        <span class="feature-tag">Availability</span>
+                    </div>
+                </div>
+
+                <!-- Playwright -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon playwright">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Playwright</h3>
+                            <p class="card-version">Browser Automation</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Automate browser testing, web scraping, and interactive web tasks.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Testing</span>
+                        <span class="feature-tag">Scraping</span>
+                        <span class="feature-tag">Screenshots</span>
+                    </div>
+                </div>
+
+                <!-- WordPress -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon wordpress">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zM4.168 12c0-1.199.27-2.337.75-3.357l4.127 11.303C5.818 18.529 4.168 15.478 4.168 12zm7.832 7.832c-.8 0-1.573-.107-2.309-.306l2.452-7.122 2.513 6.888c.016.041.037.078.057.115-.87.279-1.793.425-2.713.425zm1.118-11.607c.492-.026.936-.078.936-.078.44-.052.388-.702-.053-.676 0 0-1.322.104-2.176.104-.802 0-2.15-.104-2.15-.104-.44-.026-.492.649-.053.676 0 0 .417.052.857.078l1.273 3.488-1.788 5.363-2.976-8.851c.492-.026.936-.078.936-.078.44-.052.388-.702-.053-.676 0 0-1.322.104-2.176.104-.153 0-.333-.004-.522-.01C6.418 5.616 9.038 4.168 12 4.168c2.205 0 4.215.846 5.725 2.229-.037-.002-.072-.008-.11-.008-.802 0-1.37.698-1.37 1.448 0 .673.388 1.241.802 1.914.311.544.673 1.241.673 2.249 0 .698-.268 1.508-.622 2.638l-.815 2.723-2.955-8.786zm2.598 11.142l2.498-7.221c.467-1.166.622-2.098.622-2.927 0-.301-.019-.581-.057-.846.601 1.108.946 2.387.946 3.746 0 2.88-1.559 5.393-3.879 6.75l-.13-.502z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="card-title">WordPress</h3>
+                            <p class="card-version">Site Editing</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Create/update posts, manage media, and control your WordPress site directly.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Posts</span>
+                        <span class="feature-tag">Media</span>
+                        <span class="feature-tag">Pages</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Setup Collapsible -->
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <div class="collapsible-header">
+                    <span class="collapsible-title">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                        View Sample Configuration
+                    </span>
+                    <svg class="collapsible-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content">
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="event.stopPropagation(); copyCode(this)">Copy</button>
+                        <code>{
+  "mcpServers": {
+    "calendly": {
+      "command": "node",
+      "args": ["C:\\path\\to\\calendly-mcp-server\\build\\index.js"],
+      "env": { "CALENDLY_API_KEY": "your-api-key" }
+    },
+    "wordpress": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/wordpress-mcp"],
+      "env": {
+        "WP_URL": "https://yoursite.com",
+        "WP_USERNAME": "username",
+        "WP_APP_PASSWORD": "xxxx xxxx xxxx xxxx"
+      }
+    }
+  }
+}</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 4: Plugins -->
+        <section id="plugins" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="section-title">Step 4: Add Plugin Marketplaces</h2>
+                    <p class="section-subtitle">Extend Claude with community plugins</p>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Add Superpowers Marketplace</h4>
+                        <p>Run this command in Claude Code to add the marketplace:</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <code>/plugin marketplace add obra/superpowers-marketplace</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Add Anthropic Agent Skills</h4>
+                        <p>Add the official skills marketplace:</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <code>/plugin marketplace add anthropics/skills</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Install Plugins</h4>
+                        <p>Install the recommended plugins:</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <code># Superpowers (TDD, debugging, workflows)
+/plugin install superpowers@superpowers-marketplace
+
+# Document Skills (PDF, DOCX, PPTX, XLSX)
+/plugin install document-skills@anthropic-agent-skills</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 5: Skills -->
+        <section id="skills" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="section-title">Step 5: Available Skills</h2>
+                    <p class="section-subtitle">36 specialized skills for different tasks</p>
+                </div>
+            </div>
+
+            <div class="collapsible open" onclick="toggleCollapsible(this)">
+                <div class="collapsible-header">
+                    <span class="collapsible-title">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Document Skills (16 skills)
+                    </span>
+                    <svg class="collapsible-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content">
+                    <div class="commands-grid">
+                        <div class="command-item">
+                            <span class="command-name">pdf</span>
+                            <span class="command-desc">PDF manipulation, form filling, extraction</span>
+                        </div>
+                        <div class="command-item">
+                            <span class="command-name">docx</span>
+                            <span class="command-desc">Word document creation/editing</span>
+                        </div>
+                        <div class="command-item">
+                            <span class="command-name">pptx</span>
+                            <span class="command-desc">PowerPoint presentations</span>
+                        </div>
+                        <div class="command-item">
+                            <span class="command-name">xlsx</span>
+                            <span class="command-desc">Excel spreadsheets</span>
+                        </div>
+                        <div class="command-item">
+                            <span class="command-name">canvas-design</span>
+                            <span class="command-desc">Visual art and poster creation</span>
+                        </div>
+                        <div class="command-item">
+                            <span class="command-name">frontend-design</span>
+                            <span class="command-desc">Production-grade web interfaces</span>
+                        </div>
+                        <div class="command-item">
+                            <span class="command-name">mcp-builder</span>
+                            <span class="command-desc">MCP server development guide</span>
+                        </div>
+                        <div class="command-item">
+                            <span class="command-name">theme-factory</span>
+                            <span class="command-desc">Apply themes to artifacts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <div class="collapsible-header">
+                    <span class="collapsible-title">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        Superpowers Skills (20 skills)
+                    </span>
+                    <svg class="collapsible-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content">
+                    <p style="color: var(--gray-600); margin-bottom: 16px;">Test-Driven Development, debugging workflows, code analysis, and more advanced development tools.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">TDD</span>
+                        <span class="feature-tag">Debugging</span>
+                        <span class="feature-tag">Code Analysis</span>
+                        <span class="feature-tag">Refactoring</span>
+                        <span class="feature-tag">Documentation</span>
+                        <span class="feature-tag">Testing</span>
+                        <span class="feature-tag">Performance</span>
+                        <span class="feature-tag">Security</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 6: Commands -->
+        <section id="commands" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="section-title">Step 6: SuperClaude Commands</h2>
+                    <p class="section-subtitle">30+ powerful slash commands for advanced workflows</p>
+                </div>
+            </div>
+
+            <div class="info-box tip">
+                <svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div class="info-content">
+                    <strong>Quick Start</strong>
+                    Type <code>/sc:help</code> in Claude to see all available commands.
+                </div>
+            </div>
+
+            <div class="commands-grid">
+                <div class="command-item">
+                    <span class="command-name">/sc:pm</span>
+                    <span class="command-desc">Project Manager - orchestrates workflows</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:analyze</span>
+                    <span class="command-desc">Comprehensive code analysis</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:implement</span>
+                    <span class="command-desc">Feature implementation</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:design</span>
+                    <span class="command-desc">System architecture & API design</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:research</span>
+                    <span class="command-desc">Deep web research</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:test</span>
+                    <span class="command-desc">Test execution with coverage</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:build</span>
+                    <span class="command-desc">Build & compile with error handling</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:git</span>
+                    <span class="command-desc">Git operations with smart commits</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:document</span>
+                    <span class="command-desc">Generate documentation</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:explain</span>
+                    <span class="command-desc">Code and concept explanations</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:cleanup</span>
+                    <span class="command-desc">Code cleanup & optimization</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-name">/sc:troubleshoot</span>
+                    <span class="command-desc">Issue diagnosis & resolution</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 7: Troubleshooting -->
+        <section id="troubleshooting" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="section-title">Step 7: Troubleshooting</h2>
+                    <p class="section-subtitle">Common issues and how to fix them</p>
+                </div>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <div class="collapsible-header">
+                    <span class="collapsible-title">🔌 MCP Server Not Loading</span>
+                    <svg class="collapsible-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content">
+                    <ul style="color: var(--gray-600); list-style: disc; padding-left: 20px;">
+                        <li>Check JSON syntax in config file (use a JSON validator)</li>
+                        <li>Verify paths use double backslashes (<code>\\</code>) on Windows</li>
+                        <li>Restart Claude Desktop completely</li>
+                        <li>Check developer console for errors (Ctrl+Shift+I)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <div class="collapsible-header">
+                    <span class="collapsible-title">🌐 WordPress Connection Issues</span>
+                    <svg class="collapsible-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content">
+                    <ul style="color: var(--gray-600); list-style: disc; padding-left: 20px;">
+                        <li>Verify Application Password is correct (not login password)</li>
+                        <li>Check WordPress REST API is enabled</li>
+                        <li>Test API: <code>https://yoursite.com/wp-json/wp/v2/</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <div class="collapsible-header">
+                    <span class="collapsible-title">🧩 Extension Not Working</span>
+                    <svg class="collapsible-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content">
+                    <ul style="color: var(--gray-600); list-style: disc; padding-left: 20px;">
+                        <li>Check extension requirements (Node.js version, Python, UV)</li>
+                        <li>Review extension documentation</li>
+                        <li>Verify credentials are set correctly</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <div class="collapsible-header">
+                    <span class="collapsible-title">📦 Plugin Not Appearing</span>
+                    <svg class="collapsible-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content">
+                    <ul style="color: var(--gray-600); list-style: disc; padding-left: 20px;">
+                        <li>Run <code>/plugin list</code> to see installed plugins</li>
+                        <li>Try reinstalling: <code>/plugin uninstall X</code> then <code>/plugin install X</code></li>
+                        <li>Check marketplace connection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box note" style="margin-top: 24px;">
+                <svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div class="info-content">
+                    <strong>Final Step</strong>
+                    After making any changes, always restart Claude Desktop to ensure all configurations are loaded properly.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>📄 Claude Code Enhancement Setup Guide • Created by Jake B. • December 8, 2024</p>
+        <p style="margin-top: 8px; opacity: 0.8;">Generated with ❤️ using Claude</p>
+    </footer>
+
+    <script>
+        // Scroll to section
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Toggle collapsible sections
+        function toggleCollapsible(element) {
+            element.classList.toggle('open');
+        }
+
+        // Toggle checklist items
+        function toggleCheck(element) {
+            element.classList.toggle('checked');
+        }
+
+        // Copy code to clipboard
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('code');
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Update progress bar on scroll
+        document.addEventListener('scroll', function() {
+            const sections = ['prerequisites', 'extensions', 'mcp-servers', 'plugins', 'skills', 'commands', 'troubleshooting'];
+            const steps = document.querySelectorAll('.progress-step');
+            
+            let currentSection = 0;
+            sections.forEach((id, index) => {
+                const element = document.getElementById(id);
+                if (element && window.scrollY >= element.offsetTop - 200) {
+                    currentSection = index;
+                }
+            });
+
+            steps.forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index < currentSection) {
+                    step.classList.add('completed');
+                } else if (index === currentSection) {
+                    step.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

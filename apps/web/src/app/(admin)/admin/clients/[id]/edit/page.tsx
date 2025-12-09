@@ -10,6 +10,7 @@ interface Client {
   email: string;
   company: string | null;
   phone: string | null;
+  role: "ADMIN" | "CLIENT";
 }
 
 export default function EditClientPage() {
@@ -28,6 +29,7 @@ export default function EditClientPage() {
     company: "",
     phone: "",
     password: "",
+    role: "CLIENT" as "ADMIN" | "CLIENT",
   });
 
   useEffect(() => {
@@ -43,6 +45,7 @@ export default function EditClientPage() {
             company: data.client.company || "",
             phone: data.client.phone || "",
             password: "",
+            role: data.client.role || "CLIENT",
           });
         } else {
           setError("Failed to load client");
@@ -215,26 +218,50 @@ export default function EditClientPage() {
           </div>
         </div>
 
-        <div>
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-text-secondary mb-1.5"
-          >
-            New Password
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            minLength={8}
-            value={formData.password}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-            className="w-full px-4 py-2.5 rounded-lg bg-elevated border border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
-            placeholder="Leave blank to keep current password"
-          />
-          <p className="mt-1.5 text-xs text-text-muted">
-            Only fill this if you want to change the password
-          </p>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-text-secondary mb-1.5"
+            >
+              New Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              minLength={8}
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              className="w-full px-4 py-2.5 rounded-lg bg-elevated border border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
+              placeholder="Leave blank to keep current"
+            />
+            <p className="mt-1.5 text-xs text-text-muted">
+              Only fill this if you want to change the password
+            </p>
+          </div>
+
+          <div>
+            <label
+              htmlFor="role"
+              className="block text-sm font-medium text-text-secondary mb-1.5"
+            >
+              Role *
+            </label>
+            <select
+              id="role"
+              name="role"
+              value={formData.role}
+              onChange={(e) => setFormData({ ...formData, role: e.target.value as "ADMIN" | "CLIENT" })}
+              className="w-full px-4 py-2.5 rounded-lg bg-elevated border border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
+            >
+              <option value="CLIENT">Client</option>
+              <option value="ADMIN">Admin</option>
+            </select>
+            <p className="mt-1.5 text-xs text-text-muted">
+              Admins can access the admin portal
+            </p>
+          </div>
         </div>
 
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-border-subtle">

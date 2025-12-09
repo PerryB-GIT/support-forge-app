@@ -1,6 +1,37 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services",
+  description: "Comprehensive AI & IT services: AI integration, custom software development, cloud solutions, DevOps, cybersecurity, and managed IT services. Transform your business with expert technology solutions.",
+  keywords: [
+    "AI integration services",
+    "custom software development",
+    "cloud migration",
+    "DevOps consulting",
+    "cybersecurity services",
+    "managed IT services",
+    "machine learning solutions",
+    "AWS consulting",
+    "Azure consulting",
+    "IT strategy",
+  ],
+  openGraph: {
+    title: "IT & AI Services - Support Forge",
+    description: "Comprehensive technology solutions: AI integration, software development, cloud solutions, cybersecurity, and 24/7 managed IT services.",
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "IT & AI Services - Support Forge",
+    description: "Comprehensive technology solutions: AI integration, software development, cloud solutions, cybersecurity, and managed IT services.",
+  },
+  alternates: {
+    canonical: "/services",
+  },
+};
 
 const ServiceIcon = ({ name }: { name: string }) => {
   const icons: Record<string, ReactNode> = {

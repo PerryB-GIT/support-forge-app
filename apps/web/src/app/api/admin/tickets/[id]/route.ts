@@ -125,6 +125,9 @@ export async function DELETE(
 
   try {
     const { id } = await params;
+
+    // With cascade deletes enabled in Prisma schema,
+    // deleting the ticket will automatically delete all comments
     await prisma.ticket.delete({
       where: { id },
     });
@@ -132,8 +135,9 @@ export async function DELETE(
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting ticket:", error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { error: "Failed to delete ticket" },
+      { error: `Failed to delete ticket: ${errorMessage}` },
       { status: 500 }
     );
   }

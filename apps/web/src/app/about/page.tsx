@@ -1,5 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn about Support Forge - a team of passionate technologists with 10+ years of experience delivering AI & IT consulting solutions. 150+ projects delivered with 98% client satisfaction.",
+  keywords: ["about Support Forge", "IT consulting company", "AI consulting team", "technology experts", "digital transformation partner"],
+  openGraph: {
+    title: "About Support Forge - AI & IT Consulting Experts",
+    description: "A team of passionate technologists dedicated to helping businesses harness the power of AI and modern technology. 10+ years experience, 150+ projects delivered.",
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Support Forge - AI & IT Consulting Experts",
+    description: "A team of passionate technologists dedicated to helping businesses harness the power of AI and modern technology.",
+  },
+  alternates: {
+    canonical: "/about",
+  },
+};
 
 export default function AboutPage() {
   const values = [
@@ -99,6 +119,42 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Passion Section */}
+      <section className="py-16 px-6 bg-gradient-to-r from-accent/10 via-background to-accent/10 border-y border-accent/20">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
+              Why We <span className="text-accent">Love</span> What We Do
+            </h2>
+          </div>
+          <div className="space-y-6 text-lg text-text-secondary">
+            <p>
+              Here's the truth: we're obsessed with AI. Not in a "let's chase the latest trend" way, but in a "we genuinely can't stop thinking about how this changes everything" way.
+            </p>
+            <p>
+              We've seen too many businesses buy into the hype — downloading every new tool, sitting through endless webinars — only to end up more confused than when they started. That frustrates us, because we know what's actually possible.
+            </p>
+            <p className="text-text-primary font-medium">
+              The moment a business owner sees their operation running smarter — when they realize AI isn't just a buzzword but something that's genuinely giving them their time back — that's why we do this.
+            </p>
+            <p>
+              We don't just implement technology. We translate it. We make it make sense. And we stick around to make sure it keeps working.
+            </p>
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/ai-transformation"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white rounded-lg font-medium transition-all"
+            >
+              See Our AI Approach
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>

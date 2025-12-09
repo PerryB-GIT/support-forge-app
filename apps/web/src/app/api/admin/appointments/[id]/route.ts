@@ -119,8 +119,9 @@ export async function DELETE(
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting appointment:", error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { error: "Failed to delete appointment" },
+      { error: `Failed to delete appointment: ${errorMessage}` },
       { status: 500 }
     );
   }

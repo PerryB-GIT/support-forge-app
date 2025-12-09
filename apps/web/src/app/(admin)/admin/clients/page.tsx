@@ -4,8 +4,8 @@ import Image from "next/image";
 import { ClientActions } from "@/components/admin/ClientActions";
 
 export default async function AdminClientsPage() {
+  // Fetch all users (both clients and admins) for management
   const clients = await prisma.user.findMany({
-    where: { role: "CLIENT" },
     orderBy: { createdAt: "desc" },
     include: {
       _count: {
@@ -29,10 +29,10 @@ export default async function AdminClientsPage() {
               className="text-2xl lg:text-3xl font-bold"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Clients
+              Users
             </h1>
             <p className="text-text-secondary mt-1">
-              Manage your client accounts
+              Manage user accounts and roles
             </p>
           </div>
         </div>
@@ -55,9 +55,9 @@ export default async function AdminClientsPage() {
               <tr>
                 <th className="text-left px-4 py-3 text-sm font-medium text-text-muted">Name</th>
                 <th className="text-left px-4 py-3 text-sm font-medium text-text-muted">Email</th>
+                <th className="text-left px-4 py-3 text-sm font-medium text-text-muted">Role</th>
                 <th className="text-left px-4 py-3 text-sm font-medium text-text-muted">Company</th>
                 <th className="text-left px-4 py-3 text-sm font-medium text-text-muted">Projects</th>
-                <th className="text-left px-4 py-3 text-sm font-medium text-text-muted">Invoices</th>
                 <th className="text-left px-4 py-3 text-sm font-medium text-text-muted">Joined</th>
                 <th className="text-right px-4 py-3 text-sm font-medium text-text-muted">Actions</th>
               </tr>
@@ -77,22 +77,30 @@ export default async function AdminClientsPage() {
                   <tr key={client.id} className="hover:bg-elevated/50">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-sm font-medium">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                          client.role === "ADMIN"
+                            ? "bg-purple-500/20 text-purple-500"
+                            : "bg-accent/20 text-accent"
+                        }`}>
                           {client.name.charAt(0).toUpperCase()}
                         </div>
                         <span className="font-medium">{client.name}</span>
                       </div>
                     </td>
                     <td className="px-4 py-3 text-text-secondary">{client.email}</td>
+                    <td className="px-4 py-3">
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        client.role === "ADMIN"
+                          ? "bg-purple-500/10 text-purple-500"
+                          : "bg-gray-500/10 text-gray-500"
+                      }`}>
+                        {client.role}
+                      </span>
+                    </td>
                     <td className="px-4 py-3 text-text-secondary">{client.company || "-"}</td>
                     <td className="px-4 py-3">
                       <span className="px-2 py-1 rounded bg-blue-500/10 text-blue-500 text-xs font-medium">
                         {client._count.projects}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className="px-2 py-1 rounded bg-green-500/10 text-green-500 text-xs font-medium">
-                        {client._count.invoices}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-text-secondary">

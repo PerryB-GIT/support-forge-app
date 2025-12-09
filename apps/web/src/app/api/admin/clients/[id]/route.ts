@@ -18,13 +18,14 @@ export async function GET(
   try {
     const { id } = await params;
     const client = await prisma.user.findUnique({
-      where: { id, role: "CLIENT" },
+      where: { id },
       select: {
         id: true,
         name: true,
         email: true,
         company: true,
         phone: true,
+        role: true,
         createdAt: true,
         projects: {
           select: {
@@ -88,11 +89,19 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await req.json();
-    const { name, email, company, phone, password } = body;
+    const { name, email, company, phone, password, role } = body;
 
     if (!name || !email) {
       return NextResponse.json(
         { error: "Name and email are required" },
+        { status: 400 }
+      );
+    }
+
+    // Validate role if provided
+    if (role && !["ADMIN", "CLIENT"].includes(role)) {
+      return NextResponse.json(
+        { error: "Invalid role. Must be ADMIN or CLIENT" },
         { status: 400 }
       );
     }
@@ -118,6 +127,7 @@ export async function PUT(
       company: string | null;
       phone: string | null;
       password?: string;
+      role?: "ADMIN" | "CLIENT";
     } = {
       name,
       email,
@@ -130,6 +140,11 @@ export async function PUT(
       updateData.password = await bcrypt.hash(password, 12);
     }
 
+    // Update role if provided
+    if (role) {
+      updateData.role = role;
+    }
+
     const client = await prisma.user.update({
       where: { id },
       data: updateData,
@@ -139,6 +154,7 @@ export async function PUT(
         email: true,
         company: true,
         phone: true,
+        role: true,
         createdAt: true,
       },
     });
@@ -166,6 +182,9 @@ export async function DELETE(
 
   try {
     const { id } = await params;
+
+    // With cascade deletes enabled in Prisma schema,
+    // deleting the user will automatically delete all related records
     await prisma.user.delete({
       where: { id },
     });
@@ -173,8 +192,9 @@ export async function DELETE(
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting client:", error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { error: "Failed to delete client" },
+      { error: `Failed to delete client: ${errorMessage}` },
       { status: 500 }
     );
   }
