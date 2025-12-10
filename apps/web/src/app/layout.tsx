@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Support Forge - AI & IT Consulting Services",
+    default: "Support Forge - AI & IT Consulting Services | Massachusetts",
     template: "%s | Support Forge",
   },
   description: "Transform your business with Support Forge's AI integration, custom software development, cloud solutions, and IT consulting services. 150+ projects delivered with 98% client satisfaction.",
@@ -41,6 +41,9 @@ export const metadata: Metadata = {
     "digital transformation",
     "business automation",
     "custom software",
+    "AI consulting Massachusetts",
+    "IT services Haverhill MA",
+    "small business AI solutions",
   ],
   authors: [{ name: "Support Forge" }],
   creator: "Support Forge",
@@ -94,11 +97,21 @@ export const metadata: Metadata = {
     description: "Transform your business with cutting-edge AI solutions and expert IT consulting. 150+ projects delivered with 98% client satisfaction.",
     images: ["/og-image.png"],
     creator: "@supportforge",
+    site: "@supportforge",
   },
   alternates: {
     canonical: siteUrl,
+    languages: {
+      "en-US": siteUrl,
+    },
   },
   category: "technology",
+  other: {
+    "geo.region": "US-MA",
+    "geo.placename": "Haverhill",
+    "geo.position": "42.7762;-71.0773",
+    "ICBM": "42.7762, -71.0773",
+  },
 };
 
 export default function RootLayout({
