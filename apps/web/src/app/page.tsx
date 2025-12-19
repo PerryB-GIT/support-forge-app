@@ -38,7 +38,7 @@ export default async function Home() {
       />
       <OrganizationJsonLd
         url={siteUrl}
-        logo={}
+        logo={`${siteUrl}/sf-logo.png`}
         name="Support Forge"
         description="AI & IT Consulting Services - Building stronger foundations for your business"
         email={CONTACT_INFO.email}
