@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 import Image from "next/image";
 import { CONTACT_INFO } from "@support-forge/shared";
-import { LocalBusinessJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
+import { LocalBusinessJsonLd, WebSiteJsonLd, OrganizationJsonLd, FAQJsonLd, ServicesListJsonLd } from "@/components/seo/JsonLd";
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://support-forge.com";
 
@@ -34,7 +34,42 @@ export default async function Home() {
           region: "Massachusetts",
           country: "US",
         }}
-        priceRange="$$"
+        priceRange="$"
+      />
+      <OrganizationJsonLd
+        url={siteUrl}
+        logo={}
+        name="Support Forge"
+        description="AI & IT Consulting Services - Building stronger foundations for your business"
+        email={CONTACT_INFO.email}
+        telephone={CONTACT_INFO.phoneRaw}
+        address={{
+          city: "Haverhill",
+          region: "Massachusetts",
+          country: "US",
+          postalCode: "01830",
+        }}
+        foundingDate="2005"
+        slogan="AI That Actually Works"
+      />
+      <ServicesListJsonLd
+        provider="Support Forge"
+        url={siteUrl}
+        services={[
+          { name: "AI Integration", description: "Custom AI solutions including chatbots, automation, and machine learning integration.", serviceType: "AI Consulting" },
+          { name: "Software Development", description: "Full-stack web and mobile application development using modern technologies.", serviceType: "Software Development" },
+          { name: "Cloud Solutions", description: "AWS, Azure, and Google Cloud deployment, migration, and optimization services.", serviceType: "Cloud Computing" },
+          { name: "IT Consulting", description: "Strategic technology consulting to optimize your IT investments.", serviceType: "IT Consulting" },
+          { name: "Cybersecurity", description: "Security assessments, implementation, and monitoring to protect your digital assets.", serviceType: "Cybersecurity" },
+          { name: "24/7 Support", description: "Round-the-clock technical support and maintenance services.", serviceType: "Technical Support" },
+        ]}
+      />
+      <FAQJsonLd
+        questions={[
+          { question: "What AI consulting services does Support Forge offer?", answer: "Support Forge offers custom AI/ML model development, process automation and RPA, natural language processing, chatbot development, and predictive analytics solutions tailored to your business needs." },
+          { question: "Does Support Forge offer free consultations?", answer: "Yes, Support Forge offers a free consultation to discuss your technology needs with no obligation. Contact us to schedule a call with our experts." },
+          { question: "What industries does Support Forge serve?", answer: "Support Forge serves businesses across all industries, with particular expertise in healthcare, finance, technology startups, and small to medium enterprises looking to leverage AI and modern IT infrastructure." },
+        ]}
       />
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border-subtle">

@@ -9,8 +9,11 @@ interface OrganizationJsonLdProps {
     city: string;
     region: string;
     country: string;
+    postalCode?: string;
   };
   sameAs?: string[];
+  foundingDate?: string;
+  slogan?: string;
 }
 
 export function OrganizationJsonLd({
@@ -22,11 +25,14 @@ export function OrganizationJsonLd({
   telephone,
   address,
   sameAs = [],
+  foundingDate,
+  slogan,
 }: OrganizationJsonLdProps) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name,
+    legalName: `${name} LLC`,
     description,
     url,
     logo,
@@ -37,8 +43,15 @@ export function OrganizationJsonLd({
       addressLocality: address.city,
       addressRegion: address.region,
       addressCountry: address.country,
+      ...(address.postalCode && { postalCode: address.postalCode }),
     },
-    sameAs,
+    areaServed: [
+      { "@type": "State", name: "Massachusetts" },
+      { "@type": "Country", name: "United States" },
+    ],
+    ...(foundingDate && { foundingDate }),
+    ...(slogan && { slogan }),
+    ...(sameAs.length > 0 && { sameAs }),
   };
 
   return (
@@ -60,9 +73,13 @@ interface LocalBusinessJsonLdProps {
     city: string;
     region: string;
     country: string;
+    postalCode?: string;
+  };
+  geo?: {
+    latitude: number;
+    longitude: number;
   };
   priceRange?: string;
-  openingHours?: string;
 }
 
 export function LocalBusinessJsonLd({
@@ -73,8 +90,8 @@ export function LocalBusinessJsonLd({
   email,
   telephone,
   address,
+  geo = { latitude: 42.7762, longitude: -71.0773 },
   priceRange = "$$",
-  openingHours = "Mo-Fr 09:00-18:00",
 }: LocalBusinessJsonLdProps) {
   const jsonLd = {
     "@context": "https://schema.org",
@@ -90,18 +107,24 @@ export function LocalBusinessJsonLd({
       addressLocality: address.city,
       addressRegion: address.region,
       addressCountry: address.country,
+      ...(address.postalCode && { postalCode: address.postalCode }),
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: geo.latitude,
+      longitude: geo.longitude,
     },
     priceRange,
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       opens: "09:00",
-      closes: "18:00",
+      closes: "17:00",
     },
-    areaServed: {
-      "@type": "Country",
-      name: "United States",
-    },
+    areaServed: [
+      { "@type": "State", name: "Massachusetts" },
+      { "@type": "Country", name: "United States" },
+    ],
     serviceType: [
       "AI Consulting",
       "IT Consulting",
@@ -159,6 +182,44 @@ export function ServiceJsonLd({
   );
 }
 
+interface ServicesListJsonLdProps {
+  services: Array<{
+    name: string;
+    description: string;
+    serviceType: string;
+  }>;
+  provider: string;
+  url: string;
+}
+
+export function ServicesListJsonLd({
+  services,
+  provider,
+  url,
+}: ServicesListJsonLdProps) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${provider} Services`,
+    itemListElement: services.map((service, index) => ({
+      "@type": "Service",
+      position: index + 1,
+      name: service.name,
+      description: service.description,
+      provider: { "@type": "Organization", name: provider },
+      url: `${url}/services`,
+      serviceType: service.serviceType,
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
 interface WebSiteJsonLdProps {
   url: string;
   name: string;
@@ -172,14 +233,7 @@ export function WebSiteJsonLd({ url, name, description }: WebSiteJsonLdProps) {
     name,
     description,
     url,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${url}/search?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
+    publisher: { "@type": "Organization", name },
   };
 
   return (
