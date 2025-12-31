@@ -1,0 +1,497 @@
+import Link from "next/link";
+import Image from "next/image";
+import { Metadata } from "next";
+import { CONTACT_INFO } from "@support-forge/shared";
+
+export const metadata: Metadata = {
+  title: "Workflow Shop | Support Forge",
+  description: "Ready-to-deploy automation workflows and custom workflow development services. LinkedIn automation, uptime monitoring, AWS cost reports, and more.",
+  openGraph: {
+    title: "Workflow Shop | Support Forge",
+    description: "Ready-to-deploy automation workflows and custom workflow development services.",
+  },
+};
+
+// Autonomous workflows - plug and play
+const autonomousWorkflows = [
+  {
+    id: "linkedin-content",
+    name: "LinkedIn Content Generator",
+    price: 49,
+    description: "Automated AI-powered LinkedIn posts with 7 rotating topics. Posts Monday, Wednesday, Friday at 9am.",
+    features: [
+      "GPT-4 generated content",
+      "7 rotating AI/tech topics",
+      "Auto-post or draft mode",
+      "Google Sheets logging",
+      "Email notifications",
+      "Custom topic webhook",
+    ],
+    popular: true,
+    stripeLink: "YOUR_STRIPE_LINK_LINKEDIN",
+  },
+  {
+    id: "uptime-monitor",
+    name: "Site Uptime Monitor",
+    price: 29,
+    description: "Monitor up to 10 websites every 5 minutes. Instant email alerts when sites go down.",
+    features: [
+      "5-minute health checks",
+      "Instant email alerts",
+      "Downtime logging to Sheets",
+      "Status code tracking",
+      "Response time monitoring",
+      "Easy site configuration",
+    ],
+    popular: false,
+    stripeLink: "YOUR_STRIPE_LINK_UPTIME",
+  },
+  {
+    id: "morning-briefing",
+    name: "Morning Briefing",
+    price: 39,
+    description: "Daily digest with weather, calendar, GitHub activity, and AI-generated summary delivered to your inbox.",
+    features: [
+      "Local weather forecast",
+      "Google Calendar events",
+      "GitHub activity summary",
+      "AI-personalized briefing",
+      "Beautiful HTML emails",
+      "Customizable schedule",
+    ],
+    popular: false,
+    stripeLink: "YOUR_STRIPE_LINK_MORNING",
+  },
+  {
+    id: "aws-cost-reporter",
+    name: "AWS Cost Reporter",
+    price: 39,
+    description: "Daily AWS spending reports with service breakdown and threshold alerts.",
+    features: [
+      "Daily cost summary",
+      "Month-to-date totals",
+      "Service-by-service breakdown",
+      "Spending threshold alerts",
+      "Top 5 services highlight",
+      "Direct AWS Console links",
+    ],
+    popular: false,
+    stripeLink: "YOUR_STRIPE_LINK_AWS",
+  },
+  {
+    id: "client-onboarding",
+    name: "Client Onboarding",
+    price: 49,
+    description: "Automated new client setup: welcome emails, folder creation, task assignments, and CRM updates.",
+    features: [
+      "Welcome email sequence",
+      "Google Drive folder setup",
+      "Task auto-creation",
+      "CRM record creation",
+      "Slack notifications",
+      "Customizable templates",
+    ],
+    popular: false,
+    stripeLink: "YOUR_STRIPE_LINK_ONBOARDING",
+  },
+  {
+    id: "social-scheduler",
+    name: "Social Media Scheduler",
+    price: 59,
+    description: "Schedule and auto-post content across LinkedIn, Twitter/X, and Facebook from a single spreadsheet.",
+    features: [
+      "Multi-platform posting",
+      "Spreadsheet-based scheduling",
+      "Image attachment support",
+      "Post analytics tracking",
+      "Draft review workflow",
+      "Hashtag management",
+    ],
+    popular: false,
+    stripeLink: "YOUR_STRIPE_LINK_SOCIAL",
+  },
+];
+
+// Custom workflow tiers
+const customTiers = [
+  {
+    name: "Starter",
+    price: 199,
+    description: "Perfect for a single automation need",
+    features: [
+      "1 custom workflow",
+      "Up to 3 integrations",
+      "1 revision round",
+      "Email support",
+      "Documentation included",
+    ],
+    stripeLink: "YOUR_STRIPE_LINK_STARTER",
+  },
+  {
+    name: "Professional",
+    price: 499,
+    description: "For businesses ready to automate multiple processes",
+    features: [
+      "Up to 3 custom workflows",
+      "Unlimited integrations",
+      "3 revision rounds",
+      "30-day priority support",
+      "Video walkthrough",
+      "Maintenance guide",
+    ],
+    popular: true,
+    stripeLink: "YOUR_STRIPE_LINK_PRO",
+  },
+  {
+    name: "Enterprise",
+    price: null,
+    description: "Full-scale automation transformation",
+    features: [
+      "Unlimited workflows",
+      "Dedicated workflow architect",
+      "Ongoing maintenance",
+      "24/7 priority support",
+      "Custom integrations",
+      "Training sessions",
+    ],
+    stripeLink: null,
+  },
+];
+
+export default function ShopPage() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border-subtle">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <Image src="/sf-logo.png" alt="Support Forge" width={32} height={32} className="rounded-lg" />
+            <span className="text-xl font-bold text-accent" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              SupportForge
+            </span>
+          </Link>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/shop" className="text-accent font-medium">
+              Workflow Shop
+            </Link>
+            <Link href="/services" className="text-text-secondary hover:text-text-primary transition-colors">
+              Services
+            </Link>
+            <Link href="/ai-transformation" className="text-text-secondary hover:text-text-primary transition-colors">
+              AI Transformation
+            </Link>
+            <Link href="/contact" className="text-text-secondary hover:text-text-primary transition-colors">
+              Contact
+            </Link>
+          </nav>
+          <div className="flex items-center gap-4">
+            <Link href="/login" className="text-text-secondary hover:text-text-primary transition-colors">
+              Sign in
+            </Link>
+            <Link href="/register" className="px-4 py-2 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-colors">
+              Get Started
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="pt-32 pb-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+            Ready-to-Deploy Automations
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Workflow <span className="text-accent">Shop</span>
+          </h1>
+          <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto">
+            Pre-built n8n automations you can deploy in minutes, or custom workflows built for your exact needs.
+          </p>
+        </div>
+      </section>
+
+      {/* Autonomous Workflows */}
+      <section className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              Autonomous <span className="text-accent">Workflows</span>
+            </h2>
+            <p className="text-text-secondary max-w-2xl mx-auto">
+              Plug-and-play automations. Import into n8n, configure your credentials, and you&apos;re live.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {autonomousWorkflows.map((workflow) => (
+              <div
+                key={workflow.id}
+                className={`relative group p-6 rounded-2xl bg-background border transition-all hover:shadow-lg ${
+                  workflow.popular
+                    ? "border-accent shadow-lg shadow-accent/10"
+                    : "border-border-subtle hover:border-accent hover:shadow-accent/5"
+                }`}
+              >
+                {workflow.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent text-white text-xs font-medium">
+                    Most Popular
+                  </div>
+                )}
+                <div className="mb-4">
+                  <h3 className="text-xl font-semibold mb-2">{workflow.name}</h3>
+                  <p className="text-text-secondary text-sm">{workflow.description}</p>
+                </div>
+                <div className="mb-6">
+                  <span className="text-3xl font-bold">${workflow.price}</span>
+                  <span className="text-text-secondary text-sm ml-1">one-time</span>
+                </div>
+                <ul className="space-y-2 mb-6">
+                  {workflow.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-sm">
+                      <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-text-secondary">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={workflow.stripeLink}
+                  className={`block w-full py-3 rounded-lg font-medium text-center transition-all ${
+                    workflow.popular
+                      ? "bg-accent hover:bg-accent-hover text-white"
+                      : "bg-surface border border-border-subtle hover:border-accent text-text-primary"
+                  }`}
+                >
+                  Buy Now
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16 px-4 bg-surface/50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            How It <span className="text-accent">Works</span>
+          </h2>
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                1
+              </div>
+              <h3 className="font-semibold mb-2">Purchase</h3>
+              <p className="text-text-secondary text-sm">Complete checkout via Stripe</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                2
+              </div>
+              <h3 className="font-semibold mb-2">Download</h3>
+              <p className="text-text-secondary text-sm">Receive workflow JSON file</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                3
+              </div>
+              <h3 className="font-semibold mb-2">Import</h3>
+              <p className="text-text-secondary text-sm">Import into your n8n instance</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                4
+              </div>
+              <h3 className="font-semibold mb-2">Configure</h3>
+              <p className="text-text-secondary text-sm">Add your credentials & activate</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Custom Workflows */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              Custom <span className="text-accent">Workflows</span>
+            </h2>
+            <p className="text-text-secondary max-w-2xl mx-auto">
+              Need something specific? We&apos;ll build automations tailored to your exact business processes.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {customTiers.map((tier) => (
+              <div
+                key={tier.name}
+                className={`relative p-8 rounded-2xl bg-background border transition-all ${
+                  tier.popular
+                    ? "border-accent shadow-lg shadow-accent/10 scale-105"
+                    : "border-border-subtle"
+                }`}
+              >
+                {tier.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent text-white text-xs font-medium">
+                    Recommended
+                  </div>
+                )}
+                <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
+                <p className="text-text-secondary text-sm mb-4">{tier.description}</p>
+                <div className="mb-6">
+                  {tier.price ? (
+                    <>
+                      <span className="text-4xl font-bold">${tier.price}</span>
+                      <span className="text-text-secondary text-sm ml-1">starting</span>
+                    </>
+                  ) : (
+                    <span className="text-2xl font-bold">Custom Quote</span>
+                  )}
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {tier.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-text-secondary text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                {tier.stripeLink ? (
+                  <a
+                    href={tier.stripeLink}
+                    className={`block w-full py-3 rounded-lg font-medium text-center transition-all ${
+                      tier.popular
+                        ? "bg-accent hover:bg-accent-hover text-white"
+                        : "bg-surface border border-border-subtle hover:border-accent text-text-primary"
+                    }`}
+                  >
+                    Get Started
+                  </a>
+                ) : (
+                  <Link
+                    href="/contact"
+                    className="block w-full py-3 rounded-lg font-medium text-center bg-surface border border-border-subtle hover:border-accent text-text-primary transition-all"
+                  >
+                    Contact Us
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 px-4 bg-surface/50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Frequently Asked <span className="text-accent">Questions</span>
+          </h2>
+          <div className="space-y-6">
+            <div className="p-6 rounded-xl bg-background border border-border-subtle">
+              <h3 className="font-semibold mb-2">What is n8n?</h3>
+              <p className="text-text-secondary text-sm">
+                n8n is an open-source workflow automation platform. You can self-host it for free or use n8n Cloud. Our workflows are JSON files you import directly into n8n.
+              </p>
+            </div>
+            <div className="p-6 rounded-xl bg-background border border-border-subtle">
+              <h3 className="font-semibold mb-2">Do I need technical skills?</h3>
+              <p className="text-text-secondary text-sm">
+                Basic familiarity with n8n helps, but our workflows come with detailed setup instructions. You&apos;ll mainly need to add your API credentials (Gmail, OpenAI, etc.).
+              </p>
+            </div>
+            <div className="p-6 rounded-xl bg-background border border-border-subtle">
+              <h3 className="font-semibold mb-2">What&apos;s included with purchase?</h3>
+              <p className="text-text-secondary text-sm">
+                You receive the workflow JSON file, a setup guide with step-by-step instructions, and 30 days of email support for any questions.
+              </p>
+            </div>
+            <div className="p-6 rounded-xl bg-background border border-border-subtle">
+              <h3 className="font-semibold mb-2">Can I modify the workflows?</h3>
+              <p className="text-text-secondary text-sm">
+                Absolutely! Once purchased, the workflow is yours. Customize it however you like - change schedules, add nodes, integrate with your other tools.
+              </p>
+            </div>
+            <div className="p-6 rounded-xl bg-background border border-border-subtle">
+              <h3 className="font-semibold mb-2">Do you offer refunds?</h3>
+              <p className="text-text-secondary text-sm">
+                Yes, we offer a 14-day money-back guarantee if the workflow doesn&apos;t meet your needs. Just reach out and we&apos;ll process your refund.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Not Sure What You Need?
+          </h2>
+          <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
+            Book a free 15-minute call and we&apos;ll help you identify automation opportunities in your business.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105"
+          >
+            Schedule a Call
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 border-t border-border-subtle">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-8">
+            <div>
+              <Link href="/" className="flex items-center gap-2 mb-4">
+                <Image src="/sf-logo.png" alt="Support Forge" width={28} height={28} className="rounded-lg" />
+                <span className="font-bold text-accent" style={{ fontFamily: "var(--font-space-grotesk)" }}>SupportForge</span>
+              </Link>
+              <p className="text-text-secondary text-sm">
+                AI & IT Consulting services for modern businesses. Transforming ideas into reality.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Shop</h4>
+              <ul className="space-y-2 text-sm text-text-secondary">
+                <li><Link href="/shop#autonomous" className="hover:text-accent transition-colors">Autonomous Workflows</Link></li>
+                <li><Link href="/shop#custom" className="hover:text-accent transition-colors">Custom Workflows</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <ul className="space-y-2 text-sm text-text-secondary">
+                <li><Link href="/about" className="hover:text-accent transition-colors">About Us</Link></li>
+                <li><Link href="/services" className="hover:text-accent transition-colors">Services</Link></li>
+                <li><Link href="/contact" className="hover:text-accent transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Contact</h4>
+              <ul className="space-y-2 text-sm text-text-secondary">
+                <li><a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-accent transition-colors">{CONTACT_INFO.email}</a></li>
+                <li><a href={`tel:${CONTACT_INFO.phoneRaw}`} className="hover:text-accent transition-colors">{CONTACT_INFO.phone}</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="pt-8 border-t border-border-subtle flex flex-col sm:flex-row justify-between items-center gap-4 text-text-muted text-sm">
+            <div>&copy; {new Date().getFullYear()} Support Forge. All rights reserved.</div>
+            <div className="flex gap-6">
+              <Link href="/privacy" className="hover:text-accent transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-accent transition-colors">Terms of Service</Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

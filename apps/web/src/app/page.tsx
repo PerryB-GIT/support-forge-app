@@ -84,7 +84,10 @@ export default async function Home() {
             </span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="/ai-transformation" className="text-accent font-medium">
+            <Link href="/shop" className="text-accent font-medium">
+              Workflow Shop
+            </Link>
+            <Link href="/ai-transformation" className="text-text-secondary hover:text-text-primary transition-colors">
               AI Transformation
             </Link>
             <Link href="/services" className="text-text-secondary hover:text-text-primary transition-colors">
