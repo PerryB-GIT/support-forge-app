@@ -1,80 +1,125 @@
 import { prisma } from "@support-forge/database";
 
 export default async function AdminAnalyticsPage() {
-  // Fetch all the data for analytics
-  const [clients, projects, tickets, invoices, appointments, documents] = await Promise.all([
-    prisma.user.findMany({ where: { role: "CLIENT" } }),
-    prisma.project.findMany(),
-    prisma.ticket.findMany(),
-    prisma.invoice.findMany({ include: { items: true } }),
-    prisma.appointment.findMany(),
-    prisma.document.findMany(),
+  const now = new Date();
+
+  // Use count/aggregate queries instead of fetching all records
+  const [
+    // Client counts
+    clientCount,
+    recentClients,
+    // Project counts
+    activeProjects,
+    completedProjects,
+    onHoldProjects,
+    totalProjects,
+    // Ticket counts
+    openTickets,
+    inProgressTickets,
+    resolvedTickets,
+    urgentTickets,
+    totalTickets,
+    // Appointment counts
+    upcomingAppointments,
+    completedAppointments,
+    totalAppointments,
+    // Invoice aggregates
+    totalRevenue,
+    paidRevenue,
+    pendingRevenue,
+    paidInvoiceCount,
+    overdueInvoiceCount,
+    totalInvoiceCount,
+    // Document count
+    documentCount,
+  ] = await Promise.all([
+    // Clients
+    prisma.user.count({ where: { role: "CLIENT" } }),
+    prisma.user.findMany({
+      where: { role: "CLIENT" },
+      orderBy: { createdAt: "desc" },
+      take: 5,
+      select: { id: true, name: true, email: true, createdAt: true },
+    }),
+    // Projects
+    prisma.project.count({ where: { status: "ACTIVE" } }),
+    prisma.project.count({ where: { status: "COMPLETED" } }),
+    prisma.project.count({ where: { status: "ON_HOLD" } }),
+    prisma.project.count(),
+    // Tickets
+    prisma.ticket.count({ where: { status: "OPEN" } }),
+    prisma.ticket.count({ where: { status: "IN_PROGRESS" } }),
+    prisma.ticket.count({ where: { status: { in: ["RESOLVED", "CLOSED"] } } }),
+    prisma.ticket.count({ where: { priority: "URGENT", status: { not: "CLOSED" } } }),
+    prisma.ticket.count(),
+    // Appointments
+    prisma.appointment.count({
+      where: { date: { gte: now }, status: { not: "CANCELLED" } },
+    }),
+    prisma.appointment.count({ where: { status: "COMPLETED" } }),
+    prisma.appointment.count(),
+    // Invoices - revenue aggregates
+    prisma.invoice.aggregate({ _sum: { amount: true } }),
+    prisma.invoice.aggregate({
+      where: { status: { in: ["PAID", "paid"] } },
+      _sum: { amount: true },
+    }),
+    prisma.invoice.aggregate({
+      where: { status: { in: ["SENT", "pending", "PENDING", "OVERDUE", "overdue"] } },
+      _sum: { amount: true },
+    }),
+    prisma.invoice.count({ where: { status: { in: ["PAID", "paid"] } } }),
+    prisma.invoice.count({ where: { status: { in: ["OVERDUE", "overdue"] } } }),
+    prisma.invoice.count(),
+    // Documents
+    prisma.document.count(),
   ]);
 
-  // Calculate revenue metrics
-  const totalRevenue = invoices.reduce((sum, inv) => sum + Number(inv.amount || 0), 0);
-  const paidRevenue = invoices
-    .filter((inv) => inv.status === "PAID" || inv.status === "paid")
-    .reduce((sum, inv) => sum + Number(inv.amount || 0), 0);
-  const pendingRevenue = invoices
-    .filter((inv) => inv.status === "SENT" || inv.status === "pending" || inv.status === "OVERDUE" || inv.status === "overdue")
-    .reduce((sum, inv) => sum + Number(inv.amount || 0), 0);
-
-  // Project metrics
-  const activeProjects = projects.filter((p) => p.status === "ACTIVE").length;
-  const completedProjects = projects.filter((p) => p.status === "COMPLETED").length;
-  const onHoldProjects = projects.filter((p) => p.status === "ON_HOLD").length;
-
-  // Ticket metrics
-  const openTickets = tickets.filter((t) => t.status === "OPEN").length;
-  const inProgressTickets = tickets.filter((t) => t.status === "IN_PROGRESS").length;
-  const resolvedTickets = tickets.filter((t) => t.status === "RESOLVED" || t.status === "CLOSED").length;
-  const urgentTickets = tickets.filter((t) => t.priority === "URGENT" && t.status !== "CLOSED").length;
-
-  // Appointment metrics
-  const upcomingAppointments = appointments.filter(
-    (a) => new Date(a.date) >= new Date() && a.status !== "CANCELLED"
-  ).length;
-  const completedAppointments = appointments.filter((a) => a.status === "COMPLETED").length;
-
-  // Invoice metrics
-  const paidInvoices = invoices.filter((inv) => inv.status === "PAID").length;
-  const overdueInvoices = invoices.filter((inv) => inv.status === "OVERDUE").length;
-
-  // Get monthly data for charts (last 6 months)
-  const now = new Date();
+  // Get monthly data for charts using grouped queries
   const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 5, 1);
 
+  const [monthlyInvoices, monthlyTickets] = await Promise.all([
+    prisma.invoice.findMany({
+      where: {
+        createdAt: { gte: sixMonthsAgo },
+        status: { in: ["PAID", "paid"] },
+      },
+      select: { createdAt: true, amount: true },
+    }),
+    prisma.ticket.findMany({
+      where: { createdAt: { gte: sixMonthsAgo } },
+      select: { createdAt: true },
+    }),
+  ]);
+
+  // Build monthly data
   const monthlyData = [];
   for (let i = 5; i >= 0; i--) {
     const monthStart = new Date(now.getFullYear(), now.getMonth() - i, 1);
     const monthEnd = new Date(now.getFullYear(), now.getMonth() - i + 1, 0);
     const monthName = monthStart.toLocaleString("default", { month: "short" });
 
-    const monthInvoices = invoices.filter((inv) => {
-      const invDate = new Date(inv.createdAt);
-      return invDate >= monthStart && invDate <= monthEnd;
-    });
-
-    const monthRevenue = monthInvoices
-      .filter((inv) => inv.status === "PAID" || inv.status === "paid")
+    const monthRevenue = monthlyInvoices
+      .filter((inv) => {
+        const invDate = new Date(inv.createdAt);
+        return invDate >= monthStart && invDate <= monthEnd;
+      })
       .reduce((sum, inv) => sum + Number(inv.amount || 0), 0);
 
-    const monthTickets = tickets.filter((t) => {
+    const monthTicketCount = monthlyTickets.filter((t) => {
       const tDate = new Date(t.createdAt);
       return tDate >= monthStart && tDate <= monthEnd;
     }).length;
 
-    monthlyData.push({ month: monthName, revenue: monthRevenue, tickets: monthTickets });
+    monthlyData.push({ month: monthName, revenue: monthRevenue, tickets: monthTicketCount });
   }
 
   const maxRevenue = Math.max(...monthlyData.map((m) => m.revenue), 1);
   const maxTickets = Math.max(...monthlyData.map((m) => m.tickets), 1);
 
-  // Recent activity
-  const recentClients = clients
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    .slice(0, 5);
+  // Calculate rates
+  const resolutionRate = totalTickets > 0 ? Math.round((resolvedTickets / totalTickets) * 100) : 0;
+  const paymentRate = totalInvoiceCount > 0 ? Math.round((paidInvoiceCount / totalInvoiceCount) * 100) : 0;
 
   return (
     <div className="space-y-6">
@@ -103,7 +148,7 @@ export default async function AdminAnalyticsPage() {
             </div>
           </div>
           <p className="text-3xl font-bold mt-2 text-green-500">
-            ${totalRevenue.toLocaleString()}
+            ${Number(totalRevenue._sum.amount || 0).toLocaleString()}
           </p>
           <p className="text-xs text-text-muted mt-1">All time</p>
         </div>
@@ -118,9 +163,9 @@ export default async function AdminAnalyticsPage() {
             </div>
           </div>
           <p className="text-3xl font-bold mt-2 text-blue-500">
-            ${paidRevenue.toLocaleString()}
+            ${Number(paidRevenue._sum.amount || 0).toLocaleString()}
           </p>
-          <p className="text-xs text-text-muted mt-1">{paidInvoices} invoices</p>
+          <p className="text-xs text-text-muted mt-1">{paidInvoiceCount} invoices</p>
         </div>
 
         <div className="bg-surface border border-border-subtle rounded-xl p-5">
@@ -133,9 +178,9 @@ export default async function AdminAnalyticsPage() {
             </div>
           </div>
           <p className="text-3xl font-bold mt-2 text-yellow-500">
-            ${pendingRevenue.toLocaleString()}
+            ${Number(pendingRevenue._sum.amount || 0).toLocaleString()}
           </p>
-          <p className="text-xs text-text-muted mt-1">{overdueInvoices} overdue</p>
+          <p className="text-xs text-text-muted mt-1">{overdueInvoiceCount} overdue</p>
         </div>
 
         <div className="bg-surface border border-border-subtle rounded-xl p-5">
@@ -147,7 +192,7 @@ export default async function AdminAnalyticsPage() {
               </svg>
             </div>
           </div>
-          <p className="text-3xl font-bold mt-2">{clients.length}</p>
+          <p className="text-3xl font-bold mt-2">{clientCount}</p>
           <p className="text-xs text-text-muted mt-1">Registered</p>
         </div>
       </div>
@@ -220,7 +265,7 @@ export default async function AdminAnalyticsPage() {
             </div>
             <div className="pt-3 border-t border-border-subtle flex justify-between items-center">
               <span className="text-text-secondary">Total</span>
-              <span className="font-bold">{projects.length}</span>
+              <span className="font-bold">{totalProjects}</span>
             </div>
           </div>
         </div>
@@ -252,7 +297,7 @@ export default async function AdminAnalyticsPage() {
             </div>
             <div className="pt-3 border-t border-border-subtle flex justify-between items-center">
               <span className="text-text-secondary">Total</span>
-              <span className="font-bold">{tickets.length}</span>
+              <span className="font-bold">{totalTickets}</span>
             </div>
           </div>
         </div>
@@ -276,7 +321,7 @@ export default async function AdminAnalyticsPage() {
             </div>
             <div className="pt-3 border-t border-border-subtle flex justify-between items-center">
               <span className="text-text-secondary">Total</span>
-              <span className="font-bold">{appointments.length}</span>
+              <span className="font-bold">{totalAppointments}</span>
             </div>
           </div>
         </div>
@@ -314,23 +359,19 @@ export default async function AdminAnalyticsPage() {
           <h3 className="font-semibold mb-4">Quick Stats</h3>
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-elevated rounded-lg p-4 text-center">
-              <p className="text-2xl font-bold text-accent">{documents.length}</p>
+              <p className="text-2xl font-bold text-accent">{documentCount}</p>
               <p className="text-xs text-text-muted mt-1">Documents</p>
             </div>
             <div className="bg-elevated rounded-lg p-4 text-center">
-              <p className="text-2xl font-bold text-green-500">{invoices.length}</p>
+              <p className="text-2xl font-bold text-green-500">{totalInvoiceCount}</p>
               <p className="text-xs text-text-muted mt-1">Invoices</p>
             </div>
             <div className="bg-elevated rounded-lg p-4 text-center">
-              <p className="text-2xl font-bold text-blue-500">
-                {Math.round((resolvedTickets / (tickets.length || 1)) * 100)}%
-              </p>
+              <p className="text-2xl font-bold text-blue-500">{resolutionRate}%</p>
               <p className="text-xs text-text-muted mt-1">Resolution Rate</p>
             </div>
             <div className="bg-elevated rounded-lg p-4 text-center">
-              <p className="text-2xl font-bold text-purple-500">
-                {Math.round((paidInvoices / (invoices.length || 1)) * 100)}%
-              </p>
+              <p className="text-2xl font-bold text-purple-500">{paymentRate}%</p>
               <p className="text-xs text-text-muted mt-1">Payment Rate</p>
             </div>
           </div>

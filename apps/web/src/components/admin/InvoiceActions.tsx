@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { DeleteConfirmModal } from "./DeleteConfirmModal";
+import { useToast } from "@/components/ui/Toast";
 
 interface InvoiceActionsProps {
   invoiceId: string;
@@ -17,6 +18,7 @@ export function InvoiceActions({
   currentStatus,
 }: InvoiceActionsProps) {
   const router = useRouter();
+  const { addToast } = useToast();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [updating, setUpdating] = useState(false);
@@ -33,10 +35,14 @@ export function InvoiceActions({
       });
 
       if (res.ok) {
+        addToast("Invoice status updated", "success");
         router.refresh();
+      } else {
+        addToast("Failed to update status", "error");
       }
     } catch (error) {
       console.error("Failed to update status:", error);
+      addToast("Failed to update status", "error");
     } finally {
       setUpdating(false);
     }
@@ -51,22 +57,38 @@ export function InvoiceActions({
 
       if (res.ok) {
         setShowDeleteModal(false);
+        addToast("Invoice deleted", "success");
         router.refresh();
       } else {
         const data = await res.json();
-        alert(data.error || "Failed to delete invoice");
+        addToast(data.error || "Failed to delete invoice", "error");
       }
     } catch (error) {
       console.error("Failed to delete invoice:", error);
-      alert("Failed to delete invoice");
+      addToast("Failed to delete invoice", "error");
     } finally {
       setIsDeleting(false);
     }
   }
 
+  const isPaid = currentStatus.toLowerCase() === "paid";
+
   return (
     <>
       <div className="flex items-center justify-end gap-2">
+        {!isPaid && (
+          <button
+            onClick={() => handleStatusChange("paid")}
+            disabled={updating}
+            className="px-2.5 py-1 rounded-lg bg-green-500/10 text-green-500 hover:bg-green-500/20 text-xs font-medium transition-colors disabled:opacity-50 flex items-center gap-1"
+            title="Mark as Paid"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            {updating ? "..." : "Paid"}
+          </button>
+        )}
         <Link
           href={`/admin/invoices/${invoiceId}`}
           className="p-2 rounded-lg hover:bg-elevated text-text-secondary hover:text-text-primary transition-colors"

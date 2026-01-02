@@ -1,6 +1,7 @@
 import { prisma } from "@support-forge/database";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { TicketCommentForm } from "@/components/admin/TicketCommentForm";
 
 const STATUS_STYLES = {
   OPEN: { bg: "bg-blue-500/10", text: "text-blue-500", label: "Open" },
@@ -164,6 +165,7 @@ export default async function TicketDetailPage({
             ))}
           </div>
         )}
+        <TicketCommentForm ticketId={ticket.id} />
       </div>
     </div>
   );

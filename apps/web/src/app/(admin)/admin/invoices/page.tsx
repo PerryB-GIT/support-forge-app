@@ -2,20 +2,65 @@ import { prisma } from "@support-forge/database";
 import Link from "next/link";
 import Image from "next/image";
 import { InvoiceActions } from "@/components/admin/InvoiceActions";
+import { Pagination } from "@/components/ui/Pagination";
+import { SearchInput } from "@/components/ui/SearchInput";
+import { Prisma } from "@prisma/client";
 
-export default async function AdminInvoicesPage() {
-  const invoices = await prisma.invoice.findMany({
-    orderBy: { createdAt: "desc" },
-    include: {
-      client: {
-        select: { id: true, name: true, email: true },
+const ITEMS_PER_PAGE = 10;
+
+interface PageProps {
+  searchParams: Promise<{ page?: string; search?: string }>;
+}
+
+export default async function AdminInvoicesPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const currentPage = Math.max(1, parseInt(params.page || "1"));
+  const search = params.search || "";
+
+  // Build where clause for search
+  const whereClause: Prisma.InvoiceWhereInput = search
+    ? {
+        OR: [
+          { number: { contains: search, mode: "insensitive" } },
+          { client: { name: { contains: search, mode: "insensitive" } } },
+          { client: { email: { contains: search, mode: "insensitive" } } },
+        ],
+      }
+    : {};
+
+  // Get aggregates using efficient queries
+  const [totalCount, invoices, paidSum, pendingSum, overdueSum] = await Promise.all([
+    prisma.invoice.count({ where: whereClause }),
+    prisma.invoice.findMany({
+      where: whereClause,
+      orderBy: { createdAt: "desc" },
+      skip: (currentPage - 1) * ITEMS_PER_PAGE,
+      take: ITEMS_PER_PAGE,
+      include: {
+        client: {
+          select: { id: true, name: true, email: true },
+        },
+        items: true,
       },
-      items: true,
-    },
-  });
+    }),
+    prisma.invoice.aggregate({
+      where: { status: { in: ["paid", "PAID"] } },
+      _sum: { amount: true },
+    }),
+    prisma.invoice.aggregate({
+      where: { status: { in: ["pending", "PENDING"] } },
+      _sum: { amount: true },
+    }),
+    prisma.invoice.aggregate({
+      where: { status: { in: ["overdue", "OVERDUE"] } },
+      _sum: { amount: true },
+    }),
+  ]);
 
-  const formatCurrency = (amount: number | string | { toString(): string }) => {
-    const num = typeof amount === "number" ? amount : parseFloat(amount.toString());
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
+
+  const formatCurrency = (amount: number | string | { toString(): string } | null) => {
+    const num = typeof amount === "number" ? amount : parseFloat(amount?.toString() || "0");
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
@@ -36,18 +81,6 @@ export default async function AdminInvoicesPage() {
         return "bg-gray-500/10 text-gray-500";
     }
   };
-
-  const totalPaid = invoices
-    .filter((inv) => inv.status.toLowerCase() === "paid")
-    .reduce((sum, inv) => sum + parseFloat(inv.amount.toString()), 0);
-
-  const totalPending = invoices
-    .filter((inv) => inv.status.toLowerCase() === "pending")
-    .reduce((sum, inv) => sum + parseFloat(inv.amount.toString()), 0);
-
-  const totalOverdue = invoices
-    .filter((inv) => inv.status.toLowerCase() === "overdue")
-    .reduce((sum, inv) => sum + parseFloat(inv.amount.toString()), 0);
 
   return (
     <div className="space-y-6">
@@ -82,16 +115,32 @@ export default async function AdminInvoicesPage() {
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="bg-surface border border-border-subtle rounded-xl p-5">
           <p className="text-text-muted text-sm">Total Paid</p>
-          <p className="text-2xl font-bold mt-1 text-green-500">{formatCurrency(totalPaid)}</p>
+          <p className="text-2xl font-bold mt-1 text-green-500">
+            {formatCurrency(paidSum._sum.amount)}
+          </p>
         </div>
         <div className="bg-surface border border-border-subtle rounded-xl p-5">
           <p className="text-text-muted text-sm">Pending</p>
-          <p className="text-2xl font-bold mt-1 text-yellow-500">{formatCurrency(totalPending)}</p>
+          <p className="text-2xl font-bold mt-1 text-yellow-500">
+            {formatCurrency(pendingSum._sum.amount)}
+          </p>
         </div>
         <div className="bg-surface border border-border-subtle rounded-xl p-5">
           <p className="text-text-muted text-sm">Overdue</p>
-          <p className="text-2xl font-bold mt-1 text-red-500">{formatCurrency(totalOverdue)}</p>
+          <p className="text-2xl font-bold mt-1 text-red-500">
+            {formatCurrency(overdueSum._sum.amount)}
+          </p>
         </div>
+      </div>
+
+      {/* Search */}
+      <div className="flex items-center gap-4">
+        <SearchInput placeholder="Search invoices..." className="max-w-sm" />
+        {search && (
+          <p className="text-sm text-text-muted">
+            Found {totalCount} result{totalCount !== 1 ? "s" : ""} for &quot;{search}&quot;
+          </p>
+        )}
       </div>
 
       {/* Invoices Table */}
@@ -113,10 +162,16 @@ export default async function AdminInvoicesPage() {
               {invoices.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-4 py-8 text-center text-text-muted">
-                    No invoices yet.{" "}
-                    <Link href="/admin/invoices/new" className="text-accent hover:underline">
-                      Create your first invoice
-                    </Link>
+                    {search ? (
+                      <>No invoices found matching &quot;{search}&quot;</>
+                    ) : (
+                      <>
+                        No invoices yet.{" "}
+                        <Link href="/admin/invoices/new" className="text-accent hover:underline">
+                          Create your first invoice
+                        </Link>
+                      </>
+                    )}
                   </td>
                 </tr>
               ) : (
@@ -152,6 +207,14 @@ export default async function AdminInvoicesPage() {
             </tbody>
           </table>
         </div>
+
+        {/* Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalCount}
+          itemsPerPage={ITEMS_PER_PAGE}
+        />
       </div>
     </div>
   );

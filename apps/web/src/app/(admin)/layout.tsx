@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import AdminSidebar from "@/components/admin/sidebar";
+import { ToastProviderWrapper } from "@/components/providers/ToastProviderWrapper";
 
 export default async function AdminLayout({
   children,
@@ -20,11 +21,13 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="flex min-h-screen">
-      <AdminSidebar user={session.user} />
-      <main className="flex-1 lg:ml-64">
-        <div className="p-4 lg:p-8">{children}</div>
-      </main>
-    </div>
+    <ToastProviderWrapper>
+      <div className="flex min-h-screen">
+        <AdminSidebar user={session.user} />
+        <main className="flex-1 lg:ml-64">
+          <div className="p-4 lg:p-8">{children}</div>
+        </main>
+      </div>
+    </ToastProviderWrapper>
   );
 }

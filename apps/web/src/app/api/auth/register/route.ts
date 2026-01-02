@@ -1,9 +1,18 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@support-forge/database";
+import { applyRateLimit } from "@/lib/rate-limit";
 
 export async function POST(request: Request) {
   try {
+    // Apply rate limiting based on IP address
+    const forwarded = request.headers.get("x-forwarded-for");
+    const ip = forwarded ? forwarded.split(",")[0] : "unknown";
+    const rateLimitResponse = applyRateLimit(`register:${ip}`, "auth");
+    if (rateLimitResponse) {
+      return rateLimitResponse;
+    }
+
     const body = await request.json();
     const { email, password, name, company, phone } = body;
 

@@ -40,6 +40,36 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Client, date, and type are required" }, { status: 400 });
     }
 
+    const appointmentDate = new Date(date);
+    const appointmentDuration = duration || 60;
+    const appointmentEnd = new Date(appointmentDate.getTime() + appointmentDuration * 60 * 1000);
+
+    // Check for scheduling conflicts
+    const existingAppointments = await prisma.appointment.findMany({
+      where: {
+        status: { notIn: ["CANCELLED"] },
+        date: {
+          gte: new Date(appointmentDate.getTime() - 24 * 60 * 60 * 1000), // Same day buffer
+          lte: new Date(appointmentDate.getTime() + 24 * 60 * 60 * 1000),
+        },
+      },
+    });
+
+    const hasConflict = existingAppointments.some((existing) => {
+      const existingStart = new Date(existing.date);
+      const existingEnd = new Date(existingStart.getTime() + existing.duration * 60 * 1000);
+
+      // Check if time ranges overlap
+      return appointmentDate < existingEnd && appointmentEnd > existingStart;
+    });
+
+    if (hasConflict) {
+      return NextResponse.json(
+        { error: "This time slot conflicts with an existing appointment" },
+        { status: 409 }
+      );
+    }
+
     const appointment = await prisma.appointment.create({
       data: {
         clientId,

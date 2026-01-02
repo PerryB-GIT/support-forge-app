@@ -1,23 +1,64 @@
 import { prisma } from "@support-forge/database";
 import Link from "next/link";
 import Image from "next/image";
-import { TicketActions } from "@/components/admin/TicketActions";
+import { Pagination } from "@/components/ui/Pagination";
+import { SearchInput } from "@/components/ui/SearchInput";
 
-export default async function AdminTicketsPage() {
-  const tickets = await prisma.ticket.findMany({
-    orderBy: { createdAt: "desc" },
-    include: {
-      client: {
-        select: { id: true, name: true, email: true },
+const ITEMS_PER_PAGE = 10;
+
+interface PageProps {
+  searchParams: Promise<{ page?: string; search?: string }>;
+}
+
+export default async function AdminTicketsPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const currentPage = Math.max(1, parseInt(params.page || "1"));
+  const search = params.search || "";
+
+  // Build where clause for search
+  const whereClause = search
+    ? {
+        OR: [
+          { title: { contains: search, mode: "insensitive" as const } },
+          { description: { contains: search, mode: "insensitive" as const } },
+          { client: { name: { contains: search, mode: "insensitive" as const } } },
+          { client: { email: { contains: search, mode: "insensitive" as const } } },
+        ],
+      }
+    : {};
+
+  // Get total count and paginated data
+  const [totalCount, tickets, openCount, urgentCount, resolvedCount] = await Promise.all([
+    prisma.ticket.count({ where: whereClause }),
+    prisma.ticket.findMany({
+      where: whereClause,
+      orderBy: { createdAt: "desc" },
+      skip: (currentPage - 1) * ITEMS_PER_PAGE,
+      take: ITEMS_PER_PAGE,
+      include: {
+        client: {
+          select: { id: true, name: true, email: true },
+        },
+        project: {
+          select: { id: true, title: true },
+        },
+        _count: {
+          select: { comments: true },
+        },
       },
-      project: {
-        select: { id: true, title: true },
-      },
-      _count: {
-        select: { comments: true },
-      },
-    },
-  });
+    }),
+    prisma.ticket.count({
+      where: { status: { in: ["OPEN", "IN_PROGRESS", "WAITING"] } },
+    }),
+    prisma.ticket.count({
+      where: { priority: "URGENT", status: { not: "CLOSED" } },
+    }),
+    prisma.ticket.count({
+      where: { status: "RESOLVED" },
+    }),
+  ]);
+
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -50,9 +91,6 @@ export default async function AdminTicketsPage() {
         return "bg-gray-500/10 text-gray-500";
     }
   };
-
-  const openTickets = tickets.filter((t) => ["OPEN", "IN_PROGRESS", "WAITING"].includes(t.status));
-  const urgentTickets = tickets.filter((t) => t.priority === "URGENT" && t.status !== "CLOSED");
 
   return (
     <div className="space-y-6">
@@ -87,22 +125,30 @@ export default async function AdminTicketsPage() {
       <div className="grid gap-4 sm:grid-cols-4">
         <div className="bg-surface border border-border-subtle rounded-xl p-4">
           <p className="text-text-muted text-sm">Open Tickets</p>
-          <p className="text-2xl font-bold mt-1 text-blue-500">{openTickets.length}</p>
+          <p className="text-2xl font-bold mt-1 text-blue-500">{openCount}</p>
         </div>
         <div className="bg-surface border border-border-subtle rounded-xl p-4">
           <p className="text-text-muted text-sm">Urgent</p>
-          <p className="text-2xl font-bold mt-1 text-red-500">{urgentTickets.length}</p>
+          <p className="text-2xl font-bold mt-1 text-red-500">{urgentCount}</p>
         </div>
         <div className="bg-surface border border-border-subtle rounded-xl p-4">
           <p className="text-text-muted text-sm">Resolved</p>
-          <p className="text-2xl font-bold mt-1 text-green-500">
-            {tickets.filter((t) => t.status === "RESOLVED").length}
-          </p>
+          <p className="text-2xl font-bold mt-1 text-green-500">{resolvedCount}</p>
         </div>
         <div className="bg-surface border border-border-subtle rounded-xl p-4">
           <p className="text-text-muted text-sm">Total</p>
-          <p className="text-2xl font-bold mt-1">{tickets.length}</p>
+          <p className="text-2xl font-bold mt-1">{totalCount}</p>
         </div>
+      </div>
+
+      {/* Search */}
+      <div className="flex items-center gap-4">
+        <SearchInput placeholder="Search tickets..." className="max-w-sm" />
+        {search && (
+          <p className="text-sm text-text-muted">
+            Found {totalCount} result{totalCount !== 1 ? "s" : ""} for &quot;{search}&quot;
+          </p>
+        )}
       </div>
 
       {/* Tickets Table */}
@@ -125,10 +171,16 @@ export default async function AdminTicketsPage() {
               {tickets.length === 0 ? (
                 <tr>
                   <td colSpan={8} className="px-4 py-8 text-center text-text-muted">
-                    No tickets yet.{" "}
-                    <Link href="/admin/tickets/new" className="text-accent hover:underline">
-                      Create your first ticket
-                    </Link>
+                    {search ? (
+                      <>No tickets found matching &quot;{search}&quot;</>
+                    ) : (
+                      <>
+                        No tickets yet.{" "}
+                        <Link href="/admin/tickets/new" className="text-accent hover:underline">
+                          Create your first ticket
+                        </Link>
+                      </>
+                    )}
                   </td>
                 </tr>
               ) : (
@@ -199,6 +251,14 @@ export default async function AdminTicketsPage() {
             </tbody>
           </table>
         </div>
+
+        {/* Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalCount}
+          itemsPerPage={ITEMS_PER_PAGE}
+        />
       </div>
     </div>
   );
