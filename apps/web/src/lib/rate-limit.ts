@@ -94,6 +94,11 @@ export const rateLimitPresets = {
     interval: 60 * 1000,
     limit: 10,
   },
+  // Password reset: 3 requests per minute (very strict)
+  passwordReset: {
+    interval: 60 * 1000,
+    limit: 3,
+  },
 } as const;
 
 /**
