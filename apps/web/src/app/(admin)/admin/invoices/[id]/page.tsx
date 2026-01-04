@@ -1,6 +1,7 @@
 import { prisma } from "@support-forge/database";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { InvoiceQuickActions } from "@/components/admin/InvoiceQuickActions";
 
 const STATUS_STYLES = {
   pending: { bg: "bg-warning/10", text: "text-warning", label: "Pending" },
@@ -186,19 +187,11 @@ export default async function InvoiceDetailPage({
           {/* Quick Actions */}
           <div className="bg-surface border border-border-subtle rounded-xl p-6">
             <h3 className="font-semibold mb-4">Quick Actions</h3>
-            <div className="space-y-2">
-              {invoice.status !== "paid" && (
-                <button className="w-full px-4 py-2.5 rounded-lg bg-success/10 text-success hover:bg-success/20 font-medium transition-colors text-sm">
-                  Mark as Paid
-                </button>
-              )}
-              <button className="w-full px-4 py-2.5 rounded-lg bg-elevated hover:bg-border-subtle font-medium transition-colors text-sm">
-                Send Reminder
-              </button>
-              <button className="w-full px-4 py-2.5 rounded-lg bg-elevated hover:bg-border-subtle font-medium transition-colors text-sm">
-                Download PDF
-              </button>
-            </div>
+            <InvoiceQuickActions
+              invoiceId={invoice.id}
+              invoiceNumber={invoice.number}
+              currentStatus={invoice.status}
+            />
           </div>
         </div>
       </div>
