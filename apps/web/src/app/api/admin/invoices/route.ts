@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@support-forge/database";
+import { sendEmail, generateInvoiceEmailHtml } from "@/lib/email";
 
 // Generate invoice number
 function generateInvoiceNumber(): string {
@@ -53,7 +54,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const { clientId, dueDate, items } = body;
+    const { clientId, dueDate, items, sendEmailToClient } = body;
 
     if (!clientId || !dueDate || !items || items.length === 0) {
       return NextResponse.json(
@@ -116,10 +117,37 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // TODO: If sendEmail is true, send email notification to client
-    // This would integrate with an email service like SendGrid, SES, etc.
+    // Send email notification to client if requested
+    if (sendEmailToClient && client.email) {
+      try {
+        const emailHtml = generateInvoiceEmailHtml({
+          number: invoice.number,
+          amount: Number(invoice.amount),
+          dueDate: invoice.dueDate,
+          status: invoice.status,
+          items: invoice.items.map((item) => ({
+            description: item.description,
+            quantity: item.quantity,
+            unitPrice: Number(item.unitPrice),
+          })),
+          client: {
+            name: client.name,
+            company: client.company,
+          },
+        });
 
-    return NextResponse.json({ invoice }, { status: 201 });
+        await sendEmail({
+          to: client.email,
+          subject: `Invoice ${invoice.number} from Support Forge`,
+          html: emailHtml,
+        });
+      } catch (emailError) {
+        console.error("Failed to send invoice email:", emailError);
+        // Don't fail the request if email fails, invoice is already created
+      }
+    }
+
+    return NextResponse.json({ invoice, emailSent: sendEmailToClient && !!client.email }, { status: 201 });
   } catch (error) {
     console.error("Error creating invoice:", error);
     return NextResponse.json(
