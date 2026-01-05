@@ -16,54 +16,15 @@ export const metadata: Metadata = {
   },
 };
 
-// Custom icon components
-const LaunchIcons = {
-  Landscape: () => (
-    <svg className="w-12 h-12" fill="none" viewBox="0 0 48 48" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 36l12-12 8 8 16-16M6 36h36M6 36V12" />
-      <circle cx="38" cy="16" r="4" strokeWidth={1.5} />
-    </svg>
-  ),
-  Architect: () => (
-    <svg className="w-12 h-12" fill="none" viewBox="0 0 48 48" stroke="currentColor">
-      <rect x="8" y="8" width="12" height="12" rx="2" strokeWidth={1.5} />
-      <rect x="28" y="8" width="12" height="12" rx="2" strokeWidth={1.5} />
-      <rect x="8" y="28" width="12" height="12" rx="2" strokeWidth={1.5} />
-      <rect x="28" y="28" width="12" height="12" rx="2" strokeWidth={1.5} />
-      <path strokeLinecap="round" strokeWidth={1.5} d="M20 14h8M14 20v8M34 20v8M20 34h8" />
-    </svg>
-  ),
-  Unlock: () => (
-    <svg className="w-12 h-12" fill="none" viewBox="0 0 48 48" stroke="currentColor">
-      <rect x="10" y="20" width="28" height="22" rx="3" strokeWidth={1.5} />
-      <path strokeLinecap="round" strokeWidth={1.5} d="M16 20V14a8 8 0 0116 0" />
-      <circle cx="24" cy="31" r="3" strokeWidth={1.5} />
-      <path strokeLinecap="round" strokeWidth={1.5} d="M24 34v4" />
-    </svg>
-  ),
-  Network: () => (
-    <svg className="w-12 h-12" fill="none" viewBox="0 0 48 48" stroke="currentColor">
-      <circle cx="24" cy="24" r="6" strokeWidth={1.5} />
-      <circle cx="10" cy="10" r="4" strokeWidth={1.5} />
-      <circle cx="38" cy="10" r="4" strokeWidth={1.5} />
-      <circle cx="10" cy="38" r="4" strokeWidth={1.5} />
-      <circle cx="38" cy="38" r="4" strokeWidth={1.5} />
-      <path strokeLinecap="round" strokeWidth={1.5} d="M13 13l7 7M35 13l-7 7M13 35l7-7M35 35l-7-7" />
-    </svg>
-  ),
-  Configure: () => (
-    <svg className="w-12 h-12" fill="none" viewBox="0 0 48 48" stroke="currentColor">
-      <circle cx="24" cy="24" r="8" strokeWidth={1.5} />
-      <path strokeLinecap="round" strokeWidth={1.5} d="M24 4v6M24 38v6M4 24h6M38 24h6M10.1 10.1l4.2 4.2M33.7 33.7l4.2 4.2M10.1 37.9l4.2-4.2M33.7 14.3l4.2-4.2" />
-    </svg>
-  ),
-  Harden: () => (
-    <svg className="w-12 h-12" fill="none" viewBox="0 0 48 48" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M24 4L6 12v12c0 11 8 18 18 22 10-4 18-11 18-22V12L24 4z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 24l6 6 10-12" />
-    </svg>
-  ),
-};
+// LAUNCH letter components - styled to match site aesthetic
+const LaunchLetter = ({ letter }: { letter: string }) => (
+  <span
+    className="text-3xl font-bold"
+    style={{ fontFamily: "var(--font-space-grotesk)" }}
+  >
+    {letter}
+  </span>
+);
 
 // Category icons
 const CategoryIcons = {
@@ -184,12 +145,12 @@ const ToolIcon = ({ type }: { type: string }) => {
 
 // LAUNCH Method steps
 const launchSteps = [
-  { key: "Landscape", name: "Landscape", desc: "Map your current processes and identify high-impact AI opportunities", Icon: LaunchIcons.Landscape },
-  { key: "Architect", name: "Architect", desc: "Design your AI ecosystem with the right tools and integrations", Icon: LaunchIcons.Architect },
-  { key: "Unlock", name: "Unlock", desc: "Master prompt engineering and AI interaction patterns", Icon: LaunchIcons.Unlock },
-  { key: "Network", name: "Network", desc: "Connect your AI tools into automated workflows", Icon: LaunchIcons.Network },
-  { key: "Configure", name: "Configure", desc: "Fine-tune and customize for your specific use cases", Icon: LaunchIcons.Configure },
-  { key: "Harden", name: "Harden", desc: "Secure, document, and prepare for scale", Icon: LaunchIcons.Harden },
+  { letter: "L", name: "Landscape", desc: "Map your current processes and identify high-impact AI opportunities" },
+  { letter: "A", name: "Architect", desc: "Design your AI ecosystem with the right tools and integrations" },
+  { letter: "U", name: "Unlock", desc: "Master prompt engineering and AI interaction patterns" },
+  { letter: "N", name: "Network", desc: "Connect your AI tools into automated workflows" },
+  { letter: "C", name: "Configure", desc: "Fine-tune and customize for your specific use cases" },
+  { letter: "H", name: "Harden", desc: "Secure, document, and prepare for scale" },
 ];
 
 // Launchpad Stack - organized by category
@@ -506,12 +467,12 @@ export default function LaunchpadPage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {launchSteps.map((step) => (
               <div
-                key={step.key}
+                key={step.letter}
                 className="group p-6 rounded-2xl bg-surface border border-border-subtle hover:border-accent transition-all"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <step.Icon />
+                    <LaunchLetter letter={step.letter} />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">{step.name}</h3>
