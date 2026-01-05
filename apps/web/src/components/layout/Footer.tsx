@@ -31,6 +31,11 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
               <li>
+                <Link href="/launchpad" className="hover:text-accent transition-colors">
+                  AI Launchpad
+                </Link>
+              </li>
+              <li>
                 <Link href="/ai-transformation" className="hover:text-accent transition-colors">
                   AI Transformation
                 </Link>
