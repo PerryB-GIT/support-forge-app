@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -64,28 +66,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <header className="border-b border-border-subtle backdrop-blur-sm bg-background/80 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src="/sf-logo.png" alt="Support Forge" width={32} height={32} className="rounded-lg" />
-            <span className="text-xl font-bold text-accent">
-              SupportForge
-            </span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/services" className="text-text-secondary hover:text-text-primary transition-colors">Services</Link>
-            <Link href="/about" className="text-text-secondary hover:text-text-primary transition-colors">About</Link>
-            <Link href="/contact" className="text-accent font-medium">Contact</Link>
-            <Link
-              href="/login"
-              className="px-4 py-2 bg-accent hover:bg-accent-hover text-white rounded-lg font-medium transition-all"
-            >
-              Client Portal
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="py-20 px-6">
@@ -317,27 +298,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border-subtle">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/sf-logo.png" alt="Support Forge" width={28} height={28} className="rounded-lg" />
-              <span className="font-bold text-accent">
-                SupportForge
-              </span>
-            </Link>
-            <div className="flex gap-6 text-text-muted">
-              <Link href="/services" className="hover:text-text-primary transition-colors">Services</Link>
-              <Link href="/about" className="hover:text-text-primary transition-colors">About</Link>
-              <Link href="/contact" className="hover:text-text-primary transition-colors">Contact</Link>
-            </div>
-            <div className="text-text-muted">
-              © {new Date().getFullYear()} SupportForge. All rights reserved.
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

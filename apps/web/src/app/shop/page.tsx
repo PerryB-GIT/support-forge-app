@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { CONTACT_INFO } from "@support-forge/shared";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Workflow Shop | Support Forge",
@@ -289,39 +291,7 @@ const customTiers = [
 export default function ShopPage() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src="/sf-logo.png" alt="Support Forge" width={32} height={32} className="rounded-lg" />
-            <span className="text-xl font-bold text-accent" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              SupportForge
-            </span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/shop" className="text-accent font-medium">
-              Workflow Shop
-            </Link>
-            <Link href="/services" className="text-text-secondary hover:text-text-primary transition-colors">
-              Services
-            </Link>
-            <Link href="/ai-transformation" className="text-text-secondary hover:text-text-primary transition-colors">
-              AI Transformation
-            </Link>
-            <Link href="/contact" className="text-text-secondary hover:text-text-primary transition-colors">
-              Contact
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Link href="/login" className="text-text-secondary hover:text-text-primary transition-colors">
-              Sign in
-            </Link>
-            <Link href="/register" className="px-4 py-2 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-colors">
-              Get Started
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="pt-32 pb-16 px-4">
@@ -575,51 +545,7 @@ export default function ShopPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-8">
-            <div>
-              <Link href="/" className="flex items-center gap-2 mb-4">
-                <Image src="/sf-logo.png" alt="Support Forge" width={28} height={28} className="rounded-lg" />
-                <span className="font-bold text-accent" style={{ fontFamily: "var(--font-space-grotesk)" }}>SupportForge</span>
-              </Link>
-              <p className="text-text-secondary text-sm">
-                AI & IT Consulting services for modern businesses. Transforming ideas into reality.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Shop</h4>
-              <ul className="space-y-2 text-sm text-text-secondary">
-                <li><Link href="/shop#autonomous" className="hover:text-accent transition-colors">Autonomous Workflows</Link></li>
-                <li><Link href="/shop#custom" className="hover:text-accent transition-colors">Custom Workflows</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-text-secondary">
-                <li><Link href="/about" className="hover:text-accent transition-colors">About Us</Link></li>
-                <li><Link href="/services" className="hover:text-accent transition-colors">Services</Link></li>
-                <li><Link href="/contact" className="hover:text-accent transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <ul className="space-y-2 text-sm text-text-secondary">
-                <li><a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-accent transition-colors">{CONTACT_INFO.email}</a></li>
-                <li><a href={`tel:${CONTACT_INFO.phoneRaw}`} className="hover:text-accent transition-colors">{CONTACT_INFO.phone}</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="pt-8 border-t border-border-subtle flex flex-col sm:flex-row justify-between items-center gap-4 text-text-muted text-sm">
-            <div>&copy; {new Date().getFullYear()} Support Forge. All rights reserved.</div>
-            <div className="flex gap-6">
-              <Link href="/privacy" className="hover:text-accent transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-accent transition-colors">Terms of Service</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
