@@ -25,20 +25,51 @@ const launchSteps = [
   { letter: "H", name: "Harden", desc: "Secure, document, and prepare for scale" },
 ];
 
-// Tech stack items
-const stackItems = [
-  { icon: "🤖", name: "ChatGPT", category: "Core AI" },
-  { icon: "🧠", name: "Claude", category: "Core AI" },
-  { icon: "⚡", name: "Zapier", category: "Automation" },
-  { icon: "🔗", name: "Make", category: "Automation" },
-  { icon: "📊", name: "Notion AI", category: "Productivity" },
-  { icon: "🎯", name: "Airtable", category: "Data" },
-  { icon: "📧", name: "Gmail/Outlook", category: "Communication" },
-  { icon: "💬", name: "Slack", category: "Communication" },
-  { icon: "📅", name: "Calendar APIs", category: "Scheduling" },
-  { icon: "🎨", name: "Canva AI", category: "Design" },
-  { icon: "🔊", name: "ElevenLabs", category: "Voice" },
-  { icon: "📹", name: "Loom", category: "Video" },
+// Launchpad Stack - organized by category
+const stackCategories = [
+  {
+    name: "AI Development",
+    items: [
+      { icon: "🤖", name: "Claude Code", desc: "AI coding assistant" },
+      { icon: "🔌", name: "MCP Servers", desc: "Model context protocol" },
+      { icon: "💻", name: "Claude API", desc: "Anthropic's API" },
+      { icon: "✨", name: "Gemini", desc: "Google's AI model" },
+    ],
+  },
+  {
+    name: "Automation",
+    items: [
+      { icon: "🔄", name: "n8n", desc: "Open-source automation" },
+      { icon: "⚡", name: "Zapier", desc: "No-code automation" },
+      { icon: "🔗", name: "Make", desc: "Visual automation" },
+    ],
+  },
+  {
+    name: "Cloud & Data",
+    items: [
+      { icon: "☁️", name: "AWS", desc: "Amazon Web Services" },
+      { icon: "🌐", name: "Google Cloud", desc: "GCP services" },
+      { icon: "🧠", name: "Vertex AI", desc: "Google ML platform" },
+      { icon: "📊", name: "BigQuery", desc: "Data analytics" },
+    ],
+  },
+  {
+    name: "Development",
+    items: [
+      { icon: "🐙", name: "GitHub", desc: "Code & collaboration" },
+      { icon: "🐳", name: "Docker", desc: "Containerization" },
+      { icon: "📦", name: "VS Code", desc: "Development IDE" },
+    ],
+  },
+  {
+    name: "Productivity",
+    items: [
+      { icon: "📧", name: "Google Workspace", desc: "Gmail, Drive, Docs" },
+      { icon: "📅", name: "Calendar", desc: "Scheduling APIs" },
+      { icon: "💬", name: "Slack", desc: "Team communication" },
+      { icon: "🎨", name: "Canva", desc: "Design automation" },
+    ],
+  },
 ];
 
 // ROI stats
@@ -217,27 +248,38 @@ export default function LaunchpadPage() {
         </div>
       </section>
 
-      {/* Stack Section */}
+      {/* Launchpad Stack Section */}
       <section className="py-20 bg-surface/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Tools You&apos;ll <span className="text-accent">Master</span>
+              The Launchpad <span className="text-accent">Stack</span>
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
-              Learn to leverage the best AI tools and integrate them into powerful workflows
+              Master the complete toolkit for building AI-powered business systems
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {stackItems.map((item) => (
-              <div
-                key={item.name}
-                className="group p-4 rounded-xl bg-background border border-border-subtle hover:border-accent transition-all text-center"
-              >
-                <div className="text-3xl mb-2">{item.icon}</div>
-                <div className="font-medium text-sm">{item.name}</div>
-                <div className="text-text-muted text-xs">{item.category}</div>
+          <div className="space-y-8">
+            {stackCategories.map((category) => (
+              <div key={category.name}>
+                <h3 className="text-lg font-semibold text-accent mb-4">{category.name}</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                  {category.items.map((item) => (
+                    <div
+                      key={item.name}
+                      className="group p-4 rounded-xl bg-background border border-border-subtle hover:border-accent transition-all"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="text-2xl">{item.icon}</div>
+                        <div>
+                          <div className="font-medium text-sm">{item.name}</div>
+                          <div className="text-text-muted text-xs">{item.desc}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -294,20 +336,43 @@ export default function LaunchpadPage() {
                 <span className="text-2xl">🎓</span>
                 Certifications
               </h3>
-              <ul className="space-y-3">
-                {[
-                  "AWS Certified Solutions Architect",
-                  "Google Cloud Professional",
-                  "Microsoft Azure Administrator",
-                  "Certified Scrum Master",
-                  "ITIL Foundation Certified",
-                ].map((cert, i) => (
-                  <li key={i} className="flex items-center gap-3 text-text-secondary">
-                    <span>🏅</span>
-                    <span>{cert}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-accent font-medium mb-2">Google Cloud</p>
+                  <ul className="space-y-2">
+                    {[
+                      "Introduction to Generative AI",
+                      "Introduction to Large Language Models",
+                      "Introduction to Responsible AI",
+                      "Generative AI Fundamentals",
+                    ].map((cert, i) => (
+                      <li key={i} className="flex items-center gap-2 text-text-secondary text-sm">
+                        <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>{cert}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-sm text-accent font-medium mb-2">Cloud & DevOps</p>
+                  <ul className="space-y-2">
+                    {[
+                      "AWS Certified Solutions Architect",
+                      "Microsoft Azure Administrator",
+                      "ITIL Foundation Certified",
+                    ].map((cert, i) => (
+                      <li key={i} className="flex items-center gap-2 text-text-secondary text-sm">
+                        <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>{cert}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
 
             {/* Track Record */}
