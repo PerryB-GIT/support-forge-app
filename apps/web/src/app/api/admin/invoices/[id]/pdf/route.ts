@@ -154,8 +154,23 @@ export async function GET(
   </table>
 
   <div class="payment-info">
-    <h3>Payment Instructions</h3>
-    <p>Please contact us at billing@support-forge.com for payment details and methods.</p>
+    <h3>Payment Options</h3>
+    <div style="display: flex; gap: 30px; align-items: flex-start; margin-top: 15px;">
+      <div style="text-align: center;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://venmo.com/u/John-Bailes-1" alt="Venmo QR Code" style="border: 1px solid #ddd; border-radius: 8px; padding: 8px; background: white;" />
+        <p style="margin-top: 8px; font-size: 12px; color: #666;">Scan to pay with Venmo</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="margin-bottom: 10px;"><strong>Pay with Venmo:</strong></p>
+        <p style="font-size: 18px; color: #008CFF; margin-bottom: 5px;">@John-Bailes-1</p>
+        <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
+          <a href="https://venmo.com/u/John-Bailes-1" style="color: #008CFF; text-decoration: none;">venmo.com/u/John-Bailes-1</a>
+        </p>
+        <p style="font-size: 13px; color: #666; margin-top: 15px;">
+          Questions? Contact us at billing@support-forge.com
+        </p>
+      </div>
+    </div>
   </div>
 
   <div class="footer">

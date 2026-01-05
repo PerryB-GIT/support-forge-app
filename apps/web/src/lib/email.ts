@@ -108,8 +108,25 @@ export function generateInvoiceEmailHtml(invoice: {
     </table>
 
     <div style="margin-top: 30px; padding: 20px; background: #fff8e1; border-radius: 8px; border-left: 4px solid #c9a227;">
-      <p style="margin: 0;"><strong>Payment Instructions:</strong></p>
-      <p style="margin: 10px 0 0 0;">Please contact us at <a href="mailto:billing@support-forge.com" style="color: #c9a227;">billing@support-forge.com</a> for payment details.</p>
+      <p style="margin: 0 0 15px 0;"><strong>Payment Options:</strong></p>
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 140px; vertical-align: top; text-align: center;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://venmo.com/u/John-Bailes-1" alt="Venmo QR Code" style="border: 1px solid #ddd; border-radius: 8px; padding: 6px; background: white;" />
+            <p style="margin: 8px 0 0 0; font-size: 11px; color: #666;">Scan to pay</p>
+          </td>
+          <td style="vertical-align: top; padding-left: 15px;">
+            <p style="margin: 0 0 8px 0;"><strong>Pay with Venmo:</strong></p>
+            <p style="margin: 0 0 5px 0; font-size: 18px; color: #008CFF;">@John-Bailes-1</p>
+            <p style="margin: 0; font-size: 13px;">
+              <a href="https://venmo.com/u/John-Bailes-1" style="color: #008CFF;">venmo.com/u/John-Bailes-1</a>
+            </p>
+            <p style="margin: 15px 0 0 0; font-size: 13px; color: #666;">
+              Questions? <a href="mailto:billing@support-forge.com" style="color: #c9a227;">billing@support-forge.com</a>
+            </p>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 
