@@ -250,8 +250,8 @@ export default function SupportPage() {
             </div>
             <div>
               <p className="text-sm text-text-muted">Email</p>
-              <a href="mailto:perry.bailes@gmail.com" className="text-accent hover:underline">
-                perry.bailes@gmail.com
+              <a href="mailto:support@support-forge.com" className="text-accent hover:underline">
+                support@support-forge.com
               </a>
             </div>
           </div>

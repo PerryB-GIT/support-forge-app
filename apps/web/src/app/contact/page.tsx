@@ -34,7 +34,7 @@ export default function ContactPage() {
     {
       icon: "📧",
       title: "Email Us",
-      value: "perry.bailes@gmail.com",
+      value: "contact@support-forge.com",
       description: "We'll respond within 24 hours"
     },
     {

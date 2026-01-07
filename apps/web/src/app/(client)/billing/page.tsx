@@ -178,8 +178,8 @@ export default async function BillingPage() {
             </div>
             <div>
               <p className="text-sm text-text-muted">Email</p>
-              <a href="mailto:perry.bailes@gmail.com" className="text-accent hover:underline">
-                perry.bailes@gmail.com
+              <a href="mailto:billing@support-forge.com" className="text-accent hover:underline">
+                billing@support-forge.com
               </a>
             </div>
           </div>

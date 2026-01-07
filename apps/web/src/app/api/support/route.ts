@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     // For now, we'll log the email that would be sent
     // In production, integrate with SendGrid, Resend, AWS SES, etc.
     const emailData = {
-      to: "perry.bailes@gmail.com",
+      to: "support@support-forge.com",
       subject: `[SupportForge] New Support Ticket: ${subject}`,
       html: `
         <h2>New Support Ticket Submitted</h2>
