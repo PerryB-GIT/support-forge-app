@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -339,7 +339,7 @@ const CredentialIcons = {
   ),
 };
 
-export default function LaunchpadPage() {
+function LaunchpadContent() {
   const searchParams = useSearchParams();
   const canceled = searchParams.get("canceled");
   const { data: session } = useSession();
@@ -917,5 +917,13 @@ export default function LaunchpadPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function LaunchpadPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background"><div className="animate-pulse text-accent">Loading...</div></div>}>
+      <LaunchpadContent />
+    </Suspense>
   );
 }

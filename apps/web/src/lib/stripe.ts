@@ -1,13 +1,28 @@
 import Stripe from 'stripe';
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  console.warn('Warning: STRIPE_SECRET_KEY is not set');
+// Lazy initialization to avoid errors during build
+let _stripe: Stripe | null = null;
+
+export function getStripe(): Stripe {
+  if (!_stripe) {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error('STRIPE_SECRET_KEY is not configured');
+    }
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-12-15.clover',
+      typescript: true,
+    });
+  }
+  return _stripe;
 }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2025-02-24.acacia',
-  typescript: true,
-});
+// For backwards compatibility
+export const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-12-15.clover',
+      typescript: true,
+    })
+  : (null as unknown as Stripe);
 
 // Academy course products
 export const ACADEMY_PRODUCTS = {
@@ -73,7 +88,7 @@ export async function createAcademyCheckoutSession({
 
   if (!product.priceId) {
     // If no price ID configured, create a one-time price
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: productKey === 'paymentPlan' ? 'subscription' : 'payment',
       customer_email: customerEmail,
       line_items: [
@@ -117,7 +132,7 @@ export async function createAcademyCheckoutSession({
   }
 
   // Use configured price ID
-  const session = await stripe.checkout.sessions.create({
+  const session = await getStripe().checkout.sessions.create({
     mode: productKey === 'paymentPlan' ? 'subscription' : 'payment',
     customer_email: customerEmail,
     line_items: [
@@ -144,5 +159,5 @@ export function constructWebhookEvent(
   signature: string,
   webhookSecret: string
 ) {
-  return stripe.webhooks.constructEvent(payload, signature, webhookSecret);
+  return getStripe().webhooks.constructEvent(payload, signature, webhookSecret);
 }

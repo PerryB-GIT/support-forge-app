@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/layout/Header";
@@ -95,7 +95,7 @@ const courseTiers = [
   },
 ];
 
-export default function AcademyPage() {
+function AcademyContent() {
   const searchParams = useSearchParams();
   const canceled = searchParams.get("canceled");
   const [loading, setLoading] = useState<string | null>(null);
@@ -361,5 +361,13 @@ export default function AcademyPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function AcademyPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background"><div className="animate-pulse text-accent">Loading...</div></div>}>
+      <AcademyContent />
+    </Suspense>
   );
 }
