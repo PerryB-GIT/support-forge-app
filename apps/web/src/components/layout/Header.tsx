@@ -31,17 +31,17 @@ export function Header({ variant = "default" }: HeaderProps) {
         variant === "transparent" ? "bg-background/80" : "bg-background/80"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/sf-logo.png"
             alt="Support Forge"
-            width={32}
-            height={32}
+            width={28}
+            height={28}
             className="rounded-lg"
           />
           <span
-            className="text-xl font-bold text-accent"
+            className="text-lg font-bold text-accent"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             SupportForge
@@ -49,12 +49,12 @@ export function Header({ variant = "default" }: HeaderProps) {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`transition-colors ${
+              className={`text-sm transition-colors ${
                 isActive(link.href)
                   ? "text-accent font-medium"
                   : link.highlight
@@ -67,24 +67,24 @@ export function Header({ variant = "default" }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-3">
           <Link
             href="/login"
-            className="text-text-secondary hover:text-text-primary transition-colors"
+            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
           >
             Client Sign in
           </Link>
           <Link
             href="/register"
-            className="px-4 py-2 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-colors"
+            className="px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors"
           >
             Get Started
           </Link>
           <Link
             href="/student/login"
-            className="text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5 pl-2 border-l border-border-subtle"
+            className="text-sm text-accent hover:text-accent-hover transition-colors flex items-center gap-1 pl-2 border-l border-border-subtle"
           >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none">
               <rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/>
               <path d="M10 9L15 11.5L10 14V9Z" fill="currentColor"/>
               <path d="M6 21H18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -98,7 +98,7 @@ export function Header({ variant = "default" }: HeaderProps) {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-text-secondary hover:text-text-primary"
+          className="lg:hidden p-2 text-text-secondary hover:text-text-primary"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? (
@@ -115,7 +115,7 @@ export function Header({ variant = "default" }: HeaderProps) {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border-subtle bg-background">
+        <div className="lg:hidden border-t border-border-subtle bg-background">
           <nav className="px-4 py-4 space-y-2">
             {navLinks.map((link) => (
               <Link
