@@ -1,0 +1,56 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Launchpad Base -->
+  <path d="M8 38C8 36.8954 8.89543 36 10 36H38C39.1046 36 40 36.8954 40 38V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V38Z" fill="url(#base-gradient)" fill-opacity="0.3"/>
+
+  <!-- Rocket Body -->
+  <path d="M24 4C24 4 16 12 16 24C16 28 17.5 31 19 33H29C30.5 31 32 28 32 24C32 12 24 4 24 4Z" fill="url(#rocket-gradient)"/>
+
+  <!-- Rocket Window -->
+  <circle cx="24" cy="18" r="4" fill="#1a1a2e" stroke="url(#window-gradient)" stroke-width="1.5"/>
+  <circle cx="24" cy="18" r="2" fill="url(#window-gradient)" fill-opacity="0.5"/>
+
+  <!-- Rocket Fins -->
+  <path d="M16 24L12 32L16 30V24Z" fill="url(#fin-gradient)"/>
+  <path d="M32 24L36 32L32 30V24Z" fill="url(#fin-gradient)"/>
+
+  <!-- Rocket Flame -->
+  <path d="M20 33C20 33 22 40 24 40C26 40 28 33 28 33" stroke="url(#flame-gradient)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M21 33C21 33 23 38 24 38C25 38 27 33 27 33" stroke="#FCD34D" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- AI Circuit Lines -->
+  <path d="M6 20H12M36 20H42M6 28H10M38 28H42" stroke="url(#circuit-gradient)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
+  <circle cx="6" cy="20" r="1.5" fill="url(#circuit-gradient)"/>
+  <circle cx="42" cy="20" r="1.5" fill="url(#circuit-gradient)"/>
+
+  <!-- Stars/Sparkles -->
+  <path d="M10 8L11 10L13 11L11 12L10 14L9 12L7 11L9 10L10 8Z" fill="#A78BFA"/>
+  <path d="M38 10L39 12L41 13L39 14L38 16L37 14L35 13L37 12L38 10Z" fill="#818CF8"/>
+  <path d="M42 24L42.5 25.5L44 26L42.5 26.5L42 28L41.5 26.5L40 26L41.5 25.5L42 24Z" fill="#C4B5FD"/>
+
+  <defs>
+    <linearGradient id="rocket-gradient" x1="24" y1="4" x2="24" y2="33" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#818CF8"/>
+      <stop offset="1" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="base-gradient" x1="24" y1="36" x2="24" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#4F46E5"/>
+    </linearGradient>
+    <linearGradient id="fin-gradient" x1="14" y1="24" x2="14" y2="32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="window-gradient" x1="24" y1="14" x2="24" y2="22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C4B5FD"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <linearGradient id="flame-gradient" x1="24" y1="33" x2="24" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F97316"/>
+      <stop offset="1" stop-color="#EF4444"/>
+    </linearGradient>
+    <linearGradient id="circuit-gradient" x1="6" y1="20" x2="42" y2="20" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#818CF8"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+</svg>

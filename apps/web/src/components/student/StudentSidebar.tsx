@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
@@ -23,43 +24,79 @@ interface Props {
   enrollment?: Enrollment;
 }
 
+// Custom Academy Icons - unique to AI Launchpad
+const AcademyIcons = {
+  // Dashboard - Progress grid with rocket accent
+  dashboard: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+      <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+      <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M17.5 14L17.5 17M17.5 17L17.5 21M17.5 17L14 17M17.5 17L21 17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="17.5" cy="17" r="1" fill="currentColor"/>
+    </svg>
+  ),
+  // Courses - Video play with curriculum lines
+  courses: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+      <rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M10 9L15 11.5L10 14V9Z" fill="currentColor"/>
+      <path d="M6 21H18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M10 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M14 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  ),
+  // Templates - Layered documents with AI sparkle
+  templates: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+      <path d="M8 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H14C15.1046 21 16 20.1046 16 19V16" stroke="currentColor" strokeWidth="1.5"/>
+      <rect x="8" y="1" width="13" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M11 6H18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M11 10H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M20 18L20.5 19.5L22 20L20.5 20.5L20 22L19.5 20.5L18 20L19.5 19.5L20 18Z" fill="currentColor"/>
+    </svg>
+  ),
+  // Config - Code brackets with circuit nodes
+  config: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+      <path d="M8 6L3 12L8 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M16 6L21 12L16 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="12" cy="8" r="1.5" fill="currentColor"/>
+      <circle cx="12" cy="16" r="1.5" fill="currentColor"/>
+      <path d="M12 9.5V14.5" stroke="currentColor" strokeWidth="1.5"/>
+    </svg>
+  ),
+  // Logout - Exit with motion trail
+  logout: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+      <path d="M14 3H18C19.1046 3 20 3.89543 20 5V19C20 20.1046 19.1046 21 18 21H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M10 12H4M4 12L7 9M4 12L7 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M11 8H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+      <path d="M11 16H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+    </svg>
+  ),
+};
+
 const navigation = [
   {
     name: "Dashboard",
     href: "/academy/dashboard",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-      </svg>
-    ),
+    icon: AcademyIcons.dashboard,
   },
   {
     name: "My Courses",
     href: "/academy/learn/module-0/0.1",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-      </svg>
-    ),
+    icon: AcademyIcons.courses,
   },
   {
     name: "Templates",
     href: "/academy/resources/templates",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-    ),
+    icon: AcademyIcons.templates,
   },
   {
     name: "Config Files",
     href: "/academy/resources/config",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
+    icon: AcademyIcons.config,
   },
 ];
 
@@ -76,11 +113,13 @@ export default function StudentSidebar({ user, enrollment }: Props) {
       {/* Mobile header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-surface border-b border-border-subtle z-40 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
-            <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-          </div>
+          <Image
+            src="/academy-logo.svg"
+            alt="AI Launchpad Academy"
+            width={36}
+            height={36}
+            className="object-contain"
+          />
           <span className="font-semibold text-accent" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             AI Launchpad
           </span>
@@ -116,15 +155,20 @@ export default function StudentSidebar({ user, enrollment }: Props) {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="h-16 flex items-center px-4 border-b border-border-subtle">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
-                <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/academy-logo.svg"
+                alt="AI Launchpad Academy"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
+              <div>
+                <span className="font-bold text-lg block leading-tight" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                  AI Launchpad
+                </span>
+                <span className="text-xs text-accent">Academy</span>
               </div>
-              <span className="font-semibold text-accent" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                AI Launchpad
-              </span>
             </div>
           </div>
 
@@ -176,9 +220,7 @@ export default function StudentSidebar({ user, enrollment }: Props) {
               onClick={handleLogout}
               className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-text-secondary hover:bg-elevated hover:text-text-primary transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
+              {AcademyIcons.logout}
               Sign Out
             </button>
           </div>
