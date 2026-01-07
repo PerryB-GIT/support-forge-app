@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 
 interface Enrollment {
   id: string;
@@ -200,46 +198,38 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <Header />
-        <main className="flex-1 pt-32 pb-20 px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="animate-pulse space-y-4">
-              <div className="h-8 bg-surface rounded w-1/3"></div>
-              <div className="h-4 bg-surface rounded w-1/2"></div>
-              <div className="h-64 bg-surface rounded"></div>
-            </div>
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-surface rounded w-1/3"></div>
+            <div className="h-4 bg-surface rounded w-1/2"></div>
+            <div className="h-64 bg-surface rounded"></div>
           </div>
-        </main>
-        <Footer />
+        </div>
       </div>
     );
   }
 
   if (!enrollment) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <Header />
-        <main className="flex-1 pt-32 pb-20 px-4">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-8">
-              <svg className="w-10 h-10 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-bold mb-4">Course Access Required</h1>
-            <p className="text-text-secondary mb-8">
-              You need to enroll in the AI Academy to access the course content.
-            </p>
-            <Link
-              href="/academy"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all"
-            >
-              View Enrollment Options
-            </Link>
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-2xl mx-auto text-center pt-20">
+          <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-8">
+            <svg className="w-10 h-10 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
           </div>
-        </main>
-        <Footer />
+          <h1 className="text-2xl font-bold mb-4">Course Access Required</h1>
+          <p className="text-text-secondary mb-8">
+            You need to enroll in the AI Academy to access the course content.
+          </p>
+          <Link
+            href="/academy"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all"
+          >
+            View Enrollment Options
+          </Link>
+        </div>
       </div>
     );
   }
@@ -247,11 +237,8 @@ export default function DashboardPage() {
   const overallProgress = calculateOverallProgress();
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Header />
-
-      <main className="flex-1 pt-24 pb-20 px-4">
-        <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: "var(--font-space-grotesk)" }}>
@@ -428,9 +415,6 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+      </div>
   );
 }
