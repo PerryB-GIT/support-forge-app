@@ -2,6 +2,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import {
+  ExcellenceIcon,
+  IntegrityIcon,
+  InnovationIcon,
+  CollaborationIcon,
+  ValueCard,
+  MilestoneCard,
+  CheckItem,
+} from "@/components/about/AnimatedIcons";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -25,22 +34,22 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const values = [
     {
-      icon: "🎯",
+      icon: <ExcellenceIcon />,
       title: "Excellence",
       description: "We pursue excellence in every project, setting high standards and continuously improving our craft."
     },
     {
-      icon: "🤝",
+      icon: <IntegrityIcon />,
       title: "Integrity",
       description: "We operate with transparency and honesty, building trust through ethical business practices."
     },
     {
-      icon: "💡",
+      icon: <InnovationIcon />,
       title: "Innovation",
       description: "We embrace innovation, constantly exploring new technologies and methodologies to deliver better solutions."
     },
     {
-      icon: "👥",
+      icon: <CollaborationIcon />,
       title: "Collaboration",
       description: "We work as partners with our clients, fostering open communication and shared success."
     }
@@ -51,6 +60,13 @@ export default function AboutPage() {
     { stat: "98%", description: "Client Satisfaction" },
     { stat: "24/7", description: "Support Available" },
     { stat: "10+", description: "Years Experience" }
+  ];
+
+  const benefits = [
+    { title: "Proven Track Record", description: "150+ successful projects delivered with a 98% client satisfaction rate." },
+    { title: "Expert Team", description: "Certified professionals with deep expertise across multiple technology domains." },
+    { title: "Tailored Solutions", description: "Every solution is customized to fit your specific business needs and goals." },
+    { title: "Ongoing Support", description: "24/7 support and continuous optimization to ensure long-term success." },
   ];
 
   return (
@@ -90,12 +106,12 @@ export default function AboutPage() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {milestones.map((milestone, index) => (
-                  <div key={index} className="bg-background border border-border-subtle rounded-xl p-6 text-center">
-                    <div className="text-3xl font-bold text-accent mb-2">
-                      {milestone.stat}
-                    </div>
-                    <div className="text-sm text-text-muted">{milestone.description}</div>
-                  </div>
+                  <MilestoneCard
+                    key={index}
+                    stat={milestone.stat}
+                    description={milestone.description}
+                    index={index}
+                  />
                 ))}
               </div>
             </div>
@@ -113,25 +129,25 @@ export default function AboutPage() {
           </div>
           <div className="space-y-6 text-lg text-text-secondary">
             <p>
-              Here's the truth: we're obsessed with AI. Not in a "let's chase the latest trend" way, but in a "we genuinely can't stop thinking about how this changes everything" way.
+              Here&apos;s the truth: we&apos;re obsessed with AI. Not in a &quot;let&apos;s chase the latest trend&quot; way, but in a &quot;we genuinely can&apos;t stop thinking about how this changes everything&quot; way.
             </p>
             <p>
-              We've seen too many businesses buy into the hype — downloading every new tool, sitting through endless webinars — only to end up more confused than when they started. That frustrates us, because we know what's actually possible.
+              We&apos;ve seen too many businesses buy into the hype — downloading every new tool, sitting through endless webinars — only to end up more confused than when they started. That frustrates us, because we know what&apos;s actually possible.
             </p>
             <p className="text-text-primary font-medium">
-              The moment a business owner sees their operation running smarter — when they realize AI isn't just a buzzword but something that's genuinely giving them their time back — that's why we do this.
+              The moment a business owner sees their operation running smarter — when they realize AI isn&apos;t just a buzzword but something that&apos;s genuinely giving them their time back — that&apos;s why we do this.
             </p>
             <p>
-              We don't just implement technology. We translate it. We make it make sense. And we stick around to make sure it keeps working.
+              We don&apos;t just implement technology. We translate it. We make it make sense. And we stick around to make sure it keeps working.
             </p>
           </div>
           <div className="mt-8 text-center">
             <Link
               href="/ai-transformation"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white rounded-lg font-medium transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-accent/25 group"
             >
               See Our AI Approach
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
@@ -150,14 +166,13 @@ export default function AboutPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <div
+              <ValueCard
                 key={index}
-                className="bg-background border border-border-subtle rounded-xl p-6 text-center hover:border-accent/50 transition-all duration-300"
-              >
-                <div className="text-4xl mb-4">{value.icon}</div>
-                <h3 className="text-lg font-bold text-text-primary mb-2">{value.title}</h3>
-                <p className="text-text-muted text-sm">{value.description}</p>
-              </div>
+                icon={value.icon}
+                title={value.title}
+                description={value.description}
+                index={index}
+              />
             ))}
           </div>
         </div>
@@ -169,53 +184,29 @@ export default function AboutPage() {
           <div className="bg-gradient-to-r from-accent/10 via-background to-accent/10 border border-border-subtle rounded-2xl p-8 md:p-12">
             <h2 className="text-3xl font-bold text-text-primary mb-8 text-center">Why Choose SupportForge?</h2>
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-text-primary">Proven Track Record</h4>
-                    <p className="text-text-muted">150+ successful projects delivered with a 98% client satisfaction rate.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-text-primary">Expert Team</h4>
-                    <p className="text-text-muted">Certified professionals with deep expertise across multiple technology domains.</p>
-                  </div>
-                </div>
+              <div className="space-y-6">
+                <CheckItem
+                  title={benefits[0].title}
+                  description={benefits[0].description}
+                  delay={0.2}
+                />
+                <CheckItem
+                  title={benefits[1].title}
+                  description={benefits[1].description}
+                  delay={0.4}
+                />
               </div>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-text-primary">Tailored Solutions</h4>
-                    <p className="text-text-muted">Every solution is customized to fit your specific business needs and goals.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-text-primary">Ongoing Support</h4>
-                    <p className="text-text-muted">24/7 support and continuous optimization to ensure long-term success.</p>
-                  </div>
-                </div>
+              <div className="space-y-6">
+                <CheckItem
+                  title={benefits[2].title}
+                  description={benefits[2].description}
+                  delay={0.6}
+                />
+                <CheckItem
+                  title={benefits[3].title}
+                  description={benefits[3].description}
+                  delay={0.8}
+                />
               </div>
             </div>
           </div>
@@ -234,13 +225,13 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="px-8 py-4 bg-accent hover:bg-accent-hover text-white rounded-xl font-semibold text-lg transition-all shadow-lg shadow-accent/25"
+              className="px-8 py-4 bg-accent hover:bg-accent-hover text-white rounded-xl font-semibold text-lg transition-all shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5"
             >
               Contact Us
             </Link>
             <Link
               href="/services"
-              className="px-8 py-4 border border-border-subtle text-text-primary rounded-xl font-semibold text-lg hover:bg-surface transition-all"
+              className="px-8 py-4 border border-border-subtle text-text-primary rounded-xl font-semibold text-lg hover:bg-surface hover:border-accent/50 transition-all"
             >
               View Our Services
             </Link>
