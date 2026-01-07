@@ -190,9 +190,7 @@ interface ValueCardProps {
 
 export const ValueCard = ({ icon, title, description, index }: ValueCardProps) => (
   <div
-    className="group bg-background border border-border-subtle rounded-xl p-6 text-center
-               hover:border-accent hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]
-               transition-all duration-300 hover:-translate-y-1"
+    className="group bg-background border border-border-subtle rounded-xl p-6 text-center hover:border-accent hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] transition-all duration-300 hover:-translate-y-1"
     style={{ animationDelay: `${index * 0.1}s` }}
   >
     <div className="mb-4 flex justify-center transform transition-transform duration-300 group-hover:scale-110">
@@ -212,8 +210,7 @@ interface MilestoneCardProps {
 
 export const MilestoneCard = ({ stat, description, index }: MilestoneCardProps) => (
   <div
-    className="bg-background border border-border-subtle rounded-xl p-6 text-center
-               hover:border-accent/50 transition-all duration-300"
+    className="bg-background border border-border-subtle rounded-xl p-6 text-center hover:border-accent/50 transition-all duration-300"
     style={{
       animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`
     }}
@@ -246,8 +243,7 @@ interface CheckItemProps {
 
 export const CheckItem = ({ title, description, delay }: CheckItemProps) => (
   <div className="flex items-start gap-4 group">
-    <div className="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0
-                    transition-all duration-300 group-hover:bg-accent group-hover:scale-110">
+    <div className="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-accent group-hover:scale-110">
       <AnimatedCheck delay={delay} />
     </div>
     <div>

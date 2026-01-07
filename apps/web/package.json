@@ -12,6 +12,7 @@
     "@anthropic-ai/sdk": "^0.71.2",
     "@auth/prisma-adapter": "^2.11.1",
     "@prisma/client": "^5.22.0",
+    "@stripe/stripe-js": "^8.6.1",
     "@support-forge/database": "*",
     "@support-forge/shared": "*",
     "bcryptjs": "^3.0.3",
@@ -20,7 +21,8 @@
     "nodemailer": "^7.0.12",
     "openai": "^6.10.0",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "stripe": "^20.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

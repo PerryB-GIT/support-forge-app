@@ -70,6 +70,7 @@ model User {
   tickets       Ticket[]
   documents     Document[]
   invoices      Invoice[]
+  enrollments   CourseEnrollment[]
 
   // Auth
   accounts      Account[]
@@ -254,4 +255,53 @@ model InvoiceItem {
 
   invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   invoiceId   String
+}
+
+// Academy Course Enrollments
+enum EnrollmentStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  REFUNDED
+  CANCELLED
+}
+
+model CourseEnrollment {
+  id              String           @id @default(cuid())
+
+  // User relation (optional - can be guest checkout)
+  user            User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId          String?
+
+  // Customer info (for guest checkout)
+  email           String
+  name            String?
+
+  // Course info
+  courseType      String           // selfPaced, paymentPlan, liveTutoring
+  courseName      String
+
+  // Payment info
+  stripeSessionId     String?      @unique
+  stripeCustomerId    String?
+  stripeSubscriptionId String?     // For payment plans
+  amountPaid          Decimal      @db.Decimal(10, 2)
+  currency            String       @default("usd")
+
+  // Status tracking
+  status          EnrollmentStatus @default(PENDING)
+
+  // Progress tracking
+  progress        Json?            // { moduleId: percentage }
+  completedAt     DateTime?
+
+  // Access dates
+  enrolledAt      DateTime         @default(now())
+  expiresAt       DateTime?        // For limited access courses
+
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([email])
+  @@index([stripeCustomerId])
 }
