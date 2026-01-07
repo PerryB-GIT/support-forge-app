@@ -69,19 +69,6 @@ export function Header({ variant = "default" }: HeaderProps) {
 
         <div className="hidden md:flex items-center gap-4">
           <Link
-            href="/student/login"
-            className="text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5"
-          >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-              <rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-              <path d="M10 9L15 11.5L10 14V9Z" fill="currentColor"/>
-              <path d="M6 21H18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M10 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M14 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-            Student Portal
-          </Link>
-          <Link
             href="/login"
             className="text-text-secondary hover:text-text-primary transition-colors"
           >
@@ -92,6 +79,19 @@ export function Header({ variant = "default" }: HeaderProps) {
             className="px-4 py-2 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-colors"
           >
             Get Started
+          </Link>
+          <Link
+            href="/student/login"
+            className="text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5 pl-2 border-l border-border-subtle"
+          >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M10 9L15 11.5L10 14V9Z" fill="currentColor"/>
+              <path d="M6 21H18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M10 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M14 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+            Student Portal
           </Link>
         </div>
 
