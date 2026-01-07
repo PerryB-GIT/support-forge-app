@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
-import { stripe, constructWebhookEvent, ACADEMY_PRODUCTS } from '@/lib/stripe';
+import { constructWebhookEvent, ACADEMY_PRODUCTS } from '@/lib/stripe';
 import { prisma } from '@support-forge/database';
 import Stripe from 'stripe';
 

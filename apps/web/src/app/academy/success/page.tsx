@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Welcome to AI Academy | Support Forge",
@@ -16,7 +16,7 @@ async function SuccessContent({ sessionId }: { sessionId: string }) {
 
   if (sessionId) {
     try {
-      const session = await stripe.checkout.sessions.retrieve(sessionId);
+      const session = await getStripe().checkout.sessions.retrieve(sessionId);
       customerEmail = session.customer_details?.email || session.customer_email || "";
       productName = session.metadata?.productName || "AI Academy";
     } catch (error) {
