@@ -15,6 +15,7 @@ export function Header({ variant = "default" }: HeaderProps) {
 
   const navLinks = [
     { href: "/launchpad", label: "AI Launchpad", highlight: true },
+    { href: "/academy", label: "Academy", highlight: true },
     { href: "/shop", label: "Workflow Shop" },
     { href: "/ai-transformation", label: "AI Transformation" },
     { href: "/services", label: "Services" },
@@ -68,10 +69,23 @@ export function Header({ variant = "default" }: HeaderProps) {
 
         <div className="hidden md:flex items-center gap-4">
           <Link
+            href="/student/login"
+            className="text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5"
+          >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M10 9L15 11.5L10 14V9Z" fill="currentColor"/>
+              <path d="M6 21H18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M10 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M14 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+            Student Portal
+          </Link>
+          <Link
             href="/login"
             className="text-text-secondary hover:text-text-primary transition-colors"
           >
-            Sign in
+            Client Sign in
           </Link>
           <Link
             href="/register"
@@ -119,11 +133,25 @@ export function Header({ variant = "default" }: HeaderProps) {
             ))}
             <div className="pt-4 border-t border-border-subtle space-y-2">
               <Link
+                href="/student/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 py-2 px-3 text-accent hover:bg-accent/10 rounded-lg font-medium"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="M10 9L15 11.5L10 14V9Z" fill="currentColor"/>
+                  <path d="M6 21H18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <path d="M10 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <path d="M14 21V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+                Student Portal
+              </Link>
+              <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 px-3 text-text-secondary hover:bg-surface rounded-lg"
               >
-                Sign in
+                Client Sign in
               </Link>
               <Link
                 href="/register"

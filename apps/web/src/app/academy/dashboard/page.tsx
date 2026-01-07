@@ -236,17 +236,116 @@ export default function DashboardPage() {
 
   const overallProgress = calculateOverallProgress();
 
+  // Find next incomplete lesson
+  const findNextLesson = () => {
+    for (const module of curriculum) {
+      for (const lesson of module.lessons) {
+        if (!isLessonCompleted(module.id, lesson.id)) {
+          return { moduleId: module.id, lessonId: lesson.id, title: lesson.title };
+        }
+      }
+    }
+    return null;
+  };
+
+  const nextLesson = findNextLesson();
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              {enrollment.courseName}
+              Welcome back, {session?.user?.name?.split(" ")[0] || "Student"}!
             </h1>
             <p className="text-text-secondary">
-              Enrolled {new Date(enrollment.enrolledAt).toLocaleDateString()}
+              {enrollment.courseName} • Enrolled {new Date(enrollment.enrolledAt).toLocaleDateString()}
             </p>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            {nextLesson && (
+              <Link
+                href={`/academy/learn/${nextLesson.moduleId}/${nextLesson.lessonId}`}
+                className="p-4 bg-accent text-white rounded-xl hover:bg-accent-hover transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mb-3 group-hover:bg-white/30 transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 6L18 12L8 18V6Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-sm mb-0.5">Continue Learning</h3>
+                <p className="text-white/70 text-xs truncate">{nextLesson.title}</p>
+              </Link>
+            )}
+
+            <Link
+              href="/academy/resources/templates"
+              className="p-4 bg-surface border border-border-subtle rounded-xl hover:border-accent transition-colors group"
+            >
+              <div className="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-3">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H14C15.1046 21 16 20.1046 16 19V16" stroke="currentColor" strokeWidth="1.5"/>
+                  <rect x="8" y="1" width="13" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="M11 6H18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <path d="M11 10H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <path d="M20 18L20.5 19.5L22 20L20.5 20.5L20 22L19.5 20.5L18 20L19.5 19.5L20 18Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3 className="font-semibold text-sm mb-0.5">Templates</h3>
+              <p className="text-text-muted text-xs">Download resources</p>
+            </Link>
+
+            <Link
+              href="/academy/resources/config"
+              className="p-4 bg-surface border border-border-subtle rounded-xl hover:border-accent transition-colors group"
+            >
+              <div className="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-3">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 6L3 12L8 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M16 6L21 12L16 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="12" cy="8" r="1.5" fill="currentColor"/>
+                  <circle cx="12" cy="16" r="1.5" fill="currentColor"/>
+                  <path d="M12 9.5V14.5" stroke="currentColor" strokeWidth="1.5"/>
+                </svg>
+              </div>
+              <h3 className="font-semibold text-sm mb-0.5">Config Files</h3>
+              <p className="text-text-muted text-xs">MCP & code samples</p>
+            </Link>
+
+            {enrollment.courseType === "liveTutoring" ? (
+              <a
+                href="mailto:support@support-forge.com?subject=Schedule%20Tutoring%20Session"
+                className="p-4 bg-surface border border-border-subtle rounded-xl hover:border-accent transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-green-500/10 text-green-500 flex items-center justify-center mb-3">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+                    <path d="M3 10H21" stroke="currentColor" strokeWidth="1.5"/>
+                    <path d="M9 4V2M15 4V2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <circle cx="12" cy="15" r="2" fill="currentColor"/>
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-sm mb-0.5">Schedule Tutoring</h3>
+                <p className="text-text-muted text-xs">Book 1-on-1 session</p>
+              </a>
+            ) : (
+              <a
+                href="https://discord.gg/your-invite"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-surface border border-border-subtle rounded-xl hover:border-accent transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-[#5865F2]/10 text-[#5865F2] flex items-center justify-center mb-3">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-sm mb-0.5">Community</h3>
+                <p className="text-text-muted text-xs">Join Discord</p>
+              </a>
+            )}
           </div>
 
           {/* Progress Overview */}
