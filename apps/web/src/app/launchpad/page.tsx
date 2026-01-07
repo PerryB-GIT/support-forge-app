@@ -1,22 +1,15 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Metadata } from "next";
+import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CONTACT_INFO } from "@support-forge/shared";
 import { ReactNode } from "react";
 
-export const metadata: Metadata = {
-  title: "AI Launchpad - Learn to Build AI That Works | Support Forge",
-  description: "Master AI implementation with our comprehensive training program. Learn the LAUNCH Method and build AI systems that actually work for your business.",
-  keywords: "AI training, AI implementation, business AI, AI consulting, LAUNCH Method, AI automation",
-  openGraph: {
-    title: "AI Launchpad - Learn to Build AI That Works | Support Forge",
-    description: "Master AI implementation with our comprehensive training program.",
-    type: "website",
-  },
-};
-
-// LAUNCH letter components - styled to match site aesthetic
+// LAUNCH letter components
 const LaunchLetter = ({ letter }: { letter: string }) => (
   <span
     className="text-3xl font-bold"
@@ -56,7 +49,7 @@ const CategoryIcons = {
   ),
 };
 
-// Tool icons (small, for individual tools)
+// Tool icons
 const ToolIcon = ({ type }: { type: string }) => {
   const icons: Record<string, ReactNode> = {
     ai: (
@@ -143,6 +136,32 @@ const ToolIcon = ({ type }: { type: string }) => {
   return icons[type] || icons.ai;
 };
 
+// Check icon
+const CheckIcon = () => (
+  <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+// Tier icons
+const BookIcon = () => (
+  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+  </svg>
+);
+
+const VideoIcon = () => (
+  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+  </svg>
+);
+
+const UserIcon = () => (
+  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+  </svg>
+);
+
 // LAUNCH Method steps
 const launchSteps = [
   { letter: "L", name: "Landscape", desc: "Map your current processes and identify high-impact AI opportunities" },
@@ -153,7 +172,7 @@ const launchSteps = [
   { letter: "H", name: "Harden", desc: "Secure, document, and prepare for scale" },
 ];
 
-// Launchpad Stack - organized by category
+// Launchpad Stack
 const stackCategories = [
   {
     name: "AI Development",
@@ -205,7 +224,7 @@ const stackCategories = [
   },
 ];
 
-// ROI stats with icons
+// ROI stats
 const roiStats = [
   {
     number: "10+",
@@ -236,6 +255,71 @@ const roiStats = [
   },
 ];
 
+// Course tiers with Stripe integration
+const courseTiers = [
+  {
+    key: "selfPaced",
+    name: "AI Academy",
+    subtitle: "Self-Paced",
+    Icon: BookIcon,
+    price: 997,
+    priceLabel: "one-time",
+    altPrice: "or 3 payments of $397",
+    description: "Learn to build AI systems yourself with our comprehensive video course",
+    features: [
+      "Complete LAUNCH Method curriculum",
+      "12+ hours of video training",
+      "Private community access",
+      "Monthly group coaching calls",
+      "Templates & prompt libraries",
+      "Lifetime updates",
+    ],
+    popular: false,
+    ctaText: "Enroll Now",
+  },
+  {
+    key: "liveTutoring",
+    name: "AI Academy",
+    subtitle: "+ Live Tutoring",
+    Icon: VideoIcon,
+    price: 1500,
+    priceLabel: "one-time",
+    altPrice: null,
+    description: "Personalized tutor-led training with 1-on-1 sessions",
+    features: [
+      "Everything in Self-Paced, plus:",
+      "4x 1-hour live tutoring sessions",
+      "Personalized curriculum path",
+      "Direct Slack/email access to tutor",
+      "Custom project guidance",
+      "Priority support for 90 days",
+    ],
+    popular: true,
+    ctaText: "Get Started",
+  },
+  {
+    key: "pro",
+    name: "AI Launchpad Pro",
+    subtitle: "Done-With-You",
+    Icon: UserIcon,
+    price: 5000,
+    priceLabel: "starting",
+    altPrice: "Custom quote based on scope",
+    description: "We build your AI systems alongside you",
+    features: [
+      "Everything in Live Tutoring, plus:",
+      "Full implementation support",
+      "Custom AI workflow builds",
+      "Your processes, automated",
+      "90 days of priority support",
+      "Dedicated project manager",
+    ],
+    popular: false,
+    ctaText: "Book Strategy Call",
+    isContact: true,
+  },
+];
+
 // Credential icons
 const CredentialIcons = {
   certification: (
@@ -256,13 +340,67 @@ const CredentialIcons = {
 };
 
 export default function LaunchpadPage() {
+  const searchParams = useSearchParams();
+  const canceled = searchParams.get("canceled");
+  const { data: session } = useSession();
+  const [loading, setLoading] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
+  const [showEmailInput, setShowEmailInput] = useState<string | null>(null);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+
+  // Check if user is already enrolled
+  useEffect(() => {
+    async function checkEnrollment() {
+      const userEmail = session?.user?.email;
+      if (!userEmail) return;
+
+      try {
+        const res = await fetch(`/api/academy/enrollment?email=${encodeURIComponent(userEmail)}`);
+        const data = await res.json();
+        setIsEnrolled(data.enrolled);
+      } catch (error) {
+        console.error("Error checking enrollment:", error);
+      }
+    }
+    checkEnrollment();
+  }, [session]);
+
+  const handleCheckout = async (productKey: string) => {
+    if (!email && !session?.user?.email && showEmailInput !== productKey) {
+      setShowEmailInput(productKey);
+      return;
+    }
+
+    setLoading(productKey);
+
+    try {
+      const response = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productKey, email: email || session?.user?.email }),
+      });
+
+      const data = await response.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Failed to create checkout session. Please try again.");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(null);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
-        {/* Background decoration */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 right-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 left-10 w-96 h-96 bg-accent/3 rounded-full blur-3xl"></div>
@@ -273,26 +411,35 @@ export default function LaunchpadPage() {
             <div className="max-w-xl">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
                 <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                Transform Your Business with AI
+                AI Launchpad Academy
               </div>
               <h1
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
-                Learn to Build AI That
-                <span className="text-accent"> Actually Works</span>
+                Master AI Implementation
+                <span className="text-accent"> That Actually Works</span>
               </h1>
               <p className="text-lg md:text-xl text-text-secondary mb-8">
-                Stop wasting money on AI subscriptions you don&apos;t use. Master the LAUNCH Method and
+                Stop wasting money on AI subscriptions you don&apos;t use. Learn the LAUNCH Method and
                 build AI systems that transform how you work.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="#tiers"
-                  className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105 text-center"
-                >
-                  View Programs
-                </Link>
+                {isEnrolled ? (
+                  <Link
+                    href="/academy/dashboard"
+                    className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105 text-center"
+                  >
+                    Go to Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    href="#pricing"
+                    className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105 text-center"
+                  >
+                    View Programs
+                  </Link>
+                )}
                 <Link
                   href="/contact"
                   className="px-8 py-4 rounded-lg bg-surface border border-border-subtle hover:border-accent text-text-primary font-medium transition-all text-center"
@@ -305,7 +452,6 @@ export default function LaunchpadPage() {
             {/* Hero Visual */}
             <div className="hidden lg:block relative">
               <div className="relative w-full aspect-square max-w-md mx-auto">
-                {/* Animated rings */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-64 h-64 rounded-full border border-accent/20 animate-pulse"></div>
                 </div>
@@ -319,7 +465,6 @@ export default function LaunchpadPage() {
                     </svg>
                   </div>
                 </div>
-                {/* Floating nodes */}
                 <div className="absolute top-8 left-8 w-12 h-12 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-accent">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -346,109 +491,130 @@ export default function LaunchpadPage() {
         </div>
       </section>
 
-      {/* Tiers Section */}
-      <section id="tiers" className="py-20 bg-surface/50">
+      {/* Canceled Notice */}
+      {canceled && (
+        <div className="max-w-4xl mx-auto px-4 mb-8">
+          <div className="p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-200 text-center">
+            Your checkout was canceled. Feel free to try again when you&apos;re ready.
+          </div>
+        </div>
+      )}
+
+      {/* Pricing Tiers */}
+      <section id="pricing" className="py-20 bg-surface/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               Choose Your <span className="text-accent">Path</span>
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
-              Whether you want to learn DIY or have us build it for you, we have the right option.
+              Whether you want to learn DIY or have personalized guidance, we have the right option.
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
-            {/* Academy Tier */}
-            <div className="group p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/5">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-2" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                AI Academy
-              </h3>
-              <p className="text-text-secondary mb-6">Learn to build AI systems yourself</p>
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-accent" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                  $997
-                </span>
-                <span className="text-text-secondary ml-2">one-time</span>
-                <p className="text-text-muted text-sm mt-1">or 3 payments of $397</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                {[
-                  "Complete LAUNCH Method curriculum",
-                  "12+ hours of video training",
-                  "Private community access",
-                  "Monthly group coaching calls",
-                  "Templates & prompt libraries",
-                  "Lifetime updates",
-                ].map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3 text-text-secondary">
-                    <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/contact?subject=AI%20Academy"
-                className="block w-full text-center px-6 py-3 rounded-lg bg-surface border border-border-subtle hover:border-accent text-text-primary font-medium transition-colors"
+          <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
+            {courseTiers.map((tier) => (
+              <div
+                key={tier.key}
+                className={`relative group p-8 rounded-2xl bg-background border transition-all ${
+                  tier.popular
+                    ? "border-accent shadow-lg shadow-accent/10 scale-105 z-10"
+                    : "border-border-subtle hover:border-accent hover:shadow-lg hover:shadow-accent/5"
+                }`}
               >
-                Enroll Now
-              </Link>
-            </div>
+                {tier.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent text-white text-xs font-bold rounded-full uppercase tracking-wide">
+                    Most Popular
+                  </div>
+                )}
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
+                  <tier.Icon />
+                </div>
+                <h3 className="text-2xl font-bold" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                  {tier.name}
+                </h3>
+                <p className="text-accent text-sm font-medium mb-2">{tier.subtitle}</p>
+                <p className="text-text-secondary text-sm mb-6">{tier.description}</p>
+                <div className="mb-6">
+                  <span
+                    className="text-4xl font-bold text-accent"
+                    style={{ fontFamily: "var(--font-space-grotesk)" }}
+                  >
+                    ${tier.price.toLocaleString()}
+                  </span>
+                  <span className="text-text-secondary ml-2">{tier.priceLabel}</span>
+                  {tier.altPrice && (
+                    <p className="text-text-muted text-sm mt-1">{tier.altPrice}</p>
+                  )}
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {tier.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3 text-text-secondary text-sm">
+                      <CheckIcon />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
 
-            {/* Pro Tier */}
-            <div className="relative group p-8 rounded-2xl bg-gradient-to-br from-background to-accent/5 border-2 border-accent transition-all hover:shadow-lg hover:shadow-accent/10">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent text-white text-xs font-bold rounded-full uppercase tracking-wide">
-                Most Popular
+                {/* Email Input */}
+                {showEmailInput === tier.key && !tier.isContact && !session?.user?.email && (
+                  <div className="mb-4">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-4 py-2 rounded-lg bg-surface border border-border-subtle focus:border-accent focus:outline-none text-text-primary"
+                    />
+                  </div>
+                )}
+
+                {tier.isContact ? (
+                  <Link
+                    href="/contact?subject=AI%20Launchpad%20Pro"
+                    className="block w-full text-center px-6 py-3 rounded-lg bg-surface border border-border-subtle hover:border-accent text-text-primary font-medium transition-colors"
+                  >
+                    {tier.ctaText}
+                  </Link>
+                ) : isEnrolled ? (
+                  <Link
+                    href="/academy/dashboard"
+                    className="block w-full text-center px-6 py-3 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 font-medium"
+                  >
+                    Already Enrolled
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => handleCheckout(tier.key)}
+                    disabled={loading === tier.key}
+                    className={`block w-full text-center px-6 py-3 rounded-lg font-medium transition-all disabled:opacity-50 ${
+                      tier.popular
+                        ? "bg-accent hover:bg-accent-hover text-white"
+                        : "bg-surface border border-border-subtle hover:border-accent text-text-primary"
+                    }`}
+                  >
+                    {loading === tier.key ? "Loading..." : tier.ctaText}
+                  </button>
+                )}
               </div>
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/30 to-accent/10 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-2" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                AI Launchpad Pro
-              </h3>
-              <p className="text-text-secondary mb-6">We build your AI systems with you</p>
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-accent" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                  $5,000
-                </span>
-                <span className="text-text-secondary ml-2">starting</span>
-                <p className="text-text-muted text-sm mt-1">Typically 3-5x ROI within 90 days</p>
-                <p className="text-accent/80 text-xs mt-2 font-medium">Save 10+ hrs/week = $26k+ annual value</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                {[
-                  "Everything in Academy, plus:",
-                  "1-on-1 implementation sessions",
-                  "Custom AI workflow builds",
-                  "Your processes, automated",
-                  "90 days of priority support",
-                  "Done-with-you approach",
-                ].map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3 text-text-secondary">
-                    <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/contact?subject=AI%20Launchpad%20Pro"
-                className="block w-full text-center px-6 py-3 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-colors"
-              >
-                Book Strategy Call
-              </Link>
-            </div>
+            ))}
           </div>
+
+          {/* Payment Plan Option */}
+          {!isEnrolled && (
+            <div className="mt-8 text-center">
+              <p className="text-text-secondary">
+                Need a payment plan?{" "}
+                <button
+                  onClick={() => handleCheckout("paymentPlan")}
+                  className="text-accent hover:underline"
+                >
+                  3 payments of $397
+                </button>{" "}
+                for the Self-Paced course.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -485,8 +651,39 @@ export default function LaunchpadPage() {
         </div>
       </section>
 
+      {/* What You'll Learn */}
+      <section className="py-16 px-4 bg-surface/50">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-4"
+              style={{ fontFamily: "var(--font-space-grotesk)" }}
+            >
+              What You&apos;ll <span className="text-accent">Learn</span>
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { module: "1-2", title: "Foundations & Claude Code", hours: "2.5 hrs" },
+              { module: "3-4", title: "MCP Servers & Skills", hours: "2.5 hrs" },
+              { module: "5-6", title: "Automation & Cloud", hours: "2.5 hrs" },
+              { module: "7-8", title: "Security & Capstone", hours: "2 hrs" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="p-6 rounded-xl bg-background border border-border-subtle text-center"
+              >
+                <div className="text-accent text-sm font-medium mb-2">Module {item.module}</div>
+                <div className="font-semibold mb-1">{item.title}</div>
+                <div className="text-text-muted text-sm">{item.hours}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Launchpad Stack Section */}
-      <section className="py-20 bg-surface/50">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
@@ -510,7 +707,7 @@ export default function LaunchpadPage() {
                   {category.items.map((item) => (
                     <div
                       key={item.name}
-                      className="group p-4 rounded-xl bg-background border border-border-subtle hover:border-accent transition-all"
+                      className="group p-4 rounded-xl bg-surface border border-border-subtle hover:border-accent transition-all"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors">
@@ -531,7 +728,7 @@ export default function LaunchpadPage() {
       </section>
 
       {/* ROI Section */}
-      <section className="py-20">
+      <section className="py-20 bg-surface/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
@@ -546,7 +743,7 @@ export default function LaunchpadPage() {
             {roiStats.map((stat) => (
               <div
                 key={stat.label}
-                className="p-8 rounded-2xl bg-surface border border-border-subtle text-center group hover:border-accent transition-all"
+                className="p-8 rounded-2xl bg-background border border-border-subtle text-center group hover:border-accent transition-all"
               >
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center text-accent mx-auto mb-4 group-hover:scale-110 transition-transform">
                   {stat.icon}
@@ -564,6 +761,27 @@ export default function LaunchpadPage() {
         </div>
       </section>
 
+      {/* Guarantee */}
+      <section className="py-16 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center text-accent mx-auto mb-6">
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h2
+            className="text-2xl md:text-3xl font-bold mb-4"
+            style={{ fontFamily: "var(--font-space-grotesk)" }}
+          >
+            14-Day Money-Back Guarantee
+          </h2>
+          <p className="text-text-secondary">
+            Try the course risk-free. If it&apos;s not for you within the first 14 days, we&apos;ll refund
+            your purchase in full. No questions asked.
+          </p>
+        </div>
+      </section>
+
       {/* Credentials Section */}
       <section className="py-20 bg-surface/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -577,7 +795,6 @@ export default function LaunchpadPage() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
-            {/* Certifications */}
             <div className="p-8 rounded-2xl bg-background border border-border-subtle">
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
@@ -620,7 +837,6 @@ export default function LaunchpadPage() {
               </div>
             </div>
 
-            {/* Track Record */}
             <div className="p-8 rounded-2xl bg-background border border-border-subtle">
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
@@ -666,21 +882,35 @@ export default function LaunchpadPage() {
             Ready to Launch Your AI Journey?
           </h2>
           <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
-            Book a free strategy call to discuss your goals and find the right path for you.
+            {isEnrolled
+              ? "Continue your learning journey in the course dashboard."
+              : "Book a free strategy call to discuss your goals and find the right path for you."
+            }
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact?subject=AI%20Launchpad%20Inquiry"
-              className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105"
-            >
-              Book Free Strategy Call
-            </Link>
-            <a
-              href={`tel:${CONTACT_INFO.phoneRaw}`}
-              className="px-8 py-4 rounded-lg bg-surface border border-border-subtle hover:border-accent text-text-primary font-medium transition-all"
-            >
-              Call {CONTACT_INFO.phone}
-            </a>
+            {isEnrolled ? (
+              <Link
+                href="/academy/dashboard"
+                className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105"
+              >
+                Go to Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="#pricing"
+                  className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105"
+                >
+                  Enroll Now
+                </Link>
+                <a
+                  href={`tel:${CONTACT_INFO.phoneRaw}`}
+                  className="px-8 py-4 rounded-lg bg-surface border border-border-subtle hover:border-accent text-text-primary font-medium transition-all"
+                >
+                  Call {CONTACT_INFO.phone}
+                </a>
+              </>
+            )}
           </div>
         </div>
       </section>

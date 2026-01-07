@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
       customerEmail,
       userId,
       successUrl: `${appUrl}/academy/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancelUrl: `${appUrl}/academy?canceled=true`,
+      cancelUrl: `${appUrl}/launchpad?canceled=true`,
     });
 
     return NextResponse.json({
