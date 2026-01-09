@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -58,6 +59,7 @@ export default function RegisterPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 mb-4">
+            <Image src="/sf-logo.png" alt="Support Forge" width={40} height={40} className="rounded-lg" />
             <span
               className="text-2xl font-bold text-accent"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
