@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { lessonContent } from "../lesson-content";
 
 // Course curriculum data (same as dashboard)
 const curriculum = [
@@ -110,72 +111,6 @@ const curriculum = [
     ],
   },
 ];
-
-// Placeholder lesson content (will be replaced with actual content)
-const lessonContent: Record<string, { videoUrl?: string; content: string }> = {
-  "0.1": {
-    content: `
-# Welcome to AI Launchpad
-
-Welcome to the AI Launchpad Academy! This course will transform how you work with AI.
-
-## What You'll Learn
-
-In this course, you'll master:
-- **Claude Code** - Your AI-powered coding assistant
-- **MCP Servers** - Connect AI to your tools
-- **Custom Skills** - Build specialized AI capabilities
-- **Automation** - Create powerful workflows with n8n and Zapier
-- **Cloud Deployment** - Deploy AI solutions professionally
-- **Security** - Keep your AI implementations safe
-
-## The LAUNCH Method
-
-We use the LAUNCH method to guide your learning:
-- **L**andscape - Assess your AI readiness
-- **A**rchitect - Design your AI stack
-- **U**nlock - Connect powerful integrations
-- **N**etwork - Build your skill library
-- **C**onfigure - Set up automation
-- **H**arden - Secure and document
-
-Let's get started!
-    `,
-  },
-  "0.2": {
-    content: `
-# Your Learning Environment
-
-Before diving into the content, let's set up your learning environment.
-
-## What You'll Need
-
-1. **A Computer** - Windows, Mac, or Linux
-2. **VS Code** - Our recommended code editor
-3. **Node.js** - JavaScript runtime (v18+)
-4. **Git** - Version control
-5. **A Terminal** - Command line access
-
-## Recommended Setup
-
-### VS Code Extensions
-- Claude Code extension
-- ESLint
-- Prettier
-- GitLens
-
-### Browser Extensions
-- Claude.ai sidebar (optional)
-- JSON Viewer
-
-## Course Materials
-
-All downloadable resources are available in the Resources section of your dashboard.
-
-Download the **Course Workbook** to track your progress and take notes.
-    `,
-  },
-};
 
 export default function LessonPage() {
   const params = useParams();
