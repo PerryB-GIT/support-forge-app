@@ -2,6 +2,98 @@ const chalk = require('chalk');
 
 // MCP Server definitions
 const mcpServers = {
+  // Anthropic Official MCP Servers
+  memory: {
+    id: 'memory',
+    name: 'Memory',
+    description: 'Persistent memory using knowledge graph for long-term context',
+    category: 'anthropic',
+    requiresAuth: false,
+    installCommand: 'npx -y @modelcontextprotocol/server-memory',
+    config: {
+      command: 'npx',
+      args: ['-y', '@modelcontextprotocol/server-memory']
+    }
+  },
+  fetch: {
+    id: 'fetch',
+    name: 'Fetch',
+    description: 'Web content fetching and conversion for efficient LLM usage',
+    category: 'anthropic',
+    requiresAuth: false,
+    installCommand: 'npx -y @modelcontextprotocol/server-fetch',
+    config: {
+      command: 'npx',
+      args: ['-y', '@modelcontextprotocol/server-fetch']
+    }
+  },
+  sequentialThinking: {
+    id: 'sequential-thinking',
+    name: 'Sequential Thinking',
+    description: 'Dynamic problem-solving through thought sequences',
+    category: 'anthropic',
+    requiresAuth: false,
+    installCommand: 'npx -y @modelcontextprotocol/server-sequential-thinking',
+    config: {
+      command: 'npx',
+      args: ['-y', '@modelcontextprotocol/server-sequential-thinking']
+    }
+  },
+  braveSearch: {
+    id: 'brave-search',
+    name: 'Brave Search',
+    description: 'Web and local search using Brave Search API',
+    category: 'anthropic',
+    requiresAuth: true,
+    authType: 'api-key',
+    authFields: ['BRAVE_API_KEY'],
+    preInstallNote: 'Get your API key at https://brave.com/search/api/',
+    installCommand: 'npx -y @modelcontextprotocol/server-brave-search',
+    config: {
+      command: 'npx',
+      args: ['-y', '@modelcontextprotocol/server-brave-search'],
+      env: {
+        BRAVE_API_KEY: ''
+      }
+    }
+  },
+  puppeteerMcp: {
+    id: 'puppeteer-mcp',
+    name: 'Puppeteer',
+    description: 'Browser automation for web scraping and interaction',
+    category: 'anthropic',
+    requiresAuth: false,
+    installCommand: 'npx -y @modelcontextprotocol/server-puppeteer',
+    config: {
+      command: 'npx',
+      args: ['-y', '@modelcontextprotocol/server-puppeteer']
+    }
+  },
+  time: {
+    id: 'time',
+    name: 'Time',
+    description: 'Time and timezone conversion capabilities',
+    category: 'anthropic',
+    requiresAuth: false,
+    installCommand: 'npx -y @modelcontextprotocol/server-time',
+    config: {
+      command: 'npx',
+      args: ['-y', '@modelcontextprotocol/server-time']
+    }
+  },
+  gitMcp: {
+    id: 'git-mcp',
+    name: 'Git',
+    description: 'Git repository operations (read, search, analyze)',
+    category: 'anthropic',
+    requiresAuth: false,
+    installCommand: 'npx -y @modelcontextprotocol/server-git',
+    config: {
+      command: 'npx',
+      args: ['-y', '@modelcontextprotocol/server-git']
+    }
+  },
+
   // Cloud & DevOps
   aws: {
     id: 'aws',
@@ -613,24 +705,30 @@ const mcpServers = {
 
 // Pre-configured bundles
 const bundles = {
+  anthropicEssentials: {
+    id: 'anthropic-essentials',
+    name: 'Anthropic Essentials',
+    description: 'Official Anthropic MCP servers for Claude',
+    modules: ['memory', 'fetch', 'sequential-thinking', 'brave-search', 'puppeteer-mcp', 'time', 'git-mcp', 'filesystem', 'github', 'slack', 'notion'],
+    recommended: true
+  },
   starter: {
     id: 'starter',
     name: 'Starter',
     description: 'Essential tools for getting started',
-    modules: ['filesystem', 'github', 'playwright'],
-    recommended: true
+    modules: ['filesystem', 'github', 'playwright', 'memory', 'fetch']
   },
   professional: {
     id: 'professional',
     name: 'Professional',
     description: 'Full productivity stack for business users',
-    modules: ['filesystem', 'github', 'zapier', 'wordpress', 'playwright', 'desktop-commander', 'notion', 'slack']
+    modules: ['filesystem', 'github', 'zapier', 'wordpress', 'playwright', 'desktop-commander', 'notion', 'slack', 'memory', 'fetch', 'sequential-thinking']
   },
   devops: {
     id: 'devops',
     name: 'DevOps',
     description: 'Cloud and infrastructure management',
-    modules: ['aws', 'kubernetes', 'github', 'gitlab', 'docker', 'filesystem', 'desktop-commander', 'postgres']
+    modules: ['aws', 'kubernetes', 'github', 'gitlab', 'docker', 'filesystem', 'desktop-commander', 'postgres', 'git-mcp']
   },
   marketing: {
     id: 'marketing',
@@ -648,13 +746,13 @@ const bundles = {
     id: 'ai-power-user',
     name: 'AI Power User',
     description: 'Multiple AI services for maximum flexibility',
-    modules: ['openai', 'gemini', 'vertex-ai', 'huggingface', 'replicate', 'filesystem', 'github']
+    modules: ['openai', 'gemini', 'vertex-ai', 'huggingface', 'replicate', 'filesystem', 'github', 'memory', 'sequential-thinking']
   },
   agentBuilder: {
     id: 'agent-builder',
     name: 'Agent Builder',
     description: 'Tools for building and deploying AI agents',
-    modules: ['github', 'filesystem', 'desktop-commander', 'docker', 'postgres', 'supabase', 'openai', 'playwright']
+    modules: ['github', 'filesystem', 'desktop-commander', 'docker', 'postgres', 'supabase', 'openai', 'playwright', 'memory', 'sequential-thinking', 'puppeteer-mcp']
   },
   enterprise: {
     id: 'enterprise',
@@ -745,6 +843,7 @@ async function listModules() {
 
   // MCP Servers by category
   const categories = {
+    anthropic: 'Anthropic Official',
     cloud: 'Cloud & DevOps',
     business: 'Business & CRM',
     creative: 'Design & Creative',

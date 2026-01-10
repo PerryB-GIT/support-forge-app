@@ -143,7 +143,7 @@ export default function SetupPage() {
             Claude Code Setup Tools
           </h1>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-            Download and run the SF Setup installer to configure Claude Code with pre-configured MCP servers, skills, and integrations.
+            Download and run the SF Setup installer to configure Claude Code with <span className="text-accent font-medium">Anthropic Official MCP servers</span>, pre-configured skills, and integrations.
           </p>
         </div>
 
@@ -165,7 +165,7 @@ export default function SetupPage() {
               <div className="flex flex-wrap gap-2 mb-4">
                 <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">Windows 10/11</span>
                 <span className="text-xs bg-surface-elevated text-text-muted px-2 py-1 rounded border border-border-subtle">~51 MB</span>
-                <span className="text-xs bg-surface-elevated text-text-muted px-2 py-1 rounded border border-border-subtle">v1.0.0</span>
+                <span className="text-xs bg-surface-elevated text-text-muted px-2 py-1 rounded border border-border-subtle">v1.1.0</span>
               </div>
               <a
                 href={DOWNLOAD_URL}
@@ -176,6 +176,57 @@ export default function SetupPage() {
                 </svg>
                 Download sf-setup.exe
               </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Anthropic Official MCP Servers */}
+        <div className="bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent border border-orange-500/20 rounded-2xl p-8 mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-text-primary" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                Anthropic Official MCP Servers
+              </h3>
+              <p className="text-sm text-text-secondary">Now included in the Anthropic Essentials bundle</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="bg-background/50 rounded-lg p-3 border border-border-subtle">
+              <p className="font-medium text-text-primary text-sm">Memory</p>
+              <p className="text-xs text-text-muted">Long-term context</p>
+            </div>
+            <div className="bg-background/50 rounded-lg p-3 border border-border-subtle">
+              <p className="font-medium text-text-primary text-sm">Sequential Thinking</p>
+              <p className="text-xs text-text-muted">Problem solving</p>
+            </div>
+            <div className="bg-background/50 rounded-lg p-3 border border-border-subtle">
+              <p className="font-medium text-text-primary text-sm">Brave Search</p>
+              <p className="text-xs text-text-muted">Web search API</p>
+            </div>
+            <div className="bg-background/50 rounded-lg p-3 border border-border-subtle">
+              <p className="font-medium text-text-primary text-sm">Puppeteer</p>
+              <p className="text-xs text-text-muted">Browser automation</p>
+            </div>
+            <div className="bg-background/50 rounded-lg p-3 border border-border-subtle">
+              <p className="font-medium text-text-primary text-sm">Fetch</p>
+              <p className="text-xs text-text-muted">Web content</p>
+            </div>
+            <div className="bg-background/50 rounded-lg p-3 border border-border-subtle">
+              <p className="font-medium text-text-primary text-sm">Git</p>
+              <p className="text-xs text-text-muted">Repository ops</p>
+            </div>
+            <div className="bg-background/50 rounded-lg p-3 border border-border-subtle">
+              <p className="font-medium text-text-primary text-sm">Time</p>
+              <p className="text-xs text-text-muted">Timezone tools</p>
+            </div>
+            <div className="bg-background/50 rounded-lg p-3 border border-border-subtle">
+              <p className="font-medium text-text-primary text-sm">+ 34 more</p>
+              <p className="text-xs text-text-muted">MCP servers</p>
             </div>
           </div>
         </div>
