@@ -1,6 +1,7 @@
 // Academy lesson content - separated for easier management
-export const lessonContent: Record<string, { videoUrl?: string; content: string }> = {
+export const lessonContent: Record<string, { videoUrl?: string; thumbnailUrl?: string; content: string }> = {
   "0.1": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-0/0.1.mp4",
     content: `
 # Welcome to AI Launchpad
 
@@ -30,6 +31,7 @@ Let's get started!
     `,
   },
   "0.2": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-0/0.2.mp4",
     content: `
 # Your Learning Environment
 
@@ -63,6 +65,7 @@ Download the **Course Workbook** to track your progress and take notes.
     `,
   },
   "0.3": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-0/0.3.mp4",
     content: `
 # Prerequisites Check
 
@@ -112,6 +115,7 @@ If you have all the above ready (or close to it), you're set for the next module
     `,
   },
   "1.1": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-1/1.1.mp4",
     content: `
 # The AI Readiness Audit
 
@@ -172,6 +176,7 @@ Complete the AI Readiness Audit worksheet in your course materials before procee
     `,
   },
   "1.2": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-1/1.2.mp4",
     content: `
 # Account Setup Marathon
 
@@ -238,6 +243,7 @@ Create a secure credentials file in your home directory.
     `,
   },
   "1.3": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-1/1.3.mp4",
     content: `
 # Understanding the Launchpad Stack
 
@@ -321,6 +327,7 @@ Let's start building!
   },
 
   "2.1": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-2/2.1.mp4",
     content: `
 # Installing Claude Code
 
@@ -356,6 +363,7 @@ Claude Code creates settings at ~/.claude/
     `,
   },
   "2.2": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-2/2.2.mp4",
     content: `
 # Your First Claude Code Session
 
@@ -385,6 +393,7 @@ Do incremental changes instead of massive rewrites.
     `,
   },
   "2.3": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-2/2.3.mp4",
     content: `
 # Prompting for Business Tasks
 
@@ -405,6 +414,7 @@ Context > Task > Constraints > Output Format
     `,
   },
   "2.4": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-2/2.4.mp4",
     content: `
 # Configuring Claude Code Settings
 
@@ -424,6 +434,7 @@ Create CLAUDE.md in your project root with project info, coding standards, and c
     `,
   },
   "2.5": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-2/2.5.mp4",
     content: `
 # Advanced Claude Code Features
 
@@ -449,6 +460,7 @@ In the next module, we connect external services with MCP servers.
   },
 
   "3.1": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-3/3.1.mp4",
     content: `
 # What Are MCP Servers?
 
@@ -513,6 +525,7 @@ Not ideal for:
     `,
   },
   "3.2": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-3/3.2.mp4",
     content: `
 # Installing Your First MCP Server
 
@@ -588,6 +601,7 @@ With GitHub MCP, Claude can:
     `,
   },
   "3.3": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-3/3.3.mp4",
     content: `
 # Connecting Google Services
 
@@ -662,6 +676,7 @@ Example prompts:
     `,
   },
   "3.4": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-3/3.4.mp4",
     content: `
 # Connecting GitHub
 
@@ -725,6 +740,7 @@ Example workflows:
     `,
   },
   "3.5": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-3/3.5.mp4",
     content: `
 # Troubleshooting MCP Connections
 
@@ -808,6 +824,7 @@ Look in ~/.claude/logs/ for detailed logs.
   },
 
   "4.1": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-4/4.1.mp4",
     content: `
 # Understanding Skills
 
@@ -857,6 +874,7 @@ A skill contains:
     `,
   },
   "4.2": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-4/4.2.mp4",
     content: `
 # Installing the Superpowers Plugin
 
@@ -907,6 +925,7 @@ Handle code review feedback properly.
     `,
   },
   "4.3": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-4/4.3.mp4",
     content: `
 # Installing Industry Skills
 
@@ -954,6 +973,7 @@ Example:
     `,
   },
   "4.4": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-4/4.4.mp4",
     content: `
 # Creating Your First Custom Skill
 
@@ -1004,6 +1024,7 @@ When to use this skill.
     `,
   },
   "5.1": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-5/5.1.mp4",
     content: `
 # Automation Strategy
 
@@ -1059,6 +1080,7 @@ Time saved per execution x Frequency - Setup time = ROI
     `,
   },
   "5.2": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-5/5.2.mp4",
     content: `
 # n8n Installation & Setup
 
@@ -1109,6 +1131,7 @@ Or use the n8n MCP server for direct integration.
     `,
   },
   "5.3": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-5/5.3.mp4",
     content: `
 # Building n8n Workflows
 
@@ -1159,6 +1182,7 @@ Use IF node for conditional logic.
     `,
   },
   "5.4": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-5/5.4.mp4",
     content: `
 # Zapier Essentials
 
@@ -1212,6 +1236,7 @@ Conditions for continuing.
     `,
   },
   "5.5": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-5/5.5.mp4",
     content: `
 # Connecting Automations to Claude
 
@@ -1262,6 +1287,7 @@ Message received > Claude drafts > Human reviews
     `,
   },
   "6.1": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-6/6.1.mp4",
     content: `
 # AWS Fundamentals for AI
 
@@ -1312,6 +1338,7 @@ Essential AWS knowledge for AI deployments.
     `,
   },
   "6.2": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-6/6.2.mp4",
     content: `
 # Deploying with AWS Amplify
 
@@ -1369,6 +1396,7 @@ frontend:
     `,
   },
   "6.3": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-6/6.3.mp4",
     content: `
 # Google Cloud for AI Workloads
 
@@ -1414,6 +1442,7 @@ Leverage Google's AI infrastructure.
     `,
   },
   "6.4": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-6/6.4.mp4",
     content: `
 # Cost Management & Optimization
 
@@ -1470,6 +1499,7 @@ Keep cloud costs under control.
     `,
   },
   "7.1": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-7/7.1.mp4",
     content: `
 # Credential Security
 
@@ -1525,6 +1555,7 @@ Alert on leaked credentials.
     `,
   },
   "7.2": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-7/7.2.mp4",
     content: `
 # Access Control & Auditing
 
@@ -1579,6 +1610,7 @@ More flexible, more complex.
     `,
   },
   "7.3": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-7/7.3.mp4",
     content: `
 # Responsible AI Principles
 
@@ -1633,6 +1665,7 @@ Document:
     `,
   },
   "7.4": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-7/7.4.mp4",
     content: `
 # Documentation & Handoff
 
@@ -1688,6 +1721,7 @@ Ensure others can maintain your AI implementation.
     `,
   },
   "8.1": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-8/8.1.mp4",
     content: `
 # Capstone Project Overview
 
@@ -1732,6 +1766,7 @@ Lesson 8.4: Review and certification (5 min)
     `,
   },
   "8.2": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-8/8.2.mp4",
     content: `
 # Building the Client Onboarding Agent
 
@@ -1789,6 +1824,7 @@ Check error paths.
     `,
   },
   "8.3": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-8/8.3.mp4",
     content: `
 # Testing & Refinement
 
@@ -1846,6 +1882,7 @@ Expected outcome.
     `,
   },
   "8.4": {
+    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-8/8.4.mp4",
     content: `
 # Certification & Next Steps
 
