@@ -290,16 +290,15 @@ In the meantime, you can:
               {content.videoUrl ? (
                 <div className="aspect-video bg-black rounded-xl mb-8 overflow-hidden">
                   <video
+                    key={content.videoUrl}
                     className="w-full h-full"
                     controls
                     controlsList="nodownload"
                     playsInline
-                    preload="metadata"
+                    preload="auto"
                     poster={content.thumbnailUrl}
-                  >
-                    <source src={content.videoUrl} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                    src={content.videoUrl}
+                  />
                 </div>
               ) : (
                 <div className="aspect-video bg-surface border border-border-subtle rounded-xl mb-8 flex items-center justify-center">
