@@ -1,7 +1,7 @@
 // Academy lesson content - separated for easier management
 export const lessonContent: Record<string, { videoUrl?: string; thumbnailUrl?: string; content: string }> = {
   "0.1": {
-    videoUrl: "https://d396asyzfy7mzy.cloudfront.net/videos/module-0/0.1.mp4",
+    videoUrl: "https://support-forge-academy-videos.s3.amazonaws.com/videos/module-0/0.1.mp4",
     content: `
 # Welcome to AI Launchpad
 
