@@ -1,0 +1,34 @@
+# Dependencies
+node_modules
+**/node_modules
+
+# Build artifacts
+.next
+**/dist
+**/.turbo
+
+# Development
+.git
+.gitignore
+*.md
+.env*.local
+.eslintcache
+
+# Mobile app (not needed for web)
+apps/mobile
+
+# IDE
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+**/*.test.*
+**/__tests__
+
+# Large files
+apps/web/public/downloads/*.exe
+packages/sf-setup
