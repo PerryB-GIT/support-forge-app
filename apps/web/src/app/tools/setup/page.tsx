@@ -260,7 +260,7 @@ export default function SetupPage() {
                   <div className="flex flex-wrap gap-2 mb-4">
                     <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">Windows 10/11</span>
                     <span className="text-xs bg-surface-elevated text-text-muted px-2 py-1 rounded border border-border-subtle">~51 MB</span>
-                    <span className="text-xs bg-surface-elevated text-text-muted px-2 py-1 rounded border border-border-subtle">v1.1.0</span>
+                    <span className="text-xs bg-surface-elevated text-text-muted px-2 py-1 rounded border border-border-subtle">v1.0.0</span>
                   </div>
                   <a
                     href={DOWNLOAD_URL}
