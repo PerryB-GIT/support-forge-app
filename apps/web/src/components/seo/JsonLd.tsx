@@ -299,3 +299,132 @@ export function BreadcrumbJsonLd({ items }: BreadcrumbJsonLdProps) {
     />
   );
 }
+
+interface CourseJsonLdProps {
+  name: string;
+  description: string;
+  provider: {
+    name: string;
+    url: string;
+  };
+  url: string;
+  courseMode: "online" | "onsite" | "blended";
+  offers: Array<{
+    name: string;
+    price: number;
+    priceCurrency?: string;
+    availability?: string;
+    validFrom?: string;
+  }>;
+  hasCourseInstance?: Array<{
+    name: string;
+    courseMode: string;
+    courseWorkload?: string;
+  }>;
+  educationalLevel?: string;
+  about?: string[];
+}
+
+export function CourseJsonLd({
+  name,
+  description,
+  provider,
+  url,
+  courseMode,
+  offers,
+  hasCourseInstance,
+  educationalLevel = "Beginner to Advanced",
+  about = [],
+}: CourseJsonLdProps) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name,
+    description,
+    provider: {
+      "@type": "Organization",
+      name: provider.name,
+      url: provider.url,
+    },
+    url,
+    courseMode,
+    educationalLevel,
+    offers: offers.map((offer) => ({
+      "@type": "Offer",
+      name: offer.name,
+      price: offer.price,
+      priceCurrency: offer.priceCurrency || "USD",
+      availability: offer.availability || "https://schema.org/InStock",
+      ...(offer.validFrom && { validFrom: offer.validFrom }),
+    })),
+    ...(hasCourseInstance && {
+      hasCourseInstance: hasCourseInstance.map((instance) => ({
+        "@type": "CourseInstance",
+        name: instance.name,
+        courseMode: instance.courseMode,
+        ...(instance.courseWorkload && { courseWorkload: instance.courseWorkload }),
+      })),
+    }),
+    ...(about.length > 0 && {
+      about: about.map((topic) => ({
+        "@type": "Thing",
+        name: topic,
+      })),
+    }),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+interface ProductJsonLdProps {
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+  brand: string;
+  offers: Array<{
+    price: number;
+    priceCurrency?: string;
+    availability?: string;
+  }>;
+}
+
+export function ProductJsonLd({
+  name,
+  description,
+  url,
+  image,
+  brand,
+  offers,
+}: ProductJsonLdProps) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name,
+    description,
+    url,
+    ...(image && { image }),
+    brand: {
+      "@type": "Brand",
+      name: brand,
+    },
+    offers: offers.map((offer) => ({
+      "@type": "Offer",
+      price: offer.price,
+      priceCurrency: offer.priceCurrency || "USD",
+      availability: offer.availability || "https://schema.org/InStock",
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}

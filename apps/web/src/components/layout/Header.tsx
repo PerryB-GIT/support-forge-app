@@ -19,6 +19,7 @@ export function Header({ variant = "default" }: HeaderProps) {
     { href: "/shop", label: "Workflow Shop" },
     { href: "/ai-transformation", label: "AI Transformation" },
     { href: "/services", label: "Services" },
+    { href: "/blog", label: "Blog" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -28,7 +29,7 @@ export function Header({ variant = "default" }: HeaderProps) {
   return (
     <header
       className={`border-b border-border-subtle backdrop-blur-sm sticky top-0 z-50 ${
-        variant === "transparent" ? "bg-background/80" : "bg-background/80"
+        variant === "transparent" ? "bg-transparent" : "bg-background/80"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">

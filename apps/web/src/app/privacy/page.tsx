@@ -1,9 +1,28 @@
 import Link from "next/link";
 import { CONTACT_INFO } from "@support-forge/shared";
+import { Metadata } from "next";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
-export const metadata = {
-  title: "Privacy Policy - Support Forge",
-  description: "Privacy Policy for Support Forge AI & IT Consulting services",
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Learn how Support Forge collects, uses, and protects your personal information. Our commitment to data privacy and security for AI & IT consulting services.",
+  openGraph: {
+    title: "Privacy Policy - Support Forge",
+    description:
+      "Learn how Support Forge collects, uses, and protects your personal information.",
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy - Support Forge",
+    description:
+      "Learn how Support Forge collects, uses, and protects your personal information.",
+  },
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPolicyPage() {
@@ -11,44 +30,7 @@ export default function PrivacyPolicyPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <span
-              className="text-xl font-bold text-accent"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
-            >
-              SupportForge
-            </span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/services" className="text-text-secondary hover:text-text-primary transition-colors">
-              Services
-            </Link>
-            <Link href="/about" className="text-text-secondary hover:text-text-primary transition-colors">
-              About
-            </Link>
-            <Link href="/contact" className="text-text-secondary hover:text-text-primary transition-colors">
-              Contact
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/login"
-              className="text-text-secondary hover:text-text-primary transition-colors"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/register"
-              className="px-4 py-2 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-colors"
-            >
-              Get Started
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Content */}
       <main className="flex-1 pt-24 pb-16 px-4">
@@ -217,16 +199,7 @@ export default function PrivacyPolicyPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="py-8 border-t border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-text-muted text-sm">
-          <div>&copy; {new Date().getFullYear()} Support Forge. All rights reserved.</div>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="text-accent">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-accent transition-colors">Terms of Service</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

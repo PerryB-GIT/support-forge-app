@@ -78,6 +78,7 @@ const ServiceIcon = ({ name }: { name: string }) => {
 export default function ServicesPage() {
   const services = [
     {
+      id: "ai",
       icon: "ai",
       title: "AI Integration & Automation",
       description: "Transform your business with cutting-edge AI solutions. We implement machine learning models, natural language processing, and intelligent automation to streamline operations and drive innovation.",
@@ -91,6 +92,7 @@ export default function ServicesPage() {
       ]
     },
     {
+      id: "development",
       icon: "code",
       title: "Custom Software Development",
       description: "From concept to deployment, we build scalable, maintainable software tailored to your unique business requirements. Our full-stack expertise ensures seamless solutions across all platforms.",
@@ -104,6 +106,7 @@ export default function ServicesPage() {
       ]
     },
     {
+      id: "cloud",
       icon: "cloud",
       title: "Cloud Solutions & DevOps",
       description: "Leverage the power of cloud computing with our comprehensive cloud services. We help you migrate, optimize, and manage your infrastructure for maximum efficiency and scalability.",
@@ -117,6 +120,7 @@ export default function ServicesPage() {
       ]
     },
     {
+      id: "consulting",
       icon: "strategy",
       title: "IT Consulting & Strategy",
       description: "Navigate the complex technology landscape with expert guidance. Our consultants help you make informed decisions, develop technology roadmaps, and align IT investments with business goals.",
@@ -130,6 +134,7 @@ export default function ServicesPage() {
       ]
     },
     {
+      id: "security",
       icon: "security",
       title: "Cybersecurity Services",
       description: "Protect your business from evolving cyber threats with our comprehensive security solutions. We implement defense-in-depth strategies to safeguard your data and systems.",
@@ -143,6 +148,7 @@ export default function ServicesPage() {
       ]
     },
     {
+      id: "support",
       icon: "managed",
       title: "Managed IT Services",
       description: "Focus on your core business while we handle your IT. Our managed services provide proactive monitoring, maintenance, and support to keep your systems running smoothly 24/7.",
@@ -178,10 +184,11 @@ export default function ServicesPage() {
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid gap-8">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <div
-                key={index}
-                className="group bg-surface border border-border-subtle rounded-2xl p-8 hover:border-accent/50 transition-all duration-300"
+                key={service.id}
+                id={service.id}
+                className="group bg-surface border border-border-subtle rounded-2xl p-8 hover:border-accent/50 transition-all duration-300 scroll-mt-24"
               >
                 <div className="flex flex-col lg:flex-row gap-8">
                   <div className="lg:w-1/2">

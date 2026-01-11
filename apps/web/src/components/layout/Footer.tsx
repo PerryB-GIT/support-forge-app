@@ -56,6 +56,21 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/services#consulting" className="hover:text-accent transition-colors">
+                  IT Consulting
+                </Link>
+              </li>
+              <li>
+                <Link href="/services#security" className="hover:text-accent transition-colors">
+                  Cybersecurity
+                </Link>
+              </li>
+              <li>
+                <Link href="/services#support" className="hover:text-accent transition-colors">
+                  Managed IT
+                </Link>
+              </li>
+              <li>
                 <Link href="/shop" className="hover:text-accent transition-colors">
                   Workflow Shop
                 </Link>
@@ -68,6 +83,11 @@ export function Footer() {
               <li>
                 <Link href="/about" className="hover:text-accent transition-colors">
                   About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-accent transition-colors">
+                  Blog
                 </Link>
               </li>
               <li>

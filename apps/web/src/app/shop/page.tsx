@@ -4,6 +4,32 @@ import { Metadata } from "next";
 import { CONTACT_INFO } from "@support-forge/shared";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { FAQJsonLd } from "@/components/seo/JsonLd";
+
+// FAQ data for structured data schema
+const shopFaqs = [
+  {
+    question: "What is n8n?",
+    answer: "n8n is an open-source workflow automation platform. You can self-host it for free or use n8n Cloud. Our workflows are JSON files you import directly into n8n.",
+  },
+  {
+    question: "Do I need technical skills?",
+    answer: "Basic familiarity with n8n helps, but our workflows come with detailed setup instructions. You'll mainly need to add your API credentials (Gmail, OpenAI, etc.).",
+  },
+  {
+    question: "What's included with purchase?",
+    answer: "You receive the workflow JSON file, a setup guide with step-by-step instructions, and 30 days of email support for any questions.",
+  },
+  {
+    question: "Can I modify the workflows?",
+    answer: "Absolutely! Once purchased, the workflow is yours. Customize it however you like - change schedules, add nodes, integrate with your other tools.",
+  },
+  {
+    question: "Do you offer refunds?",
+    answer: "Yes, we offer a 14-day money-back guarantee if the workflow doesn't meet your needs. Just reach out and we'll process your refund.",
+  },
+];
+
 
 export const metadata: Metadata = {
   title: "Workflow Shop | Support Forge",
@@ -290,7 +316,9 @@ const customTiers = [
 
 export default function ShopPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <>
+      <FAQJsonLd questions={shopFaqs} />
+      <div className="min-h-screen flex flex-col">
       <Header />
 
       {/* Hero */}
@@ -354,16 +382,22 @@ export default function ShopPage() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={workflow.stripeLink}
-                  className={`block w-full py-3 rounded-lg font-medium text-center transition-all ${
-                    workflow.popular
-                      ? "bg-accent hover:bg-accent-hover text-white"
-                      : "bg-surface border border-border-subtle hover:border-accent text-text-primary"
-                  }`}
-                >
-                  Buy Now
-                </a>
+                {workflow.stripeLink && !workflow.stripeLink.startsWith("YOUR_") ? (
+                  <a
+                    href={workflow.stripeLink}
+                    className={`block w-full py-3 rounded-lg font-medium text-center transition-all ${
+                      workflow.popular
+                        ? "bg-accent hover:bg-accent-hover text-white"
+                        : "bg-surface border border-border-subtle hover:border-accent text-text-primary"
+                    }`}
+                  >
+                    Buy Now
+                  </a>
+                ) : (
+                  <span className="block w-full py-3 rounded-lg font-medium text-center bg-surface/50 border border-border-subtle text-text-muted cursor-not-allowed">
+                    Coming Soon
+                  </span>
+                )}
               </div>
             ))}
           </div>
@@ -545,7 +579,8 @@ export default function ShopPage() {
         </div>
       </section>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
