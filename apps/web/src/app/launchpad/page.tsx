@@ -227,8 +227,8 @@ const stackCategories = [
 // ROI stats
 const roiStats = [
   {
-    number: "10+",
-    label: "Hours saved per week on average",
+    number: "30-40",
+    label: "Hours saved per week permanently",
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -255,63 +255,63 @@ const roiStats = [
   },
 ];
 
-// Course tiers with Stripe integration
+// Course tiers with Stripe integration - AI Launchpad pricing
 const courseTiers = [
   {
-    key: "selfPaced",
-    name: "AI Academy",
-    subtitle: "Self-Paced",
+    key: "starter",
+    name: "Launchpad Starter",
+    subtitle: "Start Your AI Journey",
     Icon: BookIcon,
-    price: 997,
-    priceLabel: "one-time",
-    altPrice: "or 3 payments of $397",
-    description: "Learn to build AI systems yourself with our comprehensive video course",
+    price: 97,
+    priceLabel: "/month",
+    altPrice: null,
+    description: "Self-paced learning with community support to begin your AI transformation",
     features: [
-      "Complete LAUNCH Method curriculum",
-      "12+ hours of video training",
-      "Private community access",
-      "Monthly group coaching calls",
-      "Templates & prompt libraries",
-      "Lifetime updates",
+      "Self-paced video course",
+      "Golden config templates",
+      "Community access (Discord)",
+      "Monthly group Q&A",
+      "Setup guides for GitHub, AWS, Zapier, N8N",
+      "Cancel anytime",
     ],
     popular: false,
-    ctaText: "Enroll Now",
-  },
-  {
-    key: "liveTutoring",
-    name: "AI Academy",
-    subtitle: "+ Live Tutoring",
-    Icon: VideoIcon,
-    price: 1500,
-    priceLabel: "one-time",
-    altPrice: null,
-    description: "Personalized tutor-led training with 1-on-1 sessions",
-    features: [
-      "Everything in Self-Paced, plus:",
-      "4x 1-hour live tutoring sessions",
-      "Personalized curriculum path",
-      "Direct Slack/email access to tutor",
-      "Custom project guidance",
-      "Priority support for 90 days",
-    ],
-    popular: true,
-    ctaText: "Get Started",
+    ctaText: "Start for $97/mo",
   },
   {
     key: "pro",
-    name: "AI Launchpad Pro",
-    subtitle: "Done-With-You",
-    Icon: UserIcon,
-    price: 5000,
-    priceLabel: "starting",
-    altPrice: "Custom quote based on scope",
-    description: "We build your AI systems alongside you",
+    name: "Launchpad Pro",
+    subtitle: "Go From Zero to Shipping in 2 Weeks",
+    Icon: VideoIcon,
+    price: 3000,
+    priceLabel: "one-time",
+    altPrice: null,
+    description: "Live cohort program with hands-on setup and direct support",
     features: [
-      "Everything in Live Tutoring, plus:",
-      "Full implementation support",
-      "Custom AI workflow builds",
-      "Your processes, automated",
-      "90 days of priority support",
+      "Everything in Starter, plus:",
+      "2-week live cohort program (4-6 people)",
+      "Hands-on Claude Code setup during sessions",
+      "Direct Slack access during program",
+      "Graduation = fully set up and trained",
+      "30-40 hours/week saved permanently",
+    ],
+    popular: true,
+    ctaText: "Join Next Cohort",
+  },
+  {
+    key: "enterprise",
+    name: "Launchpad Enterprise",
+    subtitle: "Full Custom AI Transformation",
+    Icon: UserIcon,
+    price: 10000,
+    priceLabel: "starting at",
+    altPrice: "Custom quote based on scope",
+    description: "White-glove implementation for your entire organization",
+    features: [
+      "Full custom implementation",
+      "1-on-1 engagement",
+      "Ongoing support retainer",
+      "Integration with existing tools/workflows",
+      "White-glove deployment",
       "Dedicated project manager",
     ],
     popular: false,
@@ -417,12 +417,12 @@ function LaunchpadContent() {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
-                Master AI Implementation
-                <span className="text-accent"> That Actually Works</span>
+                The Fastest Path From AI-Curious
+                <span className="text-accent"> to AI-Powered</span>
               </h1>
               <p className="text-lg md:text-xl text-text-secondary mb-8">
-                Stop wasting money on AI subscriptions you don&apos;t use. Learn the LAUNCH Method and
-                build AI systems that transform how you work.
+                Transform your team from &quot;I should use AI&quot; to &quot;I ship with AI daily&quot; in 2 weeks.
+                Reclaim 30-40 hours every week with our proven LAUNCH Method.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 {isEnrolled ? (

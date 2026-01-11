@@ -81,151 +81,101 @@ export default async function Home() {
         <div className="max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-            Real AI Awakening
+            AI Launchpad
           </div>
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            AI That Actually
-            <span className="text-accent"> Works</span>
+            The Fastest Path From AI-Curious
+            <span className="text-accent"> to AI-Powered</span>
           </h1>
           <p className="text-lg md:text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
-            Stop collecting AI subscriptions that gather dust. We help business owners build systems that genuinely transform how they work — and we love every minute of it.
+            Transform your team from &quot;I should use AI&quot; to &quot;I ship with AI daily&quot; in 2 weeks.
+            Our clients save 30-40 hours every week with our proven LAUNCH Method.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/ai-transformation"
+              href="/launchpad"
               className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105"
             >
-              See What's Possible
+              See Our Programs
             </Link>
             <Link
               href="/contact"
               className="px-8 py-4 rounded-lg bg-surface border border-border-subtle hover:border-accent text-text-primary font-medium transition-all"
             >
-              Let's Talk
+              Book a Free Strategy Call
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Value Props Section */}
       <section className="py-20 bg-surface/50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Our <span className="text-accent">Services</span>
+              Why <span className="text-accent">AI Launchpad?</span>
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
-              Comprehensive AI and IT solutions tailored to accelerate your business growth
+              Stop wasting money on AI subscriptions you don&apos;t use. Bridge the gap from &quot;AI exists&quot; to &quot;my team uses it daily.&quot;
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {/* AI Solutions */}
-            <div className="group p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/5">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          <div className="grid gap-8 md:grid-cols-3">
+            {/* Value Prop 1: Time Saved */}
+            <div className="group p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/5 text-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 mx-auto group-hover:scale-110 transition-transform">
+                <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3">AI Integration</h3>
-              <p className="text-text-secondary mb-4">
-                Custom AI solutions including chatbots, automation, and machine learning integration for your business processes.
+              <div className="text-5xl font-bold text-accent mb-2" style={{ fontFamily: "var(--font-space-grotesk)" }}>30-40</div>
+              <h3 className="text-xl font-semibold mb-3">Hours Saved Per Week</h3>
+              <p className="text-text-secondary">
+                Reclaim your time permanently. Our clients consistently report saving 30-40 hours every week after implementing our AI systems.
               </p>
-              <Link href="/services#ai" className="text-accent hover:underline inline-flex items-center gap-1">
-                Learn more <span>→</span>
-              </Link>
             </div>
 
-            {/* Software Development */}
-            <div className="group p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/5">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            {/* Value Prop 2: Speed to Value */}
+            <div className="group p-8 rounded-2xl bg-background border border-accent shadow-lg shadow-accent/10 transition-all text-center relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent text-white text-xs font-bold rounded-full uppercase tracking-wide">
+                Our Promise
+              </div>
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 mx-auto group-hover:scale-110 transition-transform">
+                <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Software Development</h3>
-              <p className="text-text-secondary mb-4">
-                Full-stack web and mobile application development using modern technologies and best practices.
+              <div className="text-5xl font-bold text-accent mb-2" style={{ fontFamily: "var(--font-space-grotesk)" }}>2</div>
+              <h3 className="text-xl font-semibold mb-3">Weeks to Productive</h3>
+              <p className="text-text-secondary">
+                Not months of trial and error. In just 2 weeks, your team goes from AI-curious to shipping with AI daily.
               </p>
-              <Link href="/services#development" className="text-accent hover:underline inline-flex items-center gap-1">
-                Learn more <span>→</span>
-              </Link>
             </div>
 
-            {/* Cloud & Infrastructure */}
-            <div className="group p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/5">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+            {/* Value Prop 3: Full Stack */}
+            <div className="group p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/5 text-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 mx-auto group-hover:scale-110 transition-transform">
+                <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Cloud Solutions</h3>
-              <p className="text-text-secondary mb-4">
-                AWS, Azure, and Google Cloud deployment, migration, and optimization services for scalable infrastructure.
+              <div className="text-5xl font-bold text-accent mb-2" style={{ fontFamily: "var(--font-space-grotesk)" }}>Full</div>
+              <h3 className="text-xl font-semibold mb-3">Stack Enablement</h3>
+              <p className="text-text-secondary">
+                Claude Code + GitHub + AWS + Zapier + N8N. We set up your entire AI ecosystem, not just one tool.
               </p>
-              <Link href="/services#cloud" className="text-accent hover:underline inline-flex items-center gap-1">
-                Learn more <span>→</span>
-              </Link>
-            </div>
-
-            {/* IT Consulting */}
-            <div className="group p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/5">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">IT Consulting</h3>
-              <p className="text-text-secondary mb-4">
-                Strategic technology consulting to help you make informed decisions and optimize your IT investments.
-              </p>
-              <Link href="/services#consulting" className="text-accent hover:underline inline-flex items-center gap-1">
-                Learn more <span>→</span>
-              </Link>
-            </div>
-
-            {/* Cybersecurity */}
-            <div className="group p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/5">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Cybersecurity</h3>
-              <p className="text-text-secondary mb-4">
-                Comprehensive security assessments, implementation, and monitoring to protect your digital assets.
-              </p>
-              <Link href="/services#security" className="text-accent hover:underline inline-flex items-center gap-1">
-                Learn more <span>→</span>
-              </Link>
-            </div>
-
-            {/* Support & Maintenance */}
-            <div className="group p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/5">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">24/7 Support</h3>
-              <p className="text-text-secondary mb-4">
-                Round-the-clock technical support and maintenance to keep your systems running smoothly.
-              </p>
-              <Link href="/services#support" className="text-accent hover:underline inline-flex items-center gap-1">
-                Learn more <span>→</span>
-              </Link>
             </div>
           </div>
 
           <div className="text-center mt-12">
             <Link
-              href="/services"
+              href="/launchpad"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-colors"
             >
-              View All Services
+              See Our Programs
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -234,76 +184,56 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
+      {/* Pricing Preview Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                Why Choose <span className="text-accent">Support Forge?</span>
-              </h2>
-              <p className="text-text-secondary mb-8">
-                We combine cutting-edge AI technology with decades of IT expertise to deliver solutions that drive real business results.
-              </p>
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Fast Implementation</h4>
-                    <p className="text-text-secondary text-sm">Rapid deployment with agile methodologies that get you results quickly.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Enterprise Security</h4>
-                    <p className="text-text-secondary text-sm">Bank-grade security protocols protecting your data at every level.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Dedicated Team</h4>
-                    <p className="text-text-secondary text-sm">Expert consultants assigned to your project from start to finish.</p>
-                  </div>
-                </div>
-              </div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              Choose Your <span className="text-accent">Path</span>
+            </h2>
+            <p className="text-text-secondary max-w-2xl mx-auto">
+              From self-paced learning to full enterprise transformation
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
+            {/* Starter */}
+            <div className="p-6 rounded-2xl bg-surface border border-border-subtle hover:border-accent transition-all">
+              <div className="text-accent text-sm font-medium mb-2">Launchpad Starter</div>
+              <div className="text-3xl font-bold mb-1">$97<span className="text-lg text-text-secondary">/mo</span></div>
+              <p className="text-text-secondary text-sm mb-4">Self-paced video course with community support</p>
+              <Link href="/launchpad#pricing" className="text-accent hover:underline text-sm">Learn more →</Link>
             </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-accent/5 rounded-3xl blur-3xl"></div>
-              <div className="relative p-8 rounded-2xl bg-surface border border-border-subtle">
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center p-6">
-                    <div className="text-4xl font-bold text-accent mb-2">150+</div>
-                    <div className="text-text-secondary text-sm">Projects Delivered</div>
-                  </div>
-                  <div className="text-center p-6">
-                    <div className="text-4xl font-bold text-accent mb-2">98%</div>
-                    <div className="text-text-secondary text-sm">Client Satisfaction</div>
-                  </div>
-                  <div className="text-center p-6">
-                    <div className="text-4xl font-bold text-accent mb-2">24/7</div>
-                    <div className="text-text-secondary text-sm">Support Available</div>
-                  </div>
-                  <div className="text-center p-6">
-                    <div className="text-4xl font-bold text-accent mb-2">10+</div>
-                    <div className="text-text-secondary text-sm">Years Experience</div>
-                  </div>
-                </div>
-              </div>
+
+            {/* Pro */}
+            <div className="p-6 rounded-2xl bg-background border-2 border-accent shadow-lg shadow-accent/10 relative">
+              <div className="absolute -top-2 right-4 px-2 py-0.5 bg-accent text-white text-xs font-bold rounded">POPULAR</div>
+              <div className="text-accent text-sm font-medium mb-2">Launchpad Pro</div>
+              <div className="text-3xl font-bold mb-1">$3,000</div>
+              <p className="text-text-secondary text-sm mb-4">2-week live cohort with hands-on setup</p>
+              <Link href="/launchpad#pricing" className="text-accent hover:underline text-sm">Learn more →</Link>
             </div>
+
+            {/* Enterprise */}
+            <div className="p-6 rounded-2xl bg-surface border border-border-subtle hover:border-accent transition-all">
+              <div className="text-accent text-sm font-medium mb-2">Launchpad Enterprise</div>
+              <div className="text-3xl font-bold mb-1">$10,000+</div>
+              <p className="text-text-secondary text-sm mb-4">Full custom AI transformation</p>
+              <Link href="/contact?subject=Enterprise" className="text-accent hover:underline text-sm">Contact us →</Link>
+            </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-text-muted text-sm mb-4">All programs include the proven LAUNCH Method framework</p>
+            <Link
+              href="/launchpad"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-colors"
+            >
+              View Full Program Details
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>

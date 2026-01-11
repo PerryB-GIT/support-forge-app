@@ -24,55 +24,35 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-text-secondary text-sm">
-              AI & IT Consulting services for modern businesses. Transforming ideas into reality.
+              The fastest path from AI-curious to AI-powered. Reclaim 30-40 hours every week.
             </p>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">Services</h4>
+            <h4 className="font-semibold mb-4">AI Launchpad</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
               <li>
                 <Link href="/launchpad" className="hover:text-accent transition-colors">
-                  AI Academy
+                  Programs & Pricing
                 </Link>
               </li>
               <li>
-                <Link href="/ai-transformation" className="hover:text-accent transition-colors">
-                  AI Transformation
+                <Link href="/launchpad#pricing" className="hover:text-accent transition-colors">
+                  Launchpad Starter ($97/mo)
                 </Link>
               </li>
               <li>
-                <Link href="/services#ai" className="hover:text-accent transition-colors">
-                  AI Integration
+                <Link href="/launchpad#pricing" className="hover:text-accent transition-colors">
+                  Launchpad Pro ($3,000)
                 </Link>
               </li>
               <li>
-                <Link href="/services#development" className="hover:text-accent transition-colors">
-                  Software Development
+                <Link href="/contact?subject=Enterprise" className="hover:text-accent transition-colors">
+                  Enterprise Solutions
                 </Link>
               </li>
               <li>
-                <Link href="/services#cloud" className="hover:text-accent transition-colors">
-                  Cloud Solutions
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#consulting" className="hover:text-accent transition-colors">
-                  IT Consulting
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#security" className="hover:text-accent transition-colors">
-                  Cybersecurity
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#support" className="hover:text-accent transition-colors">
-                  Managed IT
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop" className="hover:text-accent transition-colors">
-                  Workflow Shop
+                <Link href="/results" className="hover:text-accent transition-colors">
+                  Case Studies & Results
                 </Link>
               </li>
             </ul>
@@ -86,8 +66,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-accent transition-colors">
-                  Blog
+                <Link href="/results" className="hover:text-accent transition-colors">
+                  Results & Case Studies
                 </Link>
               </li>
               <li>

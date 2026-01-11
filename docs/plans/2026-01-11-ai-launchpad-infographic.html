@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Launchpad - Investment Overview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f14 0%, #1a1a2e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            background: linear-gradient(135deg, #8B5CF6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .header .tagline {
+            font-size: 18px;
+            color: #a0a0a0;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-box .number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #8B5CF6;
+        }
+
+        .stat-box .label {
+            font-size: 12px;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            color: #8B5CF6;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: #8B5CF6;
+            border-radius: 2px;
+        }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .problem {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .problem h3 {
+            color: #ef4444;
+            margin-bottom: 10px;
+        }
+
+        .solution {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .solution h3 {
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .tier {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tier.featured {
+            border-color: #8B5CF6;
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        .tier h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .tier .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8B5CF6;
+            margin-bottom: 10px;
+        }
+
+        .tier .desc {
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+
+        .financials {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .revenue-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .revenue-table th, .revenue-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .revenue-table th {
+            color: #8B5CF6;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .revenue-table .total {
+            font-weight: bold;
+            color: #22c55e;
+        }
+
+        .use-of-funds {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .fund-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .fund-bar {
+            flex: 1;
+            height: 20px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 4px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+
+        .fund-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #8B5CF6);
+            border-radius: 4px;
+        }
+
+        .why-us {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .why-item {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .why-item .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .why-item h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .why-item p {
+            font-size: 11px;
+            color: #a0a0a0;
+        }
+
+        .ask-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border: 2px solid #8B5CF6;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .ask-box h2 {
+            justify-content: center;
+        }
+
+        .ask-box h2::before {
+            display: none;
+        }
+
+        .ask-amount {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #8B5CF6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ask-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 15px;
+        }
+
+        .ask-detail {
+            text-align: center;
+        }
+
+        .ask-detail .value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .ask-detail .label {
+            font-size: 11px;
+            color: #a0a0a0;
+            text-transform: uppercase;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI LAUNCHPAD</h1>
+            <div class="tagline">The fastest path from AI-curious to AI-powered</div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="number">$50B+</div>
+                <div class="label">AI Services Market by 2027</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">90%</div>
+                <div class="label">Businesses Say AI is Priority</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">&lt;20%</div>
+                <div class="label">Have Actually Implemented</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">30-40</div>
+                <div class="label">Hours/Week Our Clients Save</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>THE PROBLEM</h3>
+                    <p>Every business needs AI. Few know how to use it. The gap between "AI exists" and "my team ships with AI" costs thousands of hours in failed experiments.</p>
+                </div>
+                <div class="solution">
+                    <h3>OUR SOLUTION</h3>
+                    <p>AI Launchpad takes professionals from zero to shipping real projects in 2 weeks. Hands-on setup. Real tools. Measurable results. 30-40 hours/week back - permanently.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Product Tiers</h2>
+            <div class="tiers">
+                <div class="tier">
+                    <h4>STARTER</h4>
+                    <div class="price">$97/mo</div>
+                    <div class="desc">Self-paced course, community, templates, monthly Q&A</div>
+                </div>
+                <div class="tier featured">
+                    <h4>PRO</h4>
+                    <div class="price">$3,000</div>
+                    <div class="desc">2-week cohort, live setup sessions, direct access</div>
+                </div>
+                <div class="tier">
+                    <h4>ENTERPRISE</h4>
+                    <div class="price">$10,000+</div>
+                    <div class="desc">Full custom implementation, ongoing support</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Financial Projections</h2>
+            <div class="financials">
+                <div>
+                    <table class="revenue-table">
+                        <tr>
+                            <th>Tier</th>
+                            <th>Year 1</th>
+                            <th>Year 2</th>
+                        </tr>
+                        <tr>
+                            <td>Starter</td>
+                            <td>$108K</td>
+                            <td>$300K</td>
+                        </tr>
+                        <tr>
+                            <td>Pro</td>
+                            <td>$225K</td>
+                            <td>$600K</td>
+                        </tr>
+                        <tr>
+                            <td>Enterprise</td>
+                            <td>$175K</td>
+                            <td>$400K</td>
+                        </tr>
+                        <tr class="total">
+                            <td>TOTAL</td>
+                            <td>$508K</td>
+                            <td>$1.3M+</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="use-of-funds">
+                    <strong style="color: #8B5CF6; margin-bottom: 10px;">Use of Funds</strong>
+                    <div class="fund-item">
+                        <span style="font-size: 12px;">Platform Dev</span>
+                        <div class="fund-bar"><div class="fund-fill" style="width: 30%"></div></div>
+                        <span style="font-size: 12px;">$225K</span>
+                    </div>
+                    <div class="fund-item">
+                        <span style="font-size: 12px;">Team (2 hires)</span>
+                        <div class="fund-bar"><div class="fund-fill" style="width: 22%"></div></div>
+                        <span style="font-size: 12px;">$170K</span>
+                    </div>
+                    <div class="fund-item">
+                        <span style="font-size: 12px;">Founder</span>
+                        <div class="fund-bar"><div class="fund-fill" style="width: 17%"></div></div>
+                        <span style="font-size: 12px;">$175K</span>
+                    </div>
+                    <div class="fund-item">
+                        <span style="font-size: 12px;">Marketing</span>
+                        <div class="fund-bar"><div class="fund-fill" style="width: 13%"></div></div>
+                        <span style="font-size: 12px;">$100K</span>
+                    </div>
+                    <div class="fund-item">
+                        <span style="font-size: 12px;">Content/Site</span>
+                        <div class="fund-bar"><div class="fund-fill" style="width: 11%"></div></div>
+                        <span style="font-size: 12px;">$85K</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Why We Win</h2>
+            <div class="why-us">
+                <div class="why-item">
+                    <div class="icon">&#9889;</div>
+                    <h4>First Mover</h4>
+                    <p>Leading Claude Code specialist before market crowds</p>
+                </div>
+                <div class="why-item">
+                    <div class="icon">&#128202;</div>
+                    <h4>Proven Results</h4>
+                    <p>Real clients, 30-40 hrs/week saved, organic referrals</p>
+                </div>
+                <div class="why-item">
+                    <div class="icon">&#129309;</div>
+                    <h4>Anthropic Partner</h4>
+                    <p>Partnership application in progress with tool creator</p>
+                </div>
+                <div class="why-item">
+                    <div class="icon">&#128640;</div>
+                    <h4>Scalable Model</h4>
+                    <p>Tiered products from self-serve to enterprise</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ask-box">
+            <h2>The Ask</h2>
+            <div class="ask-amount">$750K - $1M</div>
+            <div class="ask-details">
+                <div class="ask-detail">
+                    <div class="value">18-24 mo</div>
+                    <div class="label">Runway</div>
+                </div>
+                <div class="ask-detail">
+                    <div class="value">$500K</div>
+                    <div class="label">Year 1 Revenue</div>
+                </div>
+                <div class="ask-detail">
+                    <div class="value">$1.5M+</div>
+                    <div class="label">Year 2 Target</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <strong>Perry | AI Launchpad</strong> | support-forge.com
+        </div>
+    </div>
+</body>
+</html>
