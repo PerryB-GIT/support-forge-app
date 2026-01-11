@@ -309,84 +309,11 @@ export default async function Home() {
       </section>
 
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-surface/50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              What Our <span className="text-accent">Clients Say</span>
-            </h2>
-            <p className="text-text-secondary max-w-2xl mx-auto">
-              Real results from businesses we&apos;ve helped transform with AI and modern technology solutions
-            </p>
-          </div>
+      {/* Testimonials Section - Hidden until real testimonials are added
+      TODO: Uncomment when you have real client testimonials to display
+      */}
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {/* Testimonial 1 */}
-            <div className="relative p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent/50 transition-all">
-              <div className="absolute top-6 right-6 text-accent/20">
-                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-              </div>
-              <p className="text-text-secondary mb-6 relative z-10">
-                [Testimonial text here - Share how Support Forge helped transform your business with AI solutions]
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent/30 to-accent/10 flex items-center justify-center text-accent font-semibold">
-                  CN
-                </div>
-                <div>
-                  <div className="font-semibold">[Client Name]</div>
-                  <div className="text-text-muted text-sm">[Role, Company Name]</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 2 */}
-            <div className="relative p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent/50 transition-all">
-              <div className="absolute top-6 right-6 text-accent/20">
-                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-              </div>
-              <p className="text-text-secondary mb-6 relative z-10">
-                [Testimonial text here - Describe the impact of their IT consulting or cloud solutions on your operations]
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent/30 to-accent/10 flex items-center justify-center text-accent font-semibold">
-                  CN
-                </div>
-                <div>
-                  <div className="font-semibold">[Client Name]</div>
-                  <div className="text-text-muted text-sm">[Role, Company Name]</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div className="relative p-8 rounded-2xl bg-background border border-border-subtle hover:border-accent/50 transition-all md:col-span-2 lg:col-span-1">
-              <div className="absolute top-6 right-6 text-accent/20">
-                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-              </div>
-              <p className="text-text-secondary mb-6 relative z-10">
-                [Testimonial text here - Talk about their responsive support and technical expertise]
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent/30 to-accent/10 flex items-center justify-center text-accent font-semibold">
-                  CN
-                </div>
-                <div>
-                  <div className="font-semibold">[Client Name]</div>
-                  <div className="text-text-muted text-sm">[Role, Company Name]</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* CTA Section */}
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-accent/10 via-background to-accent/10">

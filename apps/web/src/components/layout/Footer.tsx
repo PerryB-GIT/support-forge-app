@@ -32,7 +32,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-text-secondary">
               <li>
                 <Link href="/launchpad" className="hover:text-accent transition-colors">
-                  AI Launchpad
+                  AI Academy
                 </Link>
               </li>
               <li>

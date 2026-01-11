@@ -492,7 +492,7 @@ export default function ShopPage() {
                     </li>
                   ))}
                 </ul>
-                {tier.stripeLink ? (
+                {tier.stripeLink && !tier.stripeLink.startsWith("YOUR_") ? (
                   <a
                     href={tier.stripeLink}
                     className={`block w-full py-3 rounded-lg font-medium text-center transition-all ${
@@ -503,6 +503,10 @@ export default function ShopPage() {
                   >
                     Get Started
                   </a>
+                ) : tier.stripeLink?.startsWith("YOUR_") ? (
+                  <span className="block w-full py-3 rounded-lg font-medium text-center bg-surface/50 border border-border-subtle text-text-muted cursor-not-allowed">
+                    Coming Soon
+                  </span>
                 ) : (
                   <Link
                     href="/contact"

@@ -14,8 +14,7 @@ export function Header({ variant = "default" }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "/launchpad", label: "AI Launchpad", highlight: true },
-    { href: "/academy", label: "Academy", highlight: true },
+    { href: "/launchpad", label: "AI Academy", highlight: true },
     { href: "/shop", label: "Workflow Shop" },
     { href: "/ai-transformation", label: "AI Transformation" },
     { href: "/services", label: "Services" },
