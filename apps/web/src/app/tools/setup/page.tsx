@@ -131,12 +131,12 @@ export default function SetupPage() {
                 <h1 className="text-xl font-bold text-text-primary" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                   SF Setup Tools
                 </h1>
-                <p className="text-sm text-text-muted">Support Forge Academy</p>
+                <p className="text-sm text-text-muted">Support Forge Client Tools</p>
               </div>
             </div>
 
             <p className="text-text-secondary text-sm text-center mb-6">
-              Enter the access code provided by your instructor to access the Claude Code setup tools.
+              Enter the access code provided by your implementation partner to access the Claude Code setup tools.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -193,7 +193,7 @@ export default function SetupPage() {
             </span>
           </div>
           <span className="text-xs text-text-muted bg-surface px-3 py-1.5 rounded-full border border-border-subtle">
-            Academy Access
+            Client Access
           </span>
         </div>
       </header>
