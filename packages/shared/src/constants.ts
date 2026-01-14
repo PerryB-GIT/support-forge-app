@@ -6,8 +6,8 @@ export const APP_DESCRIPTION = "AI & IT Consulting Platform";
 // Contact Information
 export const CONTACT_INFO = {
   email: "contact@support-forge.com",
-  phone: "478-299-1604",
-  phoneRaw: "4782991604",
+  phone: "978-219-9092",
+  phoneRaw: "9782199092",
   location: "Haverhill, MA",
   website: "https://support-forge.com",
 } as const;
