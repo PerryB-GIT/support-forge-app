@@ -72,6 +72,12 @@ export function Header({ variant = "default" }: HeaderProps) {
             Client Portal
           </Link>
           <Link
+            href="/admin"
+            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+          >
+            Admin
+          </Link>
+          <Link
             href="/contact"
             className="px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors"
           >
@@ -122,6 +128,13 @@ export function Header({ variant = "default" }: HeaderProps) {
                 className="block py-2 px-3 text-text-secondary hover:bg-surface rounded-lg"
               >
                 Client Portal
+              </Link>
+              <Link
+                href="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 px-3 text-text-secondary hover:bg-surface rounded-lg"
+              >
+                Admin Portal
               </Link>
               <Link
                 href="/contact"

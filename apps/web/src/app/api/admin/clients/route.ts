@@ -12,7 +12,7 @@ const logger = createLogger("clients-api");
 export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
-  if (\!session || session.user.role \!== "ADMIN") {
+  if (!session || session.user.role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
-  if (\!session || session.user.role \!== "ADMIN") {
+  if (!session || session.user.role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { name, email, password, company, phone } = body;
 
-    if (\!name || \!email || \!password) {
+    if (!name || !email || !password) {
       return NextResponse.json(
         { error: "Name, email, and password are required" },
         { status: 400 }

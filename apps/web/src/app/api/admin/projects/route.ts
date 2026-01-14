@@ -10,7 +10,7 @@ const logger = createLogger("projects-api");
 export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (\!session || session.user.role \!== "ADMIN") {
+    if (!session || session.user.role !== "ADMIN") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -45,14 +45,14 @@ export async function GET(req: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (\!session || session.user.role \!== "ADMIN") {
+    if (!session || session.user.role !== "ADMIN") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const data = await request.json();
     const { title, description, clientId, status, budget, startDate, endDate } = data;
 
-    if (\!title || \!clientId) {
+    if (!title || !clientId) {
       return NextResponse.json({ error: "Title and client are required" }, { status: 400 });
     }
 
