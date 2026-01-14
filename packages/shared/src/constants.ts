@@ -5,7 +5,7 @@ export const APP_DESCRIPTION = "AI & IT Consulting Platform";
 
 // Contact Information
 export const CONTACT_INFO = {
-  email: "perry.bailes@gmail.com",
+  email: "contact@support-forge.com",
   phone: "478-299-1604",
   phoneRaw: "4782991604",
   location: "Haverhill, MA",
