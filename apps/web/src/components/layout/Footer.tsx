@@ -24,30 +24,30 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-text-secondary text-sm">
-              The fastest path from AI-curious to AI-powered. Reclaim 30-40 hours every week.
+              We set it up. You own it forever. From developer dependency to digital independence.
             </p>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">AI Launchpad</h4>
+            <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
               <li>
-                <Link href="/launchpad" className="hover:text-accent transition-colors">
-                  Programs & Pricing
+                <Link href="/services" className="hover:text-accent transition-colors">
+                  All Services
                 </Link>
               </li>
               <li>
-                <Link href="/launchpad#pricing" className="hover:text-accent transition-colors">
-                  Launchpad Starter ($97/mo)
+                <Link href="/contact?service=website-liberation" className="hover:text-accent transition-colors">
+                  Website Liberation ($2,500)
                 </Link>
               </li>
               <li>
-                <Link href="/launchpad#pricing" className="hover:text-accent transition-colors">
-                  Launchpad Pro ($3,000)
+                <Link href="/contact?service=ai-toolkit" className="hover:text-accent transition-colors">
+                  AI Toolkit Setup ($5,000)
                 </Link>
               </li>
               <li>
-                <Link href="/contact?subject=Enterprise" className="hover:text-accent transition-colors">
-                  Enterprise Solutions
+                <Link href="/contact?service=digital-overhaul" className="hover:text-accent transition-colors">
+                  Full Digital Overhaul ($10-15K)
                 </Link>
               </li>
               <li>

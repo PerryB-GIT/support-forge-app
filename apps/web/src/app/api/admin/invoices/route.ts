@@ -3,6 +3,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@support-forge/database";
 import { sendEmail, generateInvoiceEmailHtml } from "@/lib/email";
+import { getPaginationFromQuery, createPaginatedResponse } from "@/lib/pagination";
+import { createLogger } from "@/lib/logger";
+
+const logger = createLogger("invoices-api");
 
 // Generate invoice number
 function generateInvoiceNumber(): string {
@@ -15,8 +19,8 @@ function generateInvoiceNumber(): string {
   return `INV-${year}${month}-${random}`;
 }
 
-// GET - List all invoices
-export async function GET() {
+// GET - List all invoices with pagination
+export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session || session.user.role !== "ADMIN") {
@@ -24,19 +28,28 @@ export async function GET() {
   }
 
   try {
-    const invoices = await prisma.invoice.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        client: {
-          select: { id: true, name: true, email: true },
-        },
-        items: true,
-      },
-    });
+    const { skip, take } = getPaginationFromQuery(req.nextUrl.searchParams);
+    const { page, pageSize } = { page: Math.max(1, (skip / take) + 1), pageSize: take };
 
-    return NextResponse.json({ invoices });
+    const [invoices, total] = await Promise.all([
+      prisma.invoice.findMany({
+        orderBy: { createdAt: "desc" },
+        include: {
+          client: {
+            select: { id: true, name: true, email: true },
+          },
+          items: true,
+        },
+        skip,
+        take,
+      }),
+      prisma.invoice.count(),
+    ]);
+
+    logger.info("Fetched invoices", { total, page, pageSize });
+    return NextResponse.json(createPaginatedResponse(invoices, total, page, pageSize));
   } catch (error) {
-    console.error("Error fetching invoices:", error);
+    logger.error("Error fetching invoices", { error });
     return NextResponse.json(
       { error: "Failed to fetch invoices" },
       { status: 500 }
@@ -142,14 +155,14 @@ export async function POST(req: NextRequest) {
           html: emailHtml,
         });
       } catch (emailError) {
-        console.error("Failed to send invoice email:", emailError);
-        // Don't fail the request if email fails, invoice is already created
+        logger.error("Failed to send invoice email", { error: emailError });
       }
     }
 
+    logger.info("Created new invoice", { invoiceId: invoice.id, number: invoice.number });
     return NextResponse.json({ invoice, emailSent: sendEmailToClient && !!client.email }, { status: 201 });
   } catch (error) {
-    console.error("Error creating invoice:", error);
+    logger.error("Error creating invoice", { error });
     return NextResponse.json(
       { error: "Failed to create invoice" },
       { status: 500 }

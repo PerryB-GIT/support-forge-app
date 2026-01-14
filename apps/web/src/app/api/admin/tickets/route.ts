@@ -2,32 +2,45 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@support-forge/database";
+import { getPaginationFromQuery, createPaginatedResponse } from "@/lib/pagination";
+import { createLogger } from "@/lib/logger";
 
-export async function GET() {
+const logger = createLogger("tickets-api");
+
+export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session || session.user.role !== "ADMIN") {
+    if (\!session || session.user.role \!== "ADMIN") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const tickets = await prisma.ticket.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        client: {
-          select: { id: true, name: true, email: true },
-        },
-        project: {
-          select: { id: true, title: true },
-        },
-        _count: {
-          select: { comments: true },
-        },
-      },
-    });
+    const { skip, take } = getPaginationFromQuery(req.nextUrl.searchParams);
+    const { page, pageSize } = { page: Math.max(1, (skip / take) + 1), pageSize: take };
 
-    return NextResponse.json({ tickets });
+    const [tickets, total] = await Promise.all([
+      prisma.ticket.findMany({
+        orderBy: { createdAt: "desc" },
+        include: {
+          client: {
+            select: { id: true, name: true, email: true },
+          },
+          project: {
+            select: { id: true, title: true },
+          },
+          _count: {
+            select: { comments: true },
+          },
+        },
+        skip,
+        take,
+      }),
+      prisma.ticket.count(),
+    ]);
+
+    logger.info("Fetched tickets", { total, page, pageSize });
+    return NextResponse.json(createPaginatedResponse(tickets, total, page, pageSize));
   } catch (error) {
-    console.error("Error fetching tickets:", error);
+    logger.error("Error fetching tickets", { error });
     return NextResponse.json({ error: "Failed to fetch tickets" }, { status: 500 });
   }
 }
@@ -35,14 +48,14 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session || session.user.role !== "ADMIN") {
+    if (\!session || session.user.role \!== "ADMIN") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const data = await request.json();
     const { title, description, clientId, projectId, priority, status } = data;
 
-    if (!title || !description || !clientId) {
+    if (\!title || \!description || \!clientId) {
       return NextResponse.json({ error: "Title, description, and client are required" }, { status: 400 });
     }
 
@@ -57,9 +70,10 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    logger.info("Created new ticket", { ticketId: ticket.id, title: ticket.title });
     return NextResponse.json({ ticket });
   } catch (error) {
-    console.error("Error creating ticket:", error);
+    logger.error("Error creating ticket", { error });
     return NextResponse.json({ error: "Failed to create ticket" }, { status: 500 });
   }
 }

@@ -1,166 +1,105 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Services",
-  description: "Comprehensive AI & IT services: AI integration, custom software development, cloud solutions, DevOps, cybersecurity, and managed IT services. Transform your business with expert technology solutions.",
+  title: "Services - AI Implementation Partner",
+  description: "AI implementation services: Website Liberation ($2,500), AI Toolkit Setup ($5,000), Full Digital Overhaul ($10-15K). One-time investment, you own everything, no monthly fees.",
   keywords: [
-    "AI integration services",
-    "custom software development",
-    "cloud migration",
-    "DevOps consulting",
-    "cybersecurity services",
-    "managed IT services",
-    "machine learning solutions",
-    "AWS consulting",
-    "Azure consulting",
-    "IT strategy",
+    "AI implementation",
+    "website migration",
+    "AWS hosting",
+    "Claude Code setup",
+    "AI automation",
+    "digital transformation",
+    "small business AI",
+    "website independence",
   ],
   openGraph: {
-    title: "IT & AI Services - Support Forge",
-    description: "Comprehensive technology solutions: AI integration, software development, cloud solutions, cybersecurity, and 24/7 managed IT services.",
+    title: "AI Implementation Services - Support Forge",
+    description: "We set it up. You own it forever. From developer dependency to digital independence.",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IT & AI Services - Support Forge",
-    description: "Comprehensive technology solutions: AI integration, software development, cloud solutions, cybersecurity, and managed IT services.",
+    title: "AI Implementation Services - Support Forge",
+    description: "We set it up. You own it forever. From developer dependency to digital independence.",
   },
   alternates: {
     canonical: "/services",
   },
 };
 
-const ServiceIcon = ({ name }: { name: string }) => {
-  const icons: Record<string, ReactNode> = {
-    ai: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    code: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-      </svg>
-    ),
-    cloud: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-      </svg>
-    ),
-    strategy: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
-    ),
-    security: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-      </svg>
-    ),
-    managed: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
-  };
-  return (
-    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
-      {icons[name]}
-    </div>
-  );
-};
+const CheckIcon = () => (
+  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+);
 
 export default function ServicesPage() {
   const services = [
     {
-      id: "ai",
-      icon: "ai",
-      title: "AI Integration & Automation",
-      description: "Transform your business with cutting-edge AI solutions. We implement machine learning models, natural language processing, and intelligent automation to streamline operations and drive innovation.",
+      id: "website-liberation",
+      tier: "Tier 1",
+      title: "Website Liberation",
+      price: "$2,500",
+      timeline: "1 week",
+      description: "Escape platform jail. Migrate your existing site to infrastructure you own and control.",
+      idealFor: "Business owners paying monthly platform fees who want out",
       features: [
-        "Custom AI/ML model development",
-        "Chatbot and virtual assistant implementation",
-        "Process automation with AI",
-        "Predictive analytics and forecasting",
-        "Computer vision solutions",
-        "Natural language processing"
-      ]
+        "Migrate existing site to AWS (~$4/month hosting)",
+        "Set up Claude Code on your computer",
+        "Connect to Google Drive for easy photo uploads",
+        "Staging environment for safe testing",
+        "2x live training sessions (60 min each)",
+        "30-day email support",
+      ],
+      outcome: "You type \"Add this photo to the About page\" and it happens. No developer. No invoice. No waiting.",
+      roi: "Save $300+/year on hosting alone. Eliminate $1,000+/year in developer change fees. Pays for itself in Year 1.",
     },
     {
-      id: "development",
-      icon: "code",
-      title: "Custom Software Development",
-      description: "From concept to deployment, we build scalable, maintainable software tailored to your unique business requirements. Our full-stack expertise ensures seamless solutions across all platforms.",
+      id: "ai-toolkit",
+      tier: "Tier 2",
+      title: "AI Toolkit Setup",
+      price: "$5,000",
+      timeline: "2 weeks",
+      popular: true,
+      description: "AI working across your entire business, not just your website.",
+      idealFor: "Professionals who want AI integrated across their daily operations",
       features: [
-        "Web application development",
-        "Mobile app development (iOS & Android)",
-        "API design and integration",
-        "Database architecture",
-        "Legacy system modernization",
-        "SaaS product development"
-      ]
+        "Everything in Website Liberation",
+        "MCP connections to your tools (Gmail, Google Drive, Calendar, GitHub)",
+        "Zapier/N8N automation setup (3 workflows)",
+        "Custom AI prompts for your specific business",
+        "Document templates and SOPs",
+        "4x live training sessions (60 min each)",
+        "60-day email support",
+      ],
+      outcome: "Your AI assistant knows your business. It can draft emails in your voice, pull data from your spreadsheets, and update your website — all from natural language commands.",
+      roi: "Save 5-10 hours/week on repetitive tasks. At $50/hour value = $15,000+/year in time savings.",
     },
     {
-      id: "cloud",
-      icon: "cloud",
-      title: "Cloud Solutions & DevOps",
-      description: "Leverage the power of cloud computing with our comprehensive cloud services. We help you migrate, optimize, and manage your infrastructure for maximum efficiency and scalability.",
+      id: "digital-overhaul",
+      tier: "Tier 3",
+      title: "Full Digital Overhaul",
+      price: "$10,000 - $15,000",
+      timeline: "3-4 weeks",
+      description: "Complete digital transformation for businesses ready to go all-in.",
+      idealFor: "Businesses needing a complete digital transformation with custom functionality",
       features: [
-        "Cloud migration (AWS, Azure, GCP)",
-        "Infrastructure as Code (Terraform, CloudFormation)",
-        "CI/CD pipeline implementation",
-        "Container orchestration (Docker, Kubernetes)",
-        "Cloud cost optimization",
-        "Serverless architecture"
-      ]
+        "Everything in AI Toolkit Setup",
+        "Complete website redesign (not just migration)",
+        "Custom functionality (booking systems, client portals, etc.)",
+        "Database setup if needed",
+        "8x live training sessions",
+        "Team training (up to 3 people)",
+        "90-day priority support",
+        "One \"emergency\" session within first year",
+      ],
+      outcome: "Your entire digital presence is rebuilt on infrastructure you own, managed by AI you control, with a team that knows how to use it.",
+      roi: "Replaces $20K-50K agency projects. Eliminates ongoing developer retainers. Complete digital independence.",
     },
-    {
-      id: "consulting",
-      icon: "strategy",
-      title: "IT Consulting & Strategy",
-      description: "Navigate the complex technology landscape with expert guidance. Our consultants help you make informed decisions, develop technology roadmaps, and align IT investments with business goals.",
-      features: [
-        "Technology assessment and audit",
-        "Digital transformation strategy",
-        "IT roadmap development",
-        "Vendor selection and management",
-        "Architecture review and design",
-        "Technology due diligence"
-      ]
-    },
-    {
-      id: "security",
-      icon: "security",
-      title: "Cybersecurity Services",
-      description: "Protect your business from evolving cyber threats with our comprehensive security solutions. We implement defense-in-depth strategies to safeguard your data and systems.",
-      features: [
-        "Security assessments and penetration testing",
-        "Security architecture design",
-        "Incident response planning",
-        "Compliance consulting (SOC 2, HIPAA, GDPR)",
-        "Security awareness training",
-        "Vulnerability management"
-      ]
-    },
-    {
-      id: "support",
-      icon: "managed",
-      title: "Managed IT Services",
-      description: "Focus on your core business while we handle your IT. Our managed services provide proactive monitoring, maintenance, and support to keep your systems running smoothly 24/7.",
-      features: [
-        "24/7 system monitoring",
-        "Help desk and technical support",
-        "Network management",
-        "Backup and disaster recovery",
-        "Software updates and patch management",
-        "Performance optimization"
-      ]
-    }
   ];
 
   return (
@@ -170,46 +109,157 @@ export default function ServicesPage() {
       {/* Hero Section */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-text-primary mb-6">
-            Our <span className="text-accent">Services</span>
+          <div className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
+            AI Implementation Partner
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-6">
+            Choose Your <span className="text-accent">Implementation</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-            Comprehensive technology solutions tailored to accelerate your business growth.
-            From AI integration to managed IT services, we have the expertise to transform your operations.
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto mb-4">
+            One-time investment. You own everything. No monthly fees.
+          </p>
+          <p className="text-lg text-text-muted max-w-2xl mx-auto">
+            We do the heavy lifting upfront and hand you the keys. Our goal is to make ourselves unnecessary.
           </p>
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Services */}
       <section className="py-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid gap-8">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                id={service.id}
-                className="group bg-surface border border-border-subtle rounded-2xl p-8 hover:border-accent/50 transition-all duration-300 scroll-mt-24"
-              >
-                <div className="flex flex-col lg:flex-row gap-8">
-                  <div className="lg:w-1/2">
-                    <div className="mb-4"><ServiceIcon name={service.icon} /></div>
-                    <h2 className="text-2xl font-bold text-text-primary mb-4">{service.title}</h2>
-                    <p className="text-text-secondary text-lg leading-relaxed">{service.description}</p>
+        <div className="max-w-7xl mx-auto space-y-12">
+          {services.map((service) => (
+            <div
+              key={service.id}
+              id={service.id}
+              className={`relative bg-surface border rounded-2xl p-8 lg:p-10 scroll-mt-24 ${
+                service.popular
+                  ? "border-accent shadow-lg shadow-accent/10"
+                  : "border-border-subtle"
+              }`}
+            >
+              {service.popular && (
+                <div className="absolute -top-3 left-8 px-4 py-1 bg-accent text-white text-sm font-medium rounded-full">
+                  Most Popular
+                </div>
+              )}
+
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+                {/* Left Column */}
+                <div>
+                  <div className="text-accent text-sm font-medium mb-2">{service.tier}</div>
+                  <h2 className="text-3xl font-bold text-text-primary mb-2">{service.title}</h2>
+                  <div className="flex items-baseline gap-2 mb-4">
+                    <span className="text-4xl font-bold text-accent">{service.price}</span>
+                    <span className="text-text-muted">/ {service.timeline}</span>
                   </div>
-                  <div className="lg:w-1/2">
-                    <h3 className="text-sm font-semibold text-accent uppercase tracking-wider mb-4">Key Capabilities</h3>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start gap-2 text-text-secondary">
-                          <svg className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
+                  <p className="text-lg text-text-secondary mb-6">{service.description}</p>
+
+                  <div className="bg-background/50 rounded-xl p-4 mb-6">
+                    <div className="text-sm font-medium text-text-muted mb-1">Ideal For:</div>
+                    <div className="text-text-primary">{service.idealFor}</div>
+                  </div>
+
+                  <Link
+                    href={`/contact?service=${service.id}`}
+                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                      service.popular
+                        ? "bg-accent hover:bg-accent-hover text-white shadow-lg shadow-accent/25"
+                        : "bg-accent/10 hover:bg-accent/20 text-accent"
+                    }`}
+                  >
+                    Get Started
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
+
+                {/* Right Column */}
+                <div>
+                  <h3 className="text-sm font-semibold text-accent uppercase tracking-wider mb-4">
+                    What&apos;s Included
+                  </h3>
+                  <ul className="space-y-3 mb-8">
+                    {service.features.map((feature, index) => (
+                      <li key={index} className="flex items-start gap-3 text-text-secondary">
+                        <CheckIcon />
+                        <span className={feature.startsWith("Everything") ? "font-semibold text-text-primary" : ""}>
                           {feature}
-                        </li>
-                      ))}
-                    </ul>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="space-y-4">
+                    <div className="bg-accent/5 rounded-xl p-4 border border-accent/20">
+                      <div className="text-sm font-semibold text-accent mb-1">The Outcome:</div>
+                      <div className="text-text-secondary text-sm">{service.outcome}</div>
+                    </div>
+                    <div className="bg-green-500/5 rounded-xl p-4 border border-green-500/20">
+                      <div className="text-sm font-semibold text-green-500 mb-1">ROI:</div>
+                      <div className="text-text-secondary text-sm">{service.roi}</div>
+                    </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 px-6 bg-surface/50 border-y border-border-subtle">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-text-primary text-center mb-12">
+            How It Works
+          </h2>
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { step: "1", title: "Free Demo", desc: "30-minute screen share showing exactly what's possible with YOUR business" },
+              { step: "2", title: "Choose Your Tier", desc: "Pick the implementation level that matches your needs and budget" },
+              { step: "3", title: "We Build It", desc: "Live collaboration sessions where we set up everything together" },
+              { step: "4", title: "You Own It", desc: "We hand you the keys and teach you to run it yourself" },
+            ].map((item) => (
+              <div key={item.step} className="text-center">
+                <div className="w-12 h-12 rounded-full bg-accent/10 text-accent font-bold text-xl flex items-center justify-center mx-auto mb-4">
+                  {item.step}
+                </div>
+                <h3 className="font-semibold text-text-primary mb-2">{item.title}</h3>
+                <p className="text-sm text-text-secondary">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-text-primary text-center mb-12">
+            Common Questions
+          </h2>
+          <div className="space-y-6">
+            {[
+              {
+                q: "I'm not technical. Can I really do this?",
+                a: "Absolutely. My best clients are a sheep farmer and a veterinary practice owner. Neither had technical backgrounds. If you can describe what you want in plain English, you can use these tools."
+              },
+              {
+                q: "What if it doesn't work for me?",
+                a: "Two things: First, we do a live demo before you commit. You'll see exactly what's possible with YOUR business, not a generic example. Second, I include training sessions — not just setup. If you can describe what you want in plain English, you can do this."
+              },
+              {
+                q: "Why not just learn this myself?",
+                a: "You could. Anthropic has free courses, YouTube has tutorials. But busy professionals start those courses and never finish. They get stuck on step 3 and give up. What I offer is accountability and speed. In 2 weeks, you're operational. Not still watching videos."
+              },
+              {
+                q: "What happens after the implementation?",
+                a: "You're independent. That's the whole point. I include email support (30-90 days depending on tier), and you can always book follow-up sessions if needed. But most clients don't need them — they're off and running."
+              },
+            ].map((faq, index) => (
+              <div key={index} className="bg-surface border border-border-subtle rounded-xl p-6">
+                <h3 className="font-semibold text-text-primary mb-2">{faq.q}</h3>
+                <p className="text-text-secondary">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -220,26 +270,28 @@ export default function ServicesPage() {
       <section className="py-20 px-6 bg-gradient-to-r from-accent/10 via-background to-accent/10 border-y border-border-subtle">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-6">
-            Ready to Transform Your Business?
+            Ready for Digital Independence?
           </h2>
           <p className="text-xl text-text-secondary mb-8">
-            Let&apos;s discuss how our services can help you achieve your technology goals.
-            Schedule a free consultation with our experts today.
+            Book a free 30-minute demo. I&apos;ll share my screen and show you exactly how it works with YOUR business.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
               className="px-8 py-4 bg-accent hover:bg-accent-hover text-white rounded-xl font-semibold text-lg transition-all shadow-lg shadow-accent/25"
             >
-              Schedule Consultation
+              Book Your Free Demo
             </Link>
             <Link
-              href="/about"
+              href="/results"
               className="px-8 py-4 border border-border-subtle text-text-primary rounded-xl font-semibold text-lg hover:bg-surface transition-all"
             >
-              Learn More About Us
+              See Client Results
             </Link>
           </div>
+          <p className="text-sm text-text-muted mt-4">
+            No pressure. No commitment. Just a live demo showing what&apos;s possible.
+          </p>
         </div>
       </section>
 
