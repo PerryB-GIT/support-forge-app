@@ -24,35 +24,51 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-text-secondary text-sm">
-              We set it up. You own it forever. From developer dependency to digital independence.
+              Strategic AI consulting for mid-market executives. We help you cut
+              through the hype and implement AI that delivers measurable ROI.
             </p>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
               <li>
-                <Link href="/services" className="hover:text-accent transition-colors">
-                  All Services
+                <Link
+                  href="/services"
+                  className="hover:text-accent transition-colors"
+                >
+                  Consulting Services
                 </Link>
               </li>
               <li>
-                <Link href="/contact?service=website-liberation" className="hover:text-accent transition-colors">
-                  Website Liberation ($2,500)
+                <Link
+                  href="/assessment"
+                  className="hover:text-accent transition-colors"
+                >
+                  AI Readiness Assessment
                 </Link>
               </li>
               <li>
-                <Link href="/contact?service=ai-toolkit" className="hover:text-accent transition-colors">
-                  AI Toolkit Setup ($5,000)
+                <Link
+                  href="/contact?service=implementation"
+                  className="hover:text-accent transition-colors"
+                >
+                  Strategic Implementation
                 </Link>
               </li>
               <li>
-                <Link href="/contact?service=digital-overhaul" className="hover:text-accent transition-colors">
-                  Full Digital Overhaul ($10-15K)
+                <Link
+                  href="/contact?service=advisory"
+                  className="hover:text-accent transition-colors"
+                >
+                  AI Advisory Retainer
                 </Link>
               </li>
               <li>
-                <Link href="/results" className="hover:text-accent transition-colors">
-                  Case Studies & Results
+                <Link
+                  href="/results"
+                  className="hover:text-accent transition-colors"
+                >
+                  Case Studies
                 </Link>
               </li>
             </ul>
@@ -61,27 +77,42 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
               <li>
-                <Link href="/about" className="hover:text-accent transition-colors">
+                <Link
+                  href="/about"
+                  className="hover:text-accent transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/results" className="hover:text-accent transition-colors">
+                <Link
+                  href="/results"
+                  className="hover:text-accent transition-colors"
+                >
                   Results & Case Studies
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-accent transition-colors">
+                <Link
+                  href="/contact"
+                  className="hover:text-accent transition-colors"
+                >
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/login" className="hover:text-accent transition-colors">
+                <Link
+                  href="/login"
+                  className="hover:text-accent transition-colors"
+                >
                   Client Portal
                 </Link>
               </li>
               <li>
-                <Link href="/admin" className="hover:text-accent transition-colors">
+                <Link
+                  href="/admin"
+                  className="hover:text-accent transition-colors"
+                >
                   Admin Portal
                 </Link>
               </li>
@@ -108,12 +139,26 @@ export function Footer() {
               </li>
               <li>{CONTACT_INFO.location}</li>
             </ul>
+            <div className="mt-4">
+              <Link
+                href="/contact?service=discovery"
+                className="inline-block px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm rounded-lg transition-colors"
+              >
+                Schedule Discovery Call
+              </Link>
+            </div>
           </div>
         </div>
         <div className="pt-8 border-t border-border-subtle flex flex-col sm:flex-row justify-between items-center gap-4 text-text-muted text-sm">
-          <div>&copy; {new Date().getFullYear()} Support Forge. All rights reserved.</div>
+          <div>
+            &copy; {new Date().getFullYear()} Support Forge. All rights
+            reserved.
+          </div>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-accent transition-colors">
+            <Link
+              href="/privacy"
+              className="hover:text-accent transition-colors"
+            >
               Privacy Policy
             </Link>
             <Link href="/terms" className="hover:text-accent transition-colors">

@@ -14,8 +14,8 @@ export function Header({ variant = "default" }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "/services", label: "Services", highlight: true },
-    { href: "/results", label: "Results" },
+    { href: "/services", label: "Consulting", highlight: true },
+    { href: "/results", label: "Case Studies" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -81,7 +81,7 @@ export function Header({ variant = "default" }: HeaderProps) {
             href="/contact"
             className="px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors"
           >
-            Book a Demo
+            Discovery Call
           </Link>
         </div>
 
@@ -141,7 +141,7 @@ export function Header({ variant = "default" }: HeaderProps) {
                 onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 px-3 bg-accent hover:bg-accent-hover text-white text-center rounded-lg font-medium"
               >
-                Book a Demo
+                Discovery Call
               </Link>
             </div>
           </nav>

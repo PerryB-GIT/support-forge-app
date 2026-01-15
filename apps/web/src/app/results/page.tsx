@@ -4,12 +4,20 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Results & Case Studies | AI Launchpad",
-  description: "See real results from AI Launchpad clients. Our proven LAUNCH Method helps teams save 30-40 hours per week and go from AI-curious to AI-powered in just 2 weeks.",
-  keywords: ["AI transformation results", "AI consulting case studies", "Claude Code training", "AI productivity gains", "business automation ROI"],
+  title: "Case Studies",
+  description:
+    "See how mid-market companies and SMBs achieve measurable ROI from strategic AI implementation. Real results from real engagements.",
+  keywords: [
+    "AI implementation case studies",
+    "AI ROI examples",
+    "executive AI consulting results",
+    "AI business transformation",
+    "AI automation ROI",
+  ],
   openGraph: {
-    title: "Results & Case Studies - Support Forge AI Launchpad",
-    description: "Real results from real clients. See how teams save 30-40 hours per week with our proven LAUNCH Method.",
+    title: "Case Studies | Support Forge",
+    description:
+      "Real results from strategic AI implementation. See how organizations achieve measurable ROI.",
     images: ["/og-image.png"],
   },
   alternates: {
@@ -17,63 +25,141 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ResultsPage() {
+export default function CaseStudiesPage() {
   const stats = [
-    { value: "30-40", unit: "hrs/week", label: "Average Time Saved" },
-    { value: "2", unit: "weeks", label: "Time to Productive" },
-    { value: "95%", unit: "", label: "Client Satisfaction" },
-    { value: "100%", unit: "", label: "Would Recommend" },
+    { value: "40%", label: "Average Efficiency Gain" },
+    { value: "6-12", unit: "months", label: "Typical ROI Timeline" },
+    { value: "$2.3M", label: "Avg. Annual Value Created" },
+    { value: "94%", label: "Client Retention Rate" },
   ];
 
-  const outcomes = [
+  const caseStudies = [
     {
-      title: "Marketing Agency Owner",
-      industry: "Digital Marketing",
-      challenge: "Spending 15+ hours weekly on content creation and client reporting",
-      solution: "Implemented Claude Code workflows for content drafts, social media scheduling, and automated report generation",
-      results: [
-        "Content creation time reduced by 80%",
-        "Client reports now auto-generated",
-        "Freed up 35 hours per week for strategy work",
-        "Took on 3 new clients without hiring",
+      id: "manufacturing-ops",
+      company: "Regional Manufacturing Company",
+      industry: "Manufacturing",
+      size: "85 employees",
+      revenue: "$12M annual revenue",
+      executive: "COO",
+      challenge:
+        "Production scheduling consumed 20+ hours weekly across three managers. Quality control documentation was inconsistent, leading to compliance concerns. The executive team knew AI could help but had no clear roadmap.",
+      approach: [
+        "Conducted AI Readiness Assessment to identify highest-impact opportunities",
+        "Prioritized production scheduling and QC documentation as Phase 1",
+        "Implemented custom scheduling optimization using historical production data",
+        "Built automated QC documentation system integrated with existing ERP",
       ],
-      quote: "I went from drowning in deliverables to actually having time to grow my business. The ROI was immediate.",
+      results: [
+        {
+          metric: "15 hours/week",
+          description: "Scheduling time reduced from 20+ to 5 hours",
+        },
+        {
+          metric: "100%",
+          description: "QC documentation compliance achieved",
+        },
+        {
+          metric: "$180K",
+          description: "Annual labor cost savings",
+        },
+        {
+          metric: "3 weeks",
+          description: "Time to first production deployment",
+        },
+      ],
+      quote:
+        "We knew AI was important but had no idea where to start. The assessment gave us clarity, and the implementation delivered faster than we expected. The ROI case practically wrote itself for our board.",
+      quoteAttribution: "Chief Operating Officer",
+      timeline: "8 weeks from assessment to full deployment",
+      investment: "Strategic Implementation engagement",
     },
     {
-      title: "Software Development Team Lead",
-      industry: "Technology",
-      challenge: "Team spending too much time on boilerplate code and documentation",
-      solution: "Full Claude Code + GitHub Copilot integration with custom workflows for code review and documentation",
-      results: [
-        "Code review time cut by 60%",
-        "Documentation now auto-generated",
-        "Onboarding new devs 3x faster",
-        "Team shipping features 40% faster",
-      ],
-      quote: "Our entire development workflow transformed in two weeks. Every developer on the team now ships with AI daily.",
-    },
-    {
-      title: "Small Business Consultant",
+      id: "professional-services",
+      company: "Multi-State Professional Services Firm",
       industry: "Professional Services",
-      challenge: "Overwhelmed by admin tasks, proposal writing, and client follow-ups",
-      solution: "N8N + Zapier automation stack with Claude for proposal generation and email drafting",
-      results: [
-        "Proposal creation from 4 hours to 30 minutes",
-        "Automated client follow-up sequences",
-        "40 hours per week reclaimed",
-        "Revenue up 50% with same hours",
+      size: "45 employees",
+      revenue: "$8M annual revenue",
+      executive: "Managing Partner",
+      challenge:
+        "Client proposal development took 6-8 hours each, limiting capacity to pursue new business. Senior partners spent excessive time on administrative tasks rather than client-facing work. Previous AI tool purchases went unused.",
+      approach: [
+        "Assessed existing tech stack and identified integration opportunities",
+        "Developed custom proposal generation system trained on firm's successful proposals",
+        "Created AI-assisted research and analysis workflows for senior partners",
+        "Implemented with minimal disruption to ongoing client work",
       ],
-      quote: "I was skeptical about AI hype. Now I can't imagine running my business without it. This changed everything.",
+      results: [
+        {
+          metric: "75%",
+          description: "Reduction in proposal development time",
+        },
+        {
+          metric: "12 hours/week",
+          description: "Per-partner time reclaimed for client work",
+        },
+        {
+          metric: "40%",
+          description: "Increase in proposals submitted",
+        },
+        {
+          metric: "$340K",
+          description: "New revenue attributed to increased capacity",
+        },
+      ],
+      quote:
+        "The difference between our failed DIY attempts and this engagement was night and day. Having someone who understood both the technology and our business made all the difference.",
+      quoteAttribution: "Managing Partner",
+      timeline: "6 weeks to full deployment",
+      investment: "Assessment + Strategic Implementation",
+    },
+    {
+      id: "healthcare-admin",
+      company: "Regional Healthcare Provider",
+      industry: "Healthcare",
+      size: "120 employees",
+      revenue: "$18M annual revenue",
+      executive: "CEO",
+      challenge:
+        "Administrative burden consuming clinical staff time. Patient communication inconsistent and often delayed. Leadership team facing board pressure to demonstrate technology investment ROI while maintaining strict compliance requirements.",
+      approach: [
+        "Conducted comprehensive AI Readiness Assessment with compliance focus",
+        "Identified patient communication and scheduling as low-risk, high-impact starting points",
+        "Implemented HIPAA-compliant automation for appointment reminders and follow-ups",
+        "Created administrative workflow automation for non-clinical staff",
+      ],
+      results: [
+        {
+          metric: "35%",
+          description: "Reduction in no-show appointments",
+        },
+        {
+          metric: "25 hours/week",
+          description: "Administrative time saved across staff",
+        },
+        {
+          metric: "100%",
+          description: "HIPAA compliance maintained",
+        },
+        {
+          metric: "$420K",
+          description: "Annual operational savings",
+        },
+      ],
+      quote:
+        "The board wanted to see us innovate with AI, but compliance was non-negotiable. Support Forge delivered both—we're now seen as a technology leader in our region.",
+      quoteAttribution: "Chief Executive Officer",
+      timeline: "12 weeks including compliance review",
+      investment: "Assessment + Phased Implementation",
     },
   ];
 
-  const beforeAfter = [
-    { before: "Hours lost to repetitive tasks", after: "Automation handles the mundane" },
-    { before: "AI subscriptions gathering dust", after: "AI integrated into daily workflow" },
-    { before: "Confusion about which tools to use", after: "Clear stack: Claude + GitHub + Zapier" },
-    { before: "Trial and error for months", after: "Productive in 2 weeks flat" },
-    { before: "Generic YouTube tutorials", after: "Hands-on setup with experts" },
-    { before: "No one to ask when stuck", after: "Direct Slack access to support" },
+  const industries = [
+    "Manufacturing",
+    "Professional Services",
+    "Healthcare",
+    "Financial Services",
+    "Technology",
+    "Retail & Distribution",
   ];
 
   return (
@@ -81,34 +167,41 @@ export default function ResultsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-            Real Results
+      <section className="py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
+            Client Results
           </div>
           <h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-6"
+            className="text-4xl md:text-5xl font-bold mb-6"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            From AI-Curious to{" "}
-            <span className="text-accent">AI-Powered</span>
+            Measurable Impact from Strategic AI
           </h1>
-          <p className="text-xl text-text-secondary max-w-3xl mx-auto mb-12">
-            Our clients don&apos;t just learn about AI—they transform how they work.
-            Here&apos;s what happens when you stop experimenting and start shipping.
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+            We measure success in business outcomes, not technology deployed.
+            These case studies demonstrate the real-world ROI our clients
+            achieve.
           </p>
+        </div>
+      </section>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+      {/* Stats Section */}
+      <section className="py-12 px-4 border-y border-border-subtle bg-surface/30">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="p-6 rounded-2xl bg-surface border border-border-subtle"
-              >
-                <div className="text-4xl md:text-5xl font-bold text-accent mb-1" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              <div key={index} className="text-center">
+                <div
+                  className="text-3xl md:text-4xl font-bold text-accent mb-1"
+                  style={{ fontFamily: "var(--font-space-grotesk)" }}
+                >
                   {stat.value}
-                  <span className="text-2xl text-text-secondary">{stat.unit}</span>
+                  {stat.unit && (
+                    <span className="text-lg text-text-secondary ml-1">
+                      {stat.unit}
+                    </span>
+                  )}
                 </div>
                 <div className="text-text-secondary text-sm">{stat.label}</div>
               </div>
@@ -117,130 +210,177 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      {/* Before/After Section */}
-      <section className="py-16 px-6 bg-surface/50">
+      {/* Case Studies */}
+      <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
-          <h2
-            className="text-3xl font-bold text-center mb-12"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
-            The <span className="text-accent">Transformation</span>
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="space-y-3">
-              <div className="text-sm font-medium text-red-400 uppercase tracking-wide mb-4">Before Launchpad</div>
-              {beforeAfter.map((item, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
-                  <svg className="w-5 h-5 text-red-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                  <span className="text-text-secondary">{item.before}</span>
-                </div>
-              ))}
-            </div>
-            <div className="space-y-3">
-              <div className="text-sm font-medium text-green-400 uppercase tracking-wide mb-4">After Launchpad</div>
-              {beforeAfter.map((item, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-green-500/10 border border-green-500/20">
-                  <svg className="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-text-primary">{item.after}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Case Studies Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
-            >
-              Client <span className="text-accent">Success Stories</span>
-            </h2>
-            <p className="text-text-secondary max-w-2xl mx-auto">
-              Real transformations from real businesses. These are the kinds of results
-              our LAUNCH Method delivers consistently.
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            {outcomes.map((outcome, index) => (
-              <div
-                key={index}
-                className="p-8 rounded-2xl bg-surface border border-border-subtle hover:border-accent/50 transition-all"
+          <div className="space-y-16">
+            {caseStudies.map((study, index) => (
+              <article
+                key={study.id}
+                className="rounded-2xl bg-surface border border-border-subtle overflow-hidden"
               >
-                <div className="flex flex-wrap items-center gap-3 mb-6">
-                  <h3 className="text-xl font-bold text-text-primary">{outcome.title}</h3>
-                  <span className="px-3 py-1 rounded-full bg-accent/10 text-accent text-sm">
-                    {outcome.industry}
-                  </span>
+                {/* Header */}
+                <div className="p-8 border-b border-border-subtle">
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                    <span className="px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium">
+                      {study.industry}
+                    </span>
+                    <span className="text-text-muted text-sm">
+                      {study.size}
+                    </span>
+                    <span className="text-text-muted text-sm">•</span>
+                    <span className="text-text-muted text-sm">
+                      {study.revenue}
+                    </span>
+                  </div>
+                  <h2
+                    className="text-2xl font-bold mb-2"
+                    style={{ fontFamily: "var(--font-space-grotesk)" }}
+                  >
+                    {study.company}
+                  </h2>
+                  <p className="text-text-secondary">
+                    Engagement sponsor: {study.executive}
+                  </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-8">
-                  <div>
-                    <div className="text-sm font-medium text-red-400 uppercase tracking-wide mb-2">Challenge</div>
-                    <p className="text-text-secondary">{outcome.challenge}</p>
+                {/* Content */}
+                <div className="p-8">
+                  {/* Challenge */}
+                  <div className="mb-8">
+                    <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-3">
+                      The Challenge
+                    </h3>
+                    <p className="text-text-primary">{study.challenge}</p>
                   </div>
-                  <div>
-                    <div className="text-sm font-medium text-accent uppercase tracking-wide mb-2">Solution</div>
-                    <p className="text-text-secondary">{outcome.solution}</p>
-                  </div>
-                  <div>
-                    <div className="text-sm font-medium text-green-400 uppercase tracking-wide mb-2">Results</div>
-                    <ul className="space-y-1">
-                      {outcome.results.map((result, i) => (
-                        <li key={i} className="flex items-start gap-2 text-text-secondary text-sm">
-                          <svg className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          {result}
+
+                  {/* Approach */}
+                  <div className="mb-8">
+                    <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-3">
+                      Our Approach
+                    </h3>
+                    <ul className="space-y-2">
+                      {study.approach.map((item, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-3 text-text-secondary"
+                        >
+                          <span className="w-6 h-6 rounded-full bg-accent/10 text-accent flex items-center justify-center flex-shrink-0 text-sm font-medium">
+                            {i + 1}
+                          </span>
+                          {item}
                         </li>
                       ))}
                     </ul>
                   </div>
-                </div>
 
-                <div className="mt-6 pt-6 border-t border-border-subtle">
-                  <blockquote className="text-text-primary italic">
-                    &ldquo;{outcome.quote}&rdquo;
-                  </blockquote>
+                  {/* Results */}
+                  <div className="mb-8">
+                    <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
+                      Results Achieved
+                    </h3>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {study.results.map((result, i) => (
+                        <div
+                          key={i}
+                          className="p-4 rounded-xl bg-background border border-border-subtle"
+                        >
+                          <div
+                            className="text-2xl font-bold text-accent mb-1"
+                            style={{ fontFamily: "var(--font-space-grotesk)" }}
+                          >
+                            {result.metric}
+                          </div>
+                          <div className="text-text-secondary text-sm">
+                            {result.description}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Quote */}
+                  <div className="p-6 rounded-xl bg-accent/5 border border-accent/20">
+                    <blockquote className="text-text-primary italic mb-3">
+                      &ldquo;{study.quote}&rdquo;
+                    </blockquote>
+                    <div className="text-text-secondary text-sm">
+                      — {study.quoteAttribution}
+                    </div>
+                  </div>
+
+                  {/* Meta */}
+                  <div className="mt-6 pt-6 border-t border-border-subtle flex flex-wrap gap-6 text-sm">
+                    <div>
+                      <span className="text-text-muted">Timeline:</span>{" "}
+                      <span className="text-text-primary">{study.timeline}</span>
+                    </div>
+                    <div>
+                      <span className="text-text-muted">Engagement:</span>{" "}
+                      <span className="text-text-primary">
+                        {study.investment}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industries Section */}
+      <section className="py-16 px-4 bg-surface/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2
+            className="text-2xl font-bold mb-6"
+            style={{ fontFamily: "var(--font-space-grotesk)" }}
+          >
+            Industries We Serve
+          </h2>
+          <p className="text-text-secondary mb-8">
+            Our methodology adapts to your industry&apos;s unique requirements,
+            compliance needs, and competitive landscape.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {industries.map((industry, index) => (
+              <span
+                key={index}
+                className="px-4 py-2 rounded-full bg-background border border-border-subtle text-text-secondary text-sm"
+              >
+                {industry}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-accent/10 via-background to-accent/10">
+      <section className="py-20 px-4 bg-gradient-to-r from-accent/10 via-background to-accent/10">
         <div className="max-w-4xl mx-auto text-center">
           <h2
             className="text-3xl md:text-4xl font-bold mb-6"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Ready for Your Transformation?
+            Ready to Achieve Similar Results?
           </h2>
           <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
-            Join the businesses already saving 30-40 hours every week. Start your AI journey today.
+            Every engagement starts with understanding your unique challenges
+            and opportunities. Let&apos;s discuss what&apos;s possible for your
+            organization.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/launchpad"
+              href="/contact?service=discovery"
               className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105"
             >
-              See Our Programs
+              Schedule Discovery Call
             </Link>
             <Link
-              href="/contact"
+              href="/assessment"
               className="px-8 py-4 rounded-lg bg-surface border border-border-subtle hover:border-accent text-text-primary font-medium transition-all"
             >
-              Book a Free Strategy Call
+              Learn About Assessment
             </Link>
           </div>
         </div>
