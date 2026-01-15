@@ -73,33 +73,49 @@ export default function AboutPage() {
     },
   ];
 
-  const notIdealFor = [
-    "Companies looking for the cheapest option",
-    "Organizations wanting AI for AI's sake",
-    "Teams not ready to commit time to implementation",
-    "Businesses seeking a one-time software purchase",
+  const whyChooseUs = [
+    {
+      title: "Proven Track Record",
+      description:
+        "Dozens of successful projects delivered with a 94% client retention rate and measurable ROI.",
+    },
+    {
+      title: "Tailored Solutions",
+      description:
+        "Every solution is customized to fit your specific business needs, goals, and existing tech stack.",
+    },
+    {
+      title: "We Translate Technology",
+      description:
+        "We don't just implement—we make it make sense. You'll understand what we're building and why.",
+    },
+    {
+      title: "Ongoing Partnership",
+      description:
+        "We stick around to make sure it keeps working. Continuous optimization and support as your needs evolve.",
+    },
   ];
 
   const differentiators = [
     {
-      label: "Business-First Approach",
+      label: "You Own Everything",
       detail:
-        "We speak your language—revenue, margin, efficiency—not technical jargon. Every recommendation ties to business outcomes.",
+        "No vendor lock-in, no proprietary platforms. We build on infrastructure you control. When we're done, it's yours—forever.",
     },
     {
-      label: "Hands-On Implementation",
+      label: "We Set It Up, You Run It",
       detail:
-        "We don't just advise—we build. Our team implements solutions and stays until they're working in production.",
+        "We don't create dependency. We implement, document, and train your team. You should need us less over time, not more.",
     },
     {
-      label: "Executive Partnership",
+      label: "Days, Not Months",
       detail:
-        "We work directly with decision-makers. No layers of account managers or junior staff learning on your engagement.",
+        "Traditional consultants quote quarters. We deliver in weeks. Speed matters when your competitors aren't waiting.",
     },
     {
       label: "Transparent Economics",
       detail:
-        "Clear pricing, defined scope, and honest assessments of expected ROI. No surprises, no hidden costs.",
+        "Clear pricing, defined scope, and honest ROI projections. No surprises, no hidden costs, no endless change orders.",
     },
   ];
 
@@ -252,23 +268,22 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Not Ideal For */}
-          <div className="bg-surface/50 border border-border-subtle rounded-xl p-8">
+          {/* Why Choose Us */}
+          <div className="bg-gradient-to-r from-accent/5 via-surface to-accent/5 border border-border-subtle rounded-xl p-8">
             <h3
-              className="text-lg font-semibold text-text-primary mb-4"
+              className="text-xl font-semibold text-text-primary mb-6 text-center"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              We&apos;re Probably Not the Right Fit If You&apos;re Looking
-              For...
+              Why Choose Support Forge?
             </h3>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {notIdealFor.map((item, index) => (
+            <div className="grid sm:grid-cols-2 gap-4">
+              {whyChooseUs.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 text-text-secondary"
+                  className="flex items-start gap-3"
                 >
                   <svg
-                    className="w-4 h-4 text-text-muted flex-shrink-0"
+                    className="w-5 h-5 text-accent flex-shrink-0 mt-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -277,17 +292,16 @@ export default function AboutPage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
+                      d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  {item}
+                  <div>
+                    <div className="font-medium text-text-primary">{item.title}</div>
+                    <div className="text-text-secondary text-sm">{item.description}</div>
+                  </div>
                 </div>
               ))}
             </div>
-            <p className="text-text-muted text-sm mt-4">
-              Being selective about who we work with allows us to deliver better
-              results for clients who are a genuine fit.
-            </p>
           </div>
         </div>
       </section>
