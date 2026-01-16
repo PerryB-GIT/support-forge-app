@@ -7,6 +7,7 @@ interface IndustryIllustrationProps {
     | "technology"
     | "retail";
   className?: string;
+  size?: "sm" | "md" | "lg";
 }
 
 /**
@@ -16,7 +17,19 @@ interface IndustryIllustrationProps {
 export function IndustryIllustration({
   industry,
   className = "",
+  size = "lg",
 }: IndustryIllustrationProps) {
+  const sizeClasses = {
+    sm: "max-h-40",
+    md: "max-h-56",
+    lg: "",
+  };
+
+  const iconSizes = {
+    sm: "w-10 h-10",
+    md: "w-12 h-12",
+    lg: "w-16 h-16",
+  };
   const industryConfig = {
     manufacturing: {
       label: "Manufacturing",
@@ -232,7 +245,7 @@ export function IndustryIllustration({
 
   return (
     <div
-      className={`relative overflow-hidden rounded-lg bg-gradient-to-br ${config.gradient} ${className}`}
+      className={`relative overflow-hidden rounded-lg bg-gradient-to-br ${config.gradient} ${sizeClasses[size]} ${className}`}
       style={{ aspectRatio: "4/3" }}
     >
       {/* Grid pattern overlay */}
@@ -256,7 +269,7 @@ export function IndustryIllustration({
       />
 
       {/* Icon */}
-      <div className="absolute inset-0 flex items-center justify-center text-white">
+      <div className={`absolute inset-0 flex items-center justify-center text-white ${size === "sm" ? "[&>svg]:w-10 [&>svg]:h-10" : size === "md" ? "[&>svg]:w-12 [&>svg]:h-12" : ""}`}>
         {config.icon}
       </div>
 
