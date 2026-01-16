@@ -53,3 +53,29 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 3 - US-003
+
+**Completed:** Created HeroSection component with image support
+
+**Learnings:**
+- Next.js Image component with `fill` prop and `sizes` attribute handles responsive images
+- Use `sizes="(max-width: 768px) 800px, (max-width: 1200px) 1200px, 1920px"` for breakpoints
+- Layer overlays with z-index: image(0) < spotlights(1) < noise(2) < content(10)
+- Inline CSS for radial gradients when classes aren't flexible enough
+- Use animation-delay via inline style for staggered animations
+- Components can use CSS classes from globals.css directly
+
+**Props created:**
+- `title` - main heading (required)
+- `subtitle` - description text (optional)
+- `backgroundImage` - URL for hero image (optional)
+- `gradient` - enable gradient/spotlight effects (default: true)
+- `children` - CTA buttons or additional content (optional)
+- `size` - "sm" | "md" | "lg" for padding (default: "md")
+- `align` - "left" | "center" for text alignment (default: "center")
+
+**Files created:**
+- apps/web/src/components/ui/HeroSection.tsx
+
+---
+

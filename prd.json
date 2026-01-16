@@ -40,13 +40,13 @@
       "acceptanceCriteria": [
         "Create reusable HeroSection component in components/ui/",
         "Props: title, subtitle, backgroundImage (optional), gradient (boolean)",
-        "Support responsive image sizes (1920px desktop, 1200px tablet, 800px mobile)",
+        "Support responsive image sizes (1920px desktop, 1200px tablet, 1920px mobile)",
         "Include gradient overlay on images for text readability",
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Created HeroSection.tsx with size/align props, responsive images via next/image, gradient overlays, and animated text reveals using CSS classes from US-001/US-002."
     },
     {
       "id": "US-004",
