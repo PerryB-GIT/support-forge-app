@@ -223,3 +223,32 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 9 - US-009
+
+**Completed:** Created custom icon components for Services page
+
+**Learnings:**
+- Profile heads: Use curved paths for organic head shapes, mirror for symmetry
+- Scanner/analysis: Combine document shape with separate AI module, connect with dashed lines
+- Blueprint concept: Use grid lines with low opacity, overlay faded outline of the launching element
+- Partnership symbol: Combine hands with continuous ring (strokeDasharray) for "ongoing" feel
+- Communication waves: Curved paths on either side suggest reach/support
+- Progress indicators: Small checkmarks (✓) show completed items in lists
+
+**Icon Design Patterns:**
+- Discovery: Two profiles facing each other, connection lines with central spark/glow
+- Assessment: Document with scan line, separate AI module with eye, data flow dots
+- Implementation: Blueprint base with launching rocket, trail smoke curves
+- Advisory: Partnership hands with heart center, circular ring, communication waves
+
+**Files created:**
+- apps/web/src/components/icons/IconDiscovery.tsx
+- apps/web/src/components/icons/IconAssessment.tsx
+- apps/web/src/components/icons/IconImplementation.tsx
+- apps/web/src/components/icons/IconAdvisory.tsx
+
+**Files changed:**
+- apps/web/src/components/icons/index.ts (added service icon exports)
+
+---
+
