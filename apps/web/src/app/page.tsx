@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/ui/HeroSection";
 import { FloatingParticles } from "@/components/ui/FloatingParticles";
 import { ScrollReveal, ScrollRevealList } from "@/components/ui/ScrollReveal";
+import { CountUp } from "@/components/ui/CountUp";
 import { LocalBusinessJsonLd, WebSiteJsonLd, OrganizationJsonLd, FAQJsonLd, ServicesListJsonLd } from "@/components/seo/JsonLd";
 import {
   IconCompetitivePressure,
@@ -487,7 +488,7 @@ export default async function Home() {
 
           <ScrollRevealList className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto" staggerDelay={100}>
             <div className="service-card p-8 rounded-2xl bg-surface border border-border-subtle">
-              <div className="text-3xl font-bold text-accent mb-2">40%</div>
+              <div className="text-3xl font-bold text-accent mb-2"><CountUp value={40} suffix="%" /></div>
               <div className="text-lg font-semibold mb-2">Reduction in Admin Time</div>
               <p className="text-text-secondary text-sm mb-4">
                 &quot;We went from drowning in manual processes to having systems that run themselves. My team can finally focus on growth.&quot;
@@ -502,7 +503,7 @@ export default async function Home() {
             </div>
 
             <div className="service-card p-8 rounded-2xl bg-surface border border-border-subtle">
-              <div className="text-3xl font-bold text-accent mb-2">3 weeks</div>
+              <div className="text-3xl font-bold text-accent mb-2"><CountUp value={3} suffix=" weeks" /></div>
               <div className="text-lg font-semibold mb-2">From Assessment to Live</div>
               <p className="text-text-secondary text-sm mb-4">
                 &quot;I&apos;d been trying to figure out our AI strategy for six months. Perry gave us clarity in two hours and had systems running in three weeks.&quot;
@@ -517,7 +518,7 @@ export default async function Home() {
             </div>
 
             <div className="service-card p-8 rounded-2xl bg-surface border border-border-subtle">
-              <div className="text-3xl font-bold text-accent mb-2">$180K</div>
+              <div className="text-3xl font-bold text-accent mb-2"><CountUp value={180} prefix="$" suffix="K" /></div>
               <div className="text-lg font-semibold mb-2">Saved in Year One</div>
               <p className="text-text-secondary text-sm mb-4">
                 &quot;The Assessment identified inefficiencies we&apos;d been paying for without realizing. ROI was clear within the first quarter.&quot;

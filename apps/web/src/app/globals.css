@@ -685,6 +685,29 @@ body {
 }
 
 /* =================================
+   COUNT-UP ANIMATION
+   ================================= */
+
+/* Subtle pulse effect after count completes */
+.animate-count-pulse {
+  animation: count-pulse 0.6s ease-out;
+}
+
+@keyframes count-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px var(--accent-glow);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: none;
+  }
+}
+
+/* =================================
    REDUCED MOTION SUPPORT
    ================================= */
 
@@ -722,7 +745,8 @@ body {
   .animate-particle-1,
   .animate-particle-2,
   .animate-particle-3,
-  .animate-line-pulse {
+  .animate-line-pulse,
+  .animate-count-pulse {
     animation: none;
     opacity: 1;
     transform: none;

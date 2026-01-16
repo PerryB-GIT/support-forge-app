@@ -342,3 +342,34 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 13 - US-013
+
+**Completed:** Added count-up animation for statistics
+
+**Learnings:**
+- `requestAnimationFrame` provides smooth animation loop for count-up effect
+- `performance.now()` gives precise timestamps for elapsed time calculation
+- Easing function `easeOutQuart (1 - Math.pow(1 - t, 4))` creates satisfying deceleration curve
+- Intersection Observer with `triggerOnce` pattern works well for scroll-triggered animations
+- Use `hasAnimated` state flag to prevent re-triggering animation on subsequent views
+- Pulse animation via CSS `@keyframes` with `scale` and `text-shadow` adds satisfying completion feedback
+- Component props: `prefix`/`suffix` for formatting ($, %, K), `decimals` for decimal places
+- `prefersReducedMotion` check should show final value immediately, skip animation entirely
+
+**CSS Animation Added:**
+- `@keyframes count-pulse` - scale 1 → 1.05 → 1 with text-shadow glow
+
+**Statistics Animated (3 total):**
+- 40% → `<CountUp value={40} suffix="%" />` (Reduction in Admin Time)
+- 3 weeks → `<CountUp value={3} suffix=" weeks" />` (From Assessment to Live)
+- $180K → `<CountUp value={180} prefix="$" suffix="K" />` (Saved in Year One)
+
+**Files created:**
+- apps/web/src/components/ui/CountUp.tsx
+
+**Files changed:**
+- apps/web/src/app/globals.css (count-pulse animation)
+- apps/web/src/app/page.tsx (CountUp integration on 3 statistics)
+
+---
+
