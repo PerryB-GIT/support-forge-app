@@ -406,3 +406,32 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 15 - US-015
+
+**Completed:** Replaced About page generic icons with custom audience icons
+
+**Learnings:**
+- Add `icon` property to data arrays to associate component references with data items
+- Use `const IconComponent = client.icon` pattern in map for clean rendering
+- Container size increase (w-10 h-10 → w-12 h-12) may be needed for more detailed icons
+- Icons inherit color from `text-accent` class on the component via currentColor
+- About page follows same import pattern as Homepage/Services: barrel import from @/components/icons
+
+**Implementation Pattern:**
+```tsx
+const idealClients = [
+  { title: "...", description: "...", icon: IconMidMarketLeaders },
+  // ...
+];
+
+{idealClients.map((client, index) => {
+  const IconComponent = client.icon;
+  return <IconComponent size={24} className="text-accent" />;
+})}
+```
+
+**Files changed:**
+- apps/web/src/app/about/page.tsx (added icon imports, icon property to array, updated rendering)
+
+---
+

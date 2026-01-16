@@ -2,6 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import {
+  IconMidMarketLeaders,
+  IconOperationalExecutives,
+  IconGrowthCEOs,
+  IconProfessionalServices,
+} from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "About",
@@ -55,21 +61,25 @@ export default function AboutPage() {
       title: "Mid-Market Leaders",
       description:
         "Companies with $5M-$50M in revenue who have the resources to invest in AI but lack dedicated AI expertise on staff.",
+      icon: IconMidMarketLeaders,
     },
     {
       title: "Operational Executives",
       description:
         "COOs, CFOs, and operations leaders looking to automate manual processes and improve efficiency across their organizations.",
+      icon: IconOperationalExecutives,
     },
     {
       title: "Growth-Focused CEOs",
       description:
         "Leaders who recognize AI as a competitive necessity and want to move from exploration to implementation.",
+      icon: IconGrowthCEOs,
     },
     {
       title: "Professional Services Firms",
       description:
         "Law firms, accounting practices, and consultancies where partner time is the most valuable—and most wasted—resource.",
+      icon: IconProfessionalServices,
     },
   ];
 
@@ -233,39 +243,30 @@ export default function AboutPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {idealClients.map((client, index) => (
-              <div
-                key={index}
-                className="p-6 rounded-xl bg-surface border border-border-subtle"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-5 h-5 text-accent"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3
-                      className="text-lg font-semibold text-text-primary mb-1"
-                      style={{ fontFamily: "var(--font-space-grotesk)" }}
-                    >
-                      {client.title}
-                    </h3>
-                    <p className="text-text-secondary">{client.description}</p>
+            {idealClients.map((client, index) => {
+              const IconComponent = client.icon;
+              return (
+                <div
+                  key={index}
+                  className="p-6 rounded-xl bg-surface border border-border-subtle"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                      <IconComponent size={24} className="text-accent" />
+                    </div>
+                    <div>
+                      <h3
+                        className="text-lg font-semibold text-text-primary mb-1"
+                        style={{ fontFamily: "var(--font-space-grotesk)" }}
+                      >
+                        {client.title}
+                      </h3>
+                      <p className="text-text-secondary">{client.description}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Why Choose Us */}
