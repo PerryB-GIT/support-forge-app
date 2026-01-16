@@ -30,8 +30,8 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Added hero-gradient, section-gradient, surface-gradient, noise-texture, grid-pattern, and glow-orb classes. Application to layout sections deferred to component stories."
     },
     {
       "id": "US-003",

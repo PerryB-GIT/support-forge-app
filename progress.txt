@@ -28,3 +28,28 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 2 - US-002
+
+**Completed:** Added gradient background system to globals.css
+
+**Learnings:**
+- CSS pseudo-elements (::before, ::after) work well for overlay effects
+- SVG data URIs inline in CSS work for noise textures (keep opacity very low ~0.03)
+- Need `pointer-events: none` on overlay pseudo-elements to allow clicks through
+- Grid patterns use repeating linear-gradient with background-size for tiling
+- Glow orbs use radial-gradient with blur filter for soft light effect
+
+**CSS Classes Added:**
+- `.hero-gradient` - main hero linear-gradient with purple spotlight ::before
+- `.hero-spotlight-right` - additional right-side radial gradient ::after
+- `.section-gradient` - vertical gradient for content sections
+- `.surface-gradient` - diagonal gradient for cards/elevated areas
+- `.noise-texture` - subtle grain effect using SVG feTurbulence
+- `.grid-pattern` - tech aesthetic grid overlay
+- `.glow-orb` / `.glow-orb-small/medium/large` - decorative blur effects
+
+**Files changed:**
+- apps/web/src/app/globals.css
+
+---
+
