@@ -194,3 +194,32 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 8 - US-008
+
+**Completed:** Created custom icon components for Homepage benefits
+
+**Learnings:**
+- Brain icon: Split into left/right hemispheres with center connections for symmetry
+- Rocket with clock: Overlay smaller element (clock) in corner to show dual concepts
+- Shield icon: Good container shape for nesting other symbols (AI chip)
+- Podium icon: Use varying heights and opacity to show rank hierarchy
+- Star/sparkle effects: Use small path shapes with reduced opacity for celebration feel
+- Text elements in SVG: Keep font sizes small (6-8px) for legibility at 48px render size
+
+**Icon Design Patterns:**
+- Strategic clarity: Brain with radiating beams, center glow point
+- Speed to value: Rocket with clock in corner, speed lines on opposite side
+- Risk mitigation: Shield outline with nested AI chip (pins extend to shield edges)
+- Competitive edge: First-place podium with flag and sparkle decorations
+
+**Files created:**
+- apps/web/src/components/icons/IconStrategicClarity.tsx
+- apps/web/src/components/icons/IconSpeedToValue.tsx
+- apps/web/src/components/icons/IconRiskMitigation.tsx
+- apps/web/src/components/icons/IconCompetitiveEdge.tsx
+
+**Files changed:**
+- apps/web/src/components/icons/index.ts (added benefit icon exports)
+
+---
+
