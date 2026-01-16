@@ -131,3 +131,38 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 6 - US-006
+
+**Completed:** Added scroll-triggered fade animations
+
+**Learnings:**
+- Intersection Observer API is perfect for scroll-triggered animations
+- Create generic ref-returning hook for flexibility (`useScrollReveal<T extends HTMLElement>`)
+- Stagger list animations with setTimeout array and clear on unmount
+- `prefersReducedMotion` check should skip animations entirely, not just adjust timing
+- Wrapper components (ScrollReveal, ScrollRevealList) simplify usage over direct hook calls
+- `triggerOnce: true` with `observer.unobserve()` prevents repeated animations
+
+**Hooks Created:**
+- `useScrollReveal` - single element visibility detection with Intersection Observer
+- `useScrollRevealList` - extends useScrollReveal with staggered visibleItems array
+
+**Components Created:**
+- `ScrollReveal` - wrapper with fade-up/fade-in/slide-up animations
+- `ScrollRevealList` - wrapper for staggered list item reveals
+
+**CSS Technique:**
+- Tailwind transitions: `transition-all duration-500 ease-out`
+- Animation classes: `translate-y-5 opacity-0` → `translate-y-0 opacity-100`
+- Delay via inline style: `transitionDelay: isVisible ? \`${delay}ms\` : "0ms"`
+
+**Files created:**
+- apps/web/src/hooks/useScrollReveal.ts
+- apps/web/src/hooks/index.ts
+- apps/web/src/components/ui/ScrollReveal.tsx
+
+**Files changed:**
+- apps/web/src/app/page.tsx (applied ScrollReveal to all 5 homepage sections)
+
+---
+

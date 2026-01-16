@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/ui/HeroSection";
 import { FloatingParticles } from "@/components/ui/FloatingParticles";
+import { ScrollReveal, ScrollRevealList } from "@/components/ui/ScrollReveal";
 import { LocalBusinessJsonLd, WebSiteJsonLd, OrganizationJsonLd, FAQJsonLd, ServicesListJsonLd } from "@/components/seo/JsonLd";
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://support-forge.com";
@@ -121,16 +122,19 @@ export default async function Home() {
       {/* The Challenge Section */}
       <section className="py-20 bg-surface/50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               The AI Challenge for <span className="text-accent">Leaders</span>
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
               You know AI matters. The question is where to invest for real business impact.
             </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
+          <ScrollRevealList
+            className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto"
+            staggerDelay={100}
+          >
             <div className="service-card p-6 rounded-xl bg-background border border-border-subtle">
               <div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -170,30 +174,33 @@ export default async function Home() {
               <h3 className="font-semibold mb-2">Failed Experiments</h3>
               <p className="text-text-secondary text-sm">Tried AI tools. Didn&apos;t stick. Need a strategic approach.</p>
             </div>
-          </div>
+          </ScrollRevealList>
 
-          <div className="mt-12 max-w-2xl mx-auto text-center">
+          <ScrollReveal className="mt-12 max-w-2xl mx-auto text-center" delay={400}>
             <blockquote className="text-xl italic text-text-secondary">
               &quot;We know AI is important. We just don&apos;t know where to start that will actually move the needle.&quot;
             </blockquote>
             <p className="text-text-muted mt-2">— CEO, Mid-Market Manufacturing Company</p>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Our Approach Section */}
       <section id="approach" className="py-20 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               Strategic AI That <span className="text-accent">Delivers</span>
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
               We focus on business outcomes, not technology for its own sake.
             </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+          <ScrollRevealList
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto"
+            staggerDelay={100}
+          >
             <div className="service-card p-6 rounded-2xl bg-surface border border-border-subtle">
               <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-4">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -241,24 +248,24 @@ export default async function Home() {
                 Implement before your competitors figure it out. First-mover advantage matters.
               </p>
             </div>
-          </div>
+          </ScrollRevealList>
         </div>
       </section>
 
       {/* Engagement Journey Section */}
       <section id="services" className="py-20 bg-surface/50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               How We <span className="text-accent">Work Together</span>
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
               A structured approach to AI implementation that ensures strategic alignment and measurable outcomes.
             </p>
-          </div>
+          </ScrollReveal>
 
           {/* Engagement Flow */}
-          <div className="max-w-4xl mx-auto mb-16">
+          <ScrollReveal className="max-w-4xl mx-auto mb-16" delay={100}>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0">
               <div className="flex items-center gap-3 px-6 py-3 bg-background rounded-xl border border-border-subtle">
                 <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-sm">1</div>
@@ -295,9 +302,9 @@ export default async function Home() {
                 <span className="font-medium">Advisory</span>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+          <ScrollRevealList className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto" staggerDelay={100}>
             {/* Discovery Call */}
             <div className="service-card p-8 rounded-2xl bg-background border border-border-subtle flex flex-col">
               <div className="text-accent text-sm font-medium mb-2">Start Here</div>
@@ -443,10 +450,10 @@ export default async function Home() {
                 Learn More
               </Link>
             </div>
-          </div>
+          </ScrollRevealList>
 
           {/* Advisory Retainer */}
-          <div className="max-w-4xl mx-auto mt-12">
+          <ScrollReveal className="max-w-4xl mx-auto mt-12" delay={300}>
             <div className="service-card p-8 rounded-2xl bg-background border border-border-subtle">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div>
@@ -468,23 +475,23 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Results Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               Leaders Who <span className="text-accent">Moved First</span>
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
               Results from executives who partnered with us on their AI strategy.
             </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+          <ScrollRevealList className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto" staggerDelay={100}>
             <div className="service-card p-8 rounded-2xl bg-surface border border-border-subtle">
               <div className="text-3xl font-bold text-accent mb-2">40%</div>
               <div className="text-lg font-semibold mb-2">Reduction in Admin Time</div>
@@ -529,9 +536,9 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollRevealList>
 
-          <div className="text-center mt-12">
+          <ScrollReveal className="text-center mt-12" delay={300}>
             <Link
               href="/results"
               className="inline-flex items-center gap-2 text-accent hover:text-accent-hover font-medium transition-colors"
@@ -541,13 +548,13 @@ export default async function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-accent/10 via-background to-accent/10">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+        <ScrollReveal className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             Ready to Turn AI Investment Into Results?
           </h2>
@@ -571,7 +578,7 @@ export default async function Home() {
           <p className="text-text-muted text-sm mt-6">
             For decision-makers at companies with 20-200 employees or $2M+ revenue.
           </p>
-        </div>
+        </ScrollReveal>
       </section>
 
       <Footer />
