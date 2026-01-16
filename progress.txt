@@ -107,3 +107,27 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 5 - US-005
+
+**Completed:** Updated service cards with hover animations
+
+**Learnings:**
+- CSS animated gradient borders use mask-composite technique with `::before` pseudo-element
+- Key properties: `padding: 1px` on pseudo-element creates border width
+- `-webkit-mask` with `linear-gradient(#fff 0 0)` content-box and second gradient creates border mask
+- `mask-composite: exclude` (or `-webkit-mask-composite: xor`) reveals only the border area
+- `background-size: 300% 300%` with `background-position` animation creates flowing gradient effect
+- Applied to 15 cards total across Challenge, Approach, Service pricing, and Results sections
+- Existing card styles need `position: relative` for pseudo-element positioning (already in .service-card)
+
+**CSS Techniques Used:**
+- Gradient border via mask-composite (avoids border-image limitations)
+- Animation on hover only (opacity 0 → 1 + background-position animation)
+- Reduced motion support already added in US-001
+
+**Files changed:**
+- apps/web/src/app/globals.css (added .service-card class with animated border)
+- apps/web/src/app/page.tsx (applied service-card class to 15 cards)
+
+---
+
