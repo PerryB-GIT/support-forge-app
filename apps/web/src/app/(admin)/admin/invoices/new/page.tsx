@@ -29,7 +29,7 @@ export default function NewInvoicePage() {
   useEffect(() => {
     fetch("/api/admin/clients")
       .then((res) => res.json())
-      .then((data) => setClients(data.clients || []))
+      .then((data) => setClients(data.data || []))
       .catch(() => setClients([]));
   }, []);
 
