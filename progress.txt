@@ -1,0 +1,30 @@
+# Progress Log: Support Forge Visual Improvements
+
+This file contains learnings and notes from each Ralph iteration.
+Each Claude instance appends what it learned for future iterations.
+
+---
+
+## Iteration 1 - US-001
+
+**Completed:** Added CSS animation utilities and hover effects to globals.css
+
+**Learnings:**
+- Project uses Tailwind CSS v4 with @import "tailwindcss" syntax
+- CSS custom properties already defined for brand colors (--accent-glow, --forge-purple, etc.)
+- No dedicated typecheck script - use `npx tsc --noEmit` in apps/web directory
+- Added prefers-reduced-motion support for accessibility
+
+**CSS Classes Added:**
+- `.card-hover` - lift + glow effect on hover
+- `.glow-purple` - purple glow on hover
+- `.scale-hover` / `.scale-hover-subtle` - scale effects
+- `.animate-fade-up` / `.animate-fade-up-stagger` - scroll reveal
+- `.animate-pulse-glow` - pulsing glow effect
+- `.animate-float` - floating animation
+
+**Files changed:**
+- apps/web/src/app/globals.css
+
+---
+

@@ -114,9 +114,71 @@ body {
   color: var(--bg-dark);
 }
 
+/* =================================
+   ANIMATION UTILITIES
+   ================================= */
+
+/* Card hover with glow and lift effect */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px var(--accent-glow), 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
 /* Purple glow effect for cards on hover */
+.glow-purple {
+  transition: box-shadow 0.3s ease;
+}
+
 .glow-purple:hover {
   box-shadow: 0 0 30px var(--accent-glow);
+}
+
+/* Scale hover for interactive elements */
+.scale-hover {
+  transition: transform 0.2s ease;
+}
+
+.scale-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Subtle scale for buttons/icons */
+.scale-hover-subtle {
+  transition: transform 0.2s ease;
+}
+
+.scale-hover-subtle:hover {
+  transform: scale(1.02);
+}
+
+/* =================================
+   KEYFRAME ANIMATIONS
+   ================================= */
+
+/* Fade up animation for scroll reveals */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s ease-out forwards;
+}
+
+/* Staggered fade up (use with inline style for delay) */
+.animate-fade-up-stagger {
+  opacity: 0;
+  animation: fade-up 0.5s ease-out forwards;
 }
 
 /* Toast animation */
@@ -133,4 +195,79 @@ body {
 
 .animate-slide-up {
   animation: slide-up 0.3s ease-out;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Pulse animation for emphasis */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--accent-glow), 0 0 60px rgba(139, 92, 246, 0.2);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Float animation for decorative elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* =================================
+   REDUCED MOTION SUPPORT
+   ================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .card-hover,
+  .glow-purple,
+  .scale-hover,
+  .scale-hover-subtle {
+    transition: none;
+  }
+
+  .card-hover:hover {
+    transform: none;
+  }
+
+  .scale-hover:hover,
+  .scale-hover-subtle:hover {
+    transform: none;
+  }
+
+  .animate-fade-up,
+  .animate-fade-up-stagger,
+  .animate-slide-up,
+  .animate-fade-in,
+  .animate-pulse-glow,
+  .animate-float {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }

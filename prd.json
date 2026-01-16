@@ -1,0 +1,310 @@
+{
+  "project": "Support Forge Visual Improvements",
+  "branchName": "ralph/visual-improvements",
+  "description": "Visual and graphic enhancements for support-forge.com including custom icons, hero images, animations, and dynamic elements",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Add CSS animation utilities and hover effects",
+      "description": "As a developer, I need reusable CSS animation classes for consistent visual effects across the site.",
+      "acceptanceCriteria": [
+        "Create globals.css additions with card hover glow effect (box-shadow with purple #8B5CF6)",
+        "Add translateY(-4px) lift effect on card hover with 0.3s transition",
+        "Add fade-up animation keyframe for scroll reveals",
+        "Add scale hover animation for interactive elements",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Added card-hover, glow-purple, scale-hover classes plus fade-up, pulse-glow, float animations. Includes prefers-reduced-motion support."
+    },
+    {
+      "id": "US-002",
+      "title": "Add gradient background system",
+      "description": "As a user, I want visual depth in page backgrounds instead of flat colors.",
+      "acceptanceCriteria": [
+        "Add hero-gradient class with linear-gradient(135deg, #050508 0%, #0f0f14 50%, #1a1a2e 100%)",
+        "Add radial gradient spotlight overlay using ::before pseudo-element",
+        "Add subtle noise texture CSS pattern option",
+        "Apply gradient to main layout sections",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Create HeroSection component with image support",
+      "description": "As a user, I want visually striking hero sections on each page.",
+      "acceptanceCriteria": [
+        "Create reusable HeroSection component in components/ui/",
+        "Props: title, subtitle, backgroundImage (optional), gradient (boolean)",
+        "Support responsive image sizes (1920px desktop, 1200px tablet, 800px mobile)",
+        "Include gradient overlay on images for text readability",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-004",
+      "title": "Add hero section to Homepage",
+      "description": "As a visitor, I want an eye-catching hero on the homepage that conveys AI consulting expertise.",
+      "acceptanceCriteria": [
+        "Add HeroSection to homepage with gradient background",
+        "Include floating particle/node animation effect using CSS",
+        "Hero displays main headline and CTA button",
+        "Text has reveal animation on page load",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Update service cards with hover animations",
+      "description": "As a user, I want service cards to feel interactive and premium.",
+      "acceptanceCriteria": [
+        "Add glow effect on service card hover (purple box-shadow)",
+        "Add slight lift (translateY) on hover",
+        "Add animated border effect using gradient",
+        "Ensure smooth 0.3s transitions on all effects",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-006",
+      "title": "Add scroll-triggered fade animations",
+      "description": "As a user, I want content to animate in as I scroll down the page.",
+      "acceptanceCriteria": [
+        "Create useScrollReveal hook or use Intersection Observer",
+        "Add fade-up animation to cards and sections when entering viewport",
+        "Stagger animation timing for lists (50-100ms delay between items)",
+        "Respect prefers-reduced-motion media query",
+        "Typecheck passes"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-007",
+      "title": "Create custom icon components for Homepage pain points",
+      "description": "As a user, I want distinctive icons that reinforce the AI consulting brand on the homepage.",
+      "acceptanceCriteria": [
+        "Create IconCompetitivePressure component (racing rockets concept)",
+        "Create IconROIUncertainty component (data graph with question)",
+        "Create IconBoardQuestions component (boardroom/presentation)",
+        "Create IconFailedExperiments component (broken gear reassembling)",
+        "All icons use purple (#8B5CF6) accent color, 24x24 and 48x48 sizes",
+        "Typecheck passes"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Create custom icon components for Homepage benefits",
+      "description": "As a user, I want benefit icons that communicate value clearly.",
+      "acceptanceCriteria": [
+        "Create IconStrategicClarity component (brain with clarity beam)",
+        "Create IconSpeedToValue component (rocket with clock)",
+        "Create IconRiskMitigation component (shield with AI chip)",
+        "Create IconCompetitiveEdge component (first place flag)",
+        "All icons match brand purple, available in 24x24 and 48x48",
+        "Typecheck passes"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-009",
+      "title": "Create custom icon components for Services page",
+      "description": "As a user, I want service icons that represent each offering distinctly.",
+      "acceptanceCriteria": [
+        "Create IconDiscovery component (two heads connecting)",
+        "Create IconAssessment component (AI scanner analyzing)",
+        "Create IconImplementation component (rocket launching from blueprint)",
+        "Create IconAdvisory component (ongoing support/partnership symbol)",
+        "All icons consistent with brand colors and sizes",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-010",
+      "title": "Replace Homepage generic icons with custom icons",
+      "description": "As a user, I want to see the new branded icons on the homepage.",
+      "acceptanceCriteria": [
+        "Replace pain point section icons with new custom components",
+        "Replace benefits section icons with new custom components",
+        "Icons render at appropriate sizes for their contexts",
+        "Verify in browser that icons display correctly",
+        "Typecheck passes"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-011",
+      "title": "Replace Services page generic icons with custom icons",
+      "description": "As a user, I want to see branded icons on the services page.",
+      "acceptanceCriteria": [
+        "Replace Discovery service icon with IconDiscovery",
+        "Replace Assessment service icon with IconAssessment",
+        "Replace Implementation service icon with IconImplementation",
+        "Replace Advisory service icon with IconAdvisory",
+        "Typecheck passes"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-012",
+      "title": "Add animated process flow visualization",
+      "description": "As a user, I want the 1→2→3→4 process steps to feel dynamic and engaging.",
+      "acceptanceCriteria": [
+        "Add animated connection lines between process steps",
+        "Steps highlight sequentially on scroll into view",
+        "Add pulsing indicator on active/current step",
+        "Smooth CSS transitions between states",
+        "Typecheck passes"
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-013",
+      "title": "Add count-up animation for statistics",
+      "description": "As a user, I want numbers/statistics to animate when scrolling into view.",
+      "acceptanceCriteria": [
+        "Create useCountUp hook or component",
+        "Numbers animate from 0 to target value over ~2 seconds",
+        "Animation triggers when element enters viewport",
+        "Add subtle pulse effect after count completes",
+        "Typecheck passes"
+      ],
+      "priority": 13,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-014",
+      "title": "Create custom icons for About page audience sections",
+      "description": "As a user, I want distinctive icons for each target audience on the About page.",
+      "acceptanceCriteria": [
+        "Create IconMidMarketLeaders component (growing company skyline)",
+        "Create IconOperationalExecutives component (executive with efficiency flows)",
+        "Create IconGrowthCEOs component (CEO launching rocket)",
+        "Create IconProfessionalServices component (law gavel + AI)",
+        "Typecheck passes"
+      ],
+      "priority": 14,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-015",
+      "title": "Replace About page generic icons with custom icons",
+      "description": "As a user, I want to see branded icons on the about page.",
+      "acceptanceCriteria": [
+        "Replace Mid-Market Leaders icon",
+        "Replace Operational Executives icon",
+        "Replace Growth-Focused CEOs icon",
+        "Replace Professional Services icon",
+        "Typecheck passes"
+      ],
+      "priority": 15,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-016",
+      "title": "Create industry illustration placeholders for case studies",
+      "description": "As a user, I want visual representations of each industry in case studies.",
+      "acceptanceCriteria": [
+        "Create placeholder components for 6 industries: Manufacturing, Professional Services, Healthcare, Financial Services, Technology, Retail",
+        "Each placeholder has gradient background matching industry theme",
+        "Size: 400x300px aspect ratio maintained",
+        "Include industry name text overlay as fallback",
+        "Typecheck passes"
+      ],
+      "priority": 16,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-017",
+      "title": "Add industry illustrations to Results/Case Studies page",
+      "description": "As a user, I want to see industry visuals on case study cards.",
+      "acceptanceCriteria": [
+        "Each case study card displays its industry illustration",
+        "Illustrations have hover effect (slight zoom or glow)",
+        "Images are lazy loaded for performance",
+        "Fallback displays if image fails to load",
+        "Typecheck passes"
+      ],
+      "priority": 17,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-018",
+      "title": "Enhance testimonial section styling",
+      "description": "As a user, I want testimonials to look more polished and trustworthy.",
+      "acceptanceCriteria": [
+        "Add gradient background to testimonial cards",
+        "Replace letter avatars with styled abstract avatars (gradient circles)",
+        "Add decorative quote icon with brand styling",
+        "Add subtle border glow on hover",
+        "Typecheck passes"
+      ],
+      "priority": 18,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-019",
+      "title": "Enhance footer with visual improvements",
+      "description": "As a user, I want a polished footer that completes the premium feel.",
+      "acceptanceCriteria": [
+        "Add subtle gradient or pattern background to footer",
+        "Add glow effect behind logo",
+        "Style links with hover underline animation",
+        "Add visual separator between footer sections",
+        "Typecheck passes"
+      ],
+      "priority": 19,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-020",
+      "title": "Add hero sections to Services, About, and Results pages",
+      "description": "As a user, I want consistent hero sections across all main pages.",
+      "acceptanceCriteria": [
+        "Add HeroSection to Services page with roadmap theme",
+        "Add HeroSection to About page with partnership theme",
+        "Add HeroSection to Results page with growth theme",
+        "Each hero has appropriate gradient and styling",
+        "Typecheck passes"
+      ],
+      "priority": 20,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}
