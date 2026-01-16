@@ -2,6 +2,25 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { IndustryIllustration } from "@/components/ui/IndustryIllustration";
+
+type IndustryKey =
+  | "manufacturing"
+  | "professional-services"
+  | "healthcare"
+  | "financial-services"
+  | "technology"
+  | "retail";
+
+const industryToKey: Record<string, IndustryKey> = {
+  "Manufacturing": "manufacturing",
+  "Professional Services": "professional-services",
+  "Healthcare": "healthcare",
+  "Financial Services": "financial-services",
+  "Technology": "technology",
+  "Retail": "retail",
+  "Retail & Distribution": "retail",
+};
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -219,6 +238,18 @@ export default function CaseStudiesPage() {
                 key={study.id}
                 className="rounded-2xl bg-surface border border-border-subtle overflow-hidden"
               >
+                {/* Industry Illustration */}
+                <div className="relative overflow-hidden group">
+                  <div className="transition-transform duration-500 ease-out group-hover:scale-105">
+                    <IndustryIllustration
+                      industry={industryToKey[study.industry] || "technology"}
+                      className="w-full"
+                    />
+                  </div>
+                  {/* Hover glow overlay */}
+                  <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-300 pointer-events-none" />
+                </div>
+
                 {/* Header */}
                 <div className="p-8 border-b border-border-subtle">
                   <div className="flex flex-wrap items-center gap-3 mb-4">

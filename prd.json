@@ -258,8 +258,8 @@
         "Typecheck passes"
       ],
       "priority": 17,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Added IndustryIllustration to 3 case study cards on Results page. Created industryToKey mapping for type-safe industry name conversion (Manufacturing→manufacturing, Professional Services→professional-services, Healthcare→healthcare). Hover effects: scale-105 zoom with 500ms ease-out transition, plus accent/10 glow overlay. Lazy loading inherent (CSS/SVG renders on viewport entry). Fallback built into component (industry label text overlay)."
     },
     {
       "id": "US-018",

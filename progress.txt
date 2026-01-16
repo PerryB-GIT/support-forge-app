@@ -461,3 +461,42 @@ const idealClients = [
 
 ---
 
+## Iteration 17 - US-017
+
+**Completed:** Added industry illustrations to Results/Case Studies page
+
+**Learnings:**
+- Type mapping pattern: Create `Record<string, IndustryKey>` to convert display strings to union type
+- Handle multiple display variations in mapping (e.g., "Retail" and "Retail & Distribution" → "retail")
+- Fallback in component usage: `industryToKey[study.industry] || "technology"` provides safe default
+- Hover effects on illustrations: Use `group` parent with `group-hover:scale-105` for zoom, plus overlay div with `group-hover:bg-accent/10` for glow
+- `overflow-hidden` on parent container clips scaled image cleanly during hover
+- Transition timing: `duration-500 ease-out` for zoom feels smooth, `duration-300` for color overlay
+- IndustryIllustration component already has built-in fallback via industry label text overlay
+- CSS/SVG illustrations are inherently lazy loaded (render on viewport entry, no network requests)
+- `pointer-events-none` on glow overlay ensures hover doesn't interfere with any future click handlers
+
+**Implementation Pattern:**
+```tsx
+const industryToKey: Record<string, IndustryKey> = {
+  "Manufacturing": "manufacturing",
+  "Professional Services": "professional-services",
+  // ...
+};
+
+<div className="relative overflow-hidden group">
+  <div className="transition-transform duration-500 ease-out group-hover:scale-105">
+    <IndustryIllustration
+      industry={industryToKey[study.industry] || "technology"}
+      className="w-full"
+    />
+  </div>
+  <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-300 pointer-events-none" />
+</div>
+```
+
+**Files changed:**
+- apps/web/src/app/results/page.tsx (added imports, industry mapping, illustration rendering with hover effects)
+
+---
+
