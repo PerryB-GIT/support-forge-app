@@ -303,3 +303,42 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 12 - US-012
+
+**Completed:** Added animated process flow visualization to Services page
+
+**Learnings:**
+- Reuse existing hooks (useScrollRevealList) for scroll-triggered sequential animations
+- `visibleItems.lastIndexOf(true)` finds the most recently revealed item for "active" state
+- Process flow needs both desktop (horizontal) and mobile (vertical) layouts
+- CSS `::before` and `::after` pseudo-elements work well for animated connection lines
+- Use `background-size: 200% 100%` with animated `left` position for traveling light effect
+- `mask-composite` technique not needed here - simpler gradient overlay works for line animation
+- `is-visible` CSS class pattern matches process-step selector for clean transitions
+- Keep animation durations reasonable (3s for line travel, 2s for pulse) - too fast feels chaotic
+- Arrow bounce animation should only run when `is-active` class present
+
+**CSS Classes Added:**
+- `.process-line` - horizontal connection line with traveling light `::after` pseudo-element
+- `.process-step` / `.process-step.is-visible` - step node visibility transition (opacity, scale)
+- `.process-step-active` - active step with pulsing border via `::after` pseudo-element
+- `.step-badge-pulse` - pulsing animation for the step number badge
+- `.process-arrow` / `.process-arrow.is-active` - arrow with bounce animation
+- `.process-line-vertical` - vertical connection line for mobile layout
+
+**Keyframe Animations:**
+- `@keyframes line-travel` - light travels along connection line (0% → 100% left position)
+- `@keyframes step-pulse` - pulsing glow around active step border
+- `@keyframes badge-pulse` - subtle scale pulse on step number
+- `@keyframes arrow-bounce` - horizontal bounce for directional arrows
+- `@keyframes line-travel-vertical` - vertical version of line-travel for mobile
+
+**Files created:**
+- apps/web/src/components/ui/AnimatedProcessFlow.tsx
+
+**Files changed:**
+- apps/web/src/app/globals.css (process flow animation CSS)
+- apps/web/src/app/services/page.tsx (AnimatedProcessFlow integration)
+
+---
+

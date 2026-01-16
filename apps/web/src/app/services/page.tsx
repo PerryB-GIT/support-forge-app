@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { AnimatedProcessFlow } from "@/components/ui/AnimatedProcessFlow";
 import {
   IconDiscovery,
   IconAssessment,
@@ -82,47 +83,17 @@ export default function ServicesPage() {
             A structured approach that minimizes risk and maximizes value at every stage.
           </p>
 
-          {/* Journey Flow */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0 mb-16">
-            <div className="flex items-center gap-3 px-6 py-3 bg-background rounded-xl border border-border-subtle">
-              <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-sm">1</div>
-              <span className="font-medium">Discovery Call</span>
-            </div>
-            <div className="hidden md:block w-12 h-0.5 bg-border-subtle" />
-            <svg className="hidden md:block w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-            <div className="hidden md:block w-12 h-0.5 bg-border-subtle" />
-            <div className="flex items-center gap-3 px-6 py-3 bg-background rounded-xl border border-accent">
-              <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-bold text-sm">2</div>
-              <span className="font-medium text-accent">Assessment</span>
-            </div>
-            <div className="hidden md:block w-12 h-0.5 bg-border-subtle" />
-            <svg className="hidden md:block w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-            <div className="hidden md:block w-12 h-0.5 bg-border-subtle" />
-            <div className="flex items-center gap-3 px-6 py-3 bg-background rounded-xl border border-border-subtle">
-              <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-sm">3</div>
-              <span className="font-medium">Implementation</span>
-            </div>
-            <div className="hidden md:block w-12 h-0.5 bg-border-subtle" />
-            <svg className="hidden md:block w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-            <div className="hidden md:block w-12 h-0.5 bg-border-subtle" />
-            <div className="flex items-center gap-3 px-6 py-3 bg-background rounded-xl border border-border-subtle">
-              <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-sm">4</div>
-              <span className="font-medium">Advisory</span>
-            </div>
-          </div>
-
-          {/* Mobile Journey (vertical) */}
-          <div className="md:hidden flex flex-col items-center gap-2 mb-16">
-            <div className="w-0.5 h-4 bg-border-subtle" />
-            <svg className="w-4 h-4 text-accent rotate-90" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
+          {/* Animated Journey Flow */}
+          <div className="mb-16">
+            <AnimatedProcessFlow
+              steps={[
+                { number: 1, label: "Discovery Call" },
+                { number: 2, label: "Assessment", isHighlighted: true },
+                { number: 3, label: "Implementation" },
+                { number: 4, label: "Advisory" },
+              ]}
+              staggerDelay={400}
+            />
           </div>
         </div>
       </section>

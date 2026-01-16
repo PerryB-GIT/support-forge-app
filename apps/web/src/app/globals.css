@@ -510,6 +510,181 @@ body {
 }
 
 /* =================================
+   PROCESS FLOW ANIMATIONS
+   ================================= */
+
+/* Animated connection line between steps */
+.process-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.process-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--border-subtle), var(--forge-purple), var(--border-subtle));
+  background-size: 200% 100%;
+  transform: translateY(-50%);
+  opacity: 0.3;
+}
+
+.process-line::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -100%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--forge-purple), transparent);
+  transform: translateY(-50%);
+  animation: line-travel 3s ease-in-out infinite;
+}
+
+@keyframes line-travel {
+  0% {
+    left: -50%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Process step node */
+.process-step {
+  transition: all 0.5s ease-out;
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+.process-step.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Active step with pulse indicator */
+.process-step-active {
+  position: relative;
+}
+
+.process-step-active::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 2px solid var(--forge-purple);
+  opacity: 0;
+  animation: step-pulse 2s ease-in-out infinite;
+}
+
+@keyframes step-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.6;
+  }
+}
+
+/* Step number badge pulse for current step */
+.step-badge-pulse {
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(139, 92, 246, 0);
+  }
+}
+
+/* Arrow between steps */
+.process-arrow {
+  transition: all 0.3s ease;
+  opacity: 0.4;
+}
+
+.process-arrow.is-visible {
+  opacity: 1;
+}
+
+.process-arrow.is-active {
+  color: var(--forge-purple);
+  animation: arrow-bounce 1s ease-in-out infinite;
+}
+
+@keyframes arrow-bounce {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+/* Vertical process line for mobile */
+.process-line-vertical {
+  position: relative;
+}
+
+.process-line-vertical::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--border-subtle), var(--forge-purple), var(--border-subtle));
+  background-size: 100% 200%;
+  transform: translateX(-50%);
+  opacity: 0.3;
+}
+
+.process-line-vertical::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -100%;
+  width: 2px;
+  height: 50%;
+  background: linear-gradient(180deg, transparent, var(--forge-purple), transparent);
+  transform: translateX(-50%);
+  animation: line-travel-vertical 3s ease-in-out infinite;
+}
+
+@keyframes line-travel-vertical {
+  0% {
+    top: -50%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* =================================
    REDUCED MOTION SUPPORT
    ================================= */
 
