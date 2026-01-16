@@ -6,6 +6,8 @@ import Link from "next/link";
 import { CONTACT_INFO } from "@support-forge/shared";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { HeroSection } from "@/components/ui/HeroSection";
+import { FloatingParticles } from "@/components/ui/FloatingParticles";
 import { LocalBusinessJsonLd, WebSiteJsonLd, OrganizationJsonLd, FAQJsonLd, ServicesListJsonLd } from "@/components/seo/JsonLd";
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://support-forge.com";
@@ -73,28 +75,33 @@ export default async function Home() {
 
       <Header />
 
-      {/* Hero */}
-      <section className="flex-1 flex items-center justify-center px-4 pt-24 pb-16">
-        <div className="max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
+      {/* Hero with Floating Particles */}
+      <section className="relative pt-16">
+        <HeroSection
+          title={
+            <>
+              AI Strategy That
+              <span className="text-accent"> Moves the Needle</span>
+            </>
+          }
+          subtitle="For executives and business leaders who need AI to deliver real ROI — not just another technology experiment. Strategic implementation in weeks, not quarters."
+          size="lg"
+          align="center"
+        >
+          {/* Premium badge */}
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6 animate-fade-up"
+            style={{ animationDelay: "0.05s" }}
+          >
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
             Premium AI Consultancy
           </div>
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
-            AI Strategy That
-            <span className="text-accent"> Moves the Needle</span>
-          </h1>
-          <p className="text-lg md:text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
-            For executives and business leaders who need AI to deliver real ROI — not just another technology experiment.
-            Strategic implementation in weeks, not quarters.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <Link
               href="/contact"
-              className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105"
+              className="px-8 py-4 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-all hover:scale-105 scale-hover-subtle"
             >
               Schedule a Discovery Call
             </Link>
@@ -105,7 +112,10 @@ export default async function Home() {
               See Our Approach
             </Link>
           </div>
-        </div>
+        </HeroSection>
+
+        {/* Floating particle effect */}
+        <FloatingParticles count={15} />
       </section>
 
       {/* The Challenge Section */}

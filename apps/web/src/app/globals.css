@@ -333,6 +333,133 @@ body {
 }
 
 /* =================================
+   FLOATING PARTICLES SYSTEM
+   ================================= */
+
+/* Particle container for hero sections */
+.particles-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Individual floating particle/node */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--forge-purple);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.particle::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--forge-purple);
+  filter: blur(4px);
+  opacity: 0.4;
+}
+
+/* Particle sizes */
+.particle-sm {
+  width: 3px;
+  height: 3px;
+}
+
+.particle-md {
+  width: 5px;
+  height: 5px;
+}
+
+.particle-lg {
+  width: 6px;
+  height: 6px;
+}
+
+/* Floating animation variations for particles */
+@keyframes particle-float-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(10px, -20px) scale(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-5px, -40px) scale(1);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(15px, -20px) scale(0.9);
+    opacity: 0.5;
+  }
+}
+
+@keyframes particle-float-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  33% {
+    transform: translate(-15px, -30px) scale(1.2);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate(10px, -50px) scale(0.8);
+    opacity: 0.3;
+  }
+}
+
+@keyframes particle-float-3 {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(20px, -35px);
+    opacity: 0.7;
+  }
+}
+
+.animate-particle-1 {
+  animation: particle-float-1 8s ease-in-out infinite;
+}
+
+.animate-particle-2 {
+  animation: particle-float-2 10s ease-in-out infinite;
+}
+
+.animate-particle-3 {
+  animation: particle-float-3 12s ease-in-out infinite;
+}
+
+/* Connection lines between particles */
+.particle-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+  transform-origin: left center;
+}
+
+@keyframes line-pulse {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-line-pulse {
+  animation: line-pulse 4s ease-in-out infinite;
+}
+
+/* =================================
    REDUCED MOTION SUPPORT
    ================================= */
 
@@ -358,7 +485,11 @@ body {
   .animate-slide-up,
   .animate-fade-in,
   .animate-pulse-glow,
-  .animate-float {
+  .animate-float,
+  .animate-particle-1,
+  .animate-particle-2,
+  .animate-particle-3,
+  .animate-line-pulse {
     animation: none;
     opacity: 1;
     transform: none;

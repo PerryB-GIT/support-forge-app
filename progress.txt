@@ -79,3 +79,31 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 4 - US-004
+
+**Completed:** Added hero section to Homepage with floating particles
+
+**Learnings:**
+- HeroSection title prop should be ReactNode (not string) to support JSX with styled spans
+- Floating particle system uses multiple animation keyframes with varied timing for organic feel
+- Particles distributed via array math: `left: ${(i * 8.5) % 100}%` for even spread
+- Connection lines add network/AI feel using gradient lines with pulse animation
+- Wrap HeroSection in outer section for proper positioning of absolute particles container
+- Always update prefers-reduced-motion when adding new animations
+
+**CSS Classes Added:**
+- `.particles-container` - absolute positioned container for particle system
+- `.particle` / `.particle-sm/md/lg` - individual particle nodes with glow
+- `.animate-particle-1/2/3` - varied floating animations (8s, 10s, 12s)
+- `.particle-line` / `.animate-line-pulse` - connection lines between particles
+
+**Files created:**
+- apps/web/src/components/ui/FloatingParticles.tsx
+
+**Files changed:**
+- apps/web/src/app/globals.css (particle system CSS)
+- apps/web/src/app/page.tsx (HeroSection integration)
+- apps/web/src/components/ui/HeroSection.tsx (title prop type fix)
+
+---
+

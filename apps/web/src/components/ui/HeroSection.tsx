@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ReactNode } from "react";
 
 interface HeroSectionProps {
-  title: string;
+  title: ReactNode;
   subtitle?: string;
   backgroundImage?: string;
   gradient?: boolean;
