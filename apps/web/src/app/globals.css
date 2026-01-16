@@ -781,6 +781,153 @@ body {
 }
 
 /* =================================
+   FOOTER ENHANCEMENTS
+   ================================= */
+
+/* Footer with gradient background and subtle pattern */
+.footer-enhanced {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 15, 20, 0.8) 0%,
+    rgba(5, 5, 8, 0.95) 50%,
+    rgba(10, 10, 15, 1) 100%
+  );
+}
+
+/* Grid pattern overlay for footer */
+.footer-enhanced::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Top edge glow for footer */
+.footer-enhanced::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+/* Logo glow effect */
+.footer-logo-glow {
+  position: relative;
+}
+
+.footer-logo-glow::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 92, 246, 0.3) 0%,
+    rgba(139, 92, 246, 0.1) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.footer-logo-glow:hover::before {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Footer link with hover underline animation */
+.footer-link {
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--forge-purple) 0%,
+    rgba(139, 92, 246, 0.5) 100%
+  );
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.footer-link:hover {
+  color: var(--forge-purple);
+}
+
+/* Visual separator between footer sections */
+.footer-separator {
+  position: relative;
+}
+
+.footer-separator::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.3) 20%,
+    rgba(139, 92, 246, 0.3) 80%,
+    transparent 100%
+  );
+}
+
+/* Responsive: hide separator on mobile */
+@media (max-width: 767px) {
+  .footer-separator::before {
+    display: none;
+  }
+}
+
+/* Footer section headings with accent underline */
+.footer-heading {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--forge-purple);
+  border-radius: 1px;
+}
+
+/* =================================
    REDUCED MOTION SUPPORT
    ================================= */
 
@@ -790,7 +937,9 @@ body {
   .scale-hover,
   .scale-hover-subtle,
   .service-card,
-  .testimonial-card {
+  .testimonial-card,
+  .footer-link,
+  .footer-logo-glow::before {
     transition: none;
   }
 

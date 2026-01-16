@@ -4,18 +4,21 @@ import { CONTACT_INFO } from "@support-forge/shared";
 
 export function Footer() {
   return (
-    <footer className="py-12 border-t border-border-subtle">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+    <footer className="footer-enhanced py-12 border-t border-border-subtle">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-8">
+          {/* Logo & Description */}
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <Image
-                src="/sf-logo.png"
-                alt="Support Forge"
-                width={28}
-                height={28}
-                className="rounded-lg"
-              />
+            <Link href="/" className="inline-flex items-center gap-2 mb-4">
+              <div className="footer-logo-glow">
+                <Image
+                  src="/sf-logo.png"
+                  alt="Support Forge"
+                  width={28}
+                  height={28}
+                  className="rounded-lg relative z-10"
+                />
+              </div>
               <span
                 className="font-bold text-accent"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -28,112 +31,88 @@ export function Footer() {
               through the hype and implement AI that delivers measurable ROI.
             </p>
           </div>
-          <div>
-            <h4 className="font-semibold mb-4">Services</h4>
+
+          {/* Services Links */}
+          <div className="footer-separator md:pl-6">
+            <h4 className="footer-heading font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
               <li>
-                <Link
-                  href="/services"
-                  className="hover:text-accent transition-colors"
-                >
+                <Link href="/services" className="footer-link">
                   Consulting Services
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/assessment"
-                  className="hover:text-accent transition-colors"
-                >
+                <Link href="/assessment" className="footer-link">
                   AI Readiness Assessment
                 </Link>
               </li>
               <li>
                 <Link
                   href="/contact?service=implementation"
-                  className="hover:text-accent transition-colors"
+                  className="footer-link"
                 >
                   Strategic Implementation
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/contact?service=advisory"
-                  className="hover:text-accent transition-colors"
-                >
+                <Link href="/contact?service=advisory" className="footer-link">
                   AI Advisory Retainer
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/results"
-                  className="hover:text-accent transition-colors"
-                >
+                <Link href="/results" className="footer-link">
                   Case Studies
                 </Link>
               </li>
             </ul>
           </div>
-          <div>
-            <h4 className="font-semibold mb-4">Company</h4>
+
+          {/* Company Links */}
+          <div className="footer-separator md:pl-6">
+            <h4 className="footer-heading font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
               <li>
-                <Link
-                  href="/about"
-                  className="hover:text-accent transition-colors"
-                >
+                <Link href="/about" className="footer-link">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/results"
-                  className="hover:text-accent transition-colors"
-                >
+                <Link href="/results" className="footer-link">
                   Results & Case Studies
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/contact"
-                  className="hover:text-accent transition-colors"
-                >
+                <Link href="/contact" className="footer-link">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/login"
-                  className="hover:text-accent transition-colors"
-                >
+                <Link href="/login" className="footer-link">
                   Client Portal
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/admin"
-                  className="hover:text-accent transition-colors"
-                >
+                <Link href="/admin" className="footer-link">
                   Admin Portal
                 </Link>
               </li>
             </ul>
           </div>
-          <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
+
+          {/* Contact Info */}
+          <div className="footer-separator md:pl-6">
+            <h4 className="footer-heading font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
               <li>
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="hover:text-accent transition-colors"
+                  className="footer-link"
                 >
                   {CONTACT_INFO.email}
                 </a>
               </li>
               <li>
-                <a
-                  href={`tel:${CONTACT_INFO.phoneRaw}`}
-                  className="hover:text-accent transition-colors"
-                >
+                <a href={`tel:${CONTACT_INFO.phoneRaw}`} className="footer-link">
                   {CONTACT_INFO.phone}
                 </a>
               </li>
@@ -149,19 +128,18 @@ export function Footer() {
             </div>
           </div>
         </div>
+
+        {/* Bottom Bar */}
         <div className="pt-8 border-t border-border-subtle flex flex-col sm:flex-row justify-between items-center gap-4 text-text-muted text-sm">
           <div>
             &copy; {new Date().getFullYear()} Support Forge. All rights
             reserved.
           </div>
           <div className="flex gap-6">
-            <Link
-              href="/privacy"
-              className="hover:text-accent transition-colors"
-            >
+            <Link href="/privacy" className="footer-link">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-accent transition-colors">
+            <Link href="/terms" className="footer-link">
               Terms of Service
             </Link>
           </div>

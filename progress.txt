@@ -544,3 +544,52 @@ const industryToKey: Record<string, IndustryKey> = {
 
 ---
 
+## Iteration 19 - US-019
+
+**Completed:** Enhanced footer with visual improvements
+
+**Learnings:**
+- Footer gradient: Use vertical gradient (180deg) with dark purple tints, darker in middle for depth
+- Grid pattern overlay: `background-image` with two linear-gradients at 0deg and 90deg creates subtle grid lines
+- Top edge glow: ::after pseudo-element with horizontal gradient (transparent → purple → transparent) at 50% width creates focused highlight
+- Logo glow: Radial gradient with blur(8px) filter behind logo, expand on hover with scale(1.1)
+- Animated underline: Use ::after pseudo-element with width: 0 → 100% transition on hover
+- Gradient underline: `linear-gradient(90deg, solid color → faded)` creates directional flow effect
+- Vertical separators: Gradient with transparent ends (0%, 100%) and solid middle (20%, 80%) looks natural
+- Hide elements responsively: `@media (max-width: 767px)` with `display: none` for mobile
+- Heading accent underlines: Fixed 24px width with 2px height creates subtle brand touch
+- z-index on content wrapper ensures content appears above ::before and ::after overlays
+- Add padding-left (md:pl-6) alongside separator to create visual breathing room
+
+**CSS Classes Added:**
+- `.footer-enhanced` - gradient background with grid pattern (::before) and top edge glow (::after)
+- `.footer-logo-glow` - radial gradient blur behind logo with hover intensification
+- `.footer-link` - animated underline via ::after width transition
+- `.footer-separator` - vertical gradient line (hidden on mobile)
+- `.footer-heading` - 24px purple accent underline
+
+**Implementation Pattern:**
+```css
+/* Animated underline link */
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--forge-purple) 0%, rgba(139, 92, 246, 0.5) 100%);
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+```
+
+**Files changed:**
+- apps/web/src/app/globals.css (added footer enhancement CSS classes, updated prefers-reduced-motion)
+- apps/web/src/components/layout/Footer.tsx (applied all footer classes: wrapper, logo glow, links, separators, headings)
+
+---
+
