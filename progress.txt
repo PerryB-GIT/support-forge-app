@@ -252,3 +252,32 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 10 - US-010
+
+**Completed:** Replaced Homepage generic icons with custom icon components
+
+**Learnings:**
+- Import multiple icons from barrel export: `import { Icon1, Icon2 } from "@/components/icons"`
+- Icons inherit color from parent via `currentColor` - container sets text color class
+- Size prop of 24 works well in 48x48 (w-12 h-12) containers with flex centering
+- Pain point icons use amber color scheme: `bg-amber-500/10` background, `text-amber-400`
+- Benefit icons use accent (purple) color scheme: `bg-accent/10` background, `text-accent`
+- Replacing inline SVGs with components reduces code repetition and enables consistent updates
+
+**Icon Replacements (8 total):**
+- Challenge section (pain points, amber color):
+  - Competitive Pressure → IconCompetitivePressure
+  - ROI Uncertainty → IconROIUncertainty
+  - Board Questions → IconBoardQuestions
+  - Failed Experiments → IconFailedExperiments
+- Our Approach section (benefits, accent/purple color):
+  - Strategic Clarity → IconStrategicClarity
+  - Speed to Value → IconSpeedToValue
+  - Risk Mitigation → IconRiskMitigation
+  - Competitive Edge → IconCompetitiveEdge
+
+**Files changed:**
+- apps/web/src/app/page.tsx (added icon imports, replaced 8 inline SVGs)
+
+---
+
