@@ -500,3 +500,47 @@ const industryToKey: Record<string, IndustryKey> = {
 
 ---
 
+## Iteration 18 - US-018
+
+**Completed:** Enhanced testimonial section styling on homepage
+
+**Learnings:**
+- CSS pseudo-elements (::before) work well for decorative quote icons - position absolute, large font-size (120px), low opacity (0.1), serif font for classic look
+- Gradient backgrounds on cards: Use multi-stop gradients with purple tints at edges (0.05 to 0.08 opacity) and dark center for depth
+- Avatar gradients: Use multiple layers - base gradient (::before for highlight glow at 30% 30%), (::after for bottom shadow)
+- Hover state transitions: Include border-color in transition for subtle glow effect (rgba(139, 92, 246, 0.3))
+- Quote icon scale animation: `transform: scale(1.1)` on hover with increased opacity creates subtle "breathing" effect
+- Remove `bg-surface` when using custom gradient background in CSS class to avoid conflicts
+- Letter avatars still visible on gradient background when using `text-white` instead of `text-accent`
+- Always add new CSS classes to prefers-reduced-motion media query for accessibility
+
+**CSS Classes Added:**
+- `.testimonial-card` - gradient background, decorative quote ::before, hover lift + glow + border-color transition
+- `.avatar-gradient` - multi-stop purple gradient with highlight (::before) and depth shadow (::after)
+
+**Implementation Pattern:**
+```css
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  font-size: 120px;
+  font-family: Georgia, serif;
+  color: var(--forge-purple);
+  opacity: 0.1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.testimonial-card:hover::before {
+  opacity: 0.2;
+  transform: scale(1.1);
+}
+```
+
+**Files changed:**
+- apps/web/src/app/globals.css (added .testimonial-card and .avatar-gradient classes, updated prefers-reduced-motion)
+- apps/web/src/app/page.tsx (replaced service-card with testimonial-card on 3 testimonial cards, updated avatar styling)
+
+---
+

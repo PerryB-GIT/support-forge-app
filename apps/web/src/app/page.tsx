@@ -487,14 +487,14 @@ export default async function Home() {
           </ScrollReveal>
 
           <ScrollRevealList className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto" staggerDelay={100}>
-            <div className="service-card p-8 rounded-2xl bg-surface border border-border-subtle">
+            <div className="testimonial-card p-8 rounded-2xl border border-border-subtle">
               <div className="text-3xl font-bold text-accent mb-2"><CountUp value={40} suffix="%" /></div>
               <div className="text-lg font-semibold mb-2">Reduction in Admin Time</div>
               <p className="text-text-secondary text-sm mb-4">
                 &quot;We went from drowning in manual processes to having systems that run themselves. My team can finally focus on growth.&quot;
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">M</div>
+                <div className="avatar-gradient w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm">M</div>
                 <div>
                   <p className="font-semibold">Michael R.</p>
                   <p className="text-text-muted text-sm">COO, Manufacturing (85 employees)</p>
@@ -502,14 +502,14 @@ export default async function Home() {
               </div>
             </div>
 
-            <div className="service-card p-8 rounded-2xl bg-surface border border-border-subtle">
+            <div className="testimonial-card p-8 rounded-2xl border border-border-subtle">
               <div className="text-3xl font-bold text-accent mb-2"><CountUp value={3} suffix=" weeks" /></div>
               <div className="text-lg font-semibold mb-2">From Assessment to Live</div>
               <p className="text-text-secondary text-sm mb-4">
                 &quot;I&apos;d been trying to figure out our AI strategy for six months. Perry gave us clarity in two hours and had systems running in three weeks.&quot;
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">S</div>
+                <div className="avatar-gradient w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm">S</div>
                 <div>
                   <p className="font-semibold">Sarah K.</p>
                   <p className="text-text-muted text-sm">Founder, Professional Services ($4M)</p>
@@ -517,14 +517,14 @@ export default async function Home() {
               </div>
             </div>
 
-            <div className="service-card p-8 rounded-2xl bg-surface border border-border-subtle">
+            <div className="testimonial-card p-8 rounded-2xl border border-border-subtle">
               <div className="text-3xl font-bold text-accent mb-2"><CountUp value={180} prefix="$" suffix="K" /></div>
               <div className="text-lg font-semibold mb-2">Saved in Year One</div>
               <p className="text-text-secondary text-sm mb-4">
                 &quot;The Assessment identified inefficiencies we&apos;d been paying for without realizing. ROI was clear within the first quarter.&quot;
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">D</div>
+                <div className="avatar-gradient w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm">D</div>
                 <div>
                   <p className="font-semibold">David L.</p>
                   <p className="text-text-muted text-sm">CEO, Healthcare Tech (120 employees)</p>
