@@ -15,3 +15,9 @@ export { IconDiscovery } from "./IconDiscovery";
 export { IconAssessment } from "./IconAssessment";
 export { IconImplementation } from "./IconImplementation";
 export { IconAdvisory } from "./IconAdvisory";
+
+// Audience icons (About page)
+export { IconMidMarketLeaders } from "./IconMidMarketLeaders";
+export { IconOperationalExecutives } from "./IconOperationalExecutives";
+export { IconGrowthCEOs } from "./IconGrowthCEOs";
+export { IconProfessionalServices } from "./IconProfessionalServices";

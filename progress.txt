@@ -373,3 +373,36 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 14 - US-014
+
+**Completed:** Created custom icons for About page audience sections
+
+**Learnings:**
+- Building/skyline icons: Vary building heights for visual hierarchy, windows add detail/life
+- Growth arrows: Dashed `strokeDasharray="4 2"` suggests trajectory/progression
+- Person silhouettes: Simple head (circle) + body (curved path) is recognizable at small sizes
+- Arm pointing: Single line from shoulder creates directional emphasis
+- Rocket components: Body, nose cone, window, fins, flame each as separate paths for detail
+- Speed lines: Decreasing opacity (0.5, 0.4, 0.3) creates motion blur effect
+- Efficiency flows: Arrows with process nodes suggest workflow/automation
+- Gear teeth: Use path with M commands for each tooth position around circle
+- Professional symbols: Gavel head uses rotation transform, sound block is simple rectangle
+- AI chip integration: Center square with pins extending on all 4 sides, "AI" text centered
+
+**Icon Design Patterns:**
+- Mid-Market Leaders: Skyline of 4 buildings with varying heights/windows, dashed growth arrow, dollar sign on tallest
+- Operational Executives: Person with arm pointing at 3 horizontal process flows, gear/cog element, checkmarks
+- Growth-Focused CEOs: Person pointing at launching rocket (body/nose/window/fins/flame), speed lines, mini growth chart
+- Professional Services: Gavel (head/handle/sound block), AI chip with pins on all sides, connection lines, scales of justice hint
+
+**Files created:**
+- apps/web/src/components/icons/IconMidMarketLeaders.tsx
+- apps/web/src/components/icons/IconOperationalExecutives.tsx
+- apps/web/src/components/icons/IconGrowthCEOs.tsx
+- apps/web/src/components/icons/IconProfessionalServices.tsx
+
+**Files changed:**
+- apps/web/src/components/icons/index.ts (added audience icon exports)
+
+---
+
