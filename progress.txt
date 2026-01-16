@@ -166,3 +166,31 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 7 - US-007
+
+**Completed:** Created custom icon components for Homepage pain points
+
+**Learnings:**
+- SVG icons should use `currentColor` for fill/stroke to inherit text color and enable theming
+- Use `fillOpacity` (0.1-0.3) to create depth layers without hardcoding colors
+- `strokeOpacity` (0.5-0.7) works well for secondary/decorative elements
+- `strokeDasharray` creates dashed effects for uncertainty/motion (e.g., "4 3" or "6 2")
+- Text elements in SVG use `textAnchor="middle"` for centering, need x/y positioning
+- Use `<g transform="translate(x, y)">` to position groups of related elements
+- Icon size prop with fixed options (24 | 48) keeps consistent usage across app
+
+**Icon Design Patterns:**
+- Racing rockets: Lead rocket larger/brighter, trailing smaller/faded, speed lines
+- Chart uncertainty: Bar chart with dashed trend line, question mark in circle overlay
+- Boardroom: Presentation screen with stand, data visualization, speech bubbles
+- Broken gear: Dashed stroke circle, crack lines, floating pieces with directional arrows
+
+**Files created:**
+- apps/web/src/components/icons/index.ts (barrel export)
+- apps/web/src/components/icons/IconCompetitivePressure.tsx
+- apps/web/src/components/icons/IconROIUncertainty.tsx
+- apps/web/src/components/icons/IconBoardQuestions.tsx
+- apps/web/src/components/icons/IconFailedExperiments.tsx
+
+---
+
