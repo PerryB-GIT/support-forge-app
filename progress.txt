@@ -435,3 +435,29 @@ const idealClients = [
 
 ---
 
+## Iteration 16 - US-016
+
+**Completed:** Created industry illustration placeholders for case studies
+
+**Learnings:**
+- `aspectRatio: "4/3"` in inline style maintains responsive aspect ratio without fixed dimensions
+- Union type for industry prop provides autocomplete and type safety: `"manufacturing" | "professional-services" | ...`
+- Config object pattern maps each industry to gradient, label, accentColor, and custom SVG icon
+- Layered visual effects: gradient base → grid pattern → glow orb → icon → label overlay → noise texture
+- Grid pattern via linear-gradient with `backgroundSize: "20px 20px"` creates tech aesthetic
+- Radial gradient with negative positioning (`-top-1/2 -right-1/2`) creates soft corner glow
+- Each industry has semantically meaningful icon: factory, briefcase, heart+cross, chart, chip, shopping bag
+
+**Industry Themes:**
+- Manufacturing: slate gradient, orange accent, factory with gear
+- Professional Services: indigo gradient, briefcase icon
+- Healthcare: teal gradient, heart with medical cross
+- Financial Services: emerald gradient, ascending bar chart with trend line
+- Technology: violet/purple gradient, circuit chip with pins
+- Retail: rose gradient, shopping bag with price tag
+
+**Files created:**
+- apps/web/src/components/ui/IndustryIllustration.tsx
+
+---
+
