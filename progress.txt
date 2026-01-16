@@ -281,3 +281,25 @@ Each Claude instance appends what it learned for future iterations.
 
 ---
 
+## Iteration 11 - US-011
+
+**Completed:** Replaced Services page generic icons with custom icons
+
+**Learnings:**
+- Services page uses consistent 48px circular containers with `bg-accent/10` background
+- Same `text-accent` class pattern works for icon inheritance as Homepage
+- Service sections (Discovery, Assessment, Implementation, Advisory) each have anchor IDs for navigation
+- Existing page had CheckIcon and ArrowIcon local components - didn't need to touch those
+- Services page follows same size 24 icon in 48px container pattern as Homepage
+
+**Icon Replacements (4 total):**
+- Discovery Call → IconDiscovery (was chat/message bubble SVG)
+- AI Readiness Assessment → IconAssessment (was clipboard/checklist SVG)
+- Strategic Implementation → IconImplementation (was gear/settings SVG)
+- AI Advisory Retainer → IconAdvisory (was people/group SVG)
+
+**Files changed:**
+- apps/web/src/app/services/page.tsx (added icon imports, replaced 4 inline SVGs)
+
+---
+
