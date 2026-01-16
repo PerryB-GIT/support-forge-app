@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { HeroSection } from "@/components/ui/HeroSection";
 import { AnimatedProcessFlow } from "@/components/ui/AnimatedProcessFlow";
 import {
   IconDiscovery,
@@ -56,22 +57,23 @@ export default function ServicesPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
-            Strategic AI Consulting
-          </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-6" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+      <HeroSection
+        title={
+          <>
             AI Strategy That <span className="text-accent">Delivers Results</span>
-          </h1>
-          <p className="text-xl text-text-secondary max-w-3xl mx-auto mb-4">
-            We don&apos;t sell packages. We solve problems.
-          </p>
-          <p className="text-lg text-text-muted max-w-2xl mx-auto">
-            Every engagement starts with understanding your business, identifying high-impact opportunities, and building a roadmap tailored to your strategic objectives.
-          </p>
+          </>
+        }
+        subtitle="We don't sell packages. We solve problems."
+        gradient
+        size="lg"
+      >
+        <div className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
+          Strategic AI Consulting
         </div>
-      </section>
+        <p className="text-lg text-text-muted max-w-2xl mx-auto mt-4">
+          Every engagement starts with understanding your business, identifying high-impact opportunities, and building a roadmap tailored to your strategic objectives.
+        </p>
+      </HeroSection>
 
       {/* Engagement Journey */}
       <section className="py-16 px-6 bg-surface/50 border-y border-border-subtle">

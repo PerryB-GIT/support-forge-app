@@ -593,3 +593,61 @@ const industryToKey: Record<string, IndustryKey> = {
 
 ---
 
+
+## Iteration 20 - US-020
+
+**Completed:** Added hero sections to Services, About, and Results pages
+
+**Learnings:**
+- Reusing HeroSection component: Import and configure with props (title, subtitle, gradient, size, children)
+- JSX titles for mixed formatting: Pass JSX directly to title prop for accent spans, e.g., `title={<>Text <span className="text-accent">Highlighted</span></>}`
+- Children prop for badges: Place badge/pill elements in children to render above title
+- Additional content in children: Extra paragraphs can go in children below subtitle
+- Size variants: "lg" for primary pages (Services), "md" for secondary pages (About, Results)
+- gradient prop: Boolean prop enables gradient background styling from HeroSection CSS
+- Consistency over customization: Using same component across pages creates unified brand feel
+
+**HeroSection Usage Patterns:**
+```tsx
+// Services page - lg with JSX title and extra content
+<HeroSection
+  title={<>AI Strategy That <span className="text-accent">Delivers Results</span></>}
+  subtitle="We don't sell packages. We solve problems."
+  gradient
+  size="lg"
+>
+  <div className="badge">Strategic AI Consulting</div>
+  <p className="extra-content">Additional roadmap description...</p>
+</HeroSection>
+
+// About/Results pages - md with simple title
+<HeroSection
+  title="Page Title"
+  subtitle="Descriptive subtitle text..."
+  gradient
+  size="md"
+>
+  <div className="badge">Badge Text</div>
+</HeroSection>
+```
+
+**Files changed:**
+- apps/web/src/app/services/page.tsx (added HeroSection import, replaced custom hero with component)
+- apps/web/src/app/about/page.tsx (added HeroSection import, replaced custom hero with component)
+- apps/web/src/app/results/page.tsx (added HeroSection import, replaced custom hero with component)
+
+---
+
+## PROJECT COMPLETE
+
+All 20 user stories from prd.json have been implemented and pass:
+- US-001 to US-006: CSS animations, gradients, HeroSection component, homepage hero, service cards, scroll reveals
+- US-007 to US-011: Custom icons for pain points, benefits, services, and icon replacement across pages
+- US-012 to US-013: Animated process flow and count-up statistics
+- US-014 to US-015: About page audience icons
+- US-016 to US-017: Industry illustrations for case studies
+- US-018: Testimonial section styling
+- US-019: Footer visual enhancements
+- US-020: Consistent hero sections across all pages
+
+The visual improvements branch (ralph/visual-improvements) is ready for review and merge.

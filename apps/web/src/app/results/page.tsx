@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { HeroSection } from "@/components/ui/HeroSection";
 import { IndustryIllustration } from "@/components/ui/IndustryIllustration";
 
 type IndustryKey =
@@ -186,24 +187,16 @@ export default function CaseStudiesPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
-            Client Results
-          </div>
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-6"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
-            Measurable Impact from Strategic AI
-          </h1>
-          <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-            We measure success in business outcomes, not technology deployed.
-            These case studies demonstrate the real-world ROI our clients
-            achieve.
-          </p>
+      <HeroSection
+        title="Measurable Impact from Strategic AI"
+        subtitle="We measure success in business outcomes, not technology deployed. These case studies demonstrate the real-world ROI our clients achieve."
+        gradient
+        size="md"
+      >
+        <div className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
+          Client Results
         </div>
-      </section>
+      </HeroSection>
 
       {/* Stats Section */}
       <section className="py-12 px-4 border-y border-border-subtle bg-surface/30">

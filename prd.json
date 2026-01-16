@@ -303,8 +303,8 @@
         "Typecheck passes"
       ],
       "priority": 20,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Added HeroSection component to all 3 pages. Services page: lg size with JSX title (accent span on 'Delivers Results'), badge and extra paragraph in children. About page: md size, 'partnership' theme with badge. Results page: md size, 'growth' theme with badge. All use gradient=true for consistent visual depth. Replaced custom hero markup with reusable component for consistency."
     }
   ]
 }
