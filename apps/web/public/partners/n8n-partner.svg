@@ -1,19 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" fill="none">
-  <rect width="200" height="80" rx="8" fill="#1a1a2e"/>
-
-  <!-- n8n Logo (stylized nodes) -->
-  <g transform="translate(15, 20)">
-    <circle cx="8" cy="20" r="6" fill="#ff6d5a"/>
-    <circle cx="24" cy="10" r="6" fill="#ff6d5a"/>
-    <circle cx="24" cy="30" r="6" fill="#ff6d5a"/>
-    <circle cx="40" cy="20" r="6" fill="#ff6d5a"/>
-    <line x1="14" y1="20" x2="34" y2="20" stroke="#ff6d5a" stroke-width="2"/>
-    <line x1="24" y1="16" x2="24" y2="24" stroke="#ff6d5a" stroke-width="2"/>
-  </g>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="none">
+  <!-- n8n Nodes -->
+  <circle cx="12" cy="20" r="4" fill="#a1a1aa"/>
+  <circle cx="24" cy="14" r="4" fill="#8b8b8b"/>
+  <circle cx="24" cy="26" r="4" fill="#8b8b8b"/>
+  <line x1="16" y1="20" x2="20" y2="16" stroke="#71717a" stroke-width="1.5"/>
+  <line x1="16" y1="20" x2="20" y2="24" stroke="#71717a" stroke-width="1.5"/>
   <!-- n8n Text -->
-  <text x="65" y="42" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="bold" fill="white">n8n</text>
-
-  <!-- Partner Text -->
-  <text x="65" y="56" font-family="Inter, Arial, sans-serif" font-size="10" fill="#888">Partner</text>
+  <text x="34" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#a1a1aa">n8n</text>
+  <text x="34" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="8" fill="#71717a">Partner</text>
 </svg>
