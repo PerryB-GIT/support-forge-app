@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" fill="none">
+  <rect width="200" height="80" rx="8" fill="#1a1612"/>
+
+  <!-- Anthropic A Logo -->
+  <g transform="translate(15, 18)">
+    <path d="M22 0L44 44H33L28.5 33H15.5L11 44H0L22 0zM22 12L17.5 25h9L22 12z" fill="#d4a574"/>
+  </g>
+
+  <!-- Anthropic Text -->
+  <text x="68" y="38" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="500" fill="#d4a574">Anthropic</text>
+
+  <!-- AI Launchpad Text -->
+  <text x="68" y="54" font-family="Inter, Arial, sans-serif" font-size="10" fill="#8b7355">AI Launchpad</text>
+</svg>

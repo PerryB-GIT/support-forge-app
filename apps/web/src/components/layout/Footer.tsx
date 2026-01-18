@@ -129,6 +129,113 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Partners Section */}
+        <div className="pt-8 border-t border-border-subtle mb-8">
+          <div className="text-center mb-6">
+            <span className="text-text-muted text-sm">Proud Technology Partners</span>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+            <a
+              href="https://partners.amazonaws.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src="/partners/aws-partner.svg"
+                alt="AWS Partner Network Member"
+                width={140}
+                height={56}
+                className="h-10 w-auto"
+              />
+            </a>
+            <a
+              href="https://partner.microsoft.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src="/partners/microsoft-partner.svg"
+                alt="Microsoft Partner"
+                width={140}
+                height={56}
+                className="h-10 w-auto"
+              />
+            </a>
+            <a
+              href="https://vercel.com/partners"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src="/partners/vercel-partner.svg"
+                alt="Vercel Partner"
+                width={140}
+                height={56}
+                className="h-10 w-auto"
+              />
+            </a>
+            <a
+              href="https://cloud.google.com/partners"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src="/partners/google-cloud-partner.svg"
+                alt="Google Cloud Partner"
+                width={140}
+                height={56}
+                className="h-10 w-auto"
+              />
+            </a>
+            <a
+              href="https://github.com/partners"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src="/partners/github-partner.svg"
+                alt="GitHub Partner"
+                width={140}
+                height={56}
+                className="h-10 w-auto"
+              />
+            </a>
+            <a
+              href="https://n8n.io/partners"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src="/partners/n8n-partner.svg"
+                alt="n8n Partner"
+                width={140}
+                height={56}
+                className="h-10 w-auto"
+              />
+            </a>
+            <a
+              href="https://www.anthropic.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src="/partners/anthropic-partner.svg"
+                alt="Anthropic AI Launchpad"
+                width={140}
+                height={56}
+                className="h-10 w-auto"
+              />
+            </a>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border-subtle flex flex-col sm:flex-row justify-between items-center gap-4 text-text-muted text-sm">
           <div>
