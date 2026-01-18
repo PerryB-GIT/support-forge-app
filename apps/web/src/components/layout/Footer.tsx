@@ -131,107 +131,71 @@ export function Footer() {
 
         {/* Partners Section */}
         <div className="pt-6 border-t border-border-subtle mb-6">
-          <p className="text-center text-text-muted text-xs tracking-wide uppercase mb-4">
+          <p className="text-center text-text-muted text-xs tracking-widest uppercase mb-5">
             Technology Partners
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <a
               href="https://partners.amazonaws.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-80 transition-opacity"
+              className="text-text-muted hover:text-text-secondary transition-colors text-sm font-medium tracking-wide"
             >
-              <Image
-                src="/partners/aws-partner.svg"
-                alt="AWS Partner"
-                width={90}
-                height={30}
-                className="h-6 w-auto"
-              />
+              AWS
             </a>
+            <span className="text-border-subtle hidden sm:inline">•</span>
             <a
               href="https://partner.microsoft.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-80 transition-opacity"
+              className="text-text-muted hover:text-text-secondary transition-colors text-sm font-medium tracking-wide"
             >
-              <Image
-                src="/partners/microsoft-partner.svg"
-                alt="Microsoft Partner"
-                width={90}
-                height={30}
-                className="h-6 w-auto"
-              />
+              Microsoft
             </a>
+            <span className="text-border-subtle hidden sm:inline">•</span>
             <a
               href="https://vercel.com/partners"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-80 transition-opacity"
+              className="text-text-muted hover:text-text-secondary transition-colors text-sm font-medium tracking-wide"
             >
-              <Image
-                src="/partners/vercel-partner.svg"
-                alt="Vercel Partner"
-                width={90}
-                height={30}
-                className="h-6 w-auto"
-              />
+              Vercel
             </a>
+            <span className="text-border-subtle hidden sm:inline">•</span>
             <a
               href="https://cloud.google.com/partners"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-80 transition-opacity"
+              className="text-text-muted hover:text-text-secondary transition-colors text-sm font-medium tracking-wide"
             >
-              <Image
-                src="/partners/google-cloud-partner.svg"
-                alt="Google Cloud Partner"
-                width={90}
-                height={30}
-                className="h-6 w-auto"
-              />
+              Google Cloud
             </a>
+            <span className="text-border-subtle hidden sm:inline">•</span>
             <a
               href="https://github.com/partners"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-80 transition-opacity"
+              className="text-text-muted hover:text-text-secondary transition-colors text-sm font-medium tracking-wide"
             >
-              <Image
-                src="/partners/github-partner.svg"
-                alt="GitHub Partner"
-                width={90}
-                height={30}
-                className="h-6 w-auto"
-              />
+              GitHub
             </a>
+            <span className="text-border-subtle hidden sm:inline">•</span>
             <a
               href="https://n8n.io/partners"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-80 transition-opacity"
+              className="text-text-muted hover:text-text-secondary transition-colors text-sm font-medium tracking-wide"
             >
-              <Image
-                src="/partners/n8n-partner.svg"
-                alt="n8n Partner"
-                width={90}
-                height={30}
-                className="h-6 w-auto"
-              />
+              n8n
             </a>
+            <span className="text-border-subtle hidden sm:inline">•</span>
             <a
               href="https://www.anthropic.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-80 transition-opacity"
+              className="text-text-muted hover:text-text-secondary transition-colors text-sm font-medium tracking-wide"
             >
-              <Image
-                src="/partners/anthropic-partner.svg"
-                alt="Anthropic Partner"
-                width={90}
-                height={30}
-                className="h-6 w-auto"
-              />
+              Anthropic
             </a>
           </div>
         </div>
