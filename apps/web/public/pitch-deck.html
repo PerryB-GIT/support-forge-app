@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Launchpad - Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @media print {
+            .slide {
+                page-break-after: always;
+                height: 100vh !important;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f14;
+            color: #ffffff;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f0f14 0%, #1a1a2e 100%);
+            border-bottom: 2px solid #8B5CF6;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 56px;
+            background: linear-gradient(135deg, #8B5CF6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 42px;
+            color: #8B5CF6;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-size: 28px;
+            color: #a78bfa;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 24px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 900px;
+        }
+
+        .tagline {
+            font-size: 28px;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+
+        .big-number {
+            font-size: 120px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #8B5CF6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-box {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #8B5CF6;
+        }
+
+        .stat-box .label {
+            font-size: 18px;
+            color: #a0a0a0;
+            margin-top: 10px;
+        }
+
+        .problem-box {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .solution-box {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid #22c55e;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .tier {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .tier.featured {
+            border: 2px solid #8B5CF6;
+            background: rgba(99, 102, 241, 0.15);
+            transform: scale(1.02);
+        }
+
+        .tier h4 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .tier .price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #8B5CF6;
+            margin-bottom: 15px;
+        }
+
+        .tier .desc {
+            font-size: 16px;
+            color: #a0a0a0;
+        }
+
+        ul {
+            font-size: 22px;
+            line-height: 2;
+            color: #e0e0e0;
+            list-style: none;
+        }
+
+        ul li::before {
+            content: "→ ";
+            color: #8B5CF6;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            font-size: 20px;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th {
+            color: #8B5CF6;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .highlight {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .ask-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border: 2px solid #8B5CF6;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .ask-amount {
+            font-size: 72px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #8B5CF6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo {
+            font-size: 24px;
+            color: #8B5CF6;
+            margin-bottom: 20px;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 28px;
+            color: #e0e0e0;
+            border-left: 4px solid #8B5CF6;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+
+        .quote-author {
+            color: #8B5CF6;
+            font-style: normal;
+            margin-top: 15px;
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            font-size: 20px;
+            color: #a0a0a0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide">
+    <div class="logo">SUPPORT FORGE PRESENTS</div>
+    <h1>AI LAUNCHPAD</h1>
+    <p class="tagline">The fastest path from AI-curious to AI-powered</p>
+    <p style="margin-top: 60px; color: #666;">January 2026 | Investor Presentation</p>
+</div>
+
+<!-- SLIDE 2: The Problem -->
+<div class="slide">
+    <h2>The Problem</h2>
+    <div class="stats-grid">
+        <div class="stat-box">
+            <div class="number">90%</div>
+            <div class="label">of businesses say AI is a priority</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">&lt;20%</div>
+            <div class="label">have actually implemented it</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">$1000s</div>
+            <div class="label">wasted on unused AI subscriptions</div>
+        </div>
+    </div>
+    <div class="problem-box" style="margin-top: 50px;">
+        <p>The gap between "AI exists" and "my team uses AI daily" costs businesses thousands of hours and dollars in failed experiments.</p>
+    </div>
+</div>
+
+<!-- SLIDE 3: The Solution -->
+<div class="slide">
+    <h2>The Solution</h2>
+    <div class="solution-box">
+        <h3>AI Launchpad</h3>
+        <p>We take professionals from zero to building and deploying real projects in 2 weeks. Not theory - hands-on setup, real tools, measurable results.</p>
+    </div>
+    <div class="stats-grid" style="margin-top: 40px;">
+        <div class="stat-box">
+            <div class="number">30-40</div>
+            <div class="label">hours/week saved by clients</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">2 weeks</div>
+            <div class="label">from zero to productive</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">Lifetime</div>
+            <div class="label">value from skills learned</div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: How It Works -->
+<div class="slide">
+    <h2>How It Works</h2>
+    <p style="margin-bottom: 40px;">We don't just teach AI - we give you the complete toolkit.</p>
+    <ul>
+        <li><strong>Claude Code setup</strong> - Configured specifically for your business workflow</li>
+        <li><strong>Full stack enablement</strong> - GitHub, AWS, Zapier, N8N, deployment</li>
+        <li><strong>Hands-on training</strong> - Learn by building real projects, not watching videos</li>
+        <li><strong>Ongoing support</strong> - Direct access when you get stuck</li>
+        <li><strong>The "why and how"</strong> - Not just what to click, but understanding</li>
+    </ul>
+</div>
+
+<!-- SLIDE 5: Product Tiers -->
+<div class="slide">
+    <h2>Product Tiers</h2>
+    <div class="tier-grid">
+        <div class="tier">
+            <h4>STARTER</h4>
+            <div class="price">$97/mo</div>
+            <div class="desc">Self-paced course<br>Community access<br>Monthly Q&A calls<br>Templates & configs</div>
+        </div>
+        <div class="tier featured">
+            <h4>PRO COHORT</h4>
+            <div class="price">$3,000</div>
+            <div class="desc">2-week live program<br>Group sessions (4-6 people)<br>Direct Slack access<br>Hands-on setup</div>
+        </div>
+        <div class="tier">
+            <h4>ENTERPRISE</h4>
+            <div class="price">$10,000+</div>
+            <div class="desc">Full custom implementation<br>1-on-1 engagement<br>Ongoing support retainer<br>Deployment included</div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 6: Traction -->
+<div class="slide">
+    <h2>Traction</h2>
+    <div class="quote">
+        "I'm saving 30-40 hours every week. It feels like I discovered a superpower."
+        <div class="quote-author">— AI Launchpad Client</div>
+    </div>
+    <ul style="margin-top: 40px;">
+        <li><strong>3 referrals last week</strong> - organic, word-of-mouth growth</li>
+        <li><strong>Two clients in this room</strong> vouching for results</li>
+        <li><strong>Anthropic partnership</strong> application submitted</li>
+        <li><strong>100% referral-driven</strong> growth to date</li>
+    </ul>
+</div>
+
+<!-- SLIDE 7: Financial Projections -->
+<div class="slide">
+    <h2>Financial Projections</h2>
+    <table>
+        <tr>
+            <th>Tier</th>
+            <th>Year 1</th>
+            <th>Year 2</th>
+        </tr>
+        <tr>
+            <td>Starter (self-serve)</td>
+            <td>$108K</td>
+            <td>$300K</td>
+        </tr>
+        <tr>
+            <td>Pro Cohorts</td>
+            <td>$225K</td>
+            <td>$600K</td>
+        </tr>
+        <tr>
+            <td>Enterprise</td>
+            <td>$175K</td>
+            <td>$400K</td>
+        </tr>
+        <tr style="font-size: 24px;">
+            <td><strong>Total</strong></td>
+            <td class="highlight">$508K</td>
+            <td class="highlight">$1.3M+</td>
+        </tr>
+    </table>
+    <p style="margin-top: 30px; font-size: 18px; color: #a0a0a0;">Conservative base case. Downside: $355K | Upside: $700K</p>
+</div>
+
+<!-- SLIDE 8: Use of Funds -->
+<div class="slide">
+    <h2>Use of Funds</h2>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>Platform Development</td>
+            <td>$225K</td>
+            <td>Automation & self-serve tools</td>
+        </tr>
+        <tr>
+            <td>Team (2 hires)</td>
+            <td>$170K</td>
+            <td>Ops support + sales/trainer</td>
+        </tr>
+        <tr>
+            <td>Founder Salary</td>
+            <td>$175K</td>
+            <td>Full-time focus on building</td>
+        </tr>
+        <tr>
+            <td>Marketing</td>
+            <td>$100K</td>
+            <td>Ads, content, SEO, PR</td>
+        </tr>
+        <tr>
+            <td>Content & Site</td>
+            <td>$85K</td>
+            <td>Course production, platform</td>
+        </tr>
+        <tr>
+            <td>Buffer</td>
+            <td>$95K</td>
+            <td>Contingency</td>
+        </tr>
+    </table>
+</div>
+
+<!-- SLIDE 9: Why Now, Why Us -->
+<div class="slide">
+    <h2>Why Now. Why Us.</h2>
+    <div class="two-col">
+        <div>
+            <h3>Why Now</h3>
+            <ul>
+                <li>AI tools crossed from "toys" to "essentials"</li>
+                <li>90% want AI, &lt;20% have implemented</li>
+                <li>Window to own "AI Enablement" is open</li>
+                <li>First-mover advantage before commoditization</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Why Us</h3>
+            <ul>
+                <li>Proven results: 30-40 hrs/week saved</li>
+                <li>Referral-driven growth (trust you can't buy)</li>
+                <li>Repeatable playbook across industries</li>
+                <li>Anthropic partnership in progress</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 10: The Ask -->
+<div class="slide">
+    <h2>The Ask</h2>
+    <div class="ask-box">
+        <div class="ask-amount">$750K - $1M</div>
+        <p style="font-size: 24px; margin-top: 20px;">To productize what's already working</p>
+        <div class="stats-grid" style="margin-top: 40px;">
+            <div class="stat-box">
+                <div class="number">18-24</div>
+                <div class="label">months runway</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">$500K</div>
+                <div class="label">Year 1 revenue target</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">$1.5M+</div>
+                <div class="label">Year 2 target</div>
+            </div>
+        </div>
+    </div>
+    <div class="contact-info">
+        <strong>Perry | AI Launchpad</strong><br>
+        support-forge.com | perry.bailes@gmail.com | 478-299-1604
+    </div>
+</div>
+
+</body>
+</html>
