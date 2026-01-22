@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Claude Code Setup Guide | Support Forge</title>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        :root {
+            --purple-500: #8B5CF6;
+            --purple-600: #7C3AED;
+            --purple-400: #A78BFA;
+            --bg-dark: #050508;
+            --bg-card: #0f0f14;
+            --bg-hover: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --success: #22c55e;
+            --warning: #eab308;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1a1025 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--purple-400), var(--purple-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, var(--purple-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .quick-start {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-start h2 {
+            color: var(--purple-400);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block {
+            background: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .code-block code {
+            color: #22c55e;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--purple-600);
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--purple-500);
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .guide-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .guide-card:hover {
+            border-color: var(--purple-500);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.15);
+        }
+
+        .guide-card .number {
+            display: inline-block;
+            background: var(--purple-600);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .guide-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .guide-card .time {
+            display: inline-block;
+            background: var(--bg-hover);
+            color: var(--purple-400);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .requirements {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .requirements h2 {
+            color: var(--purple-400);
+            margin-bottom: 1rem;
+        }
+
+        .req-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .req-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: var(--bg-hover);
+            border-radius: 8px;
+        }
+
+        .req-item .check {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, var(--purple-600) 0%, #5b21b6 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .download-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .download-section p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: white;
+            color: var(--purple-600);
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        .footer a {
+            color: var(--purple-400);
+            text-decoration: none;
+        }
+
+        .support-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .support-box h3 {
+            color: var(--purple-400);
+            margin-bottom: 1rem;
+        }
+
+        .support-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .support-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: var(--bg-hover);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .support-links a:hover {
+            background: var(--purple-600);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="/sf-logo.png" alt="Support Forge">
+            <span class="logo-text">Support Forge</span>
+        </div>
+        <h1>Claude Code Setup Guide</h1>
+        <p>Everything you need to get started with AI-powered coding</p>
+    </div>
+
+    <div class="container">
+        <div class="quick-start">
+            <h2>⚡ Quick Start</h2>
+            <p>Already have Git installed? Run this command in CMD or PowerShell:</p>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code>curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd</code>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Then navigate to your project and run: <code style="background: var(--bg-hover); padding: 0.25rem 0.5rem; border-radius: 4px;">claude</code></p>
+        </div>
+
+        <h2 style="color: var(--purple-400); margin-bottom: 0.5rem;">📚 Step-by-Step Guides</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Follow these guides in order for a complete setup</p>
+
+        <div class="guides-grid">
+            <a href="01-subscription.html" class="guide-card">
+                <span class="number">1</span>
+                <h3>Subscription Setup</h3>
+                <p>Set up your Claude Pro or Max subscription to unlock Claude Code access.</p>
+                <span class="time">~5 minutes</span>
+            </a>
+
+            <a href="02-installation.html" class="guide-card">
+                <span class="number">2</span>
+                <h3>Installation Guide</h3>
+                <p>Install all prerequisites including Git, Node.js, Python, and Claude Code CLI.</p>
+                <span class="time">~15-30 minutes</span>
+            </a>
+
+            <a href="03-git-cmd.html" class="guide-card">
+                <span class="number">3</span>
+                <h3>Git CMD Installation</h3>
+                <p>Windows CMD-specific steps for installing and configuring Claude Code.</p>
+                <span class="time">~10 minutes</span>
+            </a>
+
+            <a href="04-quick-start.html" class="guide-card">
+                <span class="number">4</span>
+                <h3>Quick Start Usage</h3>
+                <p>Essential commands, workflows, and tips for daily use of Claude Code.</p>
+                <span class="time">~10 minutes</span>
+            </a>
+        </div>
+
+        <div class="requirements">
+            <h2>✅ Requirements</h2>
+            <div class="req-grid">
+                <div class="req-item">
+                    <span class="check">✓</span>
+                    <span>Windows 10/11</span>
+                </div>
+                <div class="req-item">
+                    <span class="check">✓</span>
+                    <span>Git for Windows</span>
+                </div>
+                <div class="req-item">
+                    <span class="check">✓</span>
+                    <span>Claude Pro ($20/mo)</span>
+                </div>
+                <div class="req-item">
+                    <span class="check">✓</span>
+                    <span>or Claude Max ($100+/mo)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>🚀 Automated Installer</h2>
+            <p>Download our one-click installer that sets up all prerequisites automatically.</p>
+            <a href="/downloads/ClaudeCodeSetup.exe" class="download-btn">Download ClaudeCodeSetup.exe</a>
+        </div>
+
+        <div class="support-box">
+            <h3>Need Help?</h3>
+            <div class="support-links">
+                <a href="mailto:support@support-forge.com">📧 Email Support</a>
+                <a href="https://calendly.com/support-forge" target="_blank">📅 Schedule a Call</a>
+                <a href="https://docs.anthropic.com/claude-code" target="_blank">📖 Official Docs</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>Support Forge</strong> - AI Strategy That Moves the Needle</p>
+        <p><a href="https://support-forge.com">support-forge.com</a></p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">Client Resource • January 2026</p>
+    </div>
+
+    <script>
+        function copyCode(btn) {
+            const code = btn.parentElement.querySelector('code').textContent;
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+    </script>
+</body>
+</html>

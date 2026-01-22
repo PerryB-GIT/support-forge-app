@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Quick Start Usage | Claude Code Setup | Support Forge</title>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        :root {
+            --purple-500: #8B5CF6;
+            --purple-600: #7C3AED;
+            --purple-400: #A78BFA;
+            --bg-dark: #050508;
+            --bg-card: #0f0f14;
+            --bg-hover: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --success: #22c55e;
+            --warning: #eab308;
+            --error: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        .nav {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav a { color: var(--purple-400); text-decoration: none; }
+        .nav a:hover { text-decoration: underline; }
+        .nav span { color: var(--text-secondary); }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, var(--purple-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        h2 {
+            color: var(--purple-400);
+            margin: 2rem 0 1rem;
+            padding-top: 1rem;
+        }
+        h3 { color: var(--text-primary); margin: 1.5rem 0 0.75rem; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        ul, ol { margin: 1rem 0 1rem 1.5rem; color: var(--text-secondary); }
+        li { margin-bottom: 0.5rem; }
+        .code-block {
+            background: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .code-block code { color: #22c55e; }
+        .code-block .comment { color: #6b7280; }
+        .code-block .prompt { color: var(--purple-400); }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--purple-600);
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        .copy-btn:hover { background: var(--purple-500); }
+        code {
+            background: var(--bg-hover);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .card.highlight {
+            border-color: var(--purple-500);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th { background: var(--bg-card); color: var(--purple-400); }
+        td { color: var(--text-secondary); }
+        td code { background: transparent; padding: 0; }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .alert-info {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--purple-500);
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+        .footer a { color: var(--purple-400); text-decoration: none; }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--purple-400);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .nav-btn:hover { border-color: var(--purple-500); }
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .example-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .example-card h4 {
+            color: var(--purple-400);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .example-card code {
+            display: block;
+            background: #000;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #22c55e;
+        }
+        .tip {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(91, 33, 182, 0.1));
+            border-left: 3px solid var(--purple-500);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .tip strong { color: var(--purple-400); }
+        .kbd {
+            display: inline-block;
+            background: var(--bg-hover);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.1rem 0.4rem;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html">← Back to Guide</a>
+        <span>/</span>
+        <span>Quick Start Usage</span>
+    </nav>
+
+    <div class="container">
+        <h1>4. Quick Start Usage</h1>
+        <p class="subtitle">Essential commands, workflows, and tips for daily use</p>
+
+        <h2>Starting Claude Code</h2>
+
+        <h3>Basic Start</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>cd /path/to/your/project
+claude</code>
+        </div>
+
+        <h3>Start with a Task</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>claude "describe what you want to do"</code>
+        </div>
+
+        <h3>Examples</h3>
+        <div class="example-grid">
+            <div class="example-card">
+                <h4>Fix a Bug</h4>
+                <code>claude "fix the login bug in auth.js"</code>
+            </div>
+            <div class="example-card">
+                <h4>Add a Feature</h4>
+                <code>claude "add dark mode toggle to settings"</code>
+            </div>
+            <div class="example-card">
+                <h4>Write Tests</h4>
+                <code>claude "write tests for UserService"</code>
+            </div>
+            <div class="example-card">
+                <h4>Explain Code</h4>
+                <code>claude "explain the payment flow"</code>
+            </div>
+        </div>
+
+        <h2>Essential Slash Commands</h2>
+        <p>Use these inside a Claude Code session:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/help</code></td>
+                    <td>Show all available commands</td>
+                </tr>
+                <tr>
+                    <td><code>/clear</code></td>
+                    <td>Clear conversation history</td>
+                </tr>
+                <tr>
+                    <td><code>/compact</code></td>
+                    <td>Summarize conversation to save context</td>
+                </tr>
+                <tr>
+                    <td><code>/exit</code></td>
+                    <td>Exit Claude Code</td>
+                </tr>
+                <tr>
+                    <td><code>/config</code></td>
+                    <td>Open configuration menu</td>
+                </tr>
+                <tr>
+                    <td><code>/doctor</code></td>
+                    <td>Run health diagnostics</td>
+                </tr>
+                <tr>
+                    <td><code>/memory</code></td>
+                    <td>Manage project memory/context</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>File Operations</h2>
+
+        <h3>Reading Files</h3>
+        <p>Claude reads files automatically when needed. You can also specify:</p>
+        <div class="code-block">
+            <code><span class="prompt">></span> read the package.json file
+<span class="prompt">></span> show me src/components/Header.tsx
+<span class="prompt">></span> what's in the .env.example file?</code>
+        </div>
+
+        <h3>Editing Files</h3>
+        <div class="code-block">
+            <code><span class="prompt">></span> add error handling to the login function
+<span class="prompt">></span> update the API endpoint from v1 to v2
+<span class="prompt">></span> fix the typo in line 45 of server.js</code>
+        </div>
+
+        <h3>Creating Files</h3>
+        <div class="code-block">
+            <code><span class="prompt">></span> create a new component called UserProfile
+<span class="prompt">></span> add a README.md with setup instructions
+<span class="prompt">></span> generate a Dockerfile for this project</code>
+        </div>
+
+        <h2>Common Workflows</h2>
+
+        <div class="card">
+            <h3>Bug Fixing</h3>
+            <div class="code-block">
+                <code><span class="prompt">></span> I'm getting error "Cannot read property 'map' of undefined" in ProductList.tsx</code>
+            </div>
+            <p>Claude will:</p>
+            <ol>
+                <li>Analyze the error</li>
+                <li>Find the relevant code</li>
+                <li>Identify the root cause</li>
+                <li>Propose and apply a fix</li>
+            </ol>
+        </div>
+
+        <div class="card">
+            <h3>Code Review</h3>
+            <div class="code-block">
+                <code><span class="prompt">></span> review the changes in my last 3 commits
+<span class="prompt">></span> check this file for security issues
+<span class="prompt">></span> suggest improvements for the database queries</code>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Refactoring</h3>
+            <div class="code-block">
+                <code><span class="prompt">></span> convert this class component to functional
+<span class="prompt">></span> extract validation logic into a utility
+<span class="prompt">></span> rename all 'userId' to 'customerId'</code>
+            </div>
+        </div>
+
+        <h2>Git Integration</h2>
+        <p>Claude can help with Git operations:</p>
+        <div class="code-block">
+            <code><span class="prompt">></span> commit my changes with a good message
+<span class="prompt">></span> what files have I changed?
+<span class="prompt">></span> create a new branch called feature/user-dashboard
+<span class="prompt">></span> show me the diff for the last commit</code>
+        </div>
+
+        <h2>Project Memory</h2>
+        <p>Claude remembers context about your project between sessions.</p>
+
+        <h3>Adding Memory</h3>
+        <div class="code-block">
+            <code><span class="prompt">></span> remember that we use Tailwind CSS for styling
+<span class="prompt">></span> remember the database is PostgreSQL on port 5433
+<span class="prompt">></span> remember to always run tests before commits</code>
+        </div>
+
+        <h3>Viewing & Clearing Memory</h3>
+        <div class="code-block">
+            <code><span class="prompt">></span> /memory
+<span class="prompt">></span> /memory clear</code>
+        </div>
+
+        <h2>Tips for Best Results</h2>
+
+        <div class="tip">
+            <strong>Be Specific</strong>
+            <p style="margin: 0.5rem 0 0;">Instead of "add validation", try "add form validation to signup that checks email format and password length of at least 8 characters"</p>
+        </div>
+
+        <div class="tip">
+            <strong>Provide Context</strong>
+            <p style="margin: 0.5rem 0 0;">Instead of "add a loading spinner", try "in src/pages/Dashboard.tsx, add a loading spinner while data is being fetched from /api/stats"</p>
+        </div>
+
+        <div class="tip">
+            <strong>Iterate</strong>
+            <p style="margin: 0.5rem 0 0;">Build features step by step: "add search bar" → "add 300ms debouncing" → "add keyboard shortcuts"</p>
+        </div>
+
+        <h2>Keyboard Shortcuts</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Shortcut</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="kbd">Ctrl</span> + <span class="kbd">C</span></td>
+                    <td>Cancel current operation</td>
+                </tr>
+                <tr>
+                    <td><span class="kbd">Ctrl</span> + <span class="kbd">D</span></td>
+                    <td>Exit Claude Code</td>
+                </tr>
+                <tr>
+                    <td><span class="kbd">↑</span> / <span class="kbd">↓</span></td>
+                    <td>Navigate command history</td>
+                </tr>
+                <tr>
+                    <td><span class="kbd">Tab</span></td>
+                    <td>Autocomplete</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Cost Management</h2>
+        <p>Claude Code uses your subscription quota. To optimize:</p>
+        <ol>
+            <li><strong>Be concise</strong> - Shorter prompts use less context</li>
+            <li><strong>Use /compact</strong> - Summarize long conversations</li>
+            <li><strong>Focus sessions</strong> - Exit and restart for new topics</li>
+            <li><strong>Check usage</strong> - Visit <a href="https://claude.ai/settings/usage" style="color: var(--purple-400);">claude.ai/settings/usage</a></li>
+        </ol>
+
+        <h2>Getting Help</h2>
+
+        <div class="card highlight">
+            <h3>In-Session Help</h3>
+            <div class="code-block">
+                <code><span class="prompt">></span> /help
+<span class="prompt">></span> how do I...
+<span class="prompt">></span> explain this feature...</code>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>External Resources</h3>
+            <ul>
+                <li><a href="https://docs.anthropic.com/claude-code" style="color: var(--purple-400);">Claude Code Official Docs</a></li>
+                <li><a href="mailto:support@support-forge.com" style="color: var(--purple-400);">Support Forge Email</a></li>
+                <li><a href="https://calendly.com/support-forge" style="color: var(--purple-400);">Book a Call</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="03-git-cmd.html" class="nav-btn">← Previous: Git CMD</a>
+            <a href="index.html" class="nav-btn">Back to Overview →</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>Support Forge</strong> - AI Strategy That Moves the Needle</p>
+        <p><a href="mailto:support@support-forge.com">support@support-forge.com</a></p>
+    </div>
+
+    <script>
+        function copyCode(btn) {
+            const code = btn.parentElement.querySelector('code').textContent;
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+    </script>
+</body>
+</html>

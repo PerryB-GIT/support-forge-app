@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Git CMD Installation | Claude Code Setup | Support Forge</title>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        :root {
+            --purple-500: #8B5CF6;
+            --purple-600: #7C3AED;
+            --purple-400: #A78BFA;
+            --bg-dark: #050508;
+            --bg-card: #0f0f14;
+            --bg-hover: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --success: #22c55e;
+            --warning: #eab308;
+            --error: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        .nav {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav a { color: var(--purple-400); text-decoration: none; }
+        .nav a:hover { text-decoration: underline; }
+        .nav span { color: var(--text-secondary); }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, var(--purple-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        h2 {
+            color: var(--purple-400);
+            margin: 2rem 0 1rem;
+            padding-top: 1rem;
+        }
+        h3 { color: var(--text-primary); margin: 1.5rem 0 0.75rem; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        ul, ol { margin: 1rem 0 1rem 1.5rem; color: var(--text-secondary); }
+        li { margin-bottom: 0.5rem; }
+        .code-block {
+            background: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .code-block code { color: #22c55e; }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--purple-600);
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        .copy-btn:hover { background: var(--purple-500); }
+        code {
+            background: var(--bg-hover);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .alert-info {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--purple-500);
+        }
+        .alert-warning {
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid var(--warning);
+        }
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--success);
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+        .footer a { color: var(--purple-400); text-decoration: none; }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--purple-400);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .nav-btn:hover { border-color: var(--purple-500); }
+        .step {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border-left: 3px solid var(--purple-500);
+        }
+        .step-num {
+            background: var(--purple-600);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; }
+        .step-content h4 { color: var(--text-primary); margin-bottom: 0.5rem; }
+        .step-content p { margin: 0; }
+        .quick-ref {
+            background: linear-gradient(135deg, var(--bg-card), #1a1025);
+            border: 2px solid var(--purple-500);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+        }
+        .quick-ref pre {
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            line-height: 1.8;
+        }
+        .quick-ref .highlight { color: var(--purple-400); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th { background: var(--bg-card); color: var(--purple-400); }
+        td { color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html">← Back to Guide</a>
+        <span>/</span>
+        <span>Git CMD Installation</span>
+    </nav>
+
+    <div class="container">
+        <h1>3. Git CMD Installation</h1>
+        <p class="subtitle">Step-by-step guide using Windows Command Prompt with Git</p>
+
+        <h2>Open Git CMD</h2>
+
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Search for Git CMD</h4>
+                <p>Press <code>Windows + S</code> and type <code>Git CMD</code></p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Run as Administrator</h4>
+                <p>Right-click on "Git CMD" and select <strong>"Run as administrator"</strong></p>
+            </div>
+        </div>
+
+        <p>You should see a command prompt:</p>
+        <div class="code-block">
+            <code>C:\Users\YourName></code>
+        </div>
+
+        <h2>Verify Git Installation</h2>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>git --version</code>
+        </div>
+        <p>Expected output: <code>git version 2.47.1.windows.2</code> or similar</p>
+
+        <div class="alert alert-warning">
+            <strong>If you see an error:</strong> Git isn't installed properly. Download it from <a href="https://git-scm.com/download/windows" style="color: var(--purple-400);">git-scm.com</a>
+        </div>
+
+        <h2>Install Claude Code</h2>
+
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Run the Installer</h4>
+                <p>Copy and paste this command:</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd</code>
+        </div>
+
+        <p><strong>What this does:</strong></p>
+        <ol>
+            <li>Downloads the installer script from claude.ai</li>
+            <li>Runs the installer</li>
+            <li>Cleans up the temporary file</li>
+        </ol>
+
+        <p>Expected output:</p>
+        <div class="code-block">
+            <code>Downloading Claude Code...
+Installing Claude Code...
+Claude Code installed successfully!
+Installation complete. Run 'claude' to get started.</code>
+        </div>
+
+        <h2>Verify Installation</h2>
+
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Close and Reopen Git CMD</h4>
+                <p>This refreshes your PATH so the <code>claude</code> command is recognized</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>Check Version</h4>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>claude --version</code>
+        </div>
+        <p>Expected: <code>claude-code version X.X.X</code></p>
+
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+                <h4>Run Health Check</h4>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>claude doctor</code>
+        </div>
+
+        <h2>Authenticate</h2>
+
+        <div class="step">
+            <div class="step-num">7</div>
+            <div class="step-content">
+                <h4>Navigate to Your Project</h4>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>cd C:\Users\YourName\Projects\my-project</code>
+        </div>
+
+        <p>Or create a test folder:</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>mkdir C:\ClaudeTest
+cd C:\ClaudeTest</code>
+        </div>
+
+        <div class="step">
+            <div class="step-num">8</div>
+            <div class="step-content">
+                <h4>Start Claude Code</h4>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>claude</code>
+        </div>
+
+        <div class="step">
+            <div class="step-num">9</div>
+            <div class="step-content">
+                <h4>Complete Authentication</h4>
+                <ol style="margin-top: 0.5rem;">
+                    <li>Browser opens automatically with Anthropic login</li>
+                    <li>Sign in with your Claude Pro/Max credentials</li>
+                    <li>Click "Allow" to authorize Claude Code</li>
+                    <li>Return to terminal - you're ready!</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="alert alert-success">
+            <strong>Success!</strong> You should see: "Authentication successful! Welcome to Claude Code."
+        </div>
+
+        <h2>Common Commands</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>claude</code></td>
+                    <td>Start Claude Code in current directory</td>
+                </tr>
+                <tr>
+                    <td><code>claude "do something"</code></td>
+                    <td>Start with a specific task</td>
+                </tr>
+                <tr>
+                    <td><code>claude --version</code></td>
+                    <td>Check installed version</td>
+                </tr>
+                <tr>
+                    <td><code>claude doctor</code></td>
+                    <td>Run health check</td>
+                </tr>
+                <tr>
+                    <td><code>claude update</code></td>
+                    <td>Update to latest version</td>
+                </tr>
+                <tr>
+                    <td><code>claude logout</code></td>
+                    <td>Sign out</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Troubleshooting</h2>
+
+        <h3>"curl is not recognized"</h3>
+        <p>Git CMD should include curl. If not, reinstall Git for Windows with all components.</p>
+
+        <h3>"claude is not recognized" after installation</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>set PATH=%PATH%;%USERPROFILE%\.claude\bin</code>
+        </div>
+        <p>Then try <code>claude --version</code> again.</p>
+
+        <h3>"Authentication failed"</h3>
+        <ol>
+            <li>Ensure your subscription is active at <a href="https://claude.ai" style="color: var(--purple-400);">claude.ai</a></li>
+            <li>Try: <code>claude logout</code> then <code>claude</code></li>
+            <li>Check if firewall is blocking claude.ai</li>
+        </ol>
+
+        <h2>Quick Reference Card</h2>
+
+        <div class="quick-ref">
+            <pre>╔═══════════════════════════════════════════════════════════════╗
+║  <span class="highlight">CLAUDE CODE - GIT CMD QUICK REFERENCE</span>                       ║
+╠═══════════════════════════════════════════════════════════════╣
+║  <span class="highlight">INSTALL:</span>                                                     ║
+║  curl -fsSL https://claude.ai/install.cmd -o i.cmd && i.cmd   ║
+║                                                               ║
+║  <span class="highlight">DAILY USE:</span>                                                   ║
+║  cd C:\path\to\project                                        ║
+║  claude                                                       ║
+║                                                               ║
+║  <span class="highlight">COMMANDS:</span>                                                    ║
+║  claude --version    Check version                            ║
+║  claude doctor       Health check                             ║
+║  claude update       Update CLI                               ║
+║  claude logout       Sign out                                 ║
+║                                                               ║
+║  <span class="highlight">INSIDE CLAUDE:</span>                                               ║
+║  /help              Show commands                             ║
+║  /exit              Exit Claude                               ║
+║  /clear             Clear conversation                        ║
+║                                                               ║
+║  <span class="highlight">SUPPORT:</span> support@support-forge.com                           ║
+╚═══════════════════════════════════════════════════════════════╝</pre>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="02-installation.html" class="nav-btn">← Previous: Installation</a>
+            <a href="04-quick-start.html" class="nav-btn">Next: Quick Start →</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>Support Forge</strong> - AI Strategy That Moves the Needle</p>
+        <p><a href="mailto:support@support-forge.com">support@support-forge.com</a></p>
+    </div>
+
+    <script>
+        function copyCode(btn) {
+            const code = btn.parentElement.querySelector('code').textContent;
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+    </script>
+</body>
+</html>

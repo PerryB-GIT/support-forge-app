@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Installation Guide | Claude Code Setup | Support Forge</title>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        :root {
+            --purple-500: #8B5CF6;
+            --purple-600: #7C3AED;
+            --purple-400: #A78BFA;
+            --bg-dark: #050508;
+            --bg-card: #0f0f14;
+            --bg-hover: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --success: #22c55e;
+            --warning: #eab308;
+            --error: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        .nav {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav a { color: var(--purple-400); text-decoration: none; }
+        .nav a:hover { text-decoration: underline; }
+        .nav span { color: var(--text-secondary); }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, var(--purple-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        h2 {
+            color: var(--purple-400);
+            margin: 2rem 0 1rem;
+            padding-top: 1rem;
+        }
+        h3 { color: var(--text-primary); margin: 1.5rem 0 0.75rem; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        ul, ol { margin: 1rem 0 1rem 1.5rem; color: var(--text-secondary); }
+        li { margin-bottom: 0.5rem; }
+        .code-block {
+            background: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .code-block code { color: #22c55e; }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--purple-600);
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        .copy-btn:hover { background: var(--purple-500); }
+        code {
+            background: var(--bg-hover);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .card.highlight {
+            border-color: var(--purple-500);
+            background: linear-gradient(135deg, var(--bg-card), #1a1025);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th { background: var(--bg-card); color: var(--purple-400); }
+        td { color: var(--text-secondary); }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .alert-info {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--purple-500);
+        }
+        .alert-warning {
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid var(--warning);
+        }
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--success);
+        }
+        .btn {
+            display: inline-block;
+            background: var(--purple-600);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+        .btn:hover { background: var(--purple-500); }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+        .footer a { color: var(--purple-400); text-decoration: none; }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--purple-400);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .nav-btn:hover { border-color: var(--purple-500); }
+        .component {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+        .component-header {
+            background: var(--bg-card);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .component-header h3 { margin: 0; }
+        .component-body { padding: 1.5rem; }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .badge-required { background: var(--purple-600); color: white; }
+        .badge-optional { background: var(--bg-hover); color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html">← Back to Guide</a>
+        <span>/</span>
+        <span>Installation Guide</span>
+    </nav>
+
+    <div class="container">
+        <h1>2. Installation Guide</h1>
+        <p class="subtitle">Install all prerequisites and Claude Code CLI on Windows</p>
+
+        <div class="alert alert-info">
+            <strong>Quick Option:</strong> Download our <a href="/downloads/ClaudeCodeSetup.exe" style="color: var(--purple-400);">automated installer</a> to install everything with one click.
+        </div>
+
+        <h2>Prerequisites Overview</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Required?</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Git for Windows</strong></td>
+                    <td><span class="badge badge-required">Required</span></td>
+                    <td>Version control, Git Bash terminal</td>
+                </tr>
+                <tr>
+                    <td><strong>Node.js LTS</strong></td>
+                    <td><span class="badge badge-required">Required</span></td>
+                    <td>JavaScript runtime for development</td>
+                </tr>
+                <tr>
+                    <td><strong>Python 3</strong></td>
+                    <td><span class="badge badge-optional">Optional</span></td>
+                    <td>Python development, some tools</td>
+                </tr>
+                <tr>
+                    <td><strong>WSL 2</strong></td>
+                    <td><span class="badge badge-optional">Optional</span></td>
+                    <td>Linux environment on Windows</td>
+                </tr>
+                <tr>
+                    <td><strong>Docker Desktop</strong></td>
+                    <td><span class="badge badge-optional">Optional</span></td>
+                    <td>Containerization, local dev environments</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Manual Installation Steps</h2>
+
+        <div class="component">
+            <div class="component-header">
+                <h3>1. Git for Windows</h3>
+                <span class="badge badge-required">Required</span>
+            </div>
+            <div class="component-body">
+                <ol>
+                    <li>Download from <a href="https://git-scm.com/download/windows" target="_blank" style="color: var(--purple-400);">git-scm.com/download/windows</a></li>
+                    <li>Run the installer</li>
+                    <li>Accept default settings (or customize as needed)</li>
+                    <li>Ensure "Git from the command line" is selected</li>
+                    <li>Complete installation</li>
+                </ol>
+                <p><strong>Verify installation:</strong></p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>git --version</code>
+                </div>
+                <p>Expected: <code>git version 2.47.x</code> or higher</p>
+            </div>
+        </div>
+
+        <div class="component">
+            <div class="component-header">
+                <h3>2. Node.js LTS</h3>
+                <span class="badge badge-required">Required</span>
+            </div>
+            <div class="component-body">
+                <ol>
+                    <li>Download from <a href="https://nodejs.org" target="_blank" style="color: var(--purple-400);">nodejs.org</a> (choose LTS version)</li>
+                    <li>Run the MSI installer</li>
+                    <li>Accept the license agreement</li>
+                    <li>Use default installation path</li>
+                    <li>Ensure "Add to PATH" is checked</li>
+                    <li>Complete installation</li>
+                </ol>
+                <p><strong>Verify installation:</strong></p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>node --version
+npm --version</code>
+                </div>
+                <p>Expected: <code>v22.x.x</code> for Node, <code>10.x.x</code> for npm</p>
+            </div>
+        </div>
+
+        <div class="component">
+            <div class="component-header">
+                <h3>3. Python 3 (Optional)</h3>
+                <span class="badge badge-optional">Optional</span>
+            </div>
+            <div class="component-body">
+                <ol>
+                    <li>Download from <a href="https://python.org/downloads" target="_blank" style="color: var(--purple-400);">python.org/downloads</a></li>
+                    <li>Run the installer</li>
+                    <li><strong>Important:</strong> Check "Add Python to PATH"</li>
+                    <li>Click "Install Now"</li>
+                    <li>Complete installation</li>
+                </ol>
+                <p><strong>Verify installation:</strong></p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>python --version</code>
+                </div>
+                <p>Expected: <code>Python 3.12.x</code> or higher</p>
+            </div>
+        </div>
+
+        <div class="component">
+            <div class="component-header">
+                <h3>4. WSL 2 (Optional)</h3>
+                <span class="badge badge-optional">Optional</span>
+            </div>
+            <div class="component-body">
+                <p>Open PowerShell as Administrator and run:</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>wsl --install</code>
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Note:</strong> Restart your computer after installation to complete WSL setup.
+                </div>
+                <p><strong>Verify installation (after restart):</strong></p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>wsl --version</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="component">
+            <div class="component-header">
+                <h3>5. Docker Desktop (Optional)</h3>
+                <span class="badge badge-optional">Optional</span>
+            </div>
+            <div class="component-body">
+                <ol>
+                    <li>Download from <a href="https://docker.com/products/docker-desktop" target="_blank" style="color: var(--purple-400);">docker.com/products/docker-desktop</a></li>
+                    <li>Run the installer</li>
+                    <li>Accept the license</li>
+                    <li>Choose WSL 2 backend (recommended)</li>
+                    <li>Complete installation</li>
+                    <li>Launch Docker Desktop and complete first-run setup</li>
+                </ol>
+                <p><strong>Verify installation:</strong></p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>docker --version</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>Install Claude Code CLI</h2>
+
+        <p>With prerequisites installed, install Claude Code:</p>
+
+        <h3>Option A: Using CMD / Git CMD</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd</code>
+        </div>
+
+        <h3>Option B: Using PowerShell</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>irm https://claude.ai/install.ps1 | iex</code>
+        </div>
+
+        <h3>Option C: Using WinGet</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>winget install Anthropic.Claude</code>
+        </div>
+
+        <div class="alert alert-success">
+            <strong>After installation:</strong> Close and reopen your terminal, then run <code>claude --version</code> to verify.
+        </div>
+
+        <h2>Final Verification</h2>
+
+        <p>Run the health check to ensure everything is working:</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>claude doctor</code>
+        </div>
+
+        <p>Expected output:</p>
+        <div class="code-block">
+            <code>Checking environment...
+  ✓ Operating system: Windows 10/11
+  ✓ Shell: cmd.exe / PowerShell
+  ✓ Git: 2.47.x
+  ✓ Node.js: 22.x.x
+  ✓ Authentication: Not logged in
+
+All checks passed!</code>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="01-subscription.html" class="nav-btn">← Previous: Subscription</a>
+            <a href="03-git-cmd.html" class="nav-btn">Next: Git CMD Steps →</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>Support Forge</strong> - AI Strategy That Moves the Needle</p>
+        <p><a href="mailto:support@support-forge.com">support@support-forge.com</a></p>
+    </div>
+
+    <script>
+        function copyCode(btn) {
+            const code = btn.parentElement.querySelector('code').textContent;
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+    </script>
+</body>
+</html>

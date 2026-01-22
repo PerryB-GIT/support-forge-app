@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Subscription Setup | Claude Code Setup | Support Forge</title>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        :root {
+            --purple-500: #8B5CF6;
+            --purple-600: #7C3AED;
+            --purple-400: #A78BFA;
+            --bg-dark: #050508;
+            --bg-card: #0f0f14;
+            --bg-hover: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --success: #22c55e;
+            --warning: #eab308;
+            --error: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        .nav {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav a { color: var(--purple-400); text-decoration: none; }
+        .nav a:hover { text-decoration: underline; }
+        .nav span { color: var(--text-secondary); }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, var(--purple-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        h2 {
+            color: var(--purple-400);
+            margin: 2rem 0 1rem;
+            padding-top: 1rem;
+        }
+        h3 {
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem;
+        }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        ul, ol {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--text-secondary);
+        }
+        li { margin-bottom: 0.5rem; }
+        .code-block {
+            background: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .code-block code { color: #22c55e; }
+        code {
+            background: var(--bg-hover);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .card.highlight {
+            border-color: var(--purple-500);
+            background: linear-gradient(135deg, var(--bg-card), #1a1025);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background: var(--bg-card);
+            color: var(--purple-400);
+        }
+        td { color: var(--text-secondary); }
+        .step {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border-left: 3px solid var(--purple-500);
+        }
+        .step-num {
+            background: var(--purple-600);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; }
+        .step-content p { margin: 0; color: var(--text-primary); }
+        .step-content small { color: var(--text-secondary); }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .alert-info {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--purple-500);
+        }
+        .alert-warning {
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid var(--warning);
+        }
+        .btn {
+            display: inline-block;
+            background: var(--purple-600);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+        .btn:hover { background: var(--purple-500); }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+        .footer a { color: var(--purple-400); text-decoration: none; }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--purple-400);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .nav-btn:hover { border-color: var(--purple-500); }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html">← Back to Guide</a>
+        <span>/</span>
+        <span>Subscription Setup</span>
+    </nav>
+
+    <div class="container">
+        <h1>1. Subscription Setup</h1>
+        <p class="subtitle">Set up your Claude Pro or Max subscription to unlock Claude Code access</p>
+
+        <h2>Understanding Claude Plans</h2>
+        <p>Claude Code requires an active Claude subscription. Here's what's available:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Plan</th>
+                    <th>Price</th>
+                    <th>Claude Code Access</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Free</strong></td>
+                    <td>$0</td>
+                    <td style="color: var(--error);">No</td>
+                    <td>Testing Claude on web only</td>
+                </tr>
+                <tr>
+                    <td><strong>Pro</strong></td>
+                    <td>$20/mo</td>
+                    <td style="color: var(--success);">Yes</td>
+                    <td>Individual developers</td>
+                </tr>
+                <tr>
+                    <td><strong>Max (5x)</strong></td>
+                    <td>$100/mo</td>
+                    <td style="color: var(--success);">Yes</td>
+                    <td>Power users, more usage</td>
+                </tr>
+                <tr>
+                    <td><strong>Max (20x)</strong></td>
+                    <td>$200/mo</td>
+                    <td style="color: var(--success);">Yes</td>
+                    <td>Heavy daily use</td>
+                </tr>
+                <tr>
+                    <td><strong>Team Premium</strong></td>
+                    <td>$150/seat/mo</td>
+                    <td style="color: var(--success);">Yes</td>
+                    <td>Teams, shared billing</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="card highlight">
+            <h3>Our Recommendation</h3>
+            <p style="color: var(--text-primary);"><strong>Start with Claude Pro ($20/mo)</strong> - It provides full Claude Code access and is sufficient for most individual developers. Upgrade to Max if you hit usage limits frequently.</p>
+        </div>
+
+        <h2>Step-by-Step: Create Your Account</h2>
+
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <p><strong>Go to Claude.ai</strong></p>
+                <small>Visit <a href="https://claude.ai" target="_blank" style="color: var(--purple-400);">https://claude.ai</a> in your browser</small>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <p><strong>Click "Sign Up" or "Get Started"</strong></p>
+                <small>You'll see this button in the top right corner</small>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <p><strong>Create your account</strong></p>
+                <small>Options: Email + password, Google account, or Apple account</small>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <p><strong>Verify your email</strong></p>
+                <small>Check your inbox for the verification link</small>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <p><strong>Upgrade to Pro or Max</strong></p>
+                <small>Click your profile icon → "Upgrade to Pro" or visit Settings → Subscription</small>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+                <p><strong>Enter payment information</strong></p>
+                <small>Credit card or debit card accepted</small>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">7</div>
+            <div class="step-content">
+                <p><strong>Confirmation</strong></p>
+                <small>You'll receive an email confirming your subscription is active</small>
+            </div>
+        </div>
+
+        <h2>Verify Claude Code Access</h2>
+        <p>Once subscribed, verify your Claude Code access:</p>
+        <ol>
+            <li>Go to <a href="https://claude.ai/settings" target="_blank" style="color: var(--purple-400);">claude.ai/settings</a></li>
+            <li>Look for "Claude Code" or "CLI Access" section</li>
+            <li>It should show as "Enabled" or "Available"</li>
+        </ol>
+
+        <div class="alert alert-info">
+            <strong>Note:</strong> Claude Code access is automatically included with Pro, Max, and Team Premium plans. No additional setup is needed on the Anthropic side.
+        </div>
+
+        <h2>Troubleshooting</h2>
+
+        <h3>"Claude Code not available"</h3>
+        <ul>
+            <li>Ensure your subscription is active (check Settings → Subscription)</li>
+            <li>Try logging out and back in</li>
+            <li>Contact Anthropic support if issues persist</li>
+        </ul>
+
+        <h3>Payment declined</h3>
+        <ul>
+            <li>Verify card details are correct</li>
+            <li>Check with your bank for international transaction blocks</li>
+            <li>Try a different payment method</li>
+        </ul>
+
+        <h3>Can't find upgrade option</h3>
+        <ul>
+            <li>Click your profile picture in the top right</li>
+            <li>Select "Settings" from the dropdown</li>
+            <li>Navigate to "Subscription" or "Billing"</li>
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">← Back to Overview</a>
+            <a href="02-installation.html" class="nav-btn">Next: Installation →</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>Support Forge</strong> - AI Strategy That Moves the Needle</p>
+        <p><a href="mailto:support@support-forge.com">support@support-forge.com</a></p>
+    </div>
+</body>
+</html>
