@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Mac Installation | Claude Code Setup | Support Forge</title>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        :root {
+            --purple-500: #8B5CF6;
+            --purple-600: #7C3AED;
+            --purple-400: #A78BFA;
+            --bg-dark: #050508;
+            --bg-card: #0f0f14;
+            --bg-hover: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --success: #22c55e;
+            --warning: #eab308;
+            --error: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        .nav {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav a { color: var(--purple-400); text-decoration: none; }
+        .nav a:hover { text-decoration: underline; }
+        .nav span { color: var(--text-secondary); }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, var(--purple-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        h2 {
+            color: var(--purple-400);
+            margin: 2rem 0 1rem;
+            padding-top: 1rem;
+        }
+        h3 { color: var(--text-primary); margin: 1.5rem 0 0.75rem; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        ul, ol { margin: 1rem 0 1rem 1.5rem; color: var(--text-secondary); }
+        li { margin-bottom: 0.5rem; }
+        .code-block {
+            background: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .code-block code { color: #22c55e; }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--purple-600);
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        .copy-btn:hover { background: var(--purple-500); }
+        code {
+            background: var(--bg-hover);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .alert-info {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--purple-500);
+        }
+        .alert-warning {
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid var(--warning);
+        }
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--success);
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+        .footer a { color: var(--purple-400); text-decoration: none; }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--purple-400);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .nav-btn:hover { border-color: var(--purple-500); }
+        .step {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border-left: 3px solid var(--purple-500);
+        }
+        .step-num {
+            background: var(--purple-600);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; }
+        .step-content h4 { color: var(--text-primary); margin-bottom: 0.5rem; }
+        .step-content p { margin: 0; }
+        .quick-ref {
+            background: linear-gradient(135deg, var(--bg-card), #1a1025);
+            border: 2px solid var(--purple-500);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+        }
+        .quick-ref pre {
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            line-height: 1.8;
+        }
+        .quick-ref .highlight { color: var(--purple-400); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th { background: var(--bg-card); color: var(--purple-400); }
+        td { color: var(--text-secondary); }
+        .os-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-hover);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .os-badge svg {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html">← Back to Guide</a>
+        <span>/</span>
+        <span>Mac Installation</span>
+    </nav>
+
+    <div class="container">
+        <div class="os-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                <path d="M15.5 8.5c-.83-.83-2.17-.83-3 0l-4 4c-.83.83-.83 2.17 0 3 .83.83 2.17.83 3 0l4-4c.83-.83.83-2.17 0-3z"/>
+            </svg>
+            macOS
+        </div>
+        <h1>5. Mac Installation</h1>
+        <p class="subtitle">Step-by-step guide for installing Claude Code on macOS</p>
+
+        <h2>Quick Install (Recommended)</h2>
+        <p>Open Terminal and run this single command:</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>curl -fsSL https://support-forge.com/downloads/claude-install.sh | bash</code>
+        </div>
+
+        <p>This script will automatically:</p>
+        <ul>
+            <li>Check your macOS version</li>
+            <li>Install Xcode Command Line Tools (if needed)</li>
+            <li>Install Homebrew (if needed)</li>
+            <li>Install Node.js (if needed)</li>
+            <li>Install Claude Code CLI</li>
+            <li>Verify the installation</li>
+        </ul>
+
+        <div class="alert alert-info">
+            <strong>Prefer manual installation?</strong> Follow the step-by-step guide below.
+        </div>
+
+        <h2>Manual Installation</h2>
+
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Open Terminal</h4>
+                <p>Press <code>Cmd + Space</code>, type "Terminal", and press Enter</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Install Xcode Command Line Tools</h4>
+                <p>Required for development tools on Mac</p>
+            </div>
+        </div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>xcode-select --install</code>
+        </div>
+        <p>A popup will appear. Click "Install" and wait for completion.</p>
+
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Install Homebrew</h4>
+                <p>The missing package manager for macOS</p>
+            </div>
+        </div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
+        </div>
+
+        <div class="alert alert-warning">
+            <strong>Apple Silicon Macs (M1/M2/M3):</strong> After installing Homebrew, run these commands:
+            <div class="code-block" style="margin-top: 0.5rem; margin-bottom: 0;">
+                <code>echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"</code>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Install Node.js</h4>
+            </div>
+        </div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>brew install node</code>
+        </div>
+        <p>Verify installation:</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>node --version
+npm --version</code>
+        </div>
+        <p>Expected: <code>v22.x.x</code> for Node, <code>10.x.x</code> for npm</p>
+
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>Install Git (if not already installed)</h4>
+            </div>
+        </div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>brew install git</code>
+        </div>
+
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+                <h4>Install Claude Code CLI</h4>
+            </div>
+        </div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>curl -fsSL https://claude.ai/install.sh | sh</code>
+        </div>
+
+        <div class="step">
+            <div class="step-num">7</div>
+            <div class="step-content">
+                <h4>Verify Installation</h4>
+            </div>
+        </div>
+        <p>Close and reopen Terminal, then run:</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>claude --version</code>
+        </div>
+        <p>Expected: <code>claude-code version X.X.X</code></p>
+
+        <div class="step">
+            <div class="step-num">8</div>
+            <div class="step-content">
+                <h4>Run Health Check</h4>
+            </div>
+        </div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>claude doctor</code>
+        </div>
+
+        <h2>Authenticate</h2>
+
+        <div class="step">
+            <div class="step-num">9</div>
+            <div class="step-content">
+                <h4>Navigate to Your Project</h4>
+            </div>
+        </div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>cd ~/Projects/my-project</code>
+        </div>
+        <p>Or create a test folder:</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>mkdir ~/ClaudeTest && cd ~/ClaudeTest</code>
+        </div>
+
+        <div class="step">
+            <div class="step-num">10</div>
+            <div class="step-content">
+                <h4>Start Claude Code</h4>
+            </div>
+        </div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>claude</code>
+        </div>
+
+        <div class="step">
+            <div class="step-num">11</div>
+            <div class="step-content">
+                <h4>Complete Authentication</h4>
+                <ol style="margin-top: 0.5rem;">
+                    <li>Your default browser opens to Anthropic login</li>
+                    <li>Sign in with your Claude Pro/Max credentials</li>
+                    <li>Click "Allow" to authorize Claude Code</li>
+                    <li>Return to Terminal - you're ready!</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="alert alert-success">
+            <strong>Success!</strong> You should see: "Authentication successful! Welcome to Claude Code."
+        </div>
+
+        <h2>Common Commands</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>claude</code></td>
+                    <td>Start Claude Code in current directory</td>
+                </tr>
+                <tr>
+                    <td><code>claude "do something"</code></td>
+                    <td>Start with a specific task</td>
+                </tr>
+                <tr>
+                    <td><code>claude --version</code></td>
+                    <td>Check installed version</td>
+                </tr>
+                <tr>
+                    <td><code>claude doctor</code></td>
+                    <td>Run health check</td>
+                </tr>
+                <tr>
+                    <td><code>claude update</code></td>
+                    <td>Update to latest version</td>
+                </tr>
+                <tr>
+                    <td><code>claude logout</code></td>
+                    <td>Sign out</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Troubleshooting</h2>
+
+        <h3>"command not found: claude"</h3>
+        <p>Add Claude to your PATH:</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>export PATH="$HOME/.claude/bin:$PATH"</code>
+        </div>
+        <p>To make permanent, add to <code>~/.zshrc</code>:</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>echo 'export PATH="$HOME/.claude/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc</code>
+        </div>
+
+        <h3>"Homebrew not found" on Apple Silicon</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>eval "$(/opt/homebrew/bin/brew shellenv)"</code>
+        </div>
+
+        <h3>"Permission denied" errors</h3>
+        <p>Fix npm permissions:</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>sudo chown -R $(whoami) ~/.npm
+sudo chown -R $(whoami) /usr/local/lib/node_modules</code>
+        </div>
+
+        <h3>"Authentication failed"</h3>
+        <ol>
+            <li>Ensure your subscription is active at <a href="https://claude.ai" style="color: var(--purple-400);">claude.ai</a></li>
+            <li>Try: <code>claude logout</code> then <code>claude</code></li>
+            <li>Check if firewall is blocking claude.ai</li>
+        </ol>
+
+        <h2>Quick Reference Card</h2>
+
+        <div class="quick-ref">
+            <pre>+---------------------------------------------------------------+
+|  <span class="highlight">CLAUDE CODE - MACOS QUICK REFERENCE</span>                          |
++---------------------------------------------------------------+
+|  <span class="highlight">QUICK INSTALL:</span>                                                |
+|  curl -fsSL https://support-forge.com/downloads/              |
+|    claude-install.sh | bash                                   |
+|                                                               |
+|  <span class="highlight">MANUAL INSTALL:</span>                                               |
+|  xcode-select --install                                       |
+|  /bin/bash -c "$(curl -fsSL ...homebrew...)"                  |
+|  brew install node git                                        |
+|  curl -fsSL https://claude.ai/install.sh | sh                 |
+|                                                               |
+|  <span class="highlight">DAILY USE:</span>                                                    |
+|  cd ~/path/to/project                                         |
+|  claude                                                       |
+|                                                               |
+|  <span class="highlight">COMMANDS:</span>                                                     |
+|  claude --version    Check version                            |
+|  claude doctor       Health check                             |
+|  claude update       Update CLI                               |
+|  claude logout       Sign out                                 |
+|                                                               |
+|  <span class="highlight">INSIDE CLAUDE:</span>                                                |
+|  /help              Show commands                             |
+|  /exit              Exit Claude                               |
+|  /clear             Clear conversation                        |
+|                                                               |
+|  <span class="highlight">SUPPORT:</span> support@support-forge.com                            |
++---------------------------------------------------------------+</pre>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="04-quick-start.html" class="nav-btn">← Previous: Quick Start</a>
+            <a href="index.html" class="nav-btn">Back to Overview →</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>Support Forge</strong> - AI Strategy That Moves the Needle</p>
+        <p><a href="mailto:support@support-forge.com">support@support-forge.com</a></p>
+    </div>
+
+    <script>
+        function copyCode(btn) {
+            const code = btn.parentElement.querySelector('code').textContent;
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+    </script>
+</body>
+</html>
