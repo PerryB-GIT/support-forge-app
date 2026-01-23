@@ -1,1 +1,4 @@
-*.exe
+# Large exe files (sf-setup is 53MB)
+sf-setup.exe
+# Allow smaller installers
+!ClaudeCodeSetup.exe
